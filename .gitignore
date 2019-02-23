@@ -1,0 +1,22 @@
+# Arquivos que não serão versionados.
+
+/node_modules
+/public/hot
+/public/storage
+/storage/*.key
+/vendor
+
+# Arquivos gerados pelas IDE's
+/.idea
+.idea/
+.vscode/
+.nbproject/
+
+/.vagrant
+Homestead.json
+Homestead.yaml
+npm-debug.log
+yarn-error.log
+
+# Arquivo de Variáveis de Ambiente
+.env
