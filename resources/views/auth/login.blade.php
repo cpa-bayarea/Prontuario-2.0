@@ -73,6 +73,7 @@
                         </div>
                     </div>
 
+{{--
                     <p class="text-muted text-center">
                         <small>Você não tem uma conta?</small>
                     </p>
@@ -80,6 +81,7 @@
                         <i class="fa fa-user-plus"></i>
                         Solicitar acessso
                     </a>
+--}}
                 </form>
             </div>
         </div>
