@@ -73,11 +73,11 @@
                                     <li><a href="#">Contacts</a></li>
                                     <li><a href="#">Mailbox</a></li>
                                     <li class="divider"></li>
-                                    <li><a href="../usuario/logof.php">Logout</a></li>
+                                    <li><a href="#">Logout</a></li>
                                 </ul>
                             </div>
                             <div class="logo-element">
-                                <a href="../home/index.php">PE+</a>
+                                <a href="{{ route('home') }}">PE+</a>
                             </div>
                         </li>
                         <li>
@@ -98,20 +98,20 @@
                             </a>
                             <ul class="nav nav-second-level collapse">
                                 <li>
-                                    <a href="../aluno/index.php">Aluno</a>
+                                    <a href="#">Aluno</a>
                                 </li>
                                 <li>
                                     <a href="{{ route('supervisor.index') }}">Supervisor</a>
                                 </li>
                                 <li>
-                                    <a href="../pagina/index.php">Página</a>
+                                    <a href="#">Página</a>
                                 </li>
                                 <li>
-                                    <a href="../perfil/index.php">Perfis</a>
+                                    <a href="#">Perfis</a>
                                 </li>
                             </ul>
                         </li>
-                        @can('Admin')
+                        @can('Gestor')
                             <li>
                                 <a href="#">
                                     <i class="fa fa-user"></i>
@@ -132,7 +132,7 @@
                                 </a>
                                 <ul class="nav nav-second-level collapse">
                                     <li>
-                                        <a href="{{ route('linha.index') }}">Linha Teórica</a>
+                                        <a href="{{ route('linhas.index') }}">Linha Teórica</a>
                                     </li>
                                 </ul>
                             </li>
@@ -152,7 +152,7 @@
                             <li>
                                 @php
                                     # Pegando apenas o primeiro nome do usuário logado.
-                                    $nome = explode(' ', ( Auth()->user()->tx_name));
+                                    $nome = explode(' ', ( Auth()->user()->tx_nome));
                                 @endphp
                                 <span class="m-r-sm text-muted welcome-message">Seja bem vindo, @php echo $nome[0]; @endphp </span>
                             </li>

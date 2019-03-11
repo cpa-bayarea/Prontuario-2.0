@@ -30,7 +30,7 @@ class SupervisorController extends Controller
      */
     public function index()
     {
-        if(!\Gate::allows('Admin')){
+        if(!\Gate::allows('Gestor')){
             abort(403, "Página não autorizada! Você não tem permissão para acessar nessa página!");
         }
 
@@ -61,7 +61,7 @@ class SupervisorController extends Controller
      */
     public function create()
     {
-        if(!\Gate::allows('Admin')){
+        if(!\Gate::allows('Gestor')){
             abort(403, "Página não autorizada! Você não tem permissão para acessar nessa página!");
         }
 
@@ -77,7 +77,7 @@ class SupervisorController extends Controller
      */
     public function store(Request $request)
     {
-        if(!\Gate::allows('Admin')){
+        if(!\Gate::allows('Gestor')){
             abort(403, "Página não autorizada! Você não tem permissão para acessar nessa página!");
         }
         try {
@@ -120,7 +120,7 @@ class SupervisorController extends Controller
      */
     public function edit($id)
     {
-        if(!\Gate::allows('Admin')){
+        if(!\Gate::allows('Gestor')){
             abort(403, "Página não autorizada! Você não tem permissão para acessar nessa página!");
         }
 
@@ -154,7 +154,7 @@ class SupervisorController extends Controller
      */
     public function destroy($id)
     {
-        if(!\Gate::allows('Admin')){
+        if(!\Gate::allows('Gestor')){
             abort(403, "Página não autorizada! Você não tem permissão para acessar nessa página!");
         }
 

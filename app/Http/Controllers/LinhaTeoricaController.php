@@ -29,16 +29,16 @@ class LinhaTeoricaController extends Controller
     {
         try {
 
-            if(!\Gate::allows('Admin')){
+            if(!\Gate::allows('Gestor')){
                 abort(403, "Página não autorizada! Você não tem permissão para acessar nessa página!");
             }
 
-            # Order case user is adm.
-            if(Auth()->user()->id_perfil === Perfil::PFL_ADM){
-                $linhas = DB::table('tb_theoretical_line')
-                    ->orderBy('tx_name', 'asc')
+            # Ordena caso seja Gestor.
+            if(Auth()->user()->id_perfil === Perfil::PFL_GESTOR){
+                $linhas = DB::table('tb_linha_teorica')
+                    ->where('status', '=', 'A')
+                    ->orderBy('tx_nome', 'asc')
                     ->get();
-
                 return view('linha_teorica.index', compact('linhas', $linhas));
             }
         } catch (\Exception $e) {
@@ -53,7 +53,7 @@ class LinhaTeoricaController extends Controller
      */
     public function create()
     {
-        if(!\Gate::allows('Admin')){
+        if(!\Gate::allows('Gestor')){
             abort(403, "Página não autorizada! Você não tem permissão para acessar nessa página!");
         }
         return view('linha_teorica.form');
@@ -68,33 +68,19 @@ class LinhaTeoricaController extends Controller
      */
     public function store(Request $request)
     {
-        if(!\Gate::allows('Admin')){
+        if(!\Gate::allows('Gestor')){
             abort(403, "Página não autorizada! Você não tem permissão para acessar nessa página!");
         }
         try{
-            # Verifica o status da Linha teorica.
-            $request->status = $request->status ? $request->status : 'I';
-            if (!empty($request['id_theoretical_line'])) {
-                try {
-                    # Procura pela linha teórica.
-                    $linha = Linha::find($request['id_theoretical_line']);
-
-                    $linha->tx_name = $request->tx_name;
-                    $linha->tx_desc = $request->tx_desc;
-                    $linha->status = $request->status;
-                    $linha->save();
-
-                    return redirect()->route('linha.index');
-                } catch (\Exception $e) {
-                    throw new exception('Não foi possível alterar o registro da Linha Teórica ' . $request->nome . ' !');
-                }
+            if (!empty($request['id_linha_teorica'])) {
+                return $this->update($request, $request['id']);
             }
             $linha = new Linha();
-            $linha->tx_name = $request->tx_name;
+            $linha->tx_nome = $request->tx_nome;
             $linha->tx_desc = $request->tx_desc;
             $linha->status = 'A';
             $linha->save();
-            return redirect()->route('linha.index');
+            return redirect()->route('linhas.index');
         } catch (\Exception $e ){
             throw new \exception('Não foi possível salvar a Linha Teórica '.$request->nome.' !');
         }
@@ -119,13 +105,13 @@ class LinhaTeoricaController extends Controller
      */
     public function edit($id)
     {
-        if(!\Gate::allows('Admin')){
+        if(!\Gate::allows('Gestor')){
             abort(403, "Página não autorizada! Você não tem permissão para acessar nessa página!");
         }
         $linha = Linha::find($id);
         $checked = ($linha->status == "A") ? 'checked' : '';
 
-        return view('linha_teorica.edit', compact(['linha', 'checked'], [$linha, $checked]));
+        return view('linha_teorica.form', compact(['linha', 'checked'], [$linha, $checked]));
     }
 
     /**
@@ -134,10 +120,24 @@ class LinhaTeoricaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
+     * @throws \exception
      */
-    public function update(Request $request, $id)
+    public function update($request, $id)
     {
-        //
+        try {
+            # Procura pela linha teórica.
+            $linha = Linha::find($id);
+
+            $linha->tx_nome = $request['tx_nome'];
+            $linha->tx_desc = $request['tx_desc'];
+            $linha->save();
+            dd($linha);
+
+            return redirect()->route('linhas.index');
+        } catch (\Exception $e) {
+            echo $e;die;
+            throw new \exception('Não foi possível alterar o registro da Linha Teórica ' . $request['tx_nome'] . ' !');
+        }
     }
 
     /**
@@ -149,16 +149,17 @@ class LinhaTeoricaController extends Controller
      */
     public function destroy($id)
     {
-         if(!\Gate::allows('Admin')){
+         if(!\Gate::allows('Gestor')){
              abort(403, "Página não autorizada! Você não tem permissão para acessar nessa página!");
          }
         try{
             $linha = Linha::find($id);
             $linha->status = 'I';
             $linha->save();
-            return redirect()->route('linha.index');
+            return redirect()->route('linhas.index');
         } catch(\Exception $e){
-            throw new \exception('Não foi possível excluir o registro da Linha Teórica '.$linha->tx_nome.' !');
+             echo $e;die;
+            throw new \exception('Não foi possível excluir o registro da Linha Teórica ->'.$id.' !');
         }
     }
 }

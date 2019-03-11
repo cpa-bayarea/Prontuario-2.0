@@ -22,7 +22,7 @@
     <div class="wrapper wrapper-content animated fadeInRight">
         <div class="row">
             <div class="col-lg-12">
-                <a class="btn-small btn btn-success" href="{{ route('linha.create') }}">
+                <a class="btn-small btn btn-success" href="{{ route('linhas.create') }}">
                     <span class="glyphicon glyphicon-plus"></span>Novo
                 </a>
                 <div class="ibox float-e-margins">
@@ -39,35 +39,28 @@
                             <table class="table table-striped table-bordered table-hover dataTables dataTable">
                                 <thead>
                                 <tr>
-                                    <th width="10%">Ações</th>
+                                    <th colspan="2" style="width: 5%; text-align: center;">Ações</th>
                                     <th>Nome</th>
                                     <th>Descrição</th>
-                                    <th>Status</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 @foreach($linhas as $linha)
                                     <tr>
                                         <td align="center">
-                                            <a href="edit/{{ $linha->id_theoretical_line }}"
-                                               class="glyphicon glyphicon-pencil">
-                                            </a>
-                                            &nbsp;&nbsp;&nbsp;
-                                            <a href="destroy/{{ $linha->id_theoretical_line }}"
-                                               class="glyphicon glyphicon-trash">
-
+                                            <a href="{{ route('linhas.edit', $linha->id_linha_teorica) }}" class="btn btn-primary glyphicon glyphicon-pencil"></a>
+                                        </td>
+                                        <td align="center">
+                                            <a>
+                                                <form action="{{ route('linhas.destroy', $linha->id_linha_teorica )}}" method="post">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button class="btn btn-danger glyphicon glyphicon-trash" type="submit"></button>
+                                                </form>
                                             </a>
                                         </td>
-                                        <td> {{ $linha->tx_name }}</td>
-                                        <td> {{ $linha->tx_desc }}</td>
-                                        @php
-                                            if( $linha->status == 'A'):
-                                                $style = 'color: #0778ec; font-weight: bolder;';
-                                            else:
-                                                $style = 'color: #ff0000; font-weight: bolder;';
-                                            endif
-                                        @endphp
-                                        <td style="{{$style}}"> {{ $linha->status }}</td>
+                                        <td> {{ $linha->tx_nome }}</td>
+                                        <td> {{ $linha->tx_desc ? $linha->tx_desc : ' - ' }}</td>
                                     </tr>
                                 @endforeach
                                 </tbody>

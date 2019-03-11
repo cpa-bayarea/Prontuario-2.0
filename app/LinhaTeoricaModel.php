@@ -8,7 +8,7 @@ class LinhaTeoricaModel extends Model
 {
     protected $table = 'tb_linha_teorica';
     public $timestamps = FALSE;
-    protected $primaryKey = 'id_linha';
+    protected $primaryKey = 'id_linha_teorica';
     protected $fillable = [
         'tx_nome',
         'tx_desc',

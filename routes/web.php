@@ -18,14 +18,7 @@ Route::group(['middleware' => 'auth'], function () {
     $this::get('/home', 'HomeController@index')->name('home');
 
 
-    // Route::resource('linha_teorica', 'LinhaTeoricaController');
-    $this::group(['prefix' => 'linha_teorica'], function () {
-        $this::get('/index',        ['uses' => 'LinhaTeoricaController@index',   'as' => 'linha.index']);
-        $this::get('/form',         ['uses' => 'LinhaTeoricaController@create',  'as' => 'linha.create']);
-        $this::post('/store',       ['uses' => 'LinhaTeoricaController@store',   'as' => 'linha.store']);
-        $this::get('/edit/{id}',    ['uses' => 'LinhaTeoricaController@edit',    'as' => 'linha.edit']);
-        $this::get('/destroy/{id}', ['uses' => 'LinhaTeoricaController@destroy', 'as' => 'linha.destroy']);
-    });
+    $this::resource('linhas', 'LinhaTeoricaController');
 
     $this::group(['prefix' => 'supervisor'], function () {
         $this::get('/index',        ['uses' => 'SupervisorController@index',   'as' => 'supervisor.index']);

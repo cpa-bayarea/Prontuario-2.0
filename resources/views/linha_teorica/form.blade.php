@@ -29,18 +29,25 @@
                     </div>
                     <div class="ibox-content">
 
-                        <form class="form-horizontal" action="{{ route('linha.store') }}" method="post">
+                        <form class="form-horizontal" action="{{ route('linhas.store') }}" method="post">
                             @csrf
+                            <div id="oculto">
+                                <input type="number" name="id_linha_teorica"
+                                       value="{{ isset($linha->id_linha_teorica) ? $linha->id_linha_teorica : '' }}" hidden>
+                            </div>
+
                             <div class="form-group">
                                 <label for="nome" class="col-sm-2 control-label">Nome <span class="obrigatorio">*</span></label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="nome" name="tx_name" required>
+                                    <input type="text" class="form-control" id="nome" name="tx_nome"
+                                           value="{{ isset($linha->tx_nome) ? $linha->tx_nome : '' }}" required>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="dsc" class="col-sm-2 control-label">Descrição</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="dsc" name="tx_desc">
+                                    <input type="text" class="form-control" id="dsc" name="tx_desc"
+                                           value="{{ isset($linha->tx_desc) ? $linha->tx_desc : '' }}">
                                 </div>
                             </div>
 
@@ -50,7 +57,7 @@
                                         <span class="glyphicon glyphicon-send"></span>
                                         Salvar
                                     </button>
-                                    <a href="{{ route('linha.index') }}" class="btn btn-danger">
+                                    <a href="{{ route('linhas.index') }}" class="btn btn-danger">
                                         <span class="fa fa-reply"></span>
                                         Voltar
                                     </a>

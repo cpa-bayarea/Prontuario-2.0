@@ -29,7 +29,7 @@ class AlunoController extends Controller
      */
     public function index()
     {
-        if(!\Gate::allows('Admin')){
+        if(!\Gate::allows('Gestor')){
             abort(403, "Página não autorizada! Você não tem permissão para acessar nessa página!");
         }
 
@@ -53,7 +53,7 @@ class AlunoController extends Controller
      */
     public function create()
     {
-        if(!\Gate::allows('Admin')){
+        if(!\Gate::allows('Gestor')){
             abort(403, "Página não autorizada! Você não tem permissão para acessar nessa página!");
         }
 
@@ -69,7 +69,7 @@ class AlunoController extends Controller
      */
     public function store(Request $request)
     {
-        if(!\Gate::allows('Admin')){
+        if(!\Gate::allows('Gestor')){
             abort(403, "Página não autorizada! Você não tem permissão para acessar nessa página!");
         }
         try {
@@ -112,7 +112,7 @@ class AlunoController extends Controller
      */
     public function edit($id)
     {
-        if(!\Gate::allows('Admin')){
+        if(!\Gate::allows('Gestor')){
             abort(403, "Página não autorizada! Você não tem permissão para acessar nessa página!");
         }
 
@@ -146,7 +146,7 @@ class AlunoController extends Controller
      */
     public function destroy($id)
     {
-        if(!\Gate::allows('Admin')){
+        if(!\Gate::allows('Gestor')){
             abort(403, "Página não autorizada! Você não tem permissão para acessar nessa página!");
         }
 
