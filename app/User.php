@@ -3,19 +3,18 @@
 namespace App;
 
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
     use Notifiable;
 
-    # Constants of Perfi's
+    # Constantes dos Perfi's
     const PFL_ADM        = 1;
     const PFL_ALUNO      = 2;
     const PFL_SUPERVISOR = 3;
     const PFL_SECRETARIA = 4;
-    const PFL_TERAPEUTA  = 5;
+//    const PFL_TERAPEUTA  = 5;
 
     /**
      * The attributes that are mass assignable.
@@ -23,14 +22,17 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'tx_name',
+        'tx_nome',
         'username',
-        'id_perfil',
-        'nu_telephone',
-        'nu_cellphone',
-        'tx_justify',
-        'tx_email',
         'status',
+        'users_id',
+        'nu_telefone',
+        'nu_celular',
+        'tx_email',
+        'nu_semestre',
+        'nu_crp',
+        'id_linha',
+        'id_perfil',
     ];
 
     /**

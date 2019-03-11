@@ -15,13 +15,22 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('tx_name', 100);
-            $table->string('tx_email', 100);
+            $table->string('tx_nome', 100);
             $table->string('username', 11)->unique();
-            $table->string('nu_telephone', 15)->nullable();
-            $table->string('nu_cellphone', 15)->nullable();
-            $table->text('tx_justify')->nullable();
-            $table->char('status', 1)->default('P'); // options => [A, I, P] Active, Inative or Pending
+            $table->char('status', 1)->default('P'); // Opções => [A, I, P] Ativo, Inativo or Pendente
+
+            $table->integer('users_id')->unsigned()->nullable();
+            $table->foreign('users_id')->references('id')->on('users');
+
+            $table->string('nu_telefone', 15);
+            $table->string('nu_celular', 15)->nullable();
+            $table->string('tx_email', 100);
+            $table->string('nu_semestre', 2)->nullable();
+            $table->string('nu_crp', 7)->nullable();
+
+
+            $table->integer('id_linha')->unsigned()->nullable();
+            $table->foreign('id_linha')->references('id_linha_teorica')->on('tb_linha_teorica');
 
             $table->integer('id_perfil')->unsigned();
             $table->foreign('id_perfil')->references('id_perfil')->on('tb_perfil');
