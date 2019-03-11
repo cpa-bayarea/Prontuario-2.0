@@ -36,7 +36,7 @@ class CreateUsersTable extends Migration
             $table->foreign('id_perfil')->references('id_perfil')->on('tb_perfil');
 
             $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
+            $table->string('password', 100);
             $table->rememberToken();
             $table->timestamps();
         });
