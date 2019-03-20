@@ -16,7 +16,7 @@ Abaixo temos uma lista de pessoas que já contribuiram com este projeto.
 Nome                                   |  E-mail                                      |  Cargo no Projeto                |
 --------------------------------- | ------------------------------------- | -------------------------------- |
 Douglas Santana                  | douglasantana007@gmail.com | Analista Desenvolvedor	   |
-João Vitor Lima                   |                ?                                  | Desenvolvedor                   |
-Luiz Resplande                    |                ?                                  | Desenvolvedor                   |
-Renan                                  |                ?                                  | Analista de Sistemas              |
-Vitor                                     |                ?                                  | Analista de Sistemas           |
+João Vitor Lima                   | joaolima24@gmail.com | Desenvolvedor                   |
+Luiz Resplande                    | luizresplandeoliveira@gmail.com | Desenvolvedor |
+Renan                                  |  ribeirofarias00@gmail.com | Analista de Sistemas              |
+Vitor                                     | victorsouza2382@gmail.com | Analista de Sistemas           |
