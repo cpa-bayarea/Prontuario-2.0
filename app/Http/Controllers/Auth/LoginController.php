@@ -45,11 +45,12 @@ class LoginController extends Controller
      * @return string $nu_matricula
      */
     public function username()
-    {
+    {    
         return 'username';
     }
 
     protected function credentials(Request $request) {
+        
         return array_merge($request->only($this->username(), 'password'), ['status' => 'A']);
     }
 

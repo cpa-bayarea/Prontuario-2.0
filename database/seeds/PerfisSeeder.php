@@ -11,29 +11,29 @@ class PerfisSeeder extends Seeder
      */
     public function run()
     {
-        Perfil::create([
-            'tx_nome' => 'Gestor',
-            'tx_desc' => 'Gerenciar o Prontuário Eletrônico',
-            'status' => 'A',
-        ]);
+        // Perfil::create([
+        //     'tx_nome' => 'Gestor',
+        //     'tx_desc' => 'Gerenciar o Prontuário Eletrônico',
+        //     'status' => 'A',
+        // ]);
 
-        Perfil::create([
-            'tx_nome' => 'Supervisor',
-            'tx_desc' => '-',
-            'status' => 'A',
-        ]);
+        // Perfil::create([
+        //     'tx_nome' => 'Supervisor',
+        //     'tx_desc' => '-',
+        //     'status' => 'A',
+        // ]);
 
-        Perfil::create([
-            'tx_nome' => 'Aluno',
-            'tx_desc' => '-',
-            'status' => 'A',
-        ]);
+        // Perfil::create([
+        //     'tx_nome' => 'Aluno',
+        //     'tx_desc' => '-',
+        //     'status' => 'A',
+        // ]);
 
-        Perfil::create([
-            'tx_nome' => 'Secretária',
-            'tx_desc' => '-',
-            'status' => 'A',
-        ]);
+        // Perfil::create([
+        //     'tx_nome' => 'Secretária',
+        //     'tx_desc' => '-',
+        //     'status' => 'A',
+        // ]);
 
     }
 }

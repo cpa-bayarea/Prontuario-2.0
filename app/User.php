@@ -4,36 +4,20 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use App\Permission;
 
 class User extends Authenticatable
 {
     use Notifiable;
 
-    # Constantes dos Perfi's
-    const PFL_GESTOR     = 1;
-    const PFL_ALUNO      = 2;
-    const PFL_SUPERVISOR = 3;
-    const PFL_SECRETARIA = 4;
-//    const PFL_TERAPEUTA  = 5;
+
 
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
-    protected $fillable = [
-        'tx_nome',
-        'username',
-        'status',
-        'users_id',
-        'nu_telefone',
-        'nu_celular',
-        'tx_email',
-        'nu_semestre',
-        'nu_crp',
-        'id_linha',
-        'id_perfil',
-    ];
+    protected $fillable = [];
 
     /**
      * The attributes that should be hidden for arrays.
@@ -44,4 +28,34 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
+    
+    
+    
+     public function roles(){
+        
+        return $this->belongsToMany('App\Role','role_users');
+        
+    }
+    
+    
+     public function hasPermission(Permission $permission)
+    {  
+        return $this->hasAnyRoles($permission->roles);
+    }
+    
+    public function hasAnyRoles($roles)
+    { 
+        if(is_array($roles) || is_object($roles) ) {
+            
+            return !! $roles->intersect($this->roles)->count();
+            
+        }
+        
+       
+        return $this->roles->contains('nome', $roles);
+    }
+    
+    
+    
+    
 }

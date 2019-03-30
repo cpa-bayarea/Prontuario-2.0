@@ -16,9 +16,9 @@ class UserController extends Controller
      */
     public function index()
     {
-        if(!\Gate::allows('Gestor')){
+         if(!\Gate::allows('Gestor')){
             abort(403, "Página não autorizada! Você não tem permissão para acessar nessa página!");
-        }
+       }
 
         $users = User::orderBy('tx_name', 'asc')->get();
 
@@ -129,6 +129,7 @@ class UserController extends Controller
 
             return redirect()->route('user.index');
         } catch (\Exception $e) {
+            
             throw new \exception('Não foi possível excluir o registro do ' . $user->tx_name . ' !');
         }
 

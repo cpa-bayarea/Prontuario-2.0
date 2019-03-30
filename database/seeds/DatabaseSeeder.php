@@ -15,6 +15,9 @@ class DatabaseSeeder extends Seeder
             LinhaTeoricaSeeder::class,
             PerfisSeeder::class,
             UsersSeeder::class,
+            RoleSeeder::class,
+            PermissionsSeeder::class,
+            TesteSeeder::class
         ]);
     }
 }

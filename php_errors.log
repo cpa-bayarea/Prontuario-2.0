@@ -1,0 +1,3 @@
+[27-Mar-2019 18:01:46 UTC] PHP Warning:  Unknown: php_network_getaddresses: getaddrinfo failed: Name or service not known in Unknown on line 0
+[27-Mar-2019 18:02:07 UTC] PHP Warning:  Unknown: php_network_getaddresses: getaddrinfo failed: Name or service not known in Unknown on line 0
+[27-Mar-2019 18:02:08 UTC] PHP Warning:  Unknown: php_network_getaddresses: getaddrinfo failed: Name or service not known in Unknown on line 0

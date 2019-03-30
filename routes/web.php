@@ -8,7 +8,7 @@ Auth::routes();
 //    });
 
 Route::group(['middleware' => 'auth'], function () {
-
+    
 //    // After put this URL above the route group.
 //    $this::get('/', function () {
 //        return view('home');
@@ -17,7 +17,9 @@ Route::group(['middleware' => 'auth'], function () {
     $this::get('/', 'HomeController@index')->name('home');
     $this::get('/home', 'HomeController@index')->name('home');
 
-
+Route::group(['middleware' => 'role'], function () {
+    
+    
     $this::resource('linhas', 'LinhaTeoricaController');
 
     $this::group(['prefix' => 'supervisor'], function () {
@@ -43,5 +45,14 @@ Route::group(['middleware' => 'auth'], function () {
         $this::get('/edit/{id}',    ['uses' => 'AcolhimentoController@edit',    'as' => 'acolhimento.edit']);
         $this::get('/destroy/{id}', ['uses' => 'AcolhimentoController@destroy', 'as' => 'acolhimento.destroy']);
     });
-
+    
+   
+    
+        Route::resource('teste','TesteController');
+    
+        
+    });
 });
+
+
+
