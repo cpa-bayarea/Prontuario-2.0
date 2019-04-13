@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\User;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
+use App\Permission;
 
 class LoginController extends Controller
 {
@@ -35,7 +36,9 @@ class LoginController extends Controller
      * @return void
      */
     public function __construct()
-    {
+    {   
+        
+           
         $this->middleware('guest')->except('logout');
     }
 
@@ -50,6 +53,30 @@ class LoginController extends Controller
     }
 
     protected function credentials(Request $request) {
+            
+            $user = User::with('roles')->where('username',$request->username)->first();
+            $tipo_user = $user->roles[0]->id;
+            
+            $permissions = Permission::with('roles')->get();
+            foreach($permissions as $permission){
+                
+                $roles = $permission->roles;
+               foreach($roles as $role){
+                   
+                   if($role->id == $tipo_user){
+                       
+                      $array_permission[] =  $permission->nome;
+                      
+                   }
+                   
+               }
+               
+               
+            }
+            
+            //session() = 'asdasdasdasd';
+            dd( auth()->user() );
+            dd($array_permission);
         
         return array_merge($request->only($this->username(), 'password'), ['status' => 'A']);
     }
