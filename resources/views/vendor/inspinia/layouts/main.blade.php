@@ -121,9 +121,8 @@
             url: "/search/cidadebyuf/"+$('#uf').val(),
             type: "GET",
         }).done(function (response) {
-
+            $("#cidade").empty();
            response.forEach(function(key){
-               $("#cidade").empty();
                $("#cidade").append('<option value="'+key.id+'">'+key.title+'</option>');
                $("#cidade").removeAttr( "disabled" );
 
@@ -152,7 +151,8 @@
             $('input[id=endereco]').val(response.paciente.endereco);
             $("#uf").val(response.cidade[0].uf.id);
             $("#uf").change();
-            $("#cidade option[value="+response.cidade[0].id+"]").attr("selected","selected");
+
+            $("#cidade option[value="+response.cidade[0].id+"]").prop("selected","selected");
 
             $("#form_paciente").append('<input type="hidden" value="'+response.paciente.id+'" name="paciente_id">');
             $('#button_submit').empty().append('Atualizar');
