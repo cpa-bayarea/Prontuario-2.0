@@ -1,58 +1,27 @@
 <?php
 
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider within a group which
+| contains the "web" middleware group. Now create something great!
+|
+*/
+
+Route::get('/', function () {
+    return view('welcome');
+});
 
 Auth::routes();
 
-//    $this::get('/', function () {
-//        return view('welcome');
-//    });
+Route::get('/home', 'HomeController@index')->name('home');
 
-Route::group(['middleware' => 'auth'], function () {
-    
-//    // After put this URL above the route group.
-//    $this::get('/', function () {
-//        return view('home');
-//    });
-    # todo => Gambi para levar para o login, refatorar depois
-    $this::get('/', 'HomeController@index')->name('home');
-    $this::get('/home', 'HomeController@index')->name('home');
+Route::get('/paciente', 'PacienteController@index')->name('paciente');
+Route::get('search/paciente/findById/{id}', 'PacienteController@findById')->name('paciente.find');
+Route::post('/paciente', 'PacienteController@store')->name('paciente.store');
+Route::post('/paciente/delete/{id}', 'PacienteController@delete')->name('paciente.delete');
 
-Route::group(['middleware' => 'role'], function () {
-    
-    
-    $this::resource('linhas', 'LinhaTeoricaController');
-
-    $this::group(['prefix' => 'supervisor'], function () {
-        $this::get('/index',        ['uses' => 'SupervisorController@index',   'as' => 'supervisor.index']);
-        $this::get('/form',         ['uses' => 'SupervisorController@create',  'as' => 'supervisor.create']);
-        $this::post('/store',       ['uses' => 'SupervisorController@store',   'as' => 'supervisor.store']);
-        $this::get('/edit/{id}',    ['uses' => 'SupervisorController@edit',    'as' => 'supervisor.edit']);
-        $this::get('/destroy/{id}', ['uses' => 'SupervisorController@destroy', 'as' => 'supervisor.destroy']);
-    });
-
-    $this::group(['prefix' => 'user'], function () {
-        $this::get('/index',        ['uses' => 'UserController@index',   'as' => 'user.index']);
-        $this::get('/form',         ['uses' => 'UserController@create',  'as' => 'user.create']);
-        $this::post('/store',       ['uses' => 'UserController@store',   'as' => 'user.store']);
-        $this::get('/edit/{id}',    ['uses' => 'UserController@edit',    'as' => 'user.edit']);
-        $this::get('/destroy/{id}', ['uses' => 'UserController@destroy', 'as' => 'user.destroy']);
-    });
-
-    $this::group(['prefix' => 'acolhimento'], function () {
-        $this::get('/index',        ['uses' => 'AcolhimentoController@index',   'as' => 'acolhimento.index']);
-        $this::get('/form',         ['uses' => 'AcolhimentoController@create',  'as' => 'acolhimento.create']);
-        $this::post('/store',       ['uses' => 'AcolhimentoController@store',   'as' => 'acolhimento.store']);
-        $this::get('/edit/{id}',    ['uses' => 'AcolhimentoController@edit',    'as' => 'acolhimento.edit']);
-        $this::get('/destroy/{id}', ['uses' => 'AcolhimentoController@destroy', 'as' => 'acolhimento.destroy']);
-    });
-    
-   
-    
-        Route::resource('teste','TesteController');
-    
-        
-    });
-});
-
-
-
+Route::get('search/cidadebyuf/{id}', 'CidadeController@findCidadeByUf');

@@ -1,0 +1,39 @@
+// Bootstrap
+@import "~bootstrap-sass/assets/stylesheets/bootstrap";
+
+// Font-Awesome
+@import "~font-awesome/scss/font-awesome";
+
+// iCheck
+@import "~icheck/skins/square/green.css";
+
+// Animate.css
+@import "~animate.css/animate.css";
+
+// MetisMenu
+@import "~metismenu/dist/metisMenu.css";
+
+// Bootstrap Datepicker
+@import "~bootstrap-datepicker/dist/css/bootstrap-datepicker3.css";
+
+// Select2
+@import "~select2/dist/css/select2.css";
+
+// Select2 Bootstrap Theme
+@import "~select2-bootstrap-theme/src/select2-bootstrap";
+
+// Bootstrap Timepicker
+@import "~clockpicker/dist/bootstrap-clockpicker.min.css";
+
+// Toastr
+@import "~toastr/build/toastr.css";
+
+// Style
+@import "inspinia/style";
+
+.select2 {
+  width: 100% !important;
+}
+.select2-dropdown {
+  z-index: 9999;
+}

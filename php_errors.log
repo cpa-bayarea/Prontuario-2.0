@@ -1,7 +1,0 @@
-[27-Mar-2019 18:01:46 UTC] PHP Warning:  Unknown: php_network_getaddresses: getaddrinfo failed: Name or service not known in Unknown on line 0
-[27-Mar-2019 18:02:07 UTC] PHP Warning:  Unknown: php_network_getaddresses: getaddrinfo failed: Name or service not known in Unknown on line 0
-[27-Mar-2019 18:02:08 UTC] PHP Warning:  Unknown: php_network_getaddresses: getaddrinfo failed: Name or service not known in Unknown on line 0
-[06-Apr-2019 00:06:55 UTC] PHP Fatal error:  Cannot use temporary expression in write context in /home/ubuntu/workspace/prontu/Prontuario-2.0/app/Http/Controllers/Auth/LoginController.php on line 77
-[06-Apr-2019 00:07:05 UTC] PHP Fatal error:  Can't use function return value in write context in /home/ubuntu/workspace/prontu/Prontuario-2.0/app/Http/Controllers/Auth/LoginController.php on line 77
-[06-Apr-2019 00:07:20 UTC] PHP Fatal error:  Can't use function return value in write context in /home/ubuntu/workspace/prontu/Prontuario-2.0/app/Http/Controllers/Auth/LoginController.php on line 77
-[06-Apr-2019 00:08:27 UTC] PHP Fatal error:  Can't use function return value in write context in /home/ubuntu/workspace/prontu/Prontuario-2.0/app/Http/Controllers/Auth/LoginController.php on line 77

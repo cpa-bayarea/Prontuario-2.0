@@ -13,3 +13,39 @@ const mix = require('laravel-mix');
 
 mix.js('resources/js/app.js', 'public/js')
     .sass('resources/sass/app.scss', 'public/css');
+
+mix.webpackConfig({
+  resolve: {
+    alias: {
+      pace: 'pace-js'
+    }
+  }
+});
+
+mix.autoload({
+  jquery: ['$', 'jQuery', 'jquery', 'window.jQuery'],
+});
+
+mix.js('resources/assets/js/inspinia.js', 'public/js')
+  .sass('resources/assets/sass/inspinia.scss', 'public/css');
+
+mix.js('resources/assets/js/auth.js', 'public/js');
+
+mix.extract([
+  'axios',
+  'bootstrap-datepicker',
+  'bootstrap-sass',
+  'clockpicker/dist/bootstrap-clockpicker',
+  'icheck',
+  'jquery',
+  'jquery-slimscroll',
+  'lodash',
+  'metismenu',
+  'moment',
+  'pace-js',
+  'select2',
+  'toastr',
+  'vue',
+], 'public/js/vendor.js');
+
+mix.version();
