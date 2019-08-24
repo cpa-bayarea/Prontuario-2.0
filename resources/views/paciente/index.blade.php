@@ -122,8 +122,8 @@
                                     <td>{{$paciente->nome}}</td>
                                     <td>{{ date('d/m/Y', strtotime($paciente->data_nascimento)) }}</td>
 
+                                    <td>{{$paciente}}</td>
                                     <td>{{$paciente->email}}</td>
-                                    <td>{{$paciente->nome}}</td>
                                     <td>{{$paciente->cidade->title}} - {{$paciente->cidade->uf->letter}}</td>
                                     <td class="ibox-content">
                                         <form action="paciente/delete/{{$paciente->id}}" method="POST">
