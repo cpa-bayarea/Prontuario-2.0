@@ -1,34 +1,23 @@
-@extends('layouts.layout')
+@extends('layouts.app')
 
-@section('title', 'Home Page')
 @section('content')
+<div class="row">
+    <div class="col-md-8 col-md-offset-2">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title"><h5>Dashboard</h5>
+              <div class="ibox-tools"> <span class="label label-warning-light pull-right">Welcome</span></div>
+            </div>
 
-    <div class="row">
-        <div class="col-lg-10 col-lg-offset-1">
-            <div class="ibox">
-                <div class="ibox-title">
-                    <h5>Olá, {{ Auth()->user()->tx_nome }}</h5>
-                </div>
-                <div class="ibox-content">
-
-                    <div class="row">
-                        <div class="col-lg-6 col-lg-offset-3">
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    Página Inicial do Sistema
-                                </div>
-                                <div class="panel-body">
-                                    <p>Navegue pelo menu a sua esquerda para usufriuir das funcionalidades do Prontuário
-                                        Eletrônico.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
+            <div class="ibox-content">
+                @if (session('status'))
+                    <div class="alert alert-success">
+                        {{ session('status') }}
                     </div>
-                </div>
+                @endif
+
+                You are logged in!
             </div>
         </div>
     </div>
-
-
+</div>
 @endsection
