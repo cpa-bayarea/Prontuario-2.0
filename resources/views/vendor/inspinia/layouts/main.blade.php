@@ -156,13 +156,11 @@
 
             $("#form_paciente").append('<input type="hidden" value="'+response.paciente.id+'" name="paciente_id">');
             $('#button_submit').empty().append('Atualizar');
-
-
-
-
         })
-
     });
+
+
+    $.('#')
 
 
 
