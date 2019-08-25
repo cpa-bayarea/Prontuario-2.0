@@ -25,3 +25,9 @@ Route::post('/paciente', 'PacienteController@store')->name('paciente.store');
 Route::post('/paciente/delete/{id}', 'PacienteController@delete')->name('paciente.delete');
 
 Route::get('search/cidadebyuf/{id}', 'CidadeController@findCidadeByUf');
+
+// Triagem
+Route::get('/triagem', 'triagemController@index')->name('triagem');
+Route::get('search/triagem/findById/{id}', 'triagemController@findById')->name('triagem.find');
+Route::post('/triagem', 'triagemController@store')->name('triagem.store');
+Route::post('/triagem/delete/{id}', 'triagemController@delete')->name('triagem.delete');
