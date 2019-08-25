@@ -1,0 +1,72 @@
+@extends('layouts.app')
+@section('content-title', 'Triagem')
+@section('content')
+
+<div class="col-12">
+    <div class="ibox">
+        <div class="ibox-title">
+            <h5>Cadastro de Triagem</h5>
+            <div class="ibox-tools">
+                <a class="collapse-link">
+                    <i class="fa fa-chevron-up"></i>
+                </a>
+
+            </div>
+        </div>
+        <div class="ibox-content" style="">
+            <form action="triagem" method="POST" id="form_triagem">
+                @csrf
+                <div class="form-group row"><label for="nome" class="col-lg-2 col-form-label">Nome</label>
+                    <div class="col-lg-10"><input type="text" placeholder="Nome" required name="nome" id="nome" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group row"><label for="idade" class="col-lg-2 col-form-label">Idade</label>
+                    <div class="col-lg-10"><input type="number" min="0" max="150" placeholder="Idade" required name="idade" id="idade" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group row"><label for="triador" class="col-lg-2 col-form-label">Triador</label>
+                    <div class="col-lg-10"><input type="text" placeholder="Triador" required name="triador" id="triador" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group row"><label for="supervisor" class="col-lg-2 col-form-label">Supervisor</label>
+                    <div class="col-lg-10"><input type="text" min="0" max="150" placeholder="Supervisor" required name="supervisor" id="supervisor" class="form-control">
+                    </div>
+                </div>
+                <div class="hr-line-dashed"></div>
+                <div class="form-group row"><label for="supervisor" class="col-lg-2 col-form-label">Tipo de Atendimento</label>
+                    <div class="col-sm-10">
+                        <div class="checkbox-inline i-checks"><label> <div class="iradio_square-green" style="position: relative;"><input type="radio" value="Criança" name="atendimento" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins></div> <i></i> Criança</label></div>
+                        <div class="checkbox-inline i-checks"><label> <div class="iradio_square-green" style="position: relative;"><input type="radio" value="Adolescente" name="atendimento" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins></div> <i></i> Adolescente </label></div>
+                        <div class="checkbox-inline i-checks"><label> <div class="iradio_square-green" style="position: relative;"><input type="radio" value="Adulto" name="atendimento" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins></div> <i></i> Adulto </label></div>
+                        <div class="checkbox-inline i-checks"><label> <div class="iradio_square-green" style="position: relative;"><input type="radio" value="Idoso" name="atendimento" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins></div> <i></i> Idoso </label></div>
+                    </div>
+                </div>
+                <div class="hr-line-dashed"></div>
+                <div class="form-group row"><label for="supervisor" class="col-lg-2 col-form-label">Grupo</label>
+                    <div class="col-sm-10">
+                        <div class="checkbox-inline i-checks"><label> <div class="iradio_square-green" style="position: relative;"><input type="radio" value="Criança" name="grupo" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins></div> <i></i> Criança</label></div>
+                        <div class="checkbox-inline i-checks"><label> <div class="iradio_square-green" style="position: relative;"><input type="radio" value="Mulheres" name="grupo" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins></div> <i></i> Mulheres </label></div>
+                        <div class="checkbox-inline i-checks"><label> <div class="iradio_square-green" style="position: relative;"><input type="radio" value="Homens" name="grupo" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins></div> <i></i> Homens </label></div>
+                        <div class="checkbox-inline i-checks"><label> <div class="iradio_square-green" style="position: relative;"><input type="radio" value="Educação Familiar" name="grupo" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins></div> <i></i> Educação Familiar </label></div>
+                        <div class="checkbox-inline i-checks"><label> <div class="iradio_square-green" style="position: relative;"><input type="radio" value="Educação Drogadição" name="grupo" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins></div> <i></i> Educação Drogadição </label></div>
+                    </div>
+                </div>
+                <div class="hr-line-dashed"></div>
+                <div class="form-group row"><label for="supervisor" class="col-lg-2 col-form-label">Temporário</label>
+                    <div class="col-sm-10">
+                        <div class="checkbox-inline i-checks"><label> <div class="iradio_square-green" style="position: relative;"><input type="radio" value="Casal" name="temporario" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins></div> <i></i> Casal</label></div>
+                        <div class="checkbox-inline i-checks"><label> <div class="iradio_square-green" style="position: relative;"><input type="radio" value="Familiar" name="temporario" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins></div> <i></i> Familiar </label></div>
+                        <div class="checkbox-inline i-checks"><label> <div class="iradio_square-green" style="position: relative;"><input type="radio" value="Outros,quais?" name="temporario" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins></div> <i></i> Outros,quais? </label></div>
+                    </div>
+                </div>
+                <div class="hr-line-dashed"></div>
+                <div class="form-group row"><label for="supervisor" class="col-lg-2 col-form-label">Queixa Principal</label>
+                    <div class="col-lg-10"><input type="textarea" placeholder="Nome" required name="queixa" id="queixa" class="form-control">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+@endsection
+
