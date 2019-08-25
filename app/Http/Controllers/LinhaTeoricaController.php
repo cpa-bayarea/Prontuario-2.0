@@ -28,9 +28,7 @@ class LinhaTeoricaController extends Controller
     public function index()
     {
         try {
-            $linhas = DB::table('tb_linha_teorica')
-                        ->orderBy('tx_nome', 'asc')
-                        ->get();
+            $linhas = Linha::orderBy('tx_nome', 'asc')->get();
 
             return view('linha_teorica.index', compact('linhas', $linhas));
         } catch (\Exception $e) {
@@ -133,7 +131,8 @@ class LinhaTeoricaController extends Controller
     public function destroy($id)
     {
         try {
-            DB::table('tb_linha_teorica')->where('id', '=', $id)->delete();
+            $linha = Linha::where('id', $id)->first();
+            $linha->delete();
             Session::flash('success', 'Operação realizada com sucesso');
             return redirect()->route('linha_teorica.index');
         } catch (\Exception $e) {

@@ -37,4 +37,11 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/linha_teorica/edit/{id}', 'LinhaTeoricaController@edit')->name('linha_teorica.edit');
     Route::post('/linha_teorica/delete/{id}', 'LinhaTeoricaController@destroy')->name('linha_teorica.delete');
 
+    /**  Rotas de Supervisores **/
+    Route::get('/supervisor', 'SupervisorController@index')->name('supervisor.index');
+    Route::get('/supervisor/create', 'SupervisorController@create')->name('supervisor.create');
+    Route::post('/supervisor/store', 'SupervisorController@store')->name('supervisor.store');
+    Route::get('/supervisor/edit/{id}', 'SupervisorController@edit')->name('supervisor.edit');
+    Route::post('/supervisor/delete/{id}', 'SupervisorController@destroy')->name('supervisor.delete');
+
 });

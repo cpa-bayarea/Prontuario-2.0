@@ -17,4 +17,11 @@ class LinhaTeorica extends Model
         'tx_nome', 'tx_desc'
     ];
 
+    /**
+     * Relacionamento de linha teórica com Supervisor.
+     */
+    public function getSupervisor()
+    {
+        return $this->hasMany('App\Supervisor');
+    }
 }

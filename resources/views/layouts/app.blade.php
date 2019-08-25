@@ -30,5 +30,10 @@
                 <span class="nav-label">Linha Teórica</span>
             </a>
         </li>
+        <li class="">
+            <a href="{{ route('supervisor.index') }}"><i class="fa fa-users"></i>
+                <span class="nav-label">Supervisor</span>
+            </a>
+        </li>
     </ul>
 @endsection
