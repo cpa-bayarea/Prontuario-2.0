@@ -15,7 +15,14 @@ class CreateTriagemsTable extends Migration
     {
         Schema::create('triagems', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('triador', 100);
+            $table->string('supervisor', 100);
+            $table->text('queixa_principal');
+            // Paciente
+            $table->unsignedBigInteger('id_pacientes');
+            $table->foreign('id_pacientes')->references('id')->on('pacientes');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
