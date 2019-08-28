@@ -15,6 +15,6 @@ class Grupo extends Model
      * Relacionamento de Grupo com GrupoItems
      */
     public function stores(){
-        return $this->hasMany('App\GrupoItem','id', 'grupo_id');
+        return $this->hasMany('App\GrupoItem','id', 'id_grupo');
     }
 }

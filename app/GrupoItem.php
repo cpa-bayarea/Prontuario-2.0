@@ -11,12 +11,12 @@ class GrupoItem extends Model
     protected $fillable = [
         'tx_nome_item_grupo', 
         'tx_outro', 
-        'grupo_id'
+        'id_grupo'
     ];
      /**
      * Relacionamento de GrupoItems com Grupo
      */
     public function grupo() {
-        return $this->belongsTo('App\Grupo', 'grupo_id', 'id');
+        return $this->belongsTo('App\Grupo', 'id_grupo', 'id');
     }
 }
