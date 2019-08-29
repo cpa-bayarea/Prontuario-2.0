@@ -35,5 +35,10 @@
                 <span class="nav-label">Supervisor</span>
             </a>
         </li>
+        <li class="">
+            <a href="{{ route('aluno.index') }}"><i class="fa fa-users"></i>
+                <span class="nav-label">Aluno</span>
+            </a>
+        </li>
     </ul>
 @endsection

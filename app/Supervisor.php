@@ -14,7 +14,8 @@ class Supervisor extends Model
 
     protected $fillable = [
         'tx_nome', 'username', 'nu_telefone', 'nu_celular', 'nu_crp',
-        'status', 'linha_id'
+//        'status',
+        'linha_id'
     ];
 
     /**

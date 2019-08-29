@@ -44,4 +44,11 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/supervisor/edit/{id}', 'SupervisorController@edit')->name('supervisor.edit');
     Route::post('/supervisor/delete/{id}', 'SupervisorController@destroy')->name('supervisor.delete');
 
+    /**  Rotas de Alunos **/
+    Route::get('/aluno', 'AlunoController@index')->name('aluno.index');
+    Route::get('/aluno/create', 'AlunoController@create')->name('aluno.create');
+    Route::post('/aluno/store', 'AlunoController@store')->name('aluno.store');
+    Route::get('/aluno/edit/{id}', 'AlunoController@edit')->name('aluno.edit');
+    Route::post('/aluno/delete/{id}', 'AlunoController@destroy')->name('aluno.delete');
+
 });
