@@ -19,8 +19,8 @@ class GrupoItemsHasTriagem extends Migration
             $table->unsignedBigInteger('id_triagem');
             $table->foreign('id_triagem')->references('id')->on('triagems');
            
-            $table->unsignedBigInteger('id_grupo_items');
-            $table->foreign('id_grupo_items')->references('id')->on('grupo_items');
+            $table->unsignedBigInteger('id_grupo_item');
+            $table->foreign('id_grupo_item')->references('id')->on('grupo_items');
            
             $table->timestamps();
             $table->softDeletes();

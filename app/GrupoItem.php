@@ -17,6 +17,6 @@ class GrupoItem extends Model
      * Relacionamento de GrupoItems com Grupo
      */
     public function grupo() {
-        return $this->belongsTo('App\Grupo', 'id_grupo', 'id');
+        return $this->hasMany('App\Grupo','id_grupo');
     }
 }

@@ -7,14 +7,12 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Grupo extends Model
 {
-    use SoftDeletes;
+    use SoftDeletes;zssad
     protected $fillable = [
         'tx_nome_grupo', 
     ];
-    /**
-     * Relacionamento de Grupo com GrupoItems
-     */
-    public function stores(){
-        return $this->hasMany('App\GrupoItem','id', 'id_grupo');
+
+    public function topicos_pergumtas(){
+        return $this->hasMany('App\GrupoItem');
     }
 }

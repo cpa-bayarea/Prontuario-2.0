@@ -14,4 +14,10 @@ class Triagem extends Model
         'queixa_principal',
         'id_paciente'
     ];
+     /**
+     * Relacionamento de Triagem com Paciente
+     */
+    public function paciente() {
+        return $this->belongsTo('App\Paciente','id_paciente');
+    }
 }
