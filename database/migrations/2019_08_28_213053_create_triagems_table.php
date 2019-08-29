@@ -18,6 +18,10 @@ class CreateTriagemsTable extends Migration
             $table->string('triador', 100);
             $table->string('supervisor', 100);
             $table->text('queixa_principal');
+            $table->string('atendimento', 100);
+            $table->string('grupo', 100);
+            $table->string('outro', 100)->nullable();
+            $table->string('temporario', 100);
             // Paciente
             $table->unsignedBigInteger('id_pacientes');
             $table->foreign('id_pacientes')->references('id')->on('pacientes');

@@ -6,51 +6,44 @@ use Illuminate\Http\Request;
 use App\Triagem;
 use App\Grupo;
 use App\GrupoItem;
+use App\Paciente;
 
 class TriagemController extends Controller
 {
-    public function index()
-    {
-        // $triagem = new Triagem;
-        // $triagem = Triagem::find(1);
-        $grupo = GrupoItem::find(1);
-
-        dd($grupo->grupo());
-
-        // dd($triagem->paciente());
-
+    public function index() {
+     
         return view('triagem.index');
 
     }
 
-    public function create()
-    {
+    public function create() {
         //
     }
 
-    public function store()
-    {
+    public function store(Request $request) {
+      
+        $paciente = new Paciente($request->all());
+        $triagem = new Triagem($request->all());
+        $paciente->save();
+        $triagem->id_pacientes = $paciente->id;
+        $triagem->save();
+        return redirect(route('triagem'));
+    }
+
+    public function show() {
         //
     }
 
-    public function show()
-    {
+
+    public function edit() {
+       //
+    }
+
+    public function update() {
         //
     }
 
-
-    public function edit()
-    {
-       
-    }
-
-    public function update()
-    {
-        //
-    }
-
-    public function destroy()
-    {
+    public function destroy() {
         //
     }
 }

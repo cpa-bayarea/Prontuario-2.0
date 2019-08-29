@@ -20,11 +20,11 @@ class CreatePacientesTable extends Migration
             $table->string('nome_social')->nullable();
             $table->string('nome_responsavel')->nullable();
             $table->date('data_nascimento');
-            $table->string('cpf',14)->unique();
+            $table->string('cpf',14)->unique()->nullable();
             $table->string('rg')->nullable();
-            $table->string('endereco');
-            $table->string('email');
-            $table->integer('cidade_id')->unsigned();
+            $table->string('endereco')->nullable();
+            $table->string('email')->nullable();
+            $table->integer('cidade_id')->unsigned()->nullable();
             $table->foreign('cidade_id')->references('id')->on('cities');
             $table->timestamps();
         });

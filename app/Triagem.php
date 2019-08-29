@@ -11,8 +11,12 @@ class Triagem extends Model
     protected $fillable = [
         'triador', 
         'supervisor', 
+        'atendimento',
         'queixa_principal',
-        'id_paciente'
+        'temporario',
+        'id_paciente',
+        'grupo',
+        'outro',
     ];
      /**
      * Relacionamento de Triagem com Paciente
