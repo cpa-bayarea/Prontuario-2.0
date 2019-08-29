@@ -28,6 +28,7 @@ Route::get('search/cidadebyuf/{id}', 'CidadeController@findCidadeByUf');
 
 // Triagem
 Route::get('/triagem', 'triagemController@index')->name('triagem');
+Route::get('/triagem/show', 'triagemController@show')->name('triagem.show');
 Route::get('search/triagem/findById/{id}', 'triagemController@findById')->name('triagem.find');
 Route::post('/triagem', 'triagemController@store')->name('triagem.store');
 Route::post('/triagem/delete/{id}', 'triagemController@delete')->name('triagem.delete');

@@ -24,5 +24,8 @@
     <li class="">
       <a href="{{ route('triagem') }}"><i class="fa fa-check-square-o"></i> <span class="nav-label">Triagem</span></a>
     </li>
+    <li class="">
+      <a href="{{ route('triagem.show') }}"><i class="fa fa-file-text-o"></i> <span class="nav-label">Pacientes em triagem ativos</span></a>
+    </li>
   </ul>
 @endsection

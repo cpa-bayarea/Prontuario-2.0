@@ -31,7 +31,7 @@ class TriagemController extends Controller
     }
 
     public function show() {
-        //
+        return view('triagem.show');
     }
 
 
