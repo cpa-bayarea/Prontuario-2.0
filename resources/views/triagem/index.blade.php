@@ -74,10 +74,10 @@
                     </div>
                 </div>
                 <div class="col-12 text-right">
-                        <section class="progress-demo">
-                            <button class="ladda-button btn btn-sm btn-success" type="submit" data-style="expand-left"><span class="ladda-label" id="button_submit">Cadastrar</span><span class="ladda-spinner"></span></button>
-                        </section>
-                    </div>
+                    <section class="progress-demo">
+                        <button class="ladda-button btn btn-sm btn-success" type="submit" data-style="expand-left"><span class="ladda-label" id="button_submit">Cadastrar</span><span class="ladda-spinner"></span></button>
+                    </section>
+                </div>
             </form>
         </div>
     </div>

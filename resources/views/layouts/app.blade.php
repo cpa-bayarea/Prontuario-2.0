@@ -22,10 +22,11 @@
       <a href="{{ route('paciente') }}"><i class="fa fa-users"></i> <span class="nav-label">Pacientes</span></a>
     </li>
     <li class="">
-      <a href="{{ route('triagem') }}"><i class="fa fa-check-square-o"></i> <span class="nav-label">Triagem</span></a>
-    </li>
-    <li class="">
-      <a href="{{ route('triagem.show') }}"><i class="fa fa-file-text-o"></i> <span class="nav-label">Pacientes em triagem ativos</span></a>
-    </li>
+      <a href="#" aria-expanded="false"><i class="fa fa-edit"></i> <span class="nav-label">Triagem</span><span class="fa arrow"></span></a>
+      <ul class="nav nav-second-level collapse" aria-expanded="false" style="height: 0px;">
+          <li><a href="{{ route('triagem') }}">Nova Triagem</a></li>
+          <li><a href="{{ route('status') }}">Status de cadastros</a></li>
+      </ul>
+  </li>
   </ul>
 @endsection

@@ -32,3 +32,10 @@ Route::get('/triagem/show', 'triagemController@show')->name('triagem.show');
 Route::get('search/triagem/findById/{id}', 'triagemController@findById')->name('triagem.find');
 Route::post('/triagem', 'triagemController@store')->name('triagem.store');
 Route::post('/triagem/delete/{id}', 'triagemController@delete')->name('triagem.delete');
+
+// Status_de_cadastro
+Route::get('/status', 'StatusDeCadastroController@index')->name('status');
+Route::get('/status/show', 'StatusDeCadastroController@show')->name('status.show');
+Route::get('search/status/findById/{id}', 'StatusDeCadastroController@findById')->name('status.find');
+Route::post('/status', 'StatusDeCadastroController@store')->name('status.store');
+Route::post('/status/delete/{id}', 'StatusDeCadastroController@delete')->name('status.delete');
