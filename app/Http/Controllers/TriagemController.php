@@ -7,6 +7,7 @@ use Session;
 use App\Triagem;
 use App\Paciente;
 use App\StatusDeCadastro;
+use App\Telefone;
 
 class TriagemController extends Controller
 {
@@ -18,7 +19,7 @@ class TriagemController extends Controller
     public function store(Request $request) {
       
         $paciente = new Paciente($request->all());
-        $paciente->id_status = 1;
+        $paciente->id_status = 1;                   //id_status = 1 paciente pré cadastrado, contem apenas dados iniciais.
         $triagem = new Triagem($request->all());
         $paciente->save();
         $triagem->id_pacientes = $paciente->id;

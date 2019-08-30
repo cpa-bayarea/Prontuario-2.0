@@ -19,7 +19,7 @@ class StatusDeCadastroController extends Controller
     
         $status = new StatusDeCadastro($request->all());
         $status->save();
-        Session::flash('success', 'Operação realizada com sucesso');
+        Session::flash('success', 'Cadastro de status realizado com sucesso');
         return redirect(route('status'));
     }
     public function delete($id){
