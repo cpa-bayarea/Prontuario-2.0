@@ -2,6 +2,46 @@
 @section('content-title', 'Status do Cadastro')
 @section('content')
 
+<div class="row">
+    <div class="col-lg-4">
+    <div class="ibox ">
+        <div class="ibox-title">
+            <h5>Status</h5>
+            <div class="ibox-tools">
+                <a class="collapse-link">
+                    <i class="fa fa-chevron-up"></i>
+                </a>
+            </div>
+        </div>
+        <div class="ibox-content">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Status</th>
+                    <th>ações</th>
+                </tr>
+                </thead>
+                <tbody>
+                    @foreach ($status as $item)
+                    <tr>
+                        <td>{{$item->id}}</td>
+                        <td>{{$item->status}}</td>
+                        <td>
+                            <form action="status/delete/{{$item->id}}" method="POST">
+                                @csrf
+                                <button class="btn btn-danger  dim" type="submit"> <i class="fa fa-trash"></i></button>
+                            </form>
+                        </td>        
+                    </tr> 
+                    @endforeach
+               
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
 <div class="col-lg-5">
     <div class="ibox ">
         <div class="ibox-title">
@@ -28,6 +68,5 @@
         </div>
     </div>
 </div>
-
 @endsection
 

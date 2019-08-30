@@ -12,7 +12,7 @@ class StatusDeCadastroController extends Controller
     public function index() {
  
         $status = StatusDeCadastro::all();
-        return view('paciente.status_de_cadastro.index');
+        return view('paciente.status_de_cadastro.index',compact('status'));
     }
 
     public function store(Request $request) {
@@ -20,6 +20,12 @@ class StatusDeCadastroController extends Controller
         $status = new StatusDeCadastro($request->all());
         $status->save();
         Session::flash('success', 'Operação realizada com sucesso');
+        return redirect(route('status'));
+    }
+    public function delete($id){
+
+        StatusDeCadastro::find($id)->delete();
+        Session::flash('success', 'Excluído com sucesso');
         return redirect(route('status'));
     }
 }
