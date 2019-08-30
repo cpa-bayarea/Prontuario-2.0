@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Session;
 use App\Triagem;
-use App\Grupo;
-use App\GrupoItem;
 use App\Paciente;
+use App\StatusDeCadastro;
 
 class TriagemController extends Controller
 {
@@ -23,10 +23,12 @@ class TriagemController extends Controller
     public function store(Request $request) {
       
         $paciente = new Paciente($request->all());
+        $paciente->id_status = 1;
         $triagem = new Triagem($request->all());
         $paciente->save();
         $triagem->id_pacientes = $paciente->id;
         $triagem->save();
+        Session::flash('success', 'Operação realizada com sucesso');
         return redirect(route('triagem'));
     }
 

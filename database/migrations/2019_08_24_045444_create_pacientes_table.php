@@ -24,9 +24,15 @@ class CreatePacientesTable extends Migration
             $table->string('rg')->nullable();
             $table->string('endereco')->nullable();
             $table->string('email')->nullable();
+
             $table->integer('cidade_id')->unsigned()->nullable();
             $table->foreign('cidade_id')->references('id')->on('cities');
+
+            $table->unsignedBigInteger('id_status');
+            $table->foreign('id_status')->references('id')->on('status_de_cadastros');
+           
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

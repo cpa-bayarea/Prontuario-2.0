@@ -130,7 +130,14 @@
 
                                     </td>
                                     <td>{{$paciente->email}}</td>
+                                    
+                                    @if ($paciente->cidade_id)
                                     <td>{{$paciente->cidade->title}} - {{$paciente->cidade->uf->letter}}</td>
+                                        
+                                    @else
+                                    <td>--</td>    
+                                    @endif
+                                        
                                     <td class="ibox-content">
                                         <form action="paciente/delete/{{$paciente->id}}" method="POST">
                                             @csrf

@@ -22,7 +22,6 @@ class CreateTriagemsTable extends Migration
             $table->string('grupo', 100);
             $table->string('outro', 100)->nullable();
             $table->string('temporario', 100);
-            // Paciente
             $table->unsignedBigInteger('id_pacientes');
             $table->foreign('id_pacientes')->references('id')->on('pacientes');
             $table->timestamps();
