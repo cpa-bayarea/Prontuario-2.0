@@ -17,15 +17,24 @@ class TriagemController extends Controller
     }
 
     public function store(Request $request) {
-      
+
         $paciente = new Paciente($request->all());
         $paciente->id_status = 1;                   //id_status = 1 paciente pré cadastrado, contem apenas dados iniciais.
-        $triagem = new Triagem($request->all());
         $paciente->save();
+
+        $triagem = new Triagem($request->all());
         $triagem->id_pacientes = $paciente->id;
         $triagem->save();
+
+        $telefone = new Telefone($request->all());
+        $telefone->id_paciente = $paciente->id;
+        $telefone->save();
+        
+       
         Session::flash('success', 'Operação realizada com sucesso');
         return redirect(route('triagem'));
+       
+        
     }
 
     public function show() {
