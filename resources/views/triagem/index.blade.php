@@ -19,6 +19,10 @@
                     <div class="col-lg-10"><input type="text" placeholder="Nome" required name="nome" id="nome" class="form-control">
                     </div>
                 </div>
+                <div class="form-group row"><label for="Data Nascimento" class="col-lg-2 col-form-label">Telefone</label>
+                    <div class="col-lg-10"><input type="text" data-mask="(99) 99999 9999" placeholder="(99) 99999-9999" name="telefone" id="telefone" class="form-control"required>
+                    </div>
+                </div>
                 <div class="form-group row"><label for="Data Nascimento" class="col-lg-2 col-form-label">Idade</label>
                     <div class="col-lg-10"><input type="date" min="0" max="150" placeholder="Data Nascimento" required name="data_nascimento" id="data_nascimento" class="form-control">
                     </div>
