@@ -13,11 +13,6 @@ class TriagemController extends Controller
     public function index() {
      
         return view('triagem.index');
-
-    }
-
-    public function create() {
-        //
     }
 
     public function store(Request $request) {
@@ -33,7 +28,7 @@ class TriagemController extends Controller
     }
 
     public function show() {
-        return view('triagem.show');
+       //
     }
 
 
