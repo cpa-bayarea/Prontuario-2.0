@@ -26,6 +26,14 @@ class PacienteController extends Controller
 
       }
 
+    public function create(){
+        $pacientes = Paciente::all();
+        $ufs = UF::all();
+
+
+       return view('paciente.create',compact('ufs','pacientes'));
+
+    }
 
     public function store(Request $request)
     {
@@ -39,7 +47,7 @@ class PacienteController extends Controller
         $paciente->fill($request->all());
         $paciente->save();
         Session::flash('success', 'Operação realizada com sucesso');
-        return Redirect::to('paciente');
+        return Redirect::to('/paciente');
     }
 
     public function delete($id){

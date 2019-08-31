@@ -19,14 +19,20 @@
       <a href="{{ route('home') }}"><i class="fa fa-home"></i> <span class="nav-label">Home</span></a>
     </li>
     <li class="">
-      <a href="{{ route('paciente') }}"><i class="fa fa-users"></i> <span class="nav-label">Pacientes</span></a>
-    </li>
-    <li class="">
       <a href="#" aria-expanded="false"><i class="fa fa-edit"></i> <span class="nav-label">Triagem</span><span class="fa arrow"></span></a>
       <ul class="nav nav-second-level collapse" aria-expanded="false" style="height: 0px;">
           <li><a href="{{ route('triagem') }}">Nova Triagem</a></li>
           <li><a href="{{ route('status') }}">Status de cadastros</a></li>
       </ul>
   </li>
+  <li>
+    <a href="#" aria-expanded="false"><i class="fa fa-users"></i><span class="nav-label">Paciente</span><span class="fa arrow"></span></a>
+    <ul class="nav nav-second-level collapse" aria-expanded="false">
+      <li> <a href="{{ route('paciente') }}">Listagem</a></li>
+      <li><a href="{{ route('paciente.create') }}">Cadastrar</a></li>
+    </ul>
+  </li>
+    
+    
   </ul>
 @endsection
