@@ -54,5 +54,11 @@ Route::middleware(['auth'])->group(function () {
     /**  Rotas de Agendamentos **/
     Route::get('/agendamento', 'AgendamentoController@index')->name('agendamento.index');
 
+    Route::resource('prontuario', 'ProntuarioController');
+    Route::get('/prontuario/{id}/destroy', 'ProntuarioController@destroy');
+
+    Route::resource('prontuariostatus', 'ProntuarioStatusController');
+    Route::get('/prontuariostatus/{id}/destroy', 'ProntuarioStatusController@destroy');
+
 
 });

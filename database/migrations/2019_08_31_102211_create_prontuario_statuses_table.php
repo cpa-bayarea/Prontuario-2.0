@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAgendamentosTable extends Migration
+class CreateProntuarioStatusesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,9 @@ class CreateAgendamentosTable extends Migration
      */
     public function up()
     {
-        Schema::create('agendamentos', function (Blueprint $table) {
+        Schema::create('prontuario_status', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('title');
-            $table->string('color');
-            $table->timestamp('start');
-            $table->timestamp('end')->nullable();
+            $table->string('nome', 20);
             $table->softDeletes();
             $table->timestamps();
         });
@@ -31,6 +28,6 @@ class CreateAgendamentosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('agendamentos');
+        Schema::dropIfExists('prontuario_statuses');
     }
 }
