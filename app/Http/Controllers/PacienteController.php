@@ -14,25 +14,20 @@ class PacienteController extends Controller
         $pacientes = Paciente::all();
         $ufs = UF::all();
 
-
        return view('paciente.index',compact('ufs','pacientes'));
     }
-
 
     public function findById($id){
 
         $paciente = Paciente::find($id);
         return ['paciente'=>$paciente , 'cidade'=>$paciente->cidade()->with('uf')->get()];
-
       }
 
     public function create(){
         $pacientes = Paciente::all();
         $ufs = UF::all();
 
-
        return view('paciente.create',compact('ufs','pacientes'));
-
     }
 
     public function store(Request $request)
@@ -55,6 +50,5 @@ class PacienteController extends Controller
         Paciente::find($id)->delete();
         Session::flash('success', 'Excluído com sucesso');
         return Redirect::to('paciente');
-
     }
 }
