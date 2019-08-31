@@ -9,13 +9,10 @@
                     <a class="collapse-link">
                         <i class="fa fa-chevron-up"></i>
                     </a>
-
                 </div>
             </div>
             <div class="ibox-content" style="">
                 <form action="/paciente" method="POST" id="form_paciente">
-
-
                 @csrf
                     <div class="form-group row"><label for="nome" class="col-lg-2 col-form-label">Nome</label>
 
@@ -51,6 +48,10 @@
                         <div class="col-lg-10"><input type="text" name="rg" id="rg" class="form-control"></div>
                     </div>
 
+                    <div class="form-group row"><label class="col-lg-2 col-form-label" for="telefone">Telefone</label>
+                        <div class="col-lg-10"><input type="text" name="telefone" data-mask="(99) 99999-9999" id="telefone" class="form-control"></div>
+                    </div>
+
                     <div class="form-group row"><label class="col-lg-2 col-form-label" for="endereco">Endereço</label>
                         <div class="col-lg-10"><input type="text" name="endereco" required id="endereco" class="form-control"></div>
                     </div>
@@ -58,7 +59,8 @@
                     <div class="form-group row"><label class="col-lg-2 col-form-label" for="uf">UF</label>
                         <div class="col-lg-10">
                             <select class="form-control" data-show-subtext="true" id="uf" data-live-search="true">
-
+             
+                                @endif
                                 @foreach($ufs as $uf)
                                 <option value="{{$uf->id}}" data-subtext="{{$uf->title}}">{{$uf->letter}}</option>
                                 @endforeach

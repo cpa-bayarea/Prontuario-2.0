@@ -8,11 +8,17 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Telefone extends Model
 {
     use SoftDeletes;
+    
     protected $fillable = [
-        'telefone',
-        'id_user',
-        'id_paciente'
+        'ddd',
+        'numero',
+        'paciente_id'
     ];
+
+
+    public function paciente(){
+        return $this->belongsTo('App\Paciente','id','paciente_id');
+    }
 
 
 }

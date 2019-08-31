@@ -23,14 +23,13 @@ class TriagemController extends Controller
         $paciente->save();
 
         $triagem = new Triagem($request->all());
-        $triagem->id_pacientes = $paciente->id;
+        $triagem->paciente_ids = $paciente->id;
         $triagem->save();
 
-        $telefone = new Telefone($request->all());
-        $telefone->id_paciente = $paciente->id;
-        $telefone->save();
+        // $telefone = new Telefone($request->all());
+        // $telefone->paciente_id = $paciente->id;
+        // $telefone->save();
         
-       
         Session::flash('success', 'Operação realizada com sucesso');
         return redirect(route('triagem'));
        

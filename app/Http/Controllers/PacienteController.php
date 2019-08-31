@@ -8,13 +8,14 @@ use Session;
 use App\UF;
 use Redirect;
 
+
 class PacienteController extends Controller
 {
     public function index(){
-        $pacientes = Paciente::all();
-        $ufs = UF::all();
 
-       return view('paciente.index',compact('ufs','pacientes'));
+        $pacientes = Paciente::with('telefones')->get();
+        $ufs = UF::all();
+        return view('paciente.index',compact('ufs','pacientes'));
     }
 
     public function findById($id){
@@ -38,11 +39,23 @@ class PacienteController extends Controller
         }else{
             $paciente = new Paciente();
         }
-
+        $paciente->id_status = 1;
         $paciente->fill($request->all());
         $paciente->save();
-        Session::flash('success', 'Operação realizada com sucesso');
+
+        if($request->telefone){
+
+            $array = $request->all();
+            $array['paciente_id'] = $paciente->id;
+
+            if((new TelefoneController)->store($array)){
+                Session::flash('success', 'Operação realizada com sucesso');
+            }else{
+                Session::flash('danger', 'Erro ao cadstrar o telefone');
+            }
+        }
         return Redirect::to('/paciente');
+
     }
 
     public function delete($id){

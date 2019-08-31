@@ -24,7 +24,12 @@ class Paciente extends Model
 
 
     public function cidade(){
-
         return $this->hasOne('App\Cidade','id','cidade_id');
     }
+
+    public function telefones(){
+        return $this->hasMany('App\Telefone');
+    }
+
+
 }
