@@ -131,12 +131,8 @@
         <div class="ibox ">
             <div class="ibox-title">
                 <h5>Nenhum paciente cadastrado!</h5>
-
             </div>
-
         </div>
-
-
     </div>
 @endif
 

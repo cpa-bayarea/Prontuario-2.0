@@ -51,6 +51,10 @@
                         <div class="col-lg-10"><input type="text" name="rg" id="rg" class="form-control"></div>
                     </div>
 
+                    <div class="form-group row"><label class="col-lg-2 col-form-label" for="telefone">Telefone</label>
+                        <div class="col-lg-10"><input type="text" name="telefone" data-mask="(99) 99999-9999" id="telefone" class="form-control"></div>
+                    </div>
+
                     <div class="form-group row"><label class="col-lg-2 col-form-label" for="endereco">Endereço</label>
                         <div class="col-lg-10"><input type="text" name="endereco" required id="endereco" class="form-control"></div>
                     </div>

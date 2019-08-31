@@ -8,6 +8,7 @@ use Session;
 use App\UF;
 use Redirect;
 
+
 class PacienteController extends Controller
 {
     public function index(){
@@ -46,8 +47,20 @@ class PacienteController extends Controller
 
         $paciente->fill($request->all());
         $paciente->save();
-        Session::flash('success', 'Operação realizada com sucesso');
+
+        if($request->telefone){
+
+            $array = $request->all();
+            $array['paciente_id'] = $paciente->id;
+
+            if((new TelefoneController)->store($array)){
+                Session::flash('success', 'Operação realizada com sucesso');
+            }else{
+                Session::flash('danger', 'Erro ao cadstrar o telefone');
+            }
+        }
         return Redirect::to('/paciente');
+
     }
 
     public function delete($id){
