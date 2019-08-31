@@ -26,3 +26,8 @@ Route::post('/paciente', 'PacienteController@store')->name('paciente.store');
 Route::post('/paciente/delete/{id}', 'PacienteController@delete')->name('paciente.delete');
 
 Route::get('search/cidadebyuf/{id}', 'CidadeController@findCidadeByUf');
+
+Route::get('search/telefonebypacienteid/{paciente_id}', 'TelefoneController@findTelefoneByPaciente')->name('telefone.by.paciente');
+Route::post('telefone/delete/{id}','TelefoneController@destroy')->name('telefone.destroy');
+Route::post('telefone','TelefoneController@store')->name('telefone.store');
+Route::post('telefone/create','TelefoneController@create')->name('telefone.create');

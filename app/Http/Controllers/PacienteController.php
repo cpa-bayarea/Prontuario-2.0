@@ -12,10 +12,9 @@ use Redirect;
 class PacienteController extends Controller
 {
     public function index(){
-        $pacientes = Paciente::all();
+        $pacientes = Paciente::with('telefones')->get();
+
         $ufs = UF::all();
-
-
        return view('paciente.index',compact('ufs','pacientes'));
     }
 

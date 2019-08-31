@@ -3,14 +3,13 @@
         <div class="modal-content animated bounceInRight">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-                <i class="fa fa-laptop modal-icon"></i>
-                <h4 class="modal-title">Cadastro telefone</h4>
-                <small class="font-bold">Modal responsável por cadastrar o telefone do usuário  .</small>
+                <i class="fa fa-phone modal-icon"></i>
+                <h4 class="modal-title">Telefones</h4>
             </div>
             <div class="modal-body">
-                <div class="form-group">
-                    <label>Insira o número abaixo</label>
-                    <input type="text" data-mask="(99) 99999 9999" placeholder="" class="form-control">
+                <div class="form-group" id="paciente_form">
+                    <label>Para adicionar um novo número, insira o número abaixo</label>
+                    <input type="text" id="telefone_number" data-mask="(99) 99999 9999" placeholder="" class="form-control">
                     <button class="btn btn-sm btn-danger mt-2" id="submit_form_telefone">Cadastrar</button>
                 </div>
 
@@ -24,17 +23,13 @@
                                 <table class="table">
                                     <thead>
                                     <tr>
-                                        <th>#</th>
-                                        <th>First Name</th>
+
+                                        <th>Telefone</th>
+                                        <th>Ações</th>
 
                                     </tr>
                                     </thead>
-                                    <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>(61) 9999 9999</td>
-
-                                    </tr>
+                                    <tbody id="body-telefone">
                                     </tbody>
                                 </table>
 
@@ -47,16 +42,10 @@
 
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" id="save_telefone">Save changes</button>
+                <button type="button" class="btn btn-white" data-dismiss="modal">Fechar</button>
+
             </div>
         </div>
     </div>
 </div>
 
-<script>
-
-    $('.buttonModalTelefone').click(function () {
-           console.log($(this).val());
-    });
-</script>
