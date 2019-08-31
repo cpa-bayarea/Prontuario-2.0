@@ -28,6 +28,10 @@
                       
                         </ul>
                     </li>
+      <li class="">
+          <a href="{{ route('grupos') }}"><i class="fa fa-home"></i> <span class="nav-label">Grupos</span></a>
+
+      </li>
     
     
   </ul>
