@@ -20,6 +20,9 @@
                     <div class="form-group">
                         <input type="hidden" value="">
                         <label>Nome</label>
+
+
+
                         <input type="text" class="form-control" name="nome" aria-describedby="emailHelp"
                                value="   {{ $grupo->nome }}" required placeholder="Nome">
 
@@ -58,7 +61,7 @@
 
                             <td> {{ $grupo->nome }}</td>
                             <td>
-                                <button class="btn btn-success"> Cadastrar Items</button>
+                                <a class="btn btn-success" href="/grupoitens/{{ $grupo->id }}"> Cadastrar Items</a>
                                 <a class="btn btn-info" href="/grupos/edit/{{ $grupo->id }}"> Editar </a>
 
                                 <form action="/grupos/{{ $grupo->id }}" method="POST">
