@@ -32,7 +32,7 @@ class GrupoItemController extends Controller
         $grupoIten->fill($request->all());
         $grupoIten->save();
 
-        return Redirect::back();
+        return Redirect::to('/grupoitens/'.$grupoIten->grupo->id);
     }
     public function show($id)
     {
@@ -51,7 +51,7 @@ class GrupoItemController extends Controller
         $grupoIten->fill($request->all());
         $grupoIten->save();
         Session::flash('success', 'Atualizado com sucesso');
-        return view('grupo.grupoitem.index');
+
     }
     public function destroy($id)
     {

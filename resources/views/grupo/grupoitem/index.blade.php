@@ -52,7 +52,7 @@
             <div class="card-body">
 
                 <table class="table table-bordered">
-                    @foreach($grupoItens as $grupoIten)
+
                         <tr>
 
                             <th scope="col">Nome</th>
@@ -63,7 +63,7 @@
 
                         </tr>
 
-
+                    @foreach($grupoItens as $grupoIten)
                         <tr>
 
                             <td> {{ $grupoIten->nome }}</td>
