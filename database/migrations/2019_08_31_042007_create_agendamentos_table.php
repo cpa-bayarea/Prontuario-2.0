@@ -18,7 +18,7 @@ class CreateAgendamentosTable extends Migration
             $table->string('title');
             $table->string('color');
             $table->timestamp('start');
-            $table->timestamp('end');
+            $table->timestamp('end')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

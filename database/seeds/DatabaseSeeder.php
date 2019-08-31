@@ -15,6 +15,7 @@ class DatabaseSeeder extends Seeder
             UserTableSeeder::class,
             CityTableSeeder::class,
             StateTableSeeder::class,
+            LinhaTeoricaSeeder::class,
             StatusTableSeeder::class
         ]);
     }

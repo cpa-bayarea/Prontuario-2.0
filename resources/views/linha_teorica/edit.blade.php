@@ -21,7 +21,7 @@
                                 <label for="nome" class="col-sm-2 control-label">Nome <span class="obrigatorio">*</span></label>
                                 <div class="col-sm-10">
                                     <input type="text" class="form-control" id="nome" name="tx_nome"
-                                           value="{{ $linha->tx_nome }}" required>
+                                           value="{{ $linha->tx_nome }}" required maxlength="255">
                                 </div>
                             </div>
                             <div class="form-group">
