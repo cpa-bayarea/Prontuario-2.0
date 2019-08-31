@@ -2,11 +2,11 @@
 @section('content-title', 'Pacientes')
 @section('content')
 
-@if(count($pacientes) >= 1)
-    <div class="col-12">
-        <div class="ibox ">
-            <div class="ibox-title">
-                <h5>Listagem Pacientes</h5>
+    @if(count($pacientes) >= 1)
+        <div class="col-12">
+            <div class="ibox ">
+                <div class="ibox-title">
+                    <h5>Listagem Pacientes</h5>
                     <div class="ibox-tools">
                         <a class="collapse-link">
                             <i class="fa fa-chevron-up"></i>
@@ -23,7 +23,7 @@
                                 <th>Telefone</th>
                                 <th>E-mail</th>
                                 <th>Cidade - UF</th>
-                                <th> Ações </th>
+                                <th> Ações</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -34,22 +34,28 @@
                                 <td>{{ date('d/m/Y', strtotime($paciente->data_nascimento)) }}</td>
                                 <td>
                                     <div class="text-center">
-                                        <button type="button findById" class="btn btn-sm btn-w-m btn-success findById" value="{{$paciente->id}}" type="button" data-toggle="modal" data-target="#modalTelefone">Visualizar Telefone</button>
+                                        <button type="button findById" class="btn btn-sm btn-w-m btn-success findById"
+                                                value="{{$paciente->id}}" type="button" data-toggle="modal"
+                                                data-target="#modalTelefone">Visualizar Telefone
+                                        </button>
                                     </div>
                                 </td>
                                 <td>{{$paciente->email}}</td>
                                 @if ($paciente->cidade_id)
-                                <td>{{$paciente->cidade->title}} - {{$paciente->cidade->uf->letter}}</td>
+                                    <td>{{$paciente->cidade->title}} - {{$paciente->cidade->uf->letter}}</td>
                                 @else
-                                <td>--</td>
-                                
+                                    <td>--</td>
+
                                 @endif
                                 <td class="ibox-content">
                                     <form action="paciente/delete/{{$paciente->id}}" method="POST">
                                         @csrf
-                                        <button class="btn btn-warning  dim" type="submit"> <i class="fa fa-trash"></i></button>
+                                        <button class="btn btn-warning  dim" type="submit"><i class="fa fa-trash"></i>
+                                        </button>
                                     </form>
-                                    <button class="btn btn-info  dim findById" value="{{$paciente->id}}" type="button"> <i class="fa fa-edit"></i></button>
+                                    <button class="btn btn-info  dim findById" value="{{$paciente->id}}" type="button">
+                                        <i class="fa fa-edit"></i>
+                                    </button>
                                 </td>
                             </tr>
                         @endforeach
@@ -57,21 +63,20 @@
                     </table>
                 </div>
             </div>
-            @include('components.modal_telefone')   
+            @include('components.modal_telefone')
         </div>
-    </div>
-    <div class="modal-footer">
-        <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-    </div>
-@else
-    <div class="col-12">
-        <div class="ibox ">
-            <div class="ibox-title">
-                <h5>Nenhum paciente cadastrado!</h5>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+    @else
+        <div class="col-12">
+            <div class="ibox ">
+                <div class="ibox-title">
+                    <h5>Nenhum paciente cadastrado!</h5>
+                </div>
             </div>
         </div>
-    </div>
-@endif
-@endsection
+    @endif
 
+@endsection

@@ -59,10 +59,9 @@
                     <div class="form-group row"><label class="col-lg-2 col-form-label" for="uf">UF</label>
                         <div class="col-lg-10">
                             <select class="form-control" data-show-subtext="true" id="uf" data-live-search="true">
-             
-                                @endif
+
                                 @foreach($ufs as $uf)
-                                <option value="{{$uf->id}}" data-subtext="{{$uf->title}}">{{$uf->letter}}</option>
+                                    <option value="{{$uf->id}}" data-subtext="{{$uf->title}}">{{$uf->letter}}</option>
                                 @endforeach
 
                             </select>

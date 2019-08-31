@@ -23,7 +23,7 @@ class CreateTelefonesTable extends Migration
 
             $table->unsignedBigInteger('paciente_id')->unsigned()->nullable();
             $table->foreign('paciente_id')->references('id')->on('pacientes');
-           
+
             $table->timestamps();
             $table->softDeletes();
         });
