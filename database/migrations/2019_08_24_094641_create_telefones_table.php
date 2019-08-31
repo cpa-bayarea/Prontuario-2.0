@@ -14,12 +14,18 @@ class CreateTelefonesTable extends Migration
     public function up()
     {
         Schema::create('telefones', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->string('ddd');
             $table->string('numero');
-            $table->integer('user_id')->unsigned();
-            $table->foreign('user_id')->references('id')->on('users');
+
+            $table->integer('id_user')->unsigned()->nullable();
+            $table->foreign('id_user')->references('id')->on('users');
+
+            $table->unsignedBigInteger('paciente_id')->unsigned()->nullable();
+            $table->foreign('paciente_id')->references('id')->on('pacientes');
+
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

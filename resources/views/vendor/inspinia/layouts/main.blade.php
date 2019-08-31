@@ -115,32 +115,79 @@
 @endif
 
 <script>
-
-    $('#uf').on('change', function () {
+    $('button.findById').click(function updateListTelefone() {
+        let paciente_id = $(this).val();
         $.ajax({
-            url: "/search/cidadebyuf/"+$('#uf').val(),
+            url: "/search/telefonebypacienteid/" + paciente_id,
             type: "GET",
-        }).done(function (response) {
-            $("#cidade").empty();
-           response.forEach(function(key){
-               $("#cidade").append('<option value="'+key.id+'">'+key.title+'</option>');
-               $("#cidade").removeAttr( "disabled" );
+            datatype: 'json',
+            success: function (data) {
 
+                $('#body-telefone').empty();
+                $.each( data, function( key, value ) {
+                    html  = '<tr>';
+                    html += '<td>' + value.ddd +' '+ value.numero +'</td>';
+                    html += ' <td class="row"> <form action="telefone/delete/'+ value.id +'" method="POST">@csrf<button class="btn btn-warning dim" type="submit"><i class="fa fa-trash"></i></button></form>';
+                    html += '<button class="btn btn-info dim findTelefoneById" value="'+ value.id +'" type="button"><i class="fa fa-edit"></i></button></td>';
+                    html += '</tr>';
 
-           });
-
-        })
-
+                    $('#body-telefone').append( html );
+                });
+                $('#paciente_form').append(`<input type="hidden" value="${paciente_id}" id="paciente_id">`);
+            },
+            error: function (jqXHR, textStatus, errorThrown) { console.log(textStatus); }
+        });
     });
 
 
+    $('#submit_form_telefone').click(function(){
+
+        $.ajax({
+            url: "/telefone/create",
+            type: "POST",
+            datatype: 'json',
+            data:{
+                telefone    : $('#telefone_number').val(),
+                paciente_id : $('#paciente_id').val(),
+                _token      : "{{ csrf_token() }}"
+            },
+            success: function (data) {
+                $('#body-telefone').empty();
+                $.each( data, function( key, value ) {
+                    html  = '<tr>';
+                    html += '<td>' + value.ddd +' '+ value.numero +'</td>';
+                    html += ' <td class="row"> <form action="telefone/delete/'+ value.id +'" method="POST">@csrf<button class="btn btn-warning dim" type="submit"><i class="fa fa-trash"></i></button></form>';
+                    html += '<button class="btn btn-info dim findTelefoneById" value="'+ value.id +'" type="button"><i class="fa fa-edit"></i></button></td>';
+                    html += '</tr>';
+
+                    $('#body-telefone').append( html );
+                });
+            },
+            error: function (jqXHR, textStatus, errorThrown) { console.log(textStatus); }
+        });});
+
+</script>
+
+<script>
+
+    $('#uf').on('change', function () {
+        $.ajax({
+            url: "/search/cidadebyuf/" + $('#uf').val(),
+            type: "GET",
+        }).done(function (response) {
+            $("#cidade").empty();
+            response.forEach(function (key) {
+                $("#cidade").append('<option value="' + key.id + '">' + key.title + '</option>');
+                $("#cidade").removeAttr("disabled");
+            });
+        });
+    });
 
     $('.findById').on('click', function () {
         $.ajax({
-            url: "search/paciente/findById/"+ $(this).val(),
+            url: "search/paciente/findById/" + $(this).val(),
             type: "GET",
         }).done(function (response) {
-
             $('input[id=nome]').val(response.paciente.nome);
             $('input[id=email]').val(response.paciente.email);
             $('input[id=nome_social]').val(response.paciente.nome_social);
@@ -152,18 +199,11 @@
             $("#uf").val(response.cidade[0].uf.id);
             $("#uf").change();
 
-            $("#cidade option[value="+response.cidade[0].id+"]").prop("selected","selected");
-
-            $("#form_paciente").append('<input type="hidden" value="'+response.paciente.id+'" name="paciente_id">');
+            $("#cidade option[value=" + response.cidade[0].id + "]").prop("selected", "selected");
+            $("#form_paciente").append('<input type="hidden" value="' + response.paciente.id + '" name="paciente_id">');
             $('#button_submit').empty().append('Atualizar');
-        })
+        });
     });
-
-
-  
-
-
-
 </script>
 
 
