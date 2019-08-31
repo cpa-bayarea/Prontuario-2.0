@@ -6,7 +6,7 @@
     
 
 
-
+@if(count($pacientes) >= 1)
                 <div class="col-12">
                     <div class="ibox ">
                         <div class="ibox-title">
@@ -126,6 +126,19 @@
                 </div>
 
 
+@else
+    <div class="col-12">
+        <div class="ibox ">
+            <div class="ibox-title">
+                <h5>Nenhum paciente cadastrado!</h5>
+
+            </div>
+
+        </div>
+
+
+    </div>
+@endif
 
 @endsection
 
