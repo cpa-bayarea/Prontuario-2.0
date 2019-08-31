@@ -17,7 +17,7 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::middleware(['auth'])->group(function () {
 
 Route::get('/paciente', 'PacienteController@index')->name('paciente');
 Route::get('/paciente/create', 'PacienteController@create')->name('paciente.create');
@@ -56,3 +56,32 @@ Route::get('grupoitens/{grupo_id}','GrupoItemController@index')->name('grupoItem
 Route::post('grupoitens','GrupoItemController@store')->name('grupoItem.store');
 Route::get('grupoitens/edit/{id}','GrupoItemController@edit')->name('grupoItem.edit');
 Route::post('grupoitens/{id}','GrupoItemController@destroy')->name('grupoItem.destroy');
+
+    Route::get('/home', 'HomeController@index')->name('home');
+
+    /**  Rotas de Linhas Teóricas **/
+    Route::get('/linha_teorica', 'LinhaTeoricaController@index')->name('linha_teorica.index');
+    Route::get('/linha_teorica/create', 'LinhaTeoricaController@create')->name('linha_teorica.create');
+    Route::post('/linha_teorica/store', 'LinhaTeoricaController@store')->name('linha_teorica.store');
+    Route::get('/linha_teorica/edit/{id}', 'LinhaTeoricaController@edit')->name('linha_teorica.edit');
+    Route::post('/linha_teorica/delete/{id}', 'LinhaTeoricaController@destroy')->name('linha_teorica.delete');
+
+    /**  Rotas de Supervisores **/
+    Route::get('/supervisor', 'SupervisorController@index')->name('supervisor.index');
+    Route::get('/supervisor/create', 'SupervisorController@create')->name('supervisor.create');
+    Route::post('/supervisor/store', 'SupervisorController@store')->name('supervisor.store');
+    Route::get('/supervisor/edit/{id}', 'SupervisorController@edit')->name('supervisor.edit');
+    Route::post('/supervisor/delete/{id}', 'SupervisorController@destroy')->name('supervisor.delete');
+
+    /**  Rotas de Alunos **/
+    Route::get('/aluno', 'AlunoController@index')->name('aluno.index');
+    Route::get('/aluno/create', 'AlunoController@create')->name('aluno.create');
+    Route::post('/aluno/store', 'AlunoController@store')->name('aluno.store');
+    Route::get('/aluno/edit/{id}', 'AlunoController@edit')->name('aluno.edit');
+    Route::post('/aluno/delete/{id}', 'AlunoController@destroy')->name('aluno.delete');
+
+    /**  Rotas de Agendamentos **/
+    Route::get('/agendamento', 'AgendamentoController@index')->name('agendamento.index');
+
+
+});
