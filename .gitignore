@@ -10,3 +10,9 @@ Homestead.json
 Homestead.yaml
 npm-debug.log
 yarn-error.log
+
+# For IDE's Jetbrains
+.idea/
+
+# For VSCode.
+.vscode/
