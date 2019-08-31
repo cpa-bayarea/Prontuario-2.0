@@ -40,5 +40,10 @@
                 <span class="nav-label">Aluno</span>
             </a>
         </li>
+        <li class="">
+            <a href="{{ route('agendamento.index') }}"><i class="fa fa-calendar"></i>
+                <span class="nav-label">Agendamentos</span>
+            </a>
+        </li>
     </ul>
 @endsection

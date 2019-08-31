@@ -51,4 +51,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/aluno/edit/{id}', 'AlunoController@edit')->name('aluno.edit');
     Route::post('/aluno/delete/{id}', 'AlunoController@destroy')->name('aluno.delete');
 
+    /**  Rotas de Agendamentos **/
+    Route::get('/agendamento', 'AgendamentoController@index')->name('agendamento.index');
+
+
 });
