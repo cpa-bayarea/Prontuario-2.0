@@ -7,17 +7,11 @@
     <link rel="stylesheet"
           href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.3/css/bootstrap-select.min.css"/>
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.2.7/fullcalendar.min.css"/>
-    <link href='{{asset('/fullcalendar/core/main.css')}}' rel='stylesheet' />
-    <link href='{{asset('/fullcalendar/daygrid/main.css')}}' rel='stylesheet' />
-    <link href='{{asset('/fullcalendar/timegrid/main.css')}}' rel='stylesheet' />
-    <link href='{{asset('/fullcalendar/list/main.css')}}' rel='stylesheet' />
+    <link href='{{asset('/js/plugins/fullcalendar/core/main.css')}}' rel='stylesheet' />
+    <link href='{{asset('/js/plugins/fullcalendar/daygrid/main.css')}}' rel='stylesheet' />
+    <link href='{{asset('/js/plugins/fullcalendar/timegrid/main.css')}}' rel='stylesheet' />
+    <link href='{{asset('/js/plugins/fullcalendar/list/main.css')}}' rel='stylesheet' />
     <style>
-        body {
-            margin: 40px 10px;
-            padding: 0;
-            font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
-            font-size: 14px;
-        }
         #calendar {
             max-width: 900px;
             margin: 0 auto;
@@ -42,7 +36,7 @@
         </div>
     </div>
 
-    {{--Modal detalhe--}}
+{{--    Modal detalhe--}}
     <div class="modal inmodal" id="modalDetalhe" tabindex="-1" role="dialog"
          style="display: none; padding-right: 14px;">
         <div class="modal-dialog">
@@ -80,13 +74,13 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-white" data-dismiss="modal">Fechar</button>
-                    {{--                    <button type="button" class="btn btn-primary">Salvar</button>--}}
+                    <button type="button" class="btn btn-primary">Salvar</button>
                 </div>
             </div>
         </div>
     </div>
 
-    {{-- Modal Cadastrar --}}
+{{--    Modal Cadastrar--}}
     <div class="modal inmodal" id="modalCadastrar" tabindex="-1" role="dialog"
          style="display: none; padding-right: 14px;">
         <div class="modal-dialog">
@@ -101,7 +95,7 @@
                     <div class="ibox-content">
                         @csrf
                         <form>
-                            <div class="form-group row"><label class="col-sm-4 col-form-label">Selecione o paciente</label>
+                            <div class="form-group row"><label class="col-sm-4 col-form-label">Paciente</label>
                                 <div class="col-sm-8">
                                     <select class="form-control m-b" name="paciente">
                                         @foreach($pacientes as $p)
@@ -110,7 +104,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="form-group row"><label class="col-sm-4 col-form-label">Selecione o terapeuta</label>
+                            <div class="form-group row"><label class="col-sm-4 col-form-label">Terapeuta</label>
                                 <div class="col-sm-8">
                                     <select class="form-control m-b" name="paciente">
                                         @foreach($alunos as $a)
@@ -121,12 +115,12 @@
                             </div>
                             <div class="form-group row"><label class="col-sm-4 col-form-label">Início da consulta</label>
                                 <div class="col-sm-8">
-                                    <input type="text" class="form-control" id="start" onkeypress="DataHora(event, this)">
+                                    <input type="time" class="form-control" id="start">
                                 </div>
                             </div>
                             <div class="form-group row"><label class="col-sm-4 col-form-label">Términdo da consulta</label>
                                 <div class="col-sm-8">
-                                    <input type="text" class="form-control" id="end" onkeypress="DataHora(event, this)">
+                                    <input type="time" class="form-control" id="end">
                                 </div>
                             </div>
                             <div class="form-group row"><label class="col-sm-4 col-form-label">Selecione a cor</label>
@@ -150,7 +144,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-white" data-dismiss="modal">Fechar</button>
-                    {{--                    <button type="button" class="btn btn-primary">Salvar</button>--}}
+                    <button type="button" class="btn btn-primary">Salvar</button>
                 </div>
             </div>
         </div>
@@ -166,12 +160,12 @@
     <script src="{{ asset('js/select2.min.js') }}" charset="utf-8"></script>
     <script src="{{ asset('js/choose.jquery.js') }}" charset="utf-8"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.3/js/bootstrap-select.min.js"></script>
-    <script src='{{asset('/fullcalendar/core/main.js')}}'></script>
-    <script src='{{asset('/fullcalendar/interaction/main.js')}}'></script>
-    <script src='{{asset('/fullcalendar/daygrid/main.js')}}'></script>
-    <script src='{{asset('/fullcalendar/timegrid/main.js')}}'></script>
-    <script src='{{asset('/fullcalendar/list/main.js')}}'></script>
-    <script src='{{asset('/fullcalendar/core/locales/pt-br.js')}}'></script>
+    <script src='{{asset('/js/plugins/fullcalendar/core/main.js')}}'></script>
+    <script src='{{asset('/js/plugins/fullcalendar/interaction/main.js')}}'></script>
+    <script src='{{asset('/js/plugins/fullcalendar/daygrid/main.js')}}'></script>
+    <script src='{{asset('/js/plugins/fullcalendar/timegrid/main.js')}}'></script>
+    <script src='{{asset('/js/plugins/fullcalendar/list/main.js')}}'></script>
+    <script src='{{asset('/js/plugins/fullcalendar/core/locales/pt-br.js')}}'></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             var calendarEl = document.getElementById('calendar');
