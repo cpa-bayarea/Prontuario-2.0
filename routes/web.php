@@ -85,6 +85,7 @@ Route::middleware(['auth'])->group(function () {
 
     /**  Rotas de Agendamentos **/
     Route::get('/agendamento', 'AgendamentoController@index')->name('agendamento.index');
+    Route::get('/agendamento/store', 'AgendamentoController@store')->name('agendamento.store');
 
 });
 

@@ -41,7 +41,19 @@ class AgendamentoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try {
+            $agendamento = new Agendamento();
+
+            $agendamento->title = $request->paciente . " - " . $request->aluno;
+            $agendamento->color = $request->cor;
+            $agendamento->start = $request->date . " " . $request->start;
+            $agendamento->end = $request->date . " " . $request->end;
+
+            $agendamento->save();
+            return redirect()->route('agendamento.index');
+        } catch (\Exception $e) {
+            throw new \exception('Não foi possível realizar o agendamento!');
+        }
     }
 
     /**

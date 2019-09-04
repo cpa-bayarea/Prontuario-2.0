@@ -11,6 +11,6 @@ class Agendamento extends Model
 
     protected $table = 'agendamentos';
 
-    protected $fillable = ['title','start_date','end_date'];
+    protected $fillable = ['title','color','start','end'];
 
 }

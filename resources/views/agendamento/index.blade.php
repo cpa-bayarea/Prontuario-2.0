@@ -36,52 +36,8 @@
         </div>
     </div>
 
-{{--    Modal detalhe--}}
-    <div class="modal inmodal" id="modalDetalhe" tabindex="-1" role="dialog"
-         style="display: none; padding-right: 14px;">
-        <div class="modal-dialog">
-            <div class="modal-content animated bounceInRight">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span
-                            class="sr-only">Close</span></button>
-                    <i class="fa fa-calendar modal-icon"></i>
-                    <h4 class="modal-title">Agendamento detalhado</h4>
-                </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="ibox ">
-                                <div class="ibox-content">
-                                    <table class="table table-hover issue-tracker">
-                                        <tbody>
-                                        <tr>
-                                            <td class="issue-info">
-                                                <div id="title"></div>
-                                            </td>
-                                            <td>
-                                                <div id="start"></div>
-                                            </td>
-                                            <td>
-                                                <div id="end"></div>
-                                            </td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-white" data-dismiss="modal">Fechar</button>
-                    <button type="button" class="btn btn-primary">Salvar</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-{{--    Modal Cadastrar--}}
-    <div class="modal inmodal" id="modalCadastrar" tabindex="-1" role="dialog"
+{{-- Modal agendamento--}}
+    <div class="modal inmodal" id="modalAgendamento" tabindex="-1" role="dialog"
          style="display: none; padding-right: 14px;">
         <div class="modal-dialog">
             <div class="modal-content animated bounceInRight">
@@ -94,10 +50,12 @@
                 <div class="modal-body">
                     <div class="ibox-content">
                         @csrf
-                        <form>
+                        <form action="{{ route('agendamento.store') }}">
+                            <input type="hidden" id="id" name="id">
                             <div class="form-group row"><label class="col-sm-4 col-form-label">Paciente</label>
                                 <div class="col-sm-8">
-                                    <select class="form-control m-b" name="paciente">
+                                    <select class="form-control m-b" name="paciente" required>
+                                        <option></option>
                                         @foreach($pacientes as $p)
                                             <option>{{$p->nome}}</option>
                                         @endforeach
@@ -106,7 +64,8 @@
                             </div>
                             <div class="form-group row"><label class="col-sm-4 col-form-label">Terapeuta</label>
                                 <div class="col-sm-8">
-                                    <select class="form-control m-b" name="paciente">
+                                    <select class="form-control m-b" name="aluno" required>
+                                        <option></option>
                                         @foreach($alunos as $a)
                                             <option>{{$a->tx_nome}}</option>
                                         @endforeach
@@ -115,12 +74,13 @@
                             </div>
                             <div class="form-group row"><label class="col-sm-4 col-form-label">Início da consulta</label>
                                 <div class="col-sm-8">
-                                    <input type="time" class="form-control" id="start">
+                                    <input type="time" class="form-control" id="start" name="start" required>
+                                    <input type="hidden" id="date" name="date">
                                 </div>
                             </div>
                             <div class="form-group row"><label class="col-sm-4 col-form-label">Términdo da consulta</label>
                                 <div class="col-sm-8">
-                                    <input type="time" class="form-control" id="end">
+                                    <input type="time" class="form-control" id="end" name="end" required>
                                 </div>
                             </div>
                             <div class="form-group row"><label class="col-sm-4 col-form-label">Selecione a cor</label>
@@ -177,7 +137,6 @@
                     center: 'title',
                     right: 'dayGridMonth,timeGridWeek,timeGridDay,listMonth'
                 },
-                defaultDate: '2019-08-12',
                 navLinks: true, // can click day/week names to navigate views
                 businessHours: true, // display business hours
                 editable: true,
@@ -185,53 +144,18 @@
                 events: {!! $agendamentos !!},
                 eventClick: function(info) {
                     info.jsEvent.preventDefault(); // don't let the browser navigate
-
-                    $('#modalDetalhe #title').text(info.event.title);
-                    $('#modalDetalhe #start').text(info.event.start.toLocaleString());
-                    $('#modalDetalhe #end').text(info.event.end.toLocaleString());
-                    $('#modalDetalhe').modal('show');
+                    alert(info.event.id);
+                    $('#id').val(info.event.id);
+                    $('#modalAgendamento').modal('show');
                 },
                 selectable: true,
                 select: function(info) {
-                    $('#modalCadastrar').modal('show');
-                    //     alert('selected ' + info.startStr + ' to ' + info.endStr);
+                    $('#modalAgendamento').modal('show');
+                    $('#date').val(info.startStr);
                 }
             });
 
             calendar.render();
         });
-
-        //Mascara para o campo data e hora
-        function DataHora(evento, objeto) {
-            var keypress = (window.event) ? event.keyCode : evento.which;
-            campo = eval(objeto);
-            if (campo.value == '00/00/0000 00:00:00') {
-                campo.value = "";
-            }
-
-            caracteres = '0123456789';
-            separacao1 = '/';
-            separacao2 = ' ';
-            separacao3 = ':';
-            conjunto1 = 2;
-            conjunto2 = 5;
-            conjunto3 = 10;
-            conjunto4 = 13;
-            conjunto5 = 16;
-            if ((caracteres.search(String.fromCharCode(keypress)) != -1) && campo.value.length < (19)) {
-                if (campo.value.length == conjunto1)
-                    campo.value = campo.value + separacao1;
-                else if (campo.value.length == conjunto2)
-                    campo.value = campo.value + separacao1;
-                else if (campo.value.length == conjunto3)
-                    campo.value = campo.value + separacao2;
-                else if (campo.value.length == conjunto4)
-                    campo.value = campo.value + separacao3;
-                else if (campo.value.length == conjunto5)
-                    campo.value = campo.value + separacao3;
-            } else {
-                event.returnValue = false;
-            }
-        }
     </script>
 @endsection
