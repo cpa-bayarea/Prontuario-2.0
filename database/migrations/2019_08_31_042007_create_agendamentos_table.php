@@ -19,6 +19,12 @@ class CreateAgendamentosTable extends Migration
             $table->string('color');
             $table->string('start');
             $table->string('end');
+
+            $table->unsignedBigInteger('aluno_id');
+            $table->foreign('aluno_id')->references('id')->on('tb_aluno');
+            $table->unsignedBigInteger('paciente_id');
+            $table->foreign('paciente_id')->references('id')->on('pacientes');
+
             $table->softDeletes();
             $table->timestamps();
         });

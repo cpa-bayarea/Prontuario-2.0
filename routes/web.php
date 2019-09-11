@@ -85,7 +85,10 @@ Route::middleware(['auth'])->group(function () {
 
     /**  Rotas de Agendamentos **/
     Route::get('/agendamento', 'AgendamentoController@index')->name('agendamento.index');
-    Route::get('/agendamento/store', 'AgendamentoController@store')->name('agendamento.store');
+    Route::post('/agendamento/store', 'AgendamentoController@store')->name('agendamento.store');
+    Route::get('search/agendamento/findById/{id}', 'AgendamentoController@findById')->name('agendamento.byid');
+    Route::get('/agendamento/delete/{id}', 'AgendamentoController@destroy')->name('agendamento.delete');
+
 
 });
 

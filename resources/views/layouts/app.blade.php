@@ -22,6 +22,11 @@
             </a>
         </li>
         <li class="">
+            <a href="{{ route('agendamento.index') }}"><i class="fa fa-calendar"></i>
+                <span class="nav-label">Agendamentos</span>
+            </a>
+        </li>
+        <li class="">
             <a href="#" aria-expanded="false"><i class="fa fa-edit"></i>
                 <span class="nav-label">Triagem</span>
                 <span class="fa arrow"></span>
@@ -59,11 +64,6 @@
         <li class="">
             <a href="{{ route('aluno.index') }}"><i class="fa fa-users"></i>
                 <span class="nav-label">Aluno</span>
-            </a>
-        </li>
-        <li class="">
-            <a href="{{ route('agendamento.index') }}"><i class="fa fa-calendar"></i>
-                <span class="nav-label">Agendamentos</span>
             </a>
         </li>
     </ul>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Agendamento;
 use App\Aluno;
 use App\Paciente;
+use Session;
 use Illuminate\Http\Request;
 
 class AgendamentoController extends Controller
@@ -42,14 +43,28 @@ class AgendamentoController extends Controller
     public function store(Request $request)
     {
         try {
+
+            if (!empty($request['id'])) {
+                if (!empty($request['paciente_id'])) {
+                    return $this->update($request, $request['id']);
+                } else {
+                    return $this->edit($request, $request['id']);
+                }
+            }
+
+            $aluno = Aluno::find($request->aluno_id);
+            $paciente = Paciente::find($request->paciente_id);
             $agendamento = new Agendamento();
 
-            $agendamento->title = $request->paciente . " - " . $request->aluno;
-            $agendamento->color = $request->cor;
-            $agendamento->start = $request->date . " " . $request->start;
-            $agendamento->end = $request->date . " " . $request->end;
+            $agendamento->title       = $aluno->tx_nome . " - " . $paciente->nome;
+            $agendamento->color       = $request->color;
+            $agendamento->paciente_id = $request->paciente_id;
+            $agendamento->aluno_id    = $request->aluno_id;
+            $agendamento->start       = $request->date . " " . $request->start;
+            $agendamento->end         = $request->date . " " . $request->end;
 
             $agendamento->save();
+            Session::flash('success', 'Operação realizada com sucesso');
             return redirect()->route('agendamento.index');
         } catch (\Exception $e) {
             throw new \exception('Não foi possível realizar o agendamento!');
@@ -73,9 +88,20 @@ class AgendamentoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request, $id)
     {
-        //
+        try {
+
+            $agendamento = Agendamento::find($id);
+
+            $agendamento->start       = $request->start;
+            $agendamento->end         = $request->end;
+
+            $agendamento->save();
+            return redirect()->route('agendamento.index');
+        } catch (\Exception $e) {
+            throw new \exception('Não foi possível alterar o agendamento!');
+        }
     }
 
     /**
@@ -87,7 +113,25 @@ class AgendamentoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        try {
+
+            $aluno = Aluno::find($request->aluno_id);
+            $paciente = Paciente::find($request->paciente_id);
+            $agendamento = Agendamento::find($id);
+
+            $agendamento->title       = $aluno->tx_nome . " - " . $paciente->nome;
+            $agendamento->color       = $request->color;
+            $agendamento->paciente_id = $request->paciente_id;
+            $agendamento->aluno_id    = $request->aluno_id;
+            $agendamento->start       = $request->date . " " . $request->start;
+            $agendamento->end         = $request->date . " " . $request->end;
+
+            $agendamento->save();
+            Session::flash('success', 'Operação realizada com sucesso');
+            return redirect()->route('agendamento.index');
+        } catch (\Exception $e) {
+            throw new \exception('Não foi possível alterar o agendamento!');
+        }
     }
 
     /**
@@ -98,6 +142,19 @@ class AgendamentoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try {
+            $agendamento = Agendamento::where('id', $id)->first();
+            $agendamento->delete();
+            Session::flash('success', 'Operação realizada com sucesso');
+            return redirect()->route('agendamento.index');
+        } catch (\Exception $e) {
+            throw new \exception('Não foi possível excluir o agendamento!');
+        }
+    }
+
+    public function findById($id)
+    {
+        $agendamento = Agendamento::find($id);
+        return ['agendamento' => $agendamento];
     }
 }
