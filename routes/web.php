@@ -19,11 +19,15 @@ Auth::routes();
 
 Route::middleware(['auth'])->group(function () {
 
+    /**  Rotas de Paciente **/
     Route::get('/paciente', 'PacienteController@index')->name('paciente');
     Route::get('/paciente/create', 'PacienteController@create')->name('paciente.create');
     Route::get('search/paciente/findById/{id}', 'PacienteController@findById')->name('paciente.find');
     Route::post('/paciente', 'PacienteController@store')->name('paciente.store');
     Route::post('/paciente/delete/{id}', 'PacienteController@delete')->name('paciente.delete');
+    /**  Documentos pdf Paciente **/
+    Route::get('/paciente/termoConsentimento', 'PacienteController@termoConsentimento')->name('termoConsentimento');
+    Route::get('/paciente/contratoTerapeutico', 'PacienteController@contratoTerapeutico')->name('contratoTerapeutico');
 
     Route::get('search/cidadebyuf/{id}', 'CidadeController@findCidadeByUf');
 

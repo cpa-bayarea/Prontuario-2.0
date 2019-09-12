@@ -78,6 +78,8 @@
 
                     <div class="col-12 text-right">
                         <section class="progress-demo">
+                            <a href="{{route('termoConsentimento')}}">termo</a>
+                            <a href="{{route('contratoTerapeutico')}}">contrato</a>
                             <button class="ladda-button btn btn-sm btn-success" data-style="expand-left"><span class="ladda-label" id="button_submit">Cadastrar</span><span class="ladda-spinner"></span></button>
                         </section>
                     </div>

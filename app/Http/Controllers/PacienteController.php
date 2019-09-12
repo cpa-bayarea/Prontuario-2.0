@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Session;
 use App\UF;
 use Redirect;
+use Dompdf\Dompdf;
 
 
 class PacienteController extends Controller
@@ -67,4 +68,33 @@ class PacienteController extends Controller
         Session::flash('success', 'Excluído com sucesso');
         return Redirect::to('paciente');
     }
+
+    public function termoConsentimento()
+    {
+        $pagina = file_get_contents( resource_path("views/documentosPdf/termoConsentimento.blade.php"));
+
+        $dompdf = new Dompdf();
+        $dompdf->loadHtml($pagina);
+
+        $dompdf->setPaper('A4', 'portrait');
+
+        $dompdf->render();
+
+        $dompdf->stream();
+    }
+
+    public function contratoTerapeutico()
+    {
+        $pagina = file_get_contents( resource_path("views/documentosPdf/contratoTerapeutico.blade.php"));
+
+        $dompdf = new Dompdf();
+        $dompdf->loadHtml($pagina);
+
+        $dompdf->setPaper('A4', 'portrait');
+
+        $dompdf->render();
+
+        $dompdf->stream();
+    }
+
 }
