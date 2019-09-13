@@ -18,7 +18,7 @@ class CreateProntuariosTable extends Migration
             $table->integer('numero');
             $table->bigInteger('aluno_id')->unsigned();
             $table->foreign('aluno_id')->references('id')->on('tb_aluno');
-            $table->integer('paciente_id')->unsigned();
+            $table->bigInteger('paciente_id')->unsigned();
             $table->foreign('paciente_id')->references('id')->on('pacientes');
             $table->bigInteger('prontuario_status_id')->unsigned();
             $table->foreign('prontuario_status_id')->references('id')->on('prontuario_status');

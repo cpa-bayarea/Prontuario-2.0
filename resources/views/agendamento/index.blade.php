@@ -139,7 +139,21 @@
                     });
                 }
             });
+
             calendar.render();
+
+            $('#paciente_id').change(function () {
+                $.ajax({
+                    url: '/search/prontuario/findByPacienteId/' + $('#paciente_id').val(),
+                    success: function (data) {
+                        if (data) {
+                            $('#prontuario_id').val(data.prontuario[0].id);
+                        } else {
+                            $('#prontuario_id').val('');
+                        }
+                    }
+                });
+            });
         });
     </script>
 @endsection

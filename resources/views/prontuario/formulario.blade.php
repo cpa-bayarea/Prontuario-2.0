@@ -58,7 +58,7 @@
                                 <div class="form-group">
                                     <label for="numero" class="col-sm-3 control-label">Status: </label>
                                     <div class="col-sm-9">
-                                        <select name="prontuariostatus_id" class="form-control" id="prontuariostatus_id" required>
+                                        <select name="prontuario_status_id" class="form-control" id="prontuario_status_id" required>
                                             <option value="">Selecione</option>
                                             @foreach($aProntuarioStatus as $prontuarioStatus)
                                                 <option  {{ $prontuarioStatus->id == $model->prontuario_status_id ? 'selected="selected"' : ''}} value="{{$prontuarioStatus->id}}">{{$prontuarioStatus->nome}}</option>

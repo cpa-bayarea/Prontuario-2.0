@@ -79,7 +79,6 @@ class AbstractController extends Controller
             $this->_model = $this->_model->find($id);
         }
         $this->_model->fill($request->toArray());
-
         $this->_model->save();
         return redirect($this->_redirectSave);
     }

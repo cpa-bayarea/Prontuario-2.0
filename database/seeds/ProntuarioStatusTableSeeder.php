@@ -1,14 +1,11 @@
 <?php
 
-
 use Illuminate\Database\Seeder;
-
 
 class ProntuarioStatusTableSeeder extends Seeder
 {
-
     /**
-     * Auto generated seed file
+     * Run the database seeds.
      *
      * @return void
      */

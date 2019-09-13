@@ -20,4 +20,12 @@ class ProntuarioController extends AbstractController
 
         return compact('aAlunos', 'aPacientes', 'aProntuarioStatus');
     }
+
+    public function  findByPacienteId($pacienteId)
+    {
+        $prontuario = Prontuario::where('paciente_id', $pacienteId)->get();
+        if (count($prontuario) > 0) {
+            return ['prontuario' => $prontuario];
+        }
+    }
 }

@@ -90,6 +90,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/agendamento/delete/{id}', 'AgendamentoController@destroy')->name('agendamento.delete');
 
     Route::resource('prontuario', 'ProntuarioController');
+    Route::get('search/prontuario/findByPacienteId/{id}', 'ProntuarioController@findByPacienteId')->name('prontuario.findByPacienteId');
     Route::get('/prontuario/{id}/destroy', 'ProntuarioController@destroy');
 
     Route::resource('prontuariostatus', 'ProntuarioStatusController');

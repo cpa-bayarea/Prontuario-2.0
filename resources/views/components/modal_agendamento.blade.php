@@ -13,6 +13,7 @@
                 <div class="modal-body">
                     <div class="ibox-content">
                         <input type="hidden" id="id" name="id">
+                        <input type="hidden" id="prontuario_id" name="prontuario_id">
 
                         <div class="form-group row"><label class="col-sm-4 col-form-label">Paciente</label>
                             <div class="col-sm-8">
