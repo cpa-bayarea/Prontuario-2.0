@@ -46,6 +46,9 @@
     <script src="{{ asset('js/select2.min.js') }}" charset="utf-8"></script>
     <script src="{{ asset('js/choose.jquery.js') }}" charset="utf-8"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.3/js/bootstrap-select.min.js"></script>
+<script src="{{asset('js/sweetalert2.all.min.js')}}"></script>
+<!-- Optional: include a polyfill for ES6 Promises for IE11 and Android browser -->
+<script type="text/javascript" src="{{asset('js/main.js')}}"></script>
 @show
 @stack('body')
 

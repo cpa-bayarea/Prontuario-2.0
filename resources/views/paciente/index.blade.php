@@ -17,19 +17,27 @@
                     <table class="table">
                         <thead>
                             <tr>
+                                <th> Ações</th>
                                 <th>#</th>
                                 <th>Nome completo</th>
                                 <th>Data nascimento</th>
                                 <th>Telefone</th>
                                 <th>E-mail</th>
                                 <th>Cidade - UF</th>
-                                <th> Ações</th>
+
                             </tr>
                         </thead>
                         <tbody>
                         @foreach($pacientes as $paciente)
                             <tr>
-                                <td>{{$paciente->id}}</td>
+                                <td class="ibox-content">
+                                    <button class="btn btn-warning  dim btn_cancel_paciente" type="submit"><i class="fa fa-trash"></i>
+                                    </button>
+                                    <button class="btn btn-info  dim findById" value="{{$paciente->id}}" type="button">
+                                        <i class="fa fa-edit"></i>
+                                    </button>
+                                </td>
+                                <td class="id_paciente">{{$paciente->id}}</td>
                                 <td>{{$paciente->nome}}</td>
                                 <td>{{ date('d/m/Y', strtotime($paciente->data_nascimento)) }}</td>
                                 <td>
@@ -47,16 +55,7 @@
                                     <td>--</td>
 
                                 @endif
-                                <td class="ibox-content">
-                                    <form action="paciente/delete/{{$paciente->id}}" method="POST">
-                                        @csrf
-                                        <button class="btn btn-warning  dim" type="submit"><i class="fa fa-trash"></i>
-                                        </button>
-                                    </form>
-                                    <button class="btn btn-info  dim findById" value="{{$paciente->id}}" type="button">
-                                        <i class="fa fa-edit"></i>
-                                    </button>
-                                </td>
+
                             </tr>
                         @endforeach
                         </tbody>

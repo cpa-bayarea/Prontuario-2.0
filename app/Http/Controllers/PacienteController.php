@@ -62,11 +62,24 @@ class PacienteController extends Controller
 
     }
 
-    public function delete($id)
+    public function delete(Request $request)
     {
-        Paciente::find($id)->delete();
-        Session::flash('success', 'Excluído com sucesso');
-        return Redirect::to('paciente');
+        $response = array();
+        try{
+            if(isset($request->idPaciente)) {
+                Paciente::find($request->idPaciente)->delete();
+                $response['resultado'] = 'OK';
+                return $response;
+            }else{
+                $response['resultado'] = 'ERRO';
+                return $response;
+            }
+
+        } catch (\Exception $e) {
+            $response['resultado'] = 'ERRO';
+            return $response;
+}
+
     }
 
     public function termoConsentimento()
