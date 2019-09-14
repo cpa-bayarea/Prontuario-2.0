@@ -28,6 +28,6 @@ class CreateProntuarioStatusesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('prontuario_statuses');
+        Schema::dropIfExists('prontuario_status');
     }
 }
