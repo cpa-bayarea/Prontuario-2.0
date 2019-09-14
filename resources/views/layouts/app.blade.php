@@ -14,7 +14,6 @@
 @endsection
 
 @section('sidebar-menu')
-
     <ul class="nav metismenu" id="side-menu" style="padding-left:0px;">
         <li class="">
             <a href="{{ route('home') }}"><i class="fa fa-home"></i>
@@ -66,6 +65,15 @@
                 <span class="nav-label">Agendamentos</span>
             </a>
         </li>
+        <li class="">
+            <a href="{{ route('prontuario.index') }}"><i class="fa fa-calendar"></i>
+                <span class="nav-label">Prontuário</span>
+            </a>
+        </li>
+        <li class="">
+            <a href="{{ route('prontuariostatus.index') }}"><i class="fa fa-calendar"></i>
+                <span class="nav-label">Status do Prontuário</span>
+            </a>
+        </li>
     </ul>
-
 @endsection

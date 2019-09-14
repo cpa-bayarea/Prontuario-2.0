@@ -9,7 +9,8 @@ use App\UF;
 use Redirect;
 
 
-class PacienteController extends Controller
+class
+PacienteController extends Controller
 {
     public function index()
     {

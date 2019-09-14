@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAgendamentosTable extends Migration
+class CreateProntuariosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,18 +13,16 @@ class CreateAgendamentosTable extends Migration
      */
     public function up()
     {
-        Schema::create('agendamentos', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('title');
-            $table->string('color');
-            $table->string('start');
-            $table->string('end');
-
-            $table->unsignedBigInteger('aluno_id');
+        Schema::create('prontuarios', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('numero');
+            $table->bigInteger('aluno_id')->unsigned();
             $table->foreign('aluno_id')->references('id')->on('tb_aluno');
-            $table->unsignedBigInteger('paciente_id');
+            $table->bigInteger('paciente_id')->unsigned();
             $table->foreign('paciente_id')->references('id')->on('pacientes');
-
+            $table->bigInteger('prontuario_status_id')->unsigned();
+            $table->foreign('prontuario_status_id')->references('id')->on('prontuario_status');
+            $table->float('valor')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });
@@ -37,6 +35,6 @@ class CreateAgendamentosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('agendamentos');
+        Schema::dropIfExists('prontuarios');
     }
 }

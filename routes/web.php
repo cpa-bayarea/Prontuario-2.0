@@ -85,6 +85,17 @@ Route::middleware(['auth'])->group(function () {
 
     /**  Rotas de Agendamentos **/
     Route::get('/agendamento', 'AgendamentoController@index')->name('agendamento.index');
+    Route::post('/agendamento/store', 'AgendamentoController@store')->name('agendamento.store');
+    Route::get('search/agendamento/findById/{id}', 'AgendamentoController@findById')->name('agendamento.byid');
+    Route::get('/agendamento/delete/{id}', 'AgendamentoController@destroy')->name('agendamento.delete');
+
+    Route::resource('prontuario', 'ProntuarioController');
+    Route::get('search/prontuario/findByPacienteId/{id}', 'ProntuarioController@findByPacienteId')->name('prontuario.findByPacienteId');
+    Route::get('/prontuario/{id}/destroy', 'ProntuarioController@destroy');
+
+    Route::resource('prontuariostatus', 'ProntuarioStatusController');
+    Route::get('/prontuariostatus/{id}/destroy', 'ProntuarioStatusController@destroy');
+
 
 });
 
