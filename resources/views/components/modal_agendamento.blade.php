@@ -69,8 +69,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button class="btn btn-primary" type="submit" id="btn-acao"></button>
-                    <a id="btn-excluir" class="btn btn-danger">Excluir</a>
+                    <button class="btn btn-primary" type="submit" id="btn-acao" onclick="return validaHoraAgendamento();"></button>
+                    <a id="btn-excluir" class="btn btn-danger" onclick="return confirm('Deseja realmente excluir este agendamento?')">Excluir</a>
                     <button type="button" class="btn btn-white" data-dismiss="modal">Fechar</button>
                 </div>
             </form>

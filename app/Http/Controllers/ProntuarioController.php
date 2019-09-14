@@ -3,12 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Aluno;
-use App\Http\Controllers\AbstractController;
 use App\Paciente;
 use App\Prontuario;
 use App\ProntuarioStatus;
-use App\Supervisor;
-use Illuminate\Http\Request;
 
 class ProntuarioController extends AbstractController
 {
@@ -27,5 +24,19 @@ class ProntuarioController extends AbstractController
         if (count($prontuario) > 0) {
             return ['prontuario' => $prontuario];
         }
+        return "";
+    }
+
+    public function createByAgendamento($request)
+    {
+        $prontuario = new Prontuario();
+
+        $prontuario->numero               = 0;
+        $prontuario->aluno_id             = $request->aluno_id;
+        $prontuario->paciente_id          = $request->paciente_id;
+        $prontuario->prontuario_status_id = 1;
+        $prontuario->valor                = 0;
+
+        $prontuario->save();
     }
 }

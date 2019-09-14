@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Agendamento;
 use App\Aluno;
 use App\Paciente;
+use App\Prontuario;
 use Session;
 use Illuminate\Http\Request;
 
@@ -63,6 +64,10 @@ class AgendamentoController extends Controller
             $agendamento->start       = $request->date . " " . $request->start;
             $agendamento->end         = $request->date . " " . $request->end;
 
+            if ($request->prontuario_id == null) {
+                $prontuario = (new ProntuarioController())->createByAgendamento($request);
+            }
+
             $agendamento->save();
             Session::flash('success', 'Operação realizada com sucesso');
             return redirect()->route('agendamento.index');
@@ -94,8 +99,8 @@ class AgendamentoController extends Controller
 
             $agendamento = Agendamento::find($id);
 
-            $agendamento->start       = $request->start;
-            $agendamento->end         = $request->end;
+            $agendamento->start = $request->start;
+            $agendamento->end   = $request->end;
 
             $agendamento->save();
             return redirect()->route('agendamento.index');
@@ -126,6 +131,10 @@ class AgendamentoController extends Controller
             $agendamento->start       = $request->date . " " . $request->start;
             $agendamento->end         = $request->date . " " . $request->end;
 
+            if ($request->prontuario_id == null) {
+                $prontuario = (new ProntuarioController())->createByAgendamento($request);
+            }
+
             $agendamento->save();
             Session::flash('success', 'Operação realizada com sucesso');
             return redirect()->route('agendamento.index');
@@ -143,7 +152,9 @@ class AgendamentoController extends Controller
     public function destroy($id)
     {
         try {
+
             $agendamento = Agendamento::where('id', $id)->first();
+
             $agendamento->delete();
             Session::flash('success', 'Operação realizada com sucesso');
             return redirect()->route('agendamento.index');
@@ -155,6 +166,7 @@ class AgendamentoController extends Controller
     public function findById($id)
     {
         $agendamento = Agendamento::find($id);
+
         return ['agendamento' => $agendamento];
     }
 }

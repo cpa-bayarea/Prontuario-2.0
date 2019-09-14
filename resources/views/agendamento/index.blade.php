@@ -50,6 +50,15 @@
     <script src='{{asset('/js/plugins/fullcalendar/core/locales/pt-br.js')}}'></script>
     <script src='{{asset('/js/plugins/fullcalendar/moment/main.min.js')}}'></script>
     <script>
+
+        function validaHoraAgendamento() {
+            if ($('#end').val() <= $('#start').val()) {
+                alert ("Informe um intervalo válido para realizar o agendamento. Verifique!");
+                return false;
+            }
+            return true;
+        }
+
         document.addEventListener('DOMContentLoaded', function() {
             var calendarEl = document.getElementById('calendar');
 
@@ -143,16 +152,21 @@
             calendar.render();
 
             $('#paciente_id').change(function () {
-                $.ajax({
-                    url: '/search/prontuario/findByPacienteId/' + $('#paciente_id').val(),
-                    success: function (data) {
-                        if (data) {
-                            $('#prontuario_id').val(data.prontuario[0].id);
-                        } else {
-                            $('#prontuario_id').val('');
+                if ($('#paciente_id').val() !== "") {
+                    $.ajax({
+                        url: '/search/prontuario/findByPacienteId/' + $('#paciente_id').val(),
+                        success: function (data) {
+                            if (data) {
+                                $('#prontuario_id').val(data.prontuario[0].id);
+                                $('#aluno_id').val(data.prontuario[0].aluno_id);
+                            } else {
+                                $('#prontuario_id').val('');
+                            }
                         }
-                    }
-                });
+                    });
+                } else {
+                    $('#prontuario_id').val('');
+                }
             });
         });
     </script>
