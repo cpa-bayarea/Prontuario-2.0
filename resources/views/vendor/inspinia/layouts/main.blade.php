@@ -18,6 +18,12 @@
         <link href="{{ mix('/css/inspinia.css') }}" rel="stylesheet">
         <link rel="stylesheet"
               href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.3/css/bootstrap-select.min.css"/>
+        <link href='{{asset('/js/plugins/fullcalendar/core/fullcalendar.min.css')}}' rel='stylesheet' />
+        <link href='{{asset('/js/plugins/fullcalendar/core/main.css')}}' rel='stylesheet' />
+        <link href='{{asset('/js/plugins/fullcalendar/daygrid/main.css')}}' rel='stylesheet' />
+        <link href='{{asset('/js/plugins/fullcalendar/timegrid/main.css')}}' rel='stylesheet' />
+        <link href='{{asset('/js/plugins/fullcalendar/list/main.css')}}' rel='stylesheet' />
+        <link href='{{asset('css/calendario.css')}}' rel='stylesheet' />
     @show
 
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -46,6 +52,13 @@
     <script src="{{ asset('js/select2.min.js') }}" charset="utf-8"></script>
     <script src="{{ asset('js/choose.jquery.js') }}" charset="utf-8"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.3/js/bootstrap-select.min.js"></script>
+    <script src='{{asset('/js/plugins/fullcalendar/core/main.js')}}'></script>
+    <script src='{{asset('/js/plugins/fullcalendar/interaction/main.js')}}'></script>
+    <script src='{{asset('/js/plugins/fullcalendar/daygrid/main.js')}}'></script>
+    <script src='{{asset('/js/plugins/fullcalendar/timegrid/main.js')}}'></script>
+    <script src='{{asset('/js/plugins/fullcalendar/list/main.js')}}'></script>
+    <script src='{{asset('/js/plugins/fullcalendar/core/locales/pt-br.js')}}'></script>
+    <script src='{{asset('/js/plugins/fullcalendar/moment/main.min.js')}}'></script>
 @show
 @stack('body')
 
@@ -206,6 +219,8 @@
     });
 </script>
 
+@section('js')
+@show
 
 </body>
 </html>

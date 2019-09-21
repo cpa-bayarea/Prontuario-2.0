@@ -2,18 +2,6 @@
 @section('content-title', 'Agendamentos')
 @section('content')
 
-@section('styles')
-    <link href="{{ mix('/css/inspinia.css') }}" rel="stylesheet">
-    <link rel="stylesheet"
-          href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.3/css/bootstrap-select.min.css"/>
-    <link href='{{asset('/js/plugins/fullcalendar/core/fullcalendar.min.css')}}' rel='stylesheet' />
-    <link href='{{asset('/js/plugins/fullcalendar/core/main.css')}}' rel='stylesheet' />
-    <link href='{{asset('/js/plugins/fullcalendar/daygrid/main.css')}}' rel='stylesheet' />
-    <link href='{{asset('/js/plugins/fullcalendar/timegrid/main.css')}}' rel='stylesheet' />
-    <link href='{{asset('/js/plugins/fullcalendar/list/main.css')}}' rel='stylesheet' />
-    <link href='{{asset('css/calendario.css')}}' rel='stylesheet' />
-@endsection
-
 @section('content')
     <div class="col-12">
         <div class="ibox">
@@ -33,22 +21,7 @@
     @include('components.modal_agendamento')
 @endsection
 
-@section('scripts')
-    <script src="{{ asset('js/jquery-3.4.1.min.js') }}" charset="utf-8"></script>
-    <script src="{{ mix('/js/manifest.js') }}" charset="utf-8"></script>
-    <script src="{{ mix('/js/vendor.js') }}" charset="utf-8"></script>
-    <script src="{{ mix('/js/inspinia.js') }}" charset="utf-8"></script>
-    <script src="{{ asset('js/jasny-bootstrap.min.js') }}" charset="utf-8"></script>
-    <script src="{{ asset('js/select2.min.js') }}" charset="utf-8"></script>
-    <script src="{{ asset('js/choose.jquery.js') }}" charset="utf-8"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.3/js/bootstrap-select.min.js"></script>
-    <script src='{{asset('/js/plugins/fullcalendar/core/main.js')}}'></script>
-    <script src='{{asset('/js/plugins/fullcalendar/interaction/main.js')}}'></script>
-    <script src='{{asset('/js/plugins/fullcalendar/daygrid/main.js')}}'></script>
-    <script src='{{asset('/js/plugins/fullcalendar/timegrid/main.js')}}'></script>
-    <script src='{{asset('/js/plugins/fullcalendar/list/main.js')}}'></script>
-    <script src='{{asset('/js/plugins/fullcalendar/core/locales/pt-br.js')}}'></script>
-    <script src='{{asset('/js/plugins/fullcalendar/moment/main.min.js')}}'></script>
+@section('js')
     <script>
 
         function validaHoraAgendamento() {
