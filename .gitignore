@@ -10,8 +10,7 @@ Homestead.yaml
 npm-debug.log
 yarn-error.log
 
-# For IDE's Jetbrains
+# For editors and IDEs 
 .idea/
-
-# For VSCode.
 .vscode/
+*.swp
