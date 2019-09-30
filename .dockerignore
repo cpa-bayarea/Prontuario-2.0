@@ -1,0 +1,6 @@
+docs/*
+tests/*
+Dockerfile
+phpunit.xml
+README.md
+.editorconfig

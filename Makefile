@@ -1,3 +1,7 @@
+install:
+	docker-php-ext-install pdo pdo_mysql
+	composer install
+
 build:
 	docker build -t prontuario .
 
