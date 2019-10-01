@@ -58,9 +58,10 @@ class AgendamentoController extends Controller
             $agendamento = new Agendamento();
 
             $agendamento->title       = $aluno->tx_nome . " - " . $paciente->nome;
-            $agendamento->color       = $request->color;
-            $agendamento->paciente_id = $request->paciente_id;
+            $agendamento->color       = '#f8ac59';
             $agendamento->aluno_id    = $request->aluno_id;
+            $agendamento->paciente_id = $request->paciente_id;
+            $agendamento->status_id   = 1;
             $agendamento->start       = $request->date . " " . $request->start;
             $agendamento->end         = $request->date . " " . $request->end;
 
@@ -119,13 +120,11 @@ class AgendamentoController extends Controller
     public function update(Request $request, $id)
     {
         try {
-
             $aluno = Aluno::find($request->aluno_id);
             $paciente = Paciente::find($request->paciente_id);
             $agendamento = Agendamento::find($id);
 
             $agendamento->title       = $aluno->tx_nome . " - " . $paciente->nome;
-            $agendamento->color       = $request->color;
             $agendamento->paciente_id = $request->paciente_id;
             $agendamento->aluno_id    = $request->aluno_id;
             $agendamento->start       = $request->date . " " . $request->start;
@@ -140,6 +139,30 @@ class AgendamentoController extends Controller
             return redirect()->route('agendamento.index');
         } catch (\Exception $e) {
             throw new \exception('Não foi possível alterar o agendamento!');
+        }
+    }
+
+    public function changeStatus($id, $status_id)
+    {
+        try {
+
+            $agendamento = Agendamento::find($id);
+
+            $agendamento->status_id   = $status_id;
+            switch ($status_id) {
+                case 2:
+                    $agendamento->color       = '#1ab394';
+                    break;
+                case 3:
+                    $agendamento->color       = '#ed5565';
+                    break;
+            }
+
+            $agendamento->save();
+            Session::flash('success', 'Operação realizada com sucesso');
+            return redirect()->route('agendamento.index');
+        } catch (\Exception $e) {
+            throw new \exception('Não foi possível alterar o status do agendamento!');
         }
     }
 

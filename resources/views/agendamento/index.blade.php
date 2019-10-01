@@ -65,15 +65,35 @@
                             $('#id').val(data.agendamento.id);
                             $('#paciente_id').val(data.agendamento.paciente_id);
                             $('#aluno_id').val(data.agendamento.aluno_id);
+                            $('#status_id').val(data.agendamento.status_id);
                             $('#date').val(data.agendamento.start.substring(0, 10));
                             $('#start').val(data.agendamento.start.substring(11));
                             $('#end').val(data.agendamento.end.substring(11));
                             $('#color').val(data.agendamento.color);
 
                             $('#acao').html("Alterar agendamento");
-                            $('#btn-excluir').show();
-                            $('#btn-excluir').attr("href", "/agendamento/delete/" + data.agendamento.id);
+                            $('#btn-status').attr("href", "/agendamento/changestatus/" + data.agendamento.id + "/2");
+                            $('#btn-cancelar').show();
+                            $('#btn-cancelar').attr("href", "/agendamento/changestatus/" + data.agendamento.id + "/3");
                             $('#btn-acao').html("Alterar");
+                            switch ($('#status_id').val()) {
+                                case '1':
+                                    $('#btn-cancelar').show();
+                                    $('#btn-status').html('Confirmar');
+                                    $('#btn-status').attr("href", "/agendamento/changestatus/" + data.agendamento.id + "/2");
+                                    $('#btn-status').show();
+                                    break;
+                                case '2':
+                                    $('#btn-cancelar').show();
+                                    $('#btn-status').hide();
+                                    break;
+                                case '3':
+                                    $('#btn-status').show();
+                                    $('#btn-status').html('Reativar');
+                                    $('#btn-status').attr("href", "/agendamento/changestatus/" + data.agendamento.id + "/2");
+                                    $('#btn-cancelar').hide();
+                                    break;
+                            }
                             $('#modalAgendamento').modal('show');
 
                             $.ajax({
@@ -104,7 +124,8 @@
                     $('#date').val(info.startStr);
 
                     $('#acao').html("Realizar agendamento");
-                    $('#btn-excluir').hide();
+                    $('#btn-status').hide();
+                    $('#btn-cancelar').hide();
                     $('#btn-acao').html("Agendar");
                     $('#modalAgendamento').modal('show');
                 },
@@ -152,6 +173,7 @@
                     });
                 } else {
                     $('#prontuario_id').val('');
+                    $('#aluno_id').val('');
                 }
             });
         });
