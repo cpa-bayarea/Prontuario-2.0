@@ -24,14 +24,21 @@ Para criar um ambiente para trabalhar com o Prontuário basta executar o comando
   docker-compose up
 ```
 
-Para visualizar os container
+Para criar um ambiente de desenvolvimento:
+```
+  docker-compose -f docker-compose.dev.yml up
+```
+
+> Neste caso o servidor estará disponível na porta `8000`
+
+Para visualizar os containers
 ```
   docker-compose ps
 ```
 
 Para executar as migrations com as seeders
 ```
-  docker exect -it prontuario-app php artisan migrate:fresh --seed
+  docker exec -it prontuario-app php artisan migrate:fresh --seed
 ```
 
 Em caso de erros na aplicação:
