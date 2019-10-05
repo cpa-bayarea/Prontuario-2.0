@@ -19,11 +19,21 @@
                     <div class="col-lg-10"><input type="text" placeholder="Nome" required name="nome" id="nome" class="form-control">
                     </div>
                 </div>
+                <div class="form-group row"><label class="col-lg-2 col-form-label" for="cpf">CPF</label>
+                    <div class="col-lg-10"><input type="text" placeholder="000.000.000-00" data-mask="999.999.999-99" required name="cpf" id="cpf" class="form-control"></div>
+                </div>
+
+                <div class="form-group row"><label class="col-lg-2 col-form-label" for="rg">RG</label>
+                    <div class="col-lg-10"><input type="text" name="rg" id="rg" class="form-control"></div>
+                </div>
+                <div class="form-group row"><label class="col-lg-2 col-form-label" for="telefone">Telefone</label>
+                    <div class="col-lg-10"><input type="text" name="telefone" data-mask="(99) 99999-9999" id="telefone" class="form-control"></div>
+                </div>
                 <div class="form-group row"><label for="Data Nascimento" class="col-lg-2 col-form-label">Idade</label>
                     <div class="col-lg-10"><input type="date" min="0" max="150" placeholder="Data Nascimento" required name="data_nascimento" id="data_nascimento" class="form-control">
                     </div>
                 </div>
-                <div class="form-group row"><label for="triador" class="col-lg-2 col-form-label">Triador</label>
+                <div class="form-group row"><label for="triador" class="col-lg-2 col-form-label">Aluno</label>
                     <div class="col-lg-10">
                         <select class="form-control m-b" name="triador" required>
                             <option value="">Selecione</option>
