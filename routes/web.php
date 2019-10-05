@@ -27,7 +27,6 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('search/cidadebyuf/{id}', 'CidadeController@findCidadeByUf');
 
-
     // Triagem
     Route::get('/triagem', 'TriagemController@index')->name('triagem');
     Route::get('/triagem/show', 'TriagemController@show')->name('triagem.show');
@@ -95,7 +94,4 @@ Route::middleware(['auth'])->group(function () {
 
     Route::resource('prontuariostatus', 'ProntuarioStatusController');
     Route::get('/prontuariostatus/{id}/destroy', 'ProntuarioStatusController@destroy');
-
-
 });
-
