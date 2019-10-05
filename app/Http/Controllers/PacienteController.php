@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Paciente;
+use App\Models\Paciente;
 use Illuminate\Http\Request;
-use Session;
-use App\UF;
-use Redirect;
+use Illuminate\Support\Facades\Session;
+use App\Models\UF;
+use Illuminate\Support\Facades\Redirect;
 
 
 class

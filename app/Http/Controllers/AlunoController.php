@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Aluno;
+use App\Models\TbAluno;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Session;
+use Illuminate\Support\Facades\Session;
 
 class AlunoController extends Controller
 {
@@ -28,7 +28,7 @@ class AlunoController extends Controller
     public function index()
     {
         try {
-            $alunos = Aluno::orderBy('tx_nome', 'asc')->get();
+            $alunos = TbAluno::orderBy('tx_nome', 'asc')->get();
 
             return view('aluno.index', compact('alunos', $alunos));
         } catch (\Exception $e) {
@@ -61,7 +61,7 @@ class AlunoController extends Controller
 
                 return $this->update($request, $request['id']);
             }
-            $aluno = new Aluno();
+            $aluno = new TbAluno();
 
             $aluno->tx_nome     = $request->tx_nome;
             $aluno->username    = $request->username;
@@ -122,7 +122,7 @@ class AlunoController extends Controller
     public function update(Request $request, $id)
     {
         try {
-            $aluno = Aluno::find($id);
+            $aluno = TbAluno::find($id);
             $aluno->tx_nome     = $request->tx_nome;
             $aluno->username    = $request->username;
             $aluno->nu_telefone = $request->nu_telefone;
@@ -153,7 +153,7 @@ class AlunoController extends Controller
     public function destroy($id)
     {
         try {
-            $aluno = Aluno::where('id', $id)->first();
+            $aluno = TbAluno::where('id', $id)->first();
             $aluno->delete();
             Session::flash('success', 'Operação realizada com sucesso');
             return redirect()->route('aluno.index');

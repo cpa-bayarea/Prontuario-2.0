@@ -2,22 +2,23 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\StatusDeCadastro;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\StatusDeCadastro;
-use Session;
+use Illuminate\Support\Facades\Session;
+
 
 class StatusDeCadastroController extends Controller
 {
     public function index() {
- 
+
         $aStatus = StatusDeCadastro::all();
         $status = new StatusDeCadastro();
         return view('paciente.status_de_cadastro.index',compact('aStatus','status'));
     }
 
     public function store(Request $request) {
-    
+
 
         if($request->id){
             $status = StatusDeCadastro::find($request->id);

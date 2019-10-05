@@ -2,17 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Aluno;
-use App\Paciente;
-use App\Prontuario;
-use App\ProntuarioStatus;
+
+
+use App\Models\Paciente;
+use App\Models\Prontuario;
+use App\Models\ProntuarioStatus;
+use App\Models\TbAluno;
 
 class ProntuarioController extends AbstractController
 {
     protected function _recuperarDados()
     {
         $aPacientes = Paciente::all();
-        $aAlunos = Aluno::all();
+        $aAlunos = TbAluno::all();
         $aProntuarioStatus = ProntuarioStatus::all();
 
         return compact('aAlunos', 'aPacientes', 'aProntuarioStatus');

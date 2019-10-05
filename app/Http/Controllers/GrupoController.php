@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 
-use App\Grupo;
+
+use App\Models\Grupo;
 use Illuminate\Http\Request;
-use Session;
-use Redirect;
-use Validator;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Validator;
+
 class GrupoController extends Controller
 {
     public function index()
@@ -22,13 +24,13 @@ class GrupoController extends Controller
     }
     public function store(Request $request)
     {
-       
+
         $rules = array(
             'nome'  => 'required'
         );
-        
+
         $validator = Validator::make($request->all(), $rules);
-        
+
         if($validator->fails()){
             Session::flash('error', 'Preencha os campos corretamente');
             return Redirect::back();

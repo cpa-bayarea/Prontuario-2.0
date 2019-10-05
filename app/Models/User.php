@@ -2,8 +2,7 @@
 
 namespace App\Models;
 
-class User extends \App\Models\Base\User
-{
+class User extends Base\User {
 	protected $hidden = [
 		'password',
 		'remember_token'

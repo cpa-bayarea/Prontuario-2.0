@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Supervisor;
-use Session;
+use App\Models\TbSupervisor;
+use exception;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -23,20 +24,20 @@ class SupervisorController extends Controller
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
-     * @throws \exception
+     * @throws exception
      */
     public function index()
     {
         try {
-            $supervisores = Supervisor::orderBy('tx_nome', 'asc')->get();
+            $supervisores = TbSupervisor::orderBy('tx_nome', 'asc')->get();
 
             // debug para buscar os excluídos
             // $supervisores = Supervisor::withTrashed()->get();
             // dd($supervisores);
 
             return view('supervisor.index', compact('supervisores', $supervisores));
-        } catch (\Exception $e) {
-            throw new \exception('Não foi possível visualizar os Supervisores !');
+        } catch (Exception $e) {
+            throw new exception('Não foi possível visualizar os Supervisores !');
         }
     }
 
@@ -56,7 +57,7 @@ class SupervisorController extends Controller
      *
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
-     * @throws \exception
+     * @throws exception
      */
     public function store(Request $request)
     {
@@ -65,7 +66,7 @@ class SupervisorController extends Controller
 
                 return $this->update($request, $request['id']);
             }
-            $supervisor = new Supervisor();
+            $supervisor = new TbSupervisor();
 
             $supervisor->tx_nome     = $request->tx_nome;
             $supervisor->username    = $request->username;
@@ -79,9 +80,9 @@ class SupervisorController extends Controller
             }
             $supervisor->save();
             return redirect()->route('supervisor.index');
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             dd($e);
-            throw new \exception('Não foi possível salvar o Supervisor ' . $request->tx_nome . ' !');
+            throw new exception('Não foi possível salvar o Supervisor ' . $request->tx_nome . ' !');
         }
     }
 
@@ -101,7 +102,7 @@ class SupervisorController extends Controller
      *
      * @param int $id
      * @return \Illuminate\Http\Response
-     * @throws \exception
+     * @throws exception
      */
     public function edit($id)
     {
@@ -109,9 +110,9 @@ class SupervisorController extends Controller
             $supervisor = DB::table('tb_supervisor')->where('id', '=', $id)->first();
             $linhas = DB::table('tb_linha_teorica')->get();
             return view('supervisor.edit', compact(['supervisor', 'linhas'], $supervisor, $linhas));
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
 
-            throw new \exception('Não foi possível salvar o Supervisor de id ->' . $id . ' !');
+            throw new exception('Não foi possível salvar o Supervisor de id ->' . $id . ' !');
         }
     }
 
@@ -121,12 +122,12 @@ class SupervisorController extends Controller
      * @param \Illuminate\Http\Request $request
      * @param int $id
      * @return \Illuminate\Http\Response]
-     * @throws \exception
+     * @throws exception
      */
     public function update(Request $request, $id)
     {
         try {
-            $supervisor = Supervisor::find($id);
+            $supervisor = TbSupervisor::find($id);
             $supervisor->tx_nome     = $request->tx_nome;
             $supervisor->username    = $request->username;
             $supervisor->nu_telefone = $request->nu_telefone;
@@ -141,8 +142,8 @@ class SupervisorController extends Controller
             $supervisor->save();
             Session::flash('success', 'Operação realizada com sucesso');
             return redirect()->route('supervisor.index');
-        } catch (\Exception $e) {
-            throw new \exception('Não foi possível alterar o registro do Supervisor ' . $request['tx_nome'] . ' !');
+        } catch (Exception $e) {
+            throw new exception('Não foi possível alterar o registro do Supervisor ' . $request['tx_nome'] . ' !');
         }
     }
 
@@ -151,17 +152,17 @@ class SupervisorController extends Controller
      *
      * @param int $id
      * @return \Illuminate\Http\Response
-     * @throws \exception
+     * @throws exception
      */
     public function destroy($id)
     {
         try {
-            $supervisor = Supervisor::where('id', $id)->first();
+            $supervisor = TbSupervisor::where('id', $id)->first();
             $supervisor->delete();
             Session::flash('success', 'Operação realizada com sucesso');
             return redirect()->route('supervisor.index');
-        } catch (\Exception $e) {
-            throw new \exception('Não foi possível excluir o registro do Supervisor ->' . $id . ' !');
+        } catch (Exception $e) {
+            throw new exception('Não foi possível excluir o registro do Supervisor ->' . $id . ' !');
         }
     }
 }

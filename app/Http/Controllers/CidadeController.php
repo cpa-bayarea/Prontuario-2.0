@@ -2,16 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\UF;
-use App\Cidade;
+use App\Models\City;
 
 class CidadeController extends Controller {
 
 
     public function findCidadeByUf($uf){
 
-        return Cidade::where('state_id', $uf)->get();
+        return City::where('state_id', $uf)->get();
 
     }
 
