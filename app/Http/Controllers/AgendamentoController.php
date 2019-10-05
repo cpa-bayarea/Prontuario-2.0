@@ -8,6 +8,7 @@ use App\Paciente;
 use App\Prontuario;
 use Session;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class AgendamentoController extends Controller
 {
@@ -58,19 +59,26 @@ class AgendamentoController extends Controller
             $agendamento = new Agendamento();
 
             $agendamento->title       = $aluno->tx_nome . " - " . $paciente->nome;
-            $agendamento->color       = $request->color;
-            $agendamento->paciente_id = $request->paciente_id;
+            $agendamento->color       = '#f8ac59';
             $agendamento->aluno_id    = $request->aluno_id;
+            $agendamento->paciente_id = $request->paciente_id;
+            $agendamento->status_id   = 1;
             $agendamento->start       = $request->date . " " . $request->start;
             $agendamento->end         = $request->date . " " . $request->end;
 
-            if ($request->prontuario_id == null) {
-                $prontuario = (new ProntuarioController())->createByAgendamento($request);
-            }
+            $checkAgendamento = $this->checkAgendamento($agendamento->aluno_id, $agendamento->start, $agendamento->end);
 
-            $agendamento->save();
-            Session::flash('success', 'Operação realizada com sucesso');
-            return redirect()->route('agendamento.index');
+            if (count($checkAgendamento) == 0) {
+                if ($request->prontuario_id == null) {
+                    $prontuario = (new ProntuarioController())->createByAgendamento($request);
+                }
+                $agendamento->save();
+                Session::flash('success', 'Operação realizada com sucesso');
+                return redirect()->route('agendamento.index');
+            } else {
+                Session::flash('error', 'Já existe agendamento para o terapeuta no intervalo de tempo informado!');
+                return redirect()->route('agendamento.index');
+            }
         } catch (\Exception $e) {
             throw new \exception('Não foi possível realizar o agendamento!');
         }
@@ -119,13 +127,11 @@ class AgendamentoController extends Controller
     public function update(Request $request, $id)
     {
         try {
-
             $aluno = Aluno::find($request->aluno_id);
             $paciente = Paciente::find($request->paciente_id);
             $agendamento = Agendamento::find($id);
 
             $agendamento->title       = $aluno->tx_nome . " - " . $paciente->nome;
-            $agendamento->color       = $request->color;
             $agendamento->paciente_id = $request->paciente_id;
             $agendamento->aluno_id    = $request->aluno_id;
             $agendamento->start       = $request->date . " " . $request->start;
@@ -140,6 +146,30 @@ class AgendamentoController extends Controller
             return redirect()->route('agendamento.index');
         } catch (\Exception $e) {
             throw new \exception('Não foi possível alterar o agendamento!');
+        }
+    }
+
+    public function changeStatus($id, $status_id)
+    {
+        try {
+
+            $agendamento = Agendamento::find($id);
+
+            $agendamento->status_id   = $status_id;
+            switch ($status_id) {
+                case 2:
+                    $agendamento->color       = '#1ab394';
+                    break;
+                case 3:
+                    $agendamento->color       = '#ed5565';
+                    break;
+            }
+
+            $agendamento->save();
+            Session::flash('success', 'Operação realizada com sucesso');
+            return redirect()->route('agendamento.index');
+        } catch (\Exception $e) {
+            throw new \exception('Não foi possível alterar o status do agendamento!');
         }
     }
 
@@ -169,4 +199,22 @@ class AgendamentoController extends Controller
 
         return ['agendamento' => $agendamento];
     }
+
+    private function checkAgendamento($aluno_id, $start, $end)
+    {
+        return DB::table('agendamentos')
+            ->where(function ($query) use ($start, $end) {
+                $query->where('start', '<', $start)
+                    ->where('end', '>', $start)
+                    ->orWhere('start', '<', $end)
+                    ->where('end', '>', $end)
+                    ->orWhereBetween('start', [$start, $end])
+                    ->orWhereBetween('end', [$start, $end]);
+            })->where(function ($query) use ($aluno_id) {
+                $query->where('aluno_id', $aluno_id);
+            })->whereBetween('status_id', [1, 2])
+            ->get();
+    }
+
+
 }

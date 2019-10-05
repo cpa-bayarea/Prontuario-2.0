@@ -61,9 +61,14 @@
             </a>
         </li>
         <li class="">
-            <a href="{{ route('agendamento.index') }}"><i class="fa fa-calendar"></i>
+            <a href="#" aria-expanded="false"><i class="fa fa-calendar"></i>
                 <span class="nav-label">Agendamentos</span>
+                <span class="fa arrow"></span>
             </a>
+            <ul class="nav nav-second-level collapse" aria-expanded="false">
+                <li><a href="{{ route('agendamento.index') }}">Consultas agendadas</a></li>
+                <li><a href="{{ route('agendamentostatus.index') }}">Status</a></li>
+            </ul>
         </li>
         <li class="">
             <a href="{{ route('prontuario.index') }}"><i class="fa fa-calendar"></i>
