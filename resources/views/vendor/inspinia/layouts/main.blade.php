@@ -72,7 +72,7 @@
                     showMethod: 'slideDown',
                     timeOut: 4000
                 };
-                toastr.error('Ok!', '{{ Session::get('error') }}');
+                toastr.error('Error!', '{{ Session::get('error') }}');
             }, 1300);
         });
     </script>
@@ -88,7 +88,7 @@
                     showMethod: 'slideDown',
                     timeOut: 4000
                 };
-                toastr.info('Ok!', '{{ Session::get('info') }}');
+                toastr.info('Informação!', '{{ Session::get('info') }}');
             }, 1300);
         });
     </script>
@@ -104,7 +104,7 @@
                     showMethod: 'slideDown',
                     timeOut: 4000
                 };
-                toastr.warning('Ok!', '{{ Session::get('warning') }}');
+                toastr.warning('Atenção!', '{{ Session::get('warning') }}');
             }, 1300);
         });
     </script>
