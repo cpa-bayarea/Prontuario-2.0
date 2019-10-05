@@ -8,11 +8,14 @@ use App\Triagem;
 use App\Paciente;
 use App\StatusDeCadastro;
 use App\Telefone;
+use App\Supervisor;
 
 class TriagemController extends Controller
 {
     public function index() {
      
+        $supervisor = Supervisor::all();
+        // dd($supervisor);
         return view('triagem.index');
     }
 
