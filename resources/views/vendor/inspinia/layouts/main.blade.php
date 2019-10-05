@@ -183,6 +183,12 @@
 
 <script>
 
+    jQuery('input.inteiro').keyup(function () {
+        jQuery(jQuery(this)).val(jQuery(this).val().replace(/[^0-9]/g, ''));
+    });
+
+    // @todo refatorar para arquivo externo. Retirando o js de todas as páginas do sistema.
+
     $('#uf').on('change', function () {
         $.ajax({
             url: "/search/cidadebyuf/" + $('#uf').val(),
