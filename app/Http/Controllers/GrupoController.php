@@ -7,7 +7,7 @@ use App\Grupo;
 use Illuminate\Http\Request;
 use Session;
 use Redirect;
-
+use Validator;
 class GrupoController extends Controller
 {
     public function index()
@@ -22,6 +22,18 @@ class GrupoController extends Controller
     }
     public function store(Request $request)
     {
+       
+        $rules = array(
+            'nome'  => 'required'
+        );
+        
+        $validator = Validator::make($request->all(), $rules);
+        
+        if($validator->fails()){
+            Session::flash('error', 'Preencha os campos corretamente');
+            return Redirect::back();
+        }
+
     if($request->id){
         $grupo = Grupo::find($request->id);
         Session::flash('success', 'Atualizado com sucesso');

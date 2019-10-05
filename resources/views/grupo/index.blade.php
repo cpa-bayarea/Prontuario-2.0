@@ -12,16 +12,14 @@
             <div class="card-body">
                 <form action="/grupos" method="POST">
                     @if($grupo->id != '')
-                        <input type="hidden" value="{{ $grupo->id }}" name="id">
+                        <input type="hidden"  required value="{{ $grupo->id }}" name="id">
 
                     @endif
                     @csrf
 
                     <div class="form-group">
                         <input type="hidden" value="">
-                        <label>Nome</label>
-
-
+                        <label>Nome  <span style="color:red">*</span> </label>
 
                         <input type="text" class="form-control" name="nome" aria-describedby="emailHelp"
                                value="   {{ $grupo->nome }}" required placeholder="Nome">
