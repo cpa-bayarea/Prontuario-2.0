@@ -19,16 +19,16 @@
 
                     <div class="form-group">
                         <input type="hidden" value="">
-                        <label>Nome</label>
+                        <label>Nome <span style="color:red">*</span></label>
                         <input type="text" class="form-control" name="nome"
                                value="   {{ $grupoIten->nome }}" required placeholder="Nome">
 
                         <input type="hidden" value="{{$id}}" name="grupo_id">
-                        <label>Ordem</label>
+                        <label>Ordem <span style="color:red">*</span></label>
                         <input type="number" class="form-control" name="ordem"  value="{{ $grupoIten->ordem }}" required placeholder="Ordem">
                         <label>Outros</label>
                         <input type="text" class="form-control" name="outro"
-                               value="   {{ $grupoIten->outro }}" required placeholder="Outros">
+                               value="   {{ $grupoIten->outro }}"  placeholder="Outros">
 
                     </div>
                     <div class="form-group">
