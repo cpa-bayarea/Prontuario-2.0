@@ -10,14 +10,11 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Auth::routes();
 
 Route::middleware(['auth'])->group(function () {
+
+    Route::get('/', 'AgendamentoController@index');
 
     Route::get('/paciente', 'PacienteController@index')->name('paciente');
     Route::get('/paciente/create', 'PacienteController@create')->name('paciente.create');
@@ -95,7 +92,6 @@ Route::middleware(['auth'])->group(function () {
 
     Route::resource('prontuariostatus', 'ProntuarioStatusController');
     Route::get('/prontuariostatus/{id}/destroy', 'ProntuarioStatusController@destroy');
-
 
 });
 
