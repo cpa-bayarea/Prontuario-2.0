@@ -70,9 +70,9 @@
                     closeButton: true,
                     progressBar: true,
                     showMethod: 'slideDown',
-                    timeOut: 4000
+                    timeOut: 6000
                 };
-                toastr.error('Error!', '{{ Session::get('error') }}');
+                toastr.error('', '{{ Session::get('error') }}');
             }, 1300);
         });
     </script>
