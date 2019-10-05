@@ -50,7 +50,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group row"><label class="col-sm-4 col-form-label">Términdo da consulta</label>
+                        <div class="form-group row"><label class="col-sm-4 col-form-label">Fim da consulta</label>
                             <div class="col-sm-8">
                                 <input type="time" class="form-control" id="end" name="end" required>
                             </div>

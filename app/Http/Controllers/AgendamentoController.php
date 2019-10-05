@@ -8,6 +8,7 @@ use App\Paciente;
 use App\Prontuario;
 use Session;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class AgendamentoController extends Controller
 {
@@ -65,13 +66,19 @@ class AgendamentoController extends Controller
             $agendamento->start       = $request->date . " " . $request->start;
             $agendamento->end         = $request->date . " " . $request->end;
 
-            if ($request->prontuario_id == null) {
-                $prontuario = (new ProntuarioController())->createByAgendamento($request);
-            }
+            $checkAgendamento = $this->checkAgendamento($agendamento->aluno_id, $agendamento->start, $agendamento->end);
 
-            $agendamento->save();
-            Session::flash('success', 'Operação realizada com sucesso');
-            return redirect()->route('agendamento.index');
+            if (count($checkAgendamento) == 0) {
+                if ($request->prontuario_id == null) {
+                    $prontuario = (new ProntuarioController())->createByAgendamento($request);
+                }
+                $agendamento->save();
+                Session::flash('success', 'Operação realizada com sucesso');
+                return redirect()->route('agendamento.index');
+            } else {
+                Session::flash('error', 'Já existe agendamento para o terapeuta no intervalo de tempo informado!');
+                return redirect()->route('agendamento.index');
+            }
         } catch (\Exception $e) {
             throw new \exception('Não foi possível realizar o agendamento!');
         }
@@ -192,4 +199,22 @@ class AgendamentoController extends Controller
 
         return ['agendamento' => $agendamento];
     }
+
+    private function checkAgendamento($aluno_id, $start, $end)
+    {
+        return DB::table('agendamentos')
+            ->where(function ($query) use ($start, $end) {
+                $query->where('start', '<', $start)
+                    ->where('end', '>', $start)
+                    ->orWhere('start', '<', $end)
+                    ->where('end', '>', $end)
+                    ->orWhereBetween('start', [$start, $end])
+                    ->orWhereBetween('end', [$start, $end]);
+            })->where(function ($query) use ($aluno_id) {
+                $query->where('aluno_id', $aluno_id);
+            })->whereBetween('status_id', [1, 2])
+            ->get();
+    }
+
+
 }

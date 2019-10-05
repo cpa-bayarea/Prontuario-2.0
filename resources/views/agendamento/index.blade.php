@@ -3,7 +3,36 @@
 @section('content')
 
 @section('content')
-    <div class="col-12">
+<div class="row">
+    <div class="col-lg-3">
+        <div class="ibox ">
+            <div class="ibox-title">
+                <h5>Status de Agendamentos - Legendas</h5>
+                <div class="ibox-tools">
+                    <a class="collapse-link">
+                        <i class="fa fa-chevron-up"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="ibox-content no-padding">
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <span class="badge badge-warning" style="color: #f8ac59;">STATUS</span>
+                        Agendado
+                    </li>
+                    <li class="list-group-item ">
+                        <span class="badge badge-primary" style="color: #1ab394;">STATUS</span>
+                        Confirmado
+                    </li>
+                    <li class="list-group-item">
+                        <span class="badge badge-danger" style="color: #ed5565;">STATUS</span>
+                        Cancelado
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-9">
         <div class="ibox">
             <div class="ibox-title">
                 <h5>Consultas agendadas</h5>
@@ -18,6 +47,7 @@
             </div>
         </div>
     </div>
+</div>
     @include('components.modal_agendamento')
 @endsection
 
