@@ -19,7 +19,7 @@ class CreateGrupoItemsTable extends Migration
             $table->integer('grupo_id')->unsigned();
             $table->foreign('grupo_id')->references('id')->on('grupos');
             $table->integer('ordem');
-            $table->string('outro');
+            $table->string('outro')->nullable();
             $table->timestamps();
         });
     }
