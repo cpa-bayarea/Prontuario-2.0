@@ -11,7 +11,7 @@ class Agendamento extends Model
 
     protected $table = 'agendamentos';
 
-    protected $fillable = ['title','color','start','end','paciente_id','aluno_id'];
+    protected $fillable = ['title','color','start','end','paciente_id','aluno_id','status_id'];
 
     /**
      * Relacionamento de agendamento com aluno
@@ -27,6 +27,14 @@ class Agendamento extends Model
     public function paciente()
     {
         return $this->belongsTo('App\Paciente', 'paciente_id', 'id');
+    }
+
+    /**
+     * Relacionamento de agendamento com status
+     */
+    public function status()
+    {
+        return $this->belongsTo('App\AgendamentoStatus', 'status_id', 'id');
     }
 
 }

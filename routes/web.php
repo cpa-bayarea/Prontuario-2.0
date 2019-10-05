@@ -24,7 +24,6 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('search/cidadebyuf/{id}', 'CidadeController@findCidadeByUf');
 
-
     // Triagem
     Route::get('/triagem', 'TriagemController@index')->name('triagem');
     Route::get('/triagem/show', 'TriagemController@show')->name('triagem.show');
@@ -84,7 +83,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/agendamento', 'AgendamentoController@index')->name('agendamento.index');
     Route::post('/agendamento/store', 'AgendamentoController@store')->name('agendamento.store');
     Route::get('search/agendamento/findById/{id}', 'AgendamentoController@findById')->name('agendamento.byid');
+    Route::get('/agendamento/changestatus/{id}/{status_id}', 'AgendamentoController@changeStatus')->name('agendamento.changeStatus');
     Route::get('/agendamento/delete/{id}', 'AgendamentoController@destroy')->name('agendamento.delete');
+    Route::resource('/agendamentostatus', 'AgendamentoStatusController');
+    Route::get('/agendamentostatus/{id}/destroy', 'AgendamentoStatusController@destroy');
 
     Route::resource('prontuario', 'ProntuarioController');
     Route::get('search/prontuario/findByPacienteId/{id}', 'ProntuarioController@findByPacienteId')->name('prontuario.findByPacienteId');

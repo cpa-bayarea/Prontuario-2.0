@@ -14,6 +14,7 @@
                     <div class="ibox-content">
                         <input type="hidden" id="id" name="id">
                         <input type="hidden" id="prontuario_id" name="prontuario_id">
+                        <input type="hidden" id="status_id" name="status_id">
 
                         <div class="form-group row"><label class="col-sm-4 col-form-label">Paciente</label>
                             <div class="col-sm-8">
@@ -49,28 +50,18 @@
                             </div>
                         </div>
 
-                        <div class="form-group row"><label class="col-sm-4 col-form-label">Términdo da consulta</label>
+                        <div class="form-group row"><label class="col-sm-4 col-form-label">Fim da consulta</label>
                             <div class="col-sm-8">
                                 <input type="time" class="form-control" id="end" name="end" required>
                             </div>
                         </div>
 
-                        <div class="form-group row"><label class="col-sm-4 col-form-label">Selecione a cor</label>
-                            <div class="col-sm-8">
-                                <select class="form-control m-b" id="color" name="color">
-                                    <option style="color:#1ab394;" value="#1ab394">&#9724; Verde</option>
-                                    <option style="color:#1c84c6;" value="#1c84c6">&#9724; Azul</option>
-                                    <option style="color:#23c6c8;" value="#23c6c8">&#9724; Verde claro</option>
-                                    <option style="color:#f8ac59;" value="#f8ac59">&#9724; Laranjado</option>
-                                    <option style="color:#ed5565;" value="#ed5565">&#9724; Vermelho</option>
-                                </select>
-                            </div>
-                        </div>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-primary" type="submit" id="btn-acao" onclick="return validaHoraAgendamento();"></button>
-                    <a id="btn-excluir" class="btn btn-danger" onclick="return confirm('Deseja realmente excluir este agendamento?')">Excluir</a>
+                    <a id="btn-status" class="btn btn-primary"></a>
+                    <a id="btn-cancelar" class="btn btn-danger" onclick="return confirm('Deseja realmente cancelar este agendamento?')">Cancelar</a>
                     <button type="button" class="btn btn-white" data-dismiss="modal">Fechar</button>
                 </div>
             </form>

@@ -6,14 +6,12 @@ use Illuminate\Http\Request;
 use App\UF;
 use App\Cidade;
 
-class CidadeController extends Controller
-{
+class CidadeController extends Controller {
 
 
     public function findCidadeByUf($uf){
 
-        return Cidade::where('state_id',$uf)->get();
-
+        return Cidade::where('state_id', $uf)->get();
 
     }
 
