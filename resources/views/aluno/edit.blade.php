@@ -24,44 +24,49 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="dsc" class="col-sm-2 control-label">Matrícula</label>
+                                <label for="mat" class="col-sm-2 control-label">Matrícula <span
+                                        class="obrigatorio">*</span></label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="dsc" name="username"
-                                           value="{{ $aluno->username }}">
+                                    <input type="text" class="form-control inteiro" id="mat" name="username"
+                                           maxlength="11" value="{{ $aluno->username }}" required>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="telefone" class="col-sm-2 control-label">Telefone</label>
+                                <label for="telefone" class="col-sm-2 control-label">Telefone <span class="obrigatorio">*</span></label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="telefone" name="nu_telefone"
-                                           value="{{ $aluno->nu_telefone }}">
+                                    <input type="text" class="form-control inteiro" id="telefone" name="nu_telefone"
+                                           value="{{ $aluno->nu_telefone }}" maxlength="10" required>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="celular" class="col-sm-2 control-label">Celular</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="celular" name="nu_celular"
-                                           value="{{ $aluno->nu_celular }}">
+                                    <input type="text" class="form-control inteiro" id="celular"
+                                           value="{{ $aluno->nu_celular }}" maxlength="10" name="nu_celular">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="sem" class="col-sm-2 control-label">Semestre</label>
+                                <label for="sem" class="col-sm-2 control-label">Semestre <span
+                                        class="obrigatorio">*</span></label>
                                 <div class="col-sm-10">
                                     <input type="text" class="form-control" id="sem" name="nu_semestre" required
-                                           value="{{ $aluno->nu_semestre }}">
+                                           value="{{ $aluno->nu_semestre }}" maxlength="2">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-sm-2 control-label" for="supervisor">Supervisor</label>
+                                <label class="col-sm-2 control-label" for="supervisor_id">Supervisor <span
+                                        class="obrigatorio">*</span></label>
                                 <div class="col-lg-10">
                                     <select name="supervisor_id" class="form-control" data-show-subtext="true"
-                                            id="supervisor" data-live-search="true" required>
-                                        <option>Selecione</option>
+                                            id="supervisor_id" data-live-search="true" required>
+                                        <option disabled>Selecione</option>
                                         @foreach($supervisores as $supervisor)
                                             @php
                                                 $checked = ($supervisor->id == $aluno->supervisor_id ) ? 'selected="true"' : '';
                                             @endphp
-                                            <option {{ $checked  }} value="{{ $supervisor->id }}">{{ $supervisor->id  }}-{{ $supervisor->tx_nome }}</option>
+                                            <option {{ $checked  }} value="{{ $supervisor->id }}">
+                                                {{ $supervisor->tx_nome }}
+                                            </option>
                                         @endforeach
 
                                     </select>

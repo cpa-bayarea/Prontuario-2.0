@@ -20,37 +20,44 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="mat" class="col-sm-2 control-label">Matrícula</label>
+                                <label for="mat" class="col-sm-2 control-label">Matrícula <span
+                                        class="obrigatorio">*</span></label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="mat" name="username">
+                                    <input type="text" class="form-control inteiro" id="mat" name="username"
+                                           maxlength="11" required>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="telefone" class="col-sm-2 control-label">Telefone</label>
+                                <label for="telefone" class="col-sm-2 control-label">Telefone <span class="obrigatorio">*</span></label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="telefone" name="nu_telefone">
+                                    <input type="text" class="form-control inteiro" id="telefone" name="nu_telefone"
+                                           maxlength="10" required>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="celular" class="col-sm-2 control-label">Celular</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="celular" name="nu_celular">
+                                    <input type="text" class="form-control inteiro" id="celular" name="nu_celular"
+                                           maxlength="10">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="sem" class="col-sm-2 control-label">Semestre</label>
+                                <label for="sem" class="col-sm-2 control-label">Semestre <span
+                                        class="obrigatorio">*</span></label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="sem" name="nu_semestre" required maxlength="2">
+                                    <input type="text" class="form-control inteiro" id="sem" name="nu_semestre"
+                                           required maxlength="2">
                                 </div>
                             </div>
-
                             <div class="form-group">
-                                <label class="col-sm-2 control-label" for="linha_teorica">Supervisor</label>
+                                <label class="col-sm-2 control-label" for="supervisor_id">Supervisor
+                                    <span class="obrigatorio">*</span>
+                                </label>
                                 <div class="col-lg-10">
                                     <select name="supervisor_id" class="form-control" data-show-subtext="true"
                                             id="supervisor_id" data-live-search="true" required>
 
-                                        <option selected="true">Selecione</option>
+                                        <option selected disabled>Selecione</option>
                                         @foreach($supervisores as $supervisor)
                                             <option value="{{ $supervisor->id }}">{{ $supervisor->tx_nome }}</option>
                                         @endforeach
