@@ -10,7 +10,7 @@ namespace App\Models\Base;
 use Reliese\Database\Eloquent\Model as Eloquent;
 
 /**
- * Class TbAluno
+ * Class Aluno
  * 
  * @property int $id
  * @property string $tx_nome
@@ -23,13 +23,13 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property \Carbon\Carbon $updated_at
  * @property string $deleted_at
  * 
- * @property \App\Models\TbSupervisor $tb_supervisor
+ * @property \App\Models\Supervisor $tb_supervisor
  * @property \Illuminate\Database\Eloquent\Collection $agendamentos
  * @property \Illuminate\Database\Eloquent\Collection $prontuarios
  *
  * @package App\Models\Base
  */
-class TbAluno extends Eloquent
+class Aluno extends Eloquent
 {
 	use \Illuminate\Database\Eloquent\SoftDeletes;
 	protected $table = 'tb_aluno';
@@ -38,9 +38,9 @@ class TbAluno extends Eloquent
 		'supervisor_id' => 'int'
 	];
 
-	public function tb_supervisor()
+	public function supervisor()
 	{
-		return $this->belongsTo(\App\Models\TbSupervisor::class, 'supervisor_id');
+		return $this->belongsTo(\App\Models\Supervisor::class, 'supervisor_id');
 	}
 
 	public function agendamentos()

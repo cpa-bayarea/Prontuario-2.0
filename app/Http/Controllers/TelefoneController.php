@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Telefone;
+use App\Models\Telefone;
 use Illuminate\Support\Facades\Redirect;
-use Session;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class TelefoneController extends Controller
 {

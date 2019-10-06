@@ -2,17 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Agendamento;
-use App\Aluno;
-use App\Paciente;
-use App\Prontuario;
-use Session;
+use App\Models\Agendamento;
+use App\Models\Aluno;
+use App\Models\Paciente;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 
 class AgendamentoController extends Controller
 {
-    /**
+    /**A
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -79,8 +79,8 @@ class AgendamentoController extends Controller
                 Session::flash('error', 'Já existe agendamento para o terapeuta no intervalo de tempo informado!');
                 return redirect()->route('agendamento.index');
             }
-        } catch (\Exception $e) {
-            throw new \exception('Não foi possível realizar o agendamento!');
+        } catch (Exception $e) {
+            throw new exception('Não foi possível realizar o agendamento!');
         }
     }
 
@@ -112,8 +112,8 @@ class AgendamentoController extends Controller
 
             $agendamento->save();
             return redirect()->route('agendamento.index');
-        } catch (\Exception $e) {
-            throw new \exception('Não foi possível alterar o agendamento!');
+        } catch (Exception $e) {
+            throw new exception('Não foi possível alterar o agendamento!');
         }
     }
 
@@ -144,8 +144,8 @@ class AgendamentoController extends Controller
             $agendamento->save();
             Session::flash('success', 'Operação realizada com sucesso');
             return redirect()->route('agendamento.index');
-        } catch (\Exception $e) {
-            throw new \exception('Não foi possível alterar o agendamento!');
+        } catch (Exception $e) {
+            throw new exception('Não foi possível alterar o agendamento!');
         }
     }
 
@@ -168,8 +168,8 @@ class AgendamentoController extends Controller
             $agendamento->save();
             Session::flash('success', 'Operação realizada com sucesso');
             return redirect()->route('agendamento.index');
-        } catch (\Exception $e) {
-            throw new \exception('Não foi possível alterar o status do agendamento!');
+        } catch (Exception $e) {
+            throw new exception('Não foi possível alterar o status do agendamento!');
         }
     }
 
@@ -188,8 +188,8 @@ class AgendamentoController extends Controller
             $agendamento->delete();
             Session::flash('success', 'Operação realizada com sucesso');
             return redirect()->route('agendamento.index');
-        } catch (\Exception $e) {
-            throw new \exception('Não foi possível excluir o agendamento!');
+        } catch (Exception $e) {
+            throw new exception('Não foi possível excluir o agendamento!');
         }
     }
 

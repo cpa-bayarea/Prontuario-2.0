@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\GrupoItem;
+use App\Models\GrupoItem;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
-use Session;
-use Validator;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Validator;
 
 class GrupoItemController extends Controller
 {
@@ -21,15 +21,15 @@ class GrupoItemController extends Controller
         //
     }
     public function store(Request $request)
-    {   
+    {
         $rules = array(
             'nome'  => 'required',
             'grupo_id' =>'required',
             'ordem'=>'required'
         );
-        
+
         $validator = Validator::make($request->all(), $rules);
-        
+
         if($validator->fails()){
             Session::flash('error', 'Preencha os campos corretamente');
             return Redirect::back();

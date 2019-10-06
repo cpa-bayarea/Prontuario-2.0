@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Aluno;
+use App\Models\Aluno;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Session;
+use Illuminate\Support\Facades\Session;
 
 class AlunoController extends Controller
 {

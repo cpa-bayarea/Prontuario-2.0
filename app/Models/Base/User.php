@@ -7,26 +7,28 @@
 
 namespace App\Models\Base;
 
-use Reliese\Database\Eloquent\Model as Eloquent;
+use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+
 
 /**
  * Class User
- * 
+ *
  * @property int $id
  * @property string $name
  * @property string $email
- * @property \Carbon\Carbon $email_verified_at
+ * @property Carbon $email_verified_at
  * @property string $password
  * @property string $remember_token
- * @property \Carbon\Carbon $created_at
- * @property \Carbon\Carbon $updated_at
- * 
- * @property \Illuminate\Database\Eloquent\Collection $telefones
+ * @property Carbon $created_at
+ * @property Carbon $updated_at
+ *
+ * @property Collection $telefones
  *
  * @package App\Models\Base
  */
-class User extends Eloquent
-{
+class User extends Authenticatable {
 	protected $dates = [
 		'email_verified_at'
 	];

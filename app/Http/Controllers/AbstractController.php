@@ -21,7 +21,7 @@ class AbstractController extends Controller
     {
         $classe = substr(get_class($this), strrpos(get_class($this), '\\')+1);
         if(!$this->_modelName){
-            $this->_modelName = 'App\\' . str_replace('Controller', '', $classe);
+            $this->_modelName = 'App\\Models\\' . str_replace('Controller', '', $classe);
         }
 
         $entidade = strtolower(str_replace('Controller', '', $classe));

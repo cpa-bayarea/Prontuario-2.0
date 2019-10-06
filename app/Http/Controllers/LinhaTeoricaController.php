@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\LinhaTeorica as Linha;
+use App\Models\LinhaTeorica as Linha;
 use Exception;
 use Illuminate\Http\Response;
-use Session;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 

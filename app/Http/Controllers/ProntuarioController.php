@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Aluno;
-use App\Paciente;
-use App\Prontuario;
-use App\ProntuarioStatus;
+
+
+use App\Models\Paciente;
+use App\Models\Prontuario;
+use App\Models\ProntuarioStatus;
+use App\Models\Aluno;
 
 class ProntuarioController extends AbstractController
 {
