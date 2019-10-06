@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-class TbLinhaTeorica extends \App\Models\Base\TbLinhaTeorica
+class LinhaTeorica extends \App\Models\Base\LinhaTeorica
 {
 	protected $fillable = [
 		'tx_nome',

@@ -5,12 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\Paciente;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
-use App\Models\UF;
+use App\Models\State as UF;
 use Illuminate\Support\Facades\Redirect;
 
 
-class
-PacienteController extends Controller
+class PacienteController extends Controller
 {
     public function index()
     {

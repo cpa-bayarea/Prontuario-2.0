@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use \App\LinhaTeorica as Linha;
+use \App\Models\LinhaTeorica as Linha;
 
 class LinhaTeoricaSeeder extends Seeder
 {

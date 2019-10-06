@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\TbSupervisor;
+use App\Models\Supervisor;
 use exception;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
@@ -29,7 +29,7 @@ class SupervisorController extends Controller
     public function index()
     {
         try {
-            $supervisores = TbSupervisor::orderBy('tx_nome', 'asc')->get();
+            $supervisores = Supervisor::orderBy('tx_nome', 'asc')->get();
 
             // debug para buscar os excluídos
             // $supervisores = Supervisor::withTrashed()->get();
@@ -66,7 +66,7 @@ class SupervisorController extends Controller
 
                 return $this->update($request, $request['id']);
             }
-            $supervisor = new TbSupervisor();
+            $supervisor = new Supervisor();
 
             $supervisor->tx_nome     = $request->tx_nome;
             $supervisor->username    = $request->username;
@@ -127,7 +127,7 @@ class SupervisorController extends Controller
     public function update(Request $request, $id)
     {
         try {
-            $supervisor = TbSupervisor::find($id);
+            $supervisor = Supervisor::find($id);
             $supervisor->tx_nome     = $request->tx_nome;
             $supervisor->username    = $request->username;
             $supervisor->nu_telefone = $request->nu_telefone;
@@ -157,7 +157,7 @@ class SupervisorController extends Controller
     public function destroy($id)
     {
         try {
-            $supervisor = TbSupervisor::where('id', $id)->first();
+            $supervisor = Supervisor::where('id', $id)->first();
             $supervisor->delete();
             Session::flash('success', 'Operação realizada com sucesso');
             return redirect()->route('supervisor.index');

@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Agendamento;
 use App\Models\Aluno;
 use App\Models\Paciente;
-use App\Models\TbAluno;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -128,7 +127,7 @@ class AgendamentoController extends Controller
     public function update(Request $request, $id)
     {
         try {
-            $aluno = TbAluno::find($request->aluno_id);
+            $aluno = Aluno::find($request->aluno_id);
             $paciente = Paciente::find($request->paciente_id);
             $agendamento = Agendamento::find($id);
 

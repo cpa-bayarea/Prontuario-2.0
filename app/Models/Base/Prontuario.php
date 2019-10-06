@@ -22,7 +22,7 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
  * 
- * @property \App\Models\TbAluno $tb_aluno
+ * @property \App\Models\Aluno $tb_aluno
  * @property \App\Models\Paciente $paciente
  * @property \App\Models\ProntuarioStatus $prontuario_status
  *
@@ -42,7 +42,7 @@ class Prontuario extends Eloquent
 
 	public function tb_aluno()
 	{
-		return $this->belongsTo(\App\Models\TbAluno::class, 'aluno_id');
+		return $this->belongsTo(\App\Models\Aluno::class, 'aluno_id');
 	}
 
 	public function paciente()

@@ -10,7 +10,7 @@ namespace App\Models\Base;
 use Reliese\Database\Eloquent\Model as Eloquent;
 
 /**
- * Class TbLinhaTeorica
+ * Class LinhaTeorica
  * 
  * @property int $id
  * @property string $tx_nome
@@ -23,13 +23,13 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  *
  * @package App\Models\Base
  */
-class TbLinhaTeorica extends Eloquent
+class LinhaTeorica extends Eloquent
 {
 	use \Illuminate\Database\Eloquent\SoftDeletes;
 	protected $table = 'tb_linha_teorica';
 
-	public function tb_supervisors()
+	public function supervisor()
 	{
-		return $this->hasMany(\App\Models\TbSupervisor::class, 'linha_id');
+		return $this->hasMany(\App\Models\Supervisor::class, 'linha_id');
 	}
 }

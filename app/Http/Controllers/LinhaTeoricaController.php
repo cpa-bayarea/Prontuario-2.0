@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\TbLinhaTeorica as Linha;
+use App\Models\LinhaTeorica as Linha;
 use Exception;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Session;

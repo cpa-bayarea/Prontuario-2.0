@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-class TbSupervisor extends \App\Models\Base\TbSupervisor
+class Supervisor extends \App\Models\Base\Supervisor
 {
 	protected $fillable = [
 		'tx_nome',
