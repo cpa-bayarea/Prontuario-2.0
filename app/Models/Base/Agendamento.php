@@ -11,7 +11,7 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 
 /**
  * Class Agendamento
- * 
+ *
  * @property int $id
  * @property string $title
  * @property string $color
@@ -19,10 +19,11 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property string $end
  * @property int $aluno_id
  * @property int $paciente_id
+ * @property int $status_id
  * @property string $deleted_at
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
- * 
+ *
  * @property \App\Models\Aluno $tb_aluno
  * @property \App\Models\Paciente $paciente
  *

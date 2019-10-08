@@ -7,7 +7,7 @@
     <div class="col-lg-3">
         <div class="ibox ">
             <div class="ibox-title">
-                <h5>Status de Agendamentos - Legendas</h5>
+                <h5>Status de Agendamentos</h5>
                 <div class="ibox-tools">
                     <a class="collapse-link">
                         <i class="fa fa-chevron-up"></i>
@@ -120,7 +120,7 @@
                                 case '3':
                                     $('#btn-status').show();
                                     $('#btn-status').html('Reativar');
-                                    $('#btn-status').attr("href", "/agendamento/changestatus/" + data.agendamento.id + "/2");
+                                    $('#btn-status').attr("href", "/agendamento/changestatus/" + data.agendamento.id + "/1");
                                     $('#btn-cancelar').hide();
                                     break;
                             }

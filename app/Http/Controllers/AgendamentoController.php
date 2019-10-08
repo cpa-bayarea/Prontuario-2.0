@@ -19,9 +19,9 @@ class AgendamentoController extends Controller
      */
     public function index()
     {
-        $agendamentos = Agendamento::all();
-        $alunos = Aluno::orderBy('tx_nome', 'asc')->get();
-        $pacientes = Paciente::orderBy('nome', 'asc')->get();
+        $agendamentos   = Agendamento::all();
+        $alunos         = Aluno::orderBy('tx_nome', 'asc')->get();
+        $pacientes      = Paciente::orderBy('nome', 'asc')->get();
 
         return view('agendamento.index', compact('agendamentos','alunos','pacientes'));
     }
@@ -54,8 +54,8 @@ class AgendamentoController extends Controller
                 }
             }
 
-            $aluno = Aluno::find($request->aluno_id);
-            $paciente = Paciente::find($request->paciente_id);
+            $aluno       = Aluno::find($request->aluno_id);
+            $paciente    = Paciente::find($request->paciente_id);
             $agendamento = new Agendamento();
 
             $agendamento->title       = $aluno->tx_nome . " - " . $paciente->nome;
@@ -66,7 +66,11 @@ class AgendamentoController extends Controller
             $agendamento->start       = $request->date . " " . $request->start;
             $agendamento->end         = $request->date . " " . $request->end;
 
-            $checkAgendamento = $this->checkAgendamento($agendamento->aluno_id, $agendamento->start, $agendamento->end);
+            $checkAgendamento = $this->checkAgendamento($agendamento->aluno_id,
+                $agendamento->start,
+                $agendamento->end,
+                [1, 2],
+                null);
 
             if (count($checkAgendamento) == 0) {
                 if ($request->prontuario_id == null) {
@@ -127,8 +131,8 @@ class AgendamentoController extends Controller
     public function update(Request $request, $id)
     {
         try {
-            $aluno = Aluno::find($request->aluno_id);
-            $paciente = Paciente::find($request->paciente_id);
+            $aluno       = Aluno::find($request->aluno_id);
+            $paciente    = Paciente::find($request->paciente_id);
             $agendamento = Agendamento::find($id);
 
             $agendamento->title       = $aluno->tx_nome . " - " . $paciente->nome;
@@ -154,20 +158,39 @@ class AgendamentoController extends Controller
         try {
 
             $agendamento = Agendamento::find($id);
+            $status = [];
 
-            $agendamento->status_id   = $status_id;
+            $agendamento->status_id = $status_id;
             switch ($status_id) {
+                case 1:
+                    $agendamento->color = '#f8ac59';
+                    $status = [1, 2];
+                    break;
                 case 2:
-                    $agendamento->color       = '#1ab394';
+                    $agendamento->color = '#1ab394';
+                    $status = [2, 2];
                     break;
                 case 3:
-                    $agendamento->color       = '#ed5565';
+                    $agendamento->color = '#ed5565';
+                    $status = [0, 0];
                     break;
             }
 
-            $agendamento->save();
-            Session::flash('success', 'Operação realizada com sucesso');
-            return redirect()->route('agendamento.index');
+            $checkAgendamento = $this->checkAgendamento(
+                $agendamento->aluno_id,
+                $agendamento->start,
+                $agendamento->end,
+                $status,
+                $agendamento->id);
+
+            if (count($checkAgendamento) == 0) {
+                $agendamento->save();
+                Session::flash('success', 'Operação realizada com sucesso');
+                return redirect()->route('agendamento.index');
+            } else {
+                Session::flash('error', 'Já existe agendamento para o terapeuta no intervalo de tempo informado!');
+                return redirect()->route('agendamento.index');
+            }
         } catch (Exception $e) {
             throw new exception('Não foi possível alterar o status do agendamento!');
         }
@@ -200,21 +223,35 @@ class AgendamentoController extends Controller
         return ['agendamento' => $agendamento];
     }
 
-    private function checkAgendamento($aluno_id, $start, $end)
+    private function checkAgendamento($aluno_id, $start, $end, $status, $agendamento_id)
     {
-        return DB::table('agendamentos')
-            ->where(function ($query) use ($start, $end) {
-                $query->where('start', '<', $start)
-                    ->where('end', '>', $start)
-                    ->orWhere('start', '<', $end)
-                    ->where('end', '>', $end)
-                    ->orWhereBetween('start', [$start, $end])
-                    ->orWhereBetween('end', [$start, $end]);
-            })->where(function ($query) use ($aluno_id) {
-                $query->where('aluno_id', $aluno_id);
-            })->whereBetween('status_id', [1, 2])
-            ->get();
+        if ($agendamento_id == null) {
+            return DB::table('agendamentos')
+                ->where(function ($query) use ($start, $end) {
+                    $query->where('start', '<', $start)
+                        ->where('end', '>', $start)
+                        ->orWhere('start', '<', $end)
+                        ->where('end', '>', $end)
+                        ->orWhereBetween('start', [$start, $end])
+                        ->orWhereBetween('end', [$start, $end]);
+                })->where(function ($query) use ($aluno_id) {
+                    $query->where('aluno_id', $aluno_id);
+                })->whereBetween('status_id', $status)
+                ->get();
+        } else {
+            return DB::table('agendamentos')
+                ->where(function ($query) use ($start, $end) {
+                    $query->where('start', '<', $start)
+                        ->where('end', '>', $start)
+                        ->orWhere('start', '<', $end)
+                        ->where('end', '>', $end)
+                        ->orWhereBetween('start', [$start, $end])
+                        ->orWhereBetween('end', [$start, $end]);
+                })->where(function ($query) use ($aluno_id) {
+                    $query->where('aluno_id', $aluno_id);
+                })->whereBetween('status_id', $status)
+                ->where('id', '<>', $agendamento_id)
+                ->get();
+        }
     }
-
-
 }

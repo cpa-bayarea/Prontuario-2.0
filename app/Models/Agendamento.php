@@ -10,6 +10,7 @@ class Agendamento extends \App\Models\Base\Agendamento
 		'start',
 		'end',
 		'aluno_id',
-		'paciente_id'
+		'paciente_id',
+        'status_id'
 	];
 }
