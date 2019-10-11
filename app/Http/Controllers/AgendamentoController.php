@@ -66,17 +66,7 @@ class AgendamentoController extends Controller
             $agendamento->start       = $request->date . " " . $request->start;
             $agendamento->end         = $request->date . " " . $request->end;
 
-            $checkAgendamento = $this->checkAgendamento($agendamento->aluno_id,
-                $agendamento->start,
-                $agendamento->end,
-                [1, 2],
-                null);
-
-            if (count($checkAgendamento) == 0) {
-                if ($request->prontuario_id == null) {
-                    $prontuario = (new ProntuarioController())->createByAgendamento($request);
-                }
-                $agendamento->save();
+            if ($this->saveAgendamento($agendamento, $agendamento->aluno_id, $agendamento->start, $agendamento->end, [1, 2], $agendamento->id, $request)) {
                 Session::flash('success', 'Operação realizada com sucesso');
                 return redirect()->route('agendamento.index');
             } else {
@@ -176,15 +166,7 @@ class AgendamentoController extends Controller
                     break;
             }
 
-            $checkAgendamento = $this->checkAgendamento(
-                $agendamento->aluno_id,
-                $agendamento->start,
-                $agendamento->end,
-                $status,
-                $agendamento->id);
-
-            if (count($checkAgendamento) == 0) {
-                $agendamento->save();
+            if ($this->saveAgendamento($agendamento, $agendamento->aluno_id, $agendamento->start, $agendamento->end, $status, $agendamento->id, null)) {
                 Session::flash('success', 'Operação realizada com sucesso');
                 return redirect()->route('agendamento.index');
             } else {
@@ -192,7 +174,7 @@ class AgendamentoController extends Controller
                 return redirect()->route('agendamento.index');
             }
         } catch (Exception $e) {
-            throw new exception('Não foi possível alterar o status do agendamento!');
+            throw new exception('Não foi possível excluir o agendamento!');
         }
     }
 
@@ -221,6 +203,22 @@ class AgendamentoController extends Controller
         $agendamento = Agendamento::find($id);
 
         return ['agendamento' => $agendamento];
+    }
+
+    private function saveAgendamento($agendamento, $aluno_id, $start, $end, $status, $agendamento_id, $request) {
+
+        $checkAgendamento = $this->checkAgendamento($aluno_id, $start, $end, $status, $agendamento_id);
+
+        if (count($checkAgendamento) == 0) {
+            if ($request !== null) {
+                if ($request->prontuario_id == null) {
+                    $prontuario = (new ProntuarioController())->createByAgendamento($request);
+                }
+            }
+            $agendamento->save();
+            return true;
+        }
+        return false;
     }
 
     private function checkAgendamento($aluno_id, $start, $end, $status, $agendamento_id)
