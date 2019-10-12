@@ -30,6 +30,7 @@ Route::middleware(['auth'])->group(function () {
 
     // Triagem
     Route::get('/triagem', 'TriagemController@index')->name('triagem');
+    Route::get('/triagem/show', 'TriagemController@create')->name('triagem.create');
     Route::get('/triagem/show', 'TriagemController@show')->name('triagem.show');
     Route::get('triagem/edit/{id}', 'TriagemController@edit')->name('triagem.edit');
     Route::post('/triagem', 'TriagemController@store')->name('triagem.store');

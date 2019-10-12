@@ -9,14 +9,7 @@ class Triagem extends Model
 {
     use SoftDeletes;
     protected $fillable = [
-        'triador', 
-        'supervisor', 
-        'atendimento',
-        'queixa_principal',
-        'temporario',
-        'paciente_id',
-        'grupo',
-        'outro',
+        'queixa_principal', 
     ];
      /**
      * Relacionamento de Triagem com Paciente

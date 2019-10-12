@@ -6,32 +6,72 @@ use Illuminate\Http\Request;
 use Session;
 use App\Triagem;
 use App\Paciente;
-use App\StatusDeCadastro;
-use App\Telefone;
+
+use App\Grupo;
 use App\Supervisor;
+use App\Aluno;
+use App\Telefone;
+use App\TriagemItensGrupo;
 
 class TriagemController extends Controller
 {
     public function index() {
      
-        $supervisor = Supervisor::all();
-        // dd($supervisor);
-        return view('triagem.index');
+        $supervisores = Supervisor::orderBy('tx_nome', 'asc')->get();
+        $alunos = Aluno::orderBy('tx_nome', 'asc')->get();
+        $tipoAtendimentos = Grupo::find(1);
+        $grupos = Grupo::find(2);
+        $temporario = Grupo::find(3);
+
+        return view('triagem.create',compact('supervisores',$supervisores,'alunos',$alunos,'grupos',$grupos,'tipoAtendimentos',$tipoAtendimentos,'temporario',$temporario));
+    }
+
+    public function create () {
+        return view('triagem.create');
     }
 
     public function store(Request $request) {
 
-        $paciente = new Paciente($request->all());
-        $paciente->id_status = 1;                   //id_status = 1 paciente pré cadastrado, contem apenas dados iniciais.
+        
+
+        $paciente = new Paciente();
+        $paciente->nome = $request->nome;
+        $paciente->cpf = $request->cpf;
+        $paciente->rg = $request->rg;
+        $paciente->data_nascimento = $request->data_nascimento;
+        $paciente->id_status = 1;
         $paciente->save();
 
-        $triagem = new Triagem($request->all());
-        $triagem->paciente_ids = $paciente->id;
+        $telefone = new Telefone();
+        $telefone->numero = $request->telefone;
+        $telefone->paciente_id = $paciente->id;
+        $telefone->save();
+
+        $triagem = new Triagem();
+        $triagem->alunos_id = $request->aluno;
+        $triagem->supervisors_id = $request->supervisor;
+        $triagem->paciente_id = $paciente->id;
+        $triagem->queixa_principal = $request->queixa_principal;
         $triagem->save();
 
-        // $telefone = new Telefone($request->all());
-        // $telefone->paciente_id = $paciente->id;
-        // $telefone->save();
+        $triagemItensGrupo = new TriagemItensGrupo();
+        $triagemItensGrupo->triagems_id = $triagem->id;
+        $triagemItensGrupo->grupo_items_id = $request->atendimento;
+    
+        $triagemItensGrupo->save();
+
+        $triagemItensGrupo->triagems_id = $triagem->id;
+        $triagemItensGrupo->grupo_items_id = $request->grupo;
+       
+        $triagemItensGrupo->save();
+
+        $triagemItensGrupo->triagems_id = $triagem->id;
+        $triagemItensGrupo->grupo_items_id = $request->temporario;
+        if($request->outro != null) {
+            $triagemItensGrupo->outro = $request->outro;
+        }
+        $triagemItensGrupo->save();
+
         
         Session::flash('success', 'Operação realizada com sucesso');
         return redirect(route('triagem'));
