@@ -13,21 +13,21 @@
             </div>
         </div>
         <div class="ibox-content">
-            <form action="triagem" method="POST" id="form_triagem" name="triagem">
+            <form action=" {{ route('triagem.store') }} " method="POST" id="form_triagem" name="triagem">
                 @csrf
                 <div class="form-group row"><label for="nome" class="col-lg-2 col-form-label">Nome</label>
-                    <div class="col-lg-10"><input type="text" placeholder="Nome" required name="nome" id="nome" class="form-control">
+                <div class="col-lg-10"><input type="text" placeholder="Nome" value="{{$paciente->nome}}" required name="nome" id="nome" class="form-control">
                     </div>
                 </div>
                 <div class="form-group row"><label class="col-lg-2 col-form-label" for="cpf">CPF</label>
-                    <div class="col-lg-10"><input type="text" placeholder="000.000.000-00" data-mask="999.999.999-99" required name="cpf" id="cpf" class="form-control"></div>
+                    <div class="col-lg-10"><input type="text" value="{{$paciente->cpf}}" placeholder="000.000.000-00" data-mask="999.999.999-99" required name="cpf" id="cpf" class="form-control"></div>
                 </div>
 
                 <div class="form-group row"><label class="col-lg-2 col-form-label" for="rg">RG</label>
-                    <div class="col-lg-10"><input type="text" name="rg" data-mask="9999999" placeholder="0000000" id="rg" class="form-control"></div>
+                    <div class="col-lg-10"><input type="text" name="rg" value="{{$paciente->rg}}" data-mask="9999999" placeholder="0000000" id="rg" class="form-control"></div>
                 </div>
                 <div class="form-group row"><label class="col-lg-2 col-form-label" for="telefone">Telefone</label>
-                    <div class="col-lg-10"><input type="text" name="telefone" data-mask="(99) 99999-9999" placeholder="(00) 00000-0000 " id="telefone" class="form-control"></div>
+                    <div class="col-lg-10"><input type="text" name="telefone"  data-mask="(99) 99999-9999" placeholder="(00) 00000-0000 " id="telefone" class="form-control"></div>
                 </div>
                 <div class="form-group row"><label for="Data Nascimento" class="col-lg-2 col-form-label">Idade</label>
                     <div class="col-lg-10"><input type="date" min="0" max="150" placeholder="Data Nascimento" required name="data_nascimento" id="data_nascimento" class="form-control">
@@ -96,7 +96,8 @@
                 </div>
                 <div class="col-12 text-right">
                     <section class="progress-demo">
-                        <button class="ladda-button btn btn-sm btn-success" type="submit" data-style="expand-left"><span class="ladda-label" id="button_submit">Cadastrar</span><span class="ladda-spinner"></span></button>
+                        <a href="{{ route('triagem') }}" class="btn-small btn btn-success">Voltar</a>
+                        <button class="btn-small btn btn-success" type="submit" data-style="expand-left">Cadastrar</button>
                     </section>
                 </div>
             </form>
@@ -114,4 +115,3 @@ $(function(){
     });
 </script>
 @endsection
-

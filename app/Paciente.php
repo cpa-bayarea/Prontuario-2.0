@@ -31,5 +31,14 @@ class Paciente extends Model
         return $this->hasMany('App\Telefone');
     }
 
+    public function triagem(){
+        return $this->hasOne('App\Triagem');
+    }
+
+    public function status() {
+        return $this->belongsTo('App\StatusDeCadastro','id_status');
+    }
+
+
 
 }
