@@ -25,4 +25,7 @@ class Supervisor extends Model
     {
         return $this->belongsTo('App\LinhaTeorica', 'linha_id', 'id');
     }
+    public function triagem() {
+        return $this->hasMany('App\Triagem');
+    }
 }

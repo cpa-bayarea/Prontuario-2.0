@@ -21,6 +21,9 @@ class Triagem extends Model
     public function aluno() {
         return $this->belongsTo('App\Aluno','alunos_id');
     }
+    public function supervisor() {
+        return $this->belongsTo('App\Supervisor','supervisors_id');
+    }
     // public function telefone() {
     //     return $this->hasMany('App\telefone');
     // }
