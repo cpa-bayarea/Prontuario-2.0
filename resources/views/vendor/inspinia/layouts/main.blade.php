@@ -13,13 +13,6 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <style>
-        .obrigatorio {
-            color: red;
-            font-size: 10px;
-        }
-    </style>
-
     <!-- Styles -->
     @section('styles')
         <link href="{{ mix('/css/inspinia.css') }}" rel="stylesheet">
@@ -31,6 +24,7 @@
         <link href='{{asset("/js/plugins/fullcalendar/list/main.css")}}' rel='stylesheet' />
         <link href='{{asset("css/calendario.css")}}' rel='stylesheet' />
         <link href='{{asset("css/plugins/dataTables/datatables.min.css")}}' rel='stylesheet' />
+        <link href='{{asset("css/plugins/sweetalert/sweetalert.css")}}' rel='stylesheet' />
     @show
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -201,6 +195,11 @@
 
     <script>
         $(document).ready(function () {
+
+            /**
+             * @class Classe para exclusão de registros.
+             *
+             */
             $('.link-excluir').click(function () {
                 var href = $(this).attr('href');
                 swal({
@@ -219,8 +218,21 @@
 
                 return false;
             });
+
+            /**
+             * Inicialização do Datatables no projeto para qualquer listagem que tiver a classe dataTable.
+             *
+             */
+            $('.dataTable').DataTable({
+                pageLength: 25,
+                responsive: true
+            });
         });
 
+        /**
+         * Obriga que os valores inseridos sejam do tipo inteiro (valor).
+         *
+         */
         $('input.inteiro').keyup(function () {
             $($(this)).val($(this).val().replace(/[^0-9]/g, ''));
         });
