@@ -13,6 +13,13 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
+    <style>
+        .obrigatorio {
+            color: red;
+            font-size: 10px;
+        }
+    </style>
+
     <!-- Styles -->
     @section('styles')
         <link href="{{ mix('/css/inspinia.css') }}" rel="stylesheet">
@@ -24,6 +31,7 @@
         <link href='{{asset('/js/plugins/fullcalendar/timegrid/main.css')}}' rel='stylesheet' />
         <link href='{{asset('/js/plugins/fullcalendar/list/main.css')}}' rel='stylesheet' />
         <link href='{{asset('css/calendario.css')}}' rel='stylesheet' />
+        <link href="{{ asset('css/plugins/sweetalert/sweetalert.css') }}" rel="stylesheet" />
     @show
 
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -59,6 +67,9 @@
     <script src='{{asset('/js/plugins/fullcalendar/list/main.js')}}'></script>
     <script src='{{asset('/js/plugins/fullcalendar/core/locales/pt-br.js')}}'></script>
     <script src='{{asset('/js/plugins/fullcalendar/moment/main.min.js')}}'></script>
+
+    <!-- Sweet alert -->
+    <script src="{{ asset('js/plugins/sweetalert/sweetalert.min.js') }}"></script>
 @show
 @stack('body')
 
@@ -183,8 +194,29 @@
 
 <script>
 
-    jQuery('input.inteiro').keyup(function () {
-        jQuery(jQuery(this)).val(jQuery(this).val().replace(/[^0-9]/g, ''));
+    $(document).ready(function () {
+        $('.link-excluir').click(function () {
+            var href = $(this).attr('href');
+            swal({
+                title: "Atenção!",
+                text: "Deseja realmente excluir o registro ?",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "Sim, estou certo!",
+                ButtonCancelText: "Cancelar",
+                closeOnConfirm: false
+            },
+            function () {
+                window.location.href = href;
+            });
+
+            return false;
+        });
+    });
+
+    $('input.inteiro').keyup(function () {
+        $($(this)).val($(this).val().replace(/[^0-9]/g, ''));
     });
 
     // @todo refatorar para arquivo externo. Retirando o js de todas as páginas do sistema.
