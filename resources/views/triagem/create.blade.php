@@ -97,7 +97,17 @@
                 <div class="form-group row"><label for="supervisor" class="col-lg-2 col-form-label">{{$tipoAtendimentos->nome}}</label>
                     <div class="col-sm-10">
                         @foreach ($tipoAtendimentos->grupoItem as $item)
-                            <div class="checkbox-inline i-checks"><label> <div class="iradio_square-green" style="position: relative;"><input required type="radio" value="{{ $item->id }}" name="atendimento" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins></div> <i></i>{{ $item->nome }}</label></div>
+                        
+                            <div class="checkbox-inline i-checks">
+                                <label> <div class="iradio_square-green" style="position: relative;">
+                                    <input required type="radio" value="{{ $item->id }}" name="atendimento" style="position: absolute; opacity: 0;">
+                                    <ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;">
+                                    </ins>
+                                    </div> 
+                                    {{ $item->nome }}
+                                </label>
+                            </div>
+                            
                         @endforeach
                     </div>
                 </div>
@@ -107,7 +117,16 @@
                 <div class="form-group row"><label for="supervisor" class="col-lg-2 col-form-label">{{ $grupos->nome }}</label>
                     <div class="col-sm-10">
                         @foreach ($grupos->grupoItem as $item)
-                            <div class="checkbox-inline i-checks"><label> <div class="iradio_square-green" style="position: relative;"><input required type="radio" value=" {{ $item->id }} " name="grupo" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins></div> <i></i> {{ $item->nome }} </label></div>
+                            <div class="checkbox-inline i-checks">
+                                <label> 
+                                    <div class="iradio_square-green" style="position: relative;">
+                                        <input required type="radio" value=" {{ $item->id }} " name="grupo" style="position: absolute; opacity: 0;">
+                                        <ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;">
+                                        </ins>
+                                    </div> 
+                                    {{ $item->nome }} 
+                                </label>
+                            </div>
                         @endforeach
                     </div>
                 </div>

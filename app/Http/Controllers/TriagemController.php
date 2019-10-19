@@ -13,6 +13,7 @@ use App\Aluno;
 use App\Telefone;
 use App\TriagemItensGrupo;
 use Illuminate\Support\Facades\DB;
+// use Illuminate\Support\Facades\Redirect;
 
 use App\Http\Requests\TriagemRequest;
 
@@ -54,7 +55,7 @@ class TriagemController extends Controller
         if($this->validaCPF($request->cpf)) {
             $paciente->cpf = $request->cpf;
         }else {
-            Session::flash('success', 'Infome CPF Valido.');
+            Session::flash('error', 'Infome CPF Valido.');
             $paciente = new Paciente();
 
             $supervisores = Supervisor::orderBy('tx_nome', 'asc')->get();
@@ -62,6 +63,7 @@ class TriagemController extends Controller
             $tipoAtendimentos = Grupo::find(1);
             $grupos = Grupo::find(2);
             $temporario = Grupo::find(3);
+            // return Redirect::to('/triagem/create')->withInput();
 
             return view('triagem.create',compact('supervisores',$supervisores,
                                                  'alunos',$alunos,
@@ -125,6 +127,8 @@ class TriagemController extends Controller
         $tipoAtendimentos = Grupo::find(1);
         $grupos = Grupo::find(2);
         $temporario = Grupo::find(3);
+
+       
 
         return view('triagem.create',compact('supervisores',$supervisores,
                                              'alunos',$alunos,
