@@ -18,7 +18,9 @@ class DatabaseSeeder extends Seeder
             LinhaTeoricaSeeder::class,
             StatusTableSeeder::class,
             ProntuarioStatusTableSeeder::class,
-            AgendamentoStatusTableSeeder::class
+            AgendamentoStatusTableSeeder::class,
+            GrupoTableSeeder::class,
+            ItensGrupoTableSeeder::class,
         ]);
     }
 }
