@@ -14,14 +14,14 @@
                     </div>
                 </div>
                 <div class="ibox-content">
-                    <a href="/prontuariostatus/create" class="btn btn-warning">Novo</a>
+                    <a href="{{ route('prontuariostatus.create') }}" class="btn btn-warning"><i class="fa fa-plus"></i>&nbsp;Novo</a>
                     <div class="table-responsive">
                         <table class="table table-striped table-hover table-bordered datatable">
                             <thead>
-                            <tr>
-                                <th>Ações</th>
-                                <th>Nome</th>
-                            </tr>
+                                <tr>
+                                    <th>Ações</th>
+                                    <th>Nome</th>
+                                </tr>
                             </thead>
                             <tbody>
                             @foreach($aItens as $item)

@@ -16,7 +16,7 @@
                 <div class="ibox-content">
                     <div class="row">
                         <div class="col-sm-12">
-                            <form action="/prontuariostatus" method="post" class="form-horizontal">
+                            <form action="{{ route('prontuariostatus.store')  }}" method="post" class="form-horizontal">
                                 @csrf
 
                                 <input type="hidden" name="id" id="id" value="{{base64_encode($model->id)}}">
