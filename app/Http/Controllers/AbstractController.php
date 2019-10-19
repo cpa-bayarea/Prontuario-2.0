@@ -50,10 +50,10 @@ class AbstractController extends Controller
      */
     public function index()
     {
-        $order = $this->_model->getFillable()[0] ?? NULL;
+        $orderBy = $this->_model->getFillable()[0] ?? NULL;
 
         if (!empty($order)) {
-            $aItens = $this->_model->orderBy("{$order}", "asc")->get();
+            $aItens = $this->_model->orderBy("{$orderBy}", "asc")->get();
         } else {
             $aItens = $this->_model->all();
         }

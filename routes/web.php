@@ -33,11 +33,8 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/triagem/delete', 'TriagemController@destroy')->name('triagem.delete');
 
     // Status_de_cadastro
-    Route::get('/status', 'StatusDeCadastroController@index')->name('status');
-    Route::get('/status/show', 'StatusDeCadastroController@show')->name('status.show');
-    Route::get('/status/edit/{id}', 'StatusDeCadastroController@edit')->name('status.edit');
-    Route::post('/status', 'StatusDeCadastroController@store')->name('status.store');
-    Route::post('/status/delete/{id}', 'StatusDeCadastroController@delete')->name('status.delete');
+    Route::resource('/statusdecadastro', 'StatusDeCadastroController');
+    Route::get('/statusdecadastro/{id}/destroy', 'StatusDeCadastroController@destroy')->name('statusdecadastro.delete');
 
 
     Route::get('search/telefonebypacienteid/{paciente_id}', 'TelefoneController@findTelefoneByPaciente')->name('telefone.by.paciente');

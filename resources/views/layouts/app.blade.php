@@ -67,7 +67,7 @@
                     </a>
                 </li>
                 <li class="">
-                    <a href="{{ route('status') }}">
+                    <a href="{{ route('statusdecadastro.index') }}">
                         <span class="nav-label">Status de cadastros</span>
                     </a>
                 </li>
