@@ -52,7 +52,7 @@
     <script src="{{ asset('js/plugins/dataTables/datatables.min.js') }}"></script>
     <script src="{{ asset('js/plugins/dataTables/dataTables.bootstrap4.min.js') }}"></script>
     <script src="{{ asset('js/bootstrap.js') }}"></script>
-    <script src="{{ asset('js/inspinia2.js') }}"></script>
+    <script src="{{ asset('js/inspinia.js') }}"></script>
     <script src="{{ asset('js/jasny-bootstrap.min.js') }}" charset="utf-8"></script>
     <script src="{{ asset('js/select2.min.js') }}" charset="utf-8"></script>
     <script src="{{ asset('js/choose.jquery.js') }}" charset="utf-8"></script>
