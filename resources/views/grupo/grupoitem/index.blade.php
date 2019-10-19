@@ -21,7 +21,7 @@
                         <input type="hidden" value="">
                         <label>Nome <span class="obrigatorio">*</span></label>
                         <input type="text" class="form-control" name="nome"
-                               value="   {{ $grupoIten->nome }}" required placeholder="Nome">
+                               value="{{ $grupoIten->nome }}" required placeholder="Nome">
 
                         <input type="hidden" value="{{$id}}" name="grupo_id">
                         <label>Ordem <span class="obrigatorio">*</span></label>

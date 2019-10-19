@@ -15,11 +15,18 @@ class Paciente extends Model
 
     public function cidade()
     {
-        return $this->hasOne('App\Cidade', 'id', 'cidade_id');
+        return $this->hasOne('App\Models\Cidade', 'id', 'cidade_id');
     }
 
     public function telefones()
     {
         return $this->hasMany('App\Models\Telefone');
+    }
+    public function triagem(){
+        return $this->hasOne('App\Models\Triagem');
+    }
+
+    public function status() {
+        return $this->belongsTo('App\Models\StatusDeCadastro','id_status');
     }
 }

@@ -9,14 +9,7 @@ class Triagem extends Model
 {
     use SoftDeletes;
     protected $fillable = [
-        'triador',
-        'supervisor',
-        'atendimento',
-        'queixa_principal',
-        'temporario',
-        'paciente_id',
-        'grupo',
-        'outro',
+        'queixa_principal', 
     ];
 
     /**
@@ -24,6 +17,19 @@ class Triagem extends Model
      */
     public function paciente()
     {
-        return $this->belongsTo('App\Paciente', 'paciente_id');
+        return $this->belongsTo('App\Models\Paciente', 'paciente_id');
     }
+
+    public function aluno() {
+        return $this->belongsTo('App\Models\Aluno','alunos_id');
+    }
+
+    public function supervisor() {
+        return $this->belongsTo('App\Models\Supervisor','supervisors_id');
+    }
+
+    // public function triagemItensGrupo() {
+    //     return $this->hasMany('App\TriagemItensGrupo','triagems_id');
+    // }
+
 }
