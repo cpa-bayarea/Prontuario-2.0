@@ -50,7 +50,14 @@ class AbstractController extends Controller
      */
     public function index()
     {
-        $aItens = $this->_model->all();
+        $order = $this->_model->getFillable()[0] ?? NULL;
+
+        if (!empty($order)) {
+            $aItens = $this->_model->orderBy("{$order}", "asc")->get();
+        } else {
+            $aItens = $this->_model->all();
+        }
+
         return view("{$this->_dirView}.index", compact('aItens'));
     }
 
@@ -86,7 +93,7 @@ class AbstractController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)

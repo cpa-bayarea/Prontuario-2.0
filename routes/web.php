@@ -60,11 +60,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/home', 'HomeController@index')->name('home');
 
     /**  Rotas de Linhas Teóricas **/
-    Route::get('/linha_teorica', 'LinhaTeoricaController@index')->name('linha_teorica.index');
-    Route::get('/linha_teorica/create', 'LinhaTeoricaController@create')->name('linha_teorica.create');
-    Route::post('/linha_teorica/store', 'LinhaTeoricaController@store')->name('linha_teorica.store');
-    Route::get('/linha_teorica/edit/{id}', 'LinhaTeoricaController@edit')->name('linha_teorica.edit');
-    Route::post('/linha_teorica/delete/{id}', 'LinhaTeoricaController@destroy')->name('linha_teorica.delete');
+    Route::resource('linhateorica', 'LinhaTeoricaController');
+    Route::get('/linhateorica/{id}/destroy', 'LinhaTeoricaController@destroy')->name('linhateorica.delete');
 
     /**  Rotas de Supervisores **/
     Route::get('/supervisor', 'SupervisorController@index')->name('supervisor.index');

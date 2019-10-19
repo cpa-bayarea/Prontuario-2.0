@@ -57,7 +57,7 @@
                     </a>
                 </li>
                 <li class="">
-                    <a href="{{ route('linha_teorica.index') }}">
+                    <a href="{{ route('linhateorica.index') }}">
                         <span class="nav-label">Linha Teórica</span>
                     </a>
                 </li>
