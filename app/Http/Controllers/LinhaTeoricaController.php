@@ -7,7 +7,6 @@ use Exception;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class LinhaTeoricaController extends Controller
 {
@@ -32,7 +31,7 @@ class LinhaTeoricaController extends Controller
         try {
             $linhas = Linha::orderBy('tx_nome', 'asc')->get();
 
-            return view('linha_teorica.index', compact('linhas', $linhas));
+            return view('linhas_teoricas.index', compact('linhas', $linhas));
         } catch (Exception $e) {
             throw new exception('Não foi possível visualizar as Linhas Teóricas !');
         }
@@ -92,7 +91,7 @@ class LinhaTeoricaController extends Controller
     public function edit($id)
     {
         try {
-            $linha = DB::table('linha_teorica')->where('id', '=', $id)->first();
+            $linha = Linha::find($id);
             return view('linha_teorica.edit', compact('linha', $linha));
         } catch (Exception $e) {
 

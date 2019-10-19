@@ -2,18 +2,11 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
-
-class Aluno extends Model
+class Aluno extends AbstractModel
 {
-    use SoftDeletes;
-    protected $table = 'tb_aluno';
-    protected $primaryKey = 'id';
+    protected $table = 'alunos';
     protected $fillable = [
-        'tx_nome', 'username', 'nu_telefone', 'nu_celular', 'nu_semestre',
-//        'status',
-        'supervisor_id'
+        'tx_nome', 'username', 'nu_telefone', 'nu_celular', 'nu_semestre', 'supervisor_id'
     ];
 
     /**

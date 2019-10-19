@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\LinhaTeorica;
 use App\Models\Supervisor;
 use exception;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class SupervisorController extends Controller
 {
@@ -31,10 +31,6 @@ class SupervisorController extends Controller
         try {
             $supervisores = Supervisor::orderBy('tx_nome', 'asc')->get();
 
-            // debug para buscar os excluídos
-            // $supervisores = Supervisor::withTrashed()->get();
-            // dd($supervisores);
-
             return view('supervisor.index', compact('supervisores', $supervisores));
         } catch (Exception $e) {
             throw new exception('Não foi possível visualizar os Supervisores !');
@@ -48,7 +44,7 @@ class SupervisorController extends Controller
      */
     public function create()
     {
-        $linhas = DB::table('linha_teorica')->get();
+        $linhas = LinhaTeorica::all();
         return view('supervisor.form', compact('linhas', $linhas));
     }
 
@@ -81,7 +77,6 @@ class SupervisorController extends Controller
             $supervisor->save();
             return redirect()->route('supervisor.index');
         } catch (Exception $e) {
-            dd($e);
             throw new exception('Não foi possível salvar o Supervisor ' . $request->tx_nome . ' !');
         }
     }
@@ -107,11 +102,10 @@ class SupervisorController extends Controller
     public function edit($id)
     {
         try {
-            $supervisor = DB::table('tb_supervisor')->where('id', '=', $id)->first();
-            $linhas = DB::table('linha_teorica')->get();
+            $supervisor = Supervisor::find($id);
+            $linhas = LinhaTeorica::all();
             return view('supervisor.edit', compact(['supervisor', 'linhas'], $supervisor, $linhas));
         } catch (Exception $e) {
-
             throw new exception('Não foi possível salvar o Supervisor de id ->' . $id . ' !');
         }
     }

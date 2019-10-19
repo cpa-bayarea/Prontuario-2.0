@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Aluno;
+use App\Models\Supervisor;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Session;
+use Session;
 
 class AlunoController extends Controller
 {
@@ -42,7 +42,7 @@ class AlunoController extends Controller
      */
     public function create()
     {
-        $supervisores = DB::table('tb_supervisor')->get();
+        $supervisores = Supervisor::all();
         return view('aluno.form', compact('supervisores', $supervisores));
     }
 
@@ -98,8 +98,8 @@ class AlunoController extends Controller
     public function edit($id)
     {
         try {
-            $aluno = DB::table('tb_aluno')->where('id', '=', $id)->first();
-            $supervisores = DB::table('tb_supervisor')->get();
+            $aluno = Aluno::find($id);
+            $supervisores = Supervisor::all();
             return view('aluno.edit', compact(['aluno', 'supervisores'], $aluno, $supervisores));
         } catch (\Exception $e) {
             throw new \exception('Não foi possível salvar o Aluno de id ->' . $id . ' !');

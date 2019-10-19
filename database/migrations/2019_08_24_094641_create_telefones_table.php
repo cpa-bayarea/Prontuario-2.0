@@ -15,11 +15,11 @@ class CreateTelefonesTable extends Migration
     {
         Schema::create('telefones', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('ddd')->nullable();
-            $table->string('numero');
+            $table->string('ddd', 3)->nullable();
+            $table->string('numero', 15);
 
-            $table->integer('id_user')->unsigned()->nullable();
-            $table->foreign('id_user')->references('id')->on('users');
+            $table->integer('user_id')->unsigned()->nullable();
+            $table->foreign('user_id')->references('id')->on('users');
 
             $table->unsignedBigInteger('paciente_id')->unsigned()->nullable();
             $table->foreign('paciente_id')->references('id')->on('pacientes');

@@ -2,18 +2,11 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
-
-class Supervisor extends Model
+class Supervisor extends AbstractModel
 {
-    use SoftDeletes;
-    protected $table = 'tb_supervisor';
-    protected $primaryKey = 'id';
+    protected $table = 'supervisores';
     protected $fillable = [
-        'tx_nome', 'username', 'nu_telefone', 'nu_celular', 'nu_crp',
-//        'status',
-        'linha_id'
+        'tx_nome', 'username', 'nu_telefone', 'nu_celular', 'nu_crp', 'linha_id'
     ];
 
     /**

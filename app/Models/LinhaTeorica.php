@@ -2,14 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
-
-class LinhaTeorica extends Model
+class LinhaTeorica extends AbstractModel
 {
-    use SoftDeletes;
-    protected $table = 'linha_teorica';
-    protected $primaryKey = 'id';
+    protected $table = 'linhas_teoricas';
+
     protected $fillable = [
         'tx_nome', 'tx_desc'
     ];
