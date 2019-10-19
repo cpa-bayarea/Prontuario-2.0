@@ -8,8 +8,7 @@ class Grupo extends Model
 {
     protected $fillable = ['nome'];
 
-    public function grupoItem()
-    {
-        return $this->hasMany('App\GrupoItem');
+    public function grupoItem(){
+        return $this->hasMany('App\Models\GrupoItem','grupo_id');
     }
 }

@@ -23,4 +23,9 @@ class Aluno extends Model
     {
         return $this->belongsTo('App\Models\Supervisor', 'supervisor_id', 'id');
     }
+
+    public function triagem() {
+        return $this->hasMany('App\Models\Triagem');
+    }
+
 }
