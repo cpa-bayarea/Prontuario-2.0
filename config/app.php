@@ -175,7 +175,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         Atnic\Inspinia\Providers\AppServiceProvider::class,
-
+	    Arcanedev\LogViewer\LogViewerServiceProvider::class,
     ],
 
     /*

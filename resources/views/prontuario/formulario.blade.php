@@ -22,13 +22,13 @@
                                 <input type="hidden" name="id" id="id" value="{{base64_encode($model->id)}}">
 
                                 <div class="form-group">
-                                    <label for="numero" class="col-sm-3 control-label">Número: </label>
+                                    <label for="numero" class="col-sm-3 control-label">Número <span class="obrigatorio">*</span></label>
                                     <div class="col-sm-9">
-                                        <input type="text" class="form-control" name="numero" id="numero" value="{{$model->numero}}" required>
+                                        <input type="text" class="form-control inteiro" name="numero" id="numero" value="{{$model->numero}}" required>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="numero" class="col-sm-3 control-label">Paciente: </label>
+                                    <label for="paciente_id" class="col-sm-3 control-label">Paciente <span class="obrigatorio">*</span></label>
                                     <div class="col-sm-9">
                                         <select name="paciente_id" class="form-control" id="paciente_id" required>
                                             <option value="">Selecione</option>
@@ -39,7 +39,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="numero" class="col-sm-3 control-label">Terapeuta: </label>
+                                    <label for="aluno_id" class="col-sm-3 control-label">Terapeuta <span class="obrigatorio">*</span></label>
                                     <div class="col-sm-9">
                                         <select name="aluno_id" class="form-control" id="aluno_id" required>
                                             <option value="">Selecione</option>
@@ -56,7 +56,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="numero" class="col-sm-3 control-label">Status: </label>
+                                    <label for="prontuario_status_id" class="col-sm-3 control-label">Status: </label>
                                     <div class="col-sm-9">
                                         <select name="prontuario_status_id" class="form-control" id="prontuario_status_id" required>
                                             <option value="">Selecione</option>

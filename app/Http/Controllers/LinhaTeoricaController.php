@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\LinhaTeorica as Linha;
-use Session;
+use App\Models\LinhaTeorica as Linha;
+use Exception;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -22,8 +24,8 @@ class LinhaTeoricaController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
-     * @throws \exception
+     * @return Response
+     * @throws exception
      */
     public function index()
     {
@@ -31,15 +33,15 @@ class LinhaTeoricaController extends Controller
             $linhas = Linha::orderBy('tx_nome', 'asc')->get();
 
             return view('linha_teorica.index', compact('linhas', $linhas));
-        } catch (\Exception $e) {
-            throw new \exception('Não foi possível visualizar as Linhas Teóricas !');
+        } catch (Exception $e) {
+            throw new exception('Não foi possível visualizar as Linhas Teóricas !');
         }
     }
 
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function create()
     {
@@ -50,8 +52,8 @@ class LinhaTeoricaController extends Controller
      * Store a newly created resource in storage.
      *
      * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
-     * @throws \exception
+     * @return Response
+     * @throws exception
      */
     public function store(Request $request)
     {
@@ -64,8 +66,8 @@ class LinhaTeoricaController extends Controller
             $linha->tx_desc = $request->tx_desc;
             $linha->save();
             return redirect()->route('linha_teorica.index');
-        } catch (\Exception $e) {
-            throw new \exception('Não foi possível salvar a Linha Teórica ' . $request->tx_nome . ' !');
+        } catch (Exception $e) {
+            throw new exception('Não foi possível salvar a Linha Teórica ' . $request->tx_nome . ' !');
         }
     }
 
@@ -73,7 +75,7 @@ class LinhaTeoricaController extends Controller
      * Display the specified resource.
      *
      * @param int $id
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function show($id)
     {
@@ -84,17 +86,17 @@ class LinhaTeoricaController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param int $id
-     * @return \Illuminate\Http\Response
-     * @throws \exception
+     * @return Response
+     * @throws exception
      */
     public function edit($id)
     {
         try {
-            $linha = DB::table('tb_linha_teorica')->where('id', '=', $id)->first();
+            $linha = DB::table('linha_teorica')->where('id', '=', $id)->first();
             return view('linha_teorica.edit', compact('linha', $linha));
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
 
-            throw new \exception('Não foi possível salvar a Linha Teórica de id ->' . $id. ' !');
+            throw new exception('Não foi possível salvar a Linha Teórica de id ->' . $id . ' !');
         }
     }
 
@@ -103,8 +105,8 @@ class LinhaTeoricaController extends Controller
      *
      * @param \Illuminate\Http\Request $request
      * @param int $id
-     * @return \Illuminate\Http\Response
-     * @throws \exception
+     * @return Response
+     * @throws exception
      */
     public function update(Request $request, $id)
     {
@@ -115,9 +117,9 @@ class LinhaTeoricaController extends Controller
             $linha->save();
             Session::flash('success', 'Operação realizada com sucesso');
             return redirect()->route('linha_teorica.index');
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
 
-            throw new \exception('Não foi possível alterar o registro da Linha Teórica ' . $request['tx_nome'] . ' !');
+            throw new exception('Não foi possível alterar o registro da Linha Teórica ' . $request['tx_nome'] . ' !');
         }
     }
 
@@ -125,8 +127,8 @@ class LinhaTeoricaController extends Controller
      * Remove the specified resource from storage.
      *
      * @param int $id
-     * @return \Illuminate\Http\Response
-     * @throws \exception
+     * @return Response
+     * @throws exception
      */
     public function destroy($id)
     {
@@ -135,8 +137,9 @@ class LinhaTeoricaController extends Controller
             $linha->delete();
             Session::flash('success', 'Operação realizada com sucesso');
             return redirect()->route('linha_teorica.index');
-        } catch (\Exception $e) {
-            throw new \exception('Não foi possível excluir o registro da Linha Teórica ->' . $id . ' !');
+        } catch (Exception $e) {
+            throw new exception('Não foi possível excluir o registro da Linha Teórica ->' . $id . ' !');
         }
     }
+
 }

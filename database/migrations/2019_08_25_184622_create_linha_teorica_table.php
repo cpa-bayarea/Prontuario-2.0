@@ -13,7 +13,7 @@ class CreateLinhaTeoricaTable extends Migration
      */
     public function up()
     {
-        Schema::create('tb_linha_teorica', function (Blueprint $table) {
+        Schema::create('linha_teorica', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('tx_nome', 100);
             $table->string('tx_desc', 255)->nullable();
@@ -29,6 +29,6 @@ class CreateLinhaTeoricaTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tb_linha_teorica');
+        Schema::dropIfExists('linha_teorica');
     }
 }

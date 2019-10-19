@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Aluno;
+use App\Models\Aluno;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Session;
+use Illuminate\Support\Facades\Session;
 
 class AlunoController extends Controller
 {
@@ -29,7 +29,6 @@ class AlunoController extends Controller
     {
         try {
             $alunos = Aluno::orderBy('tx_nome', 'asc')->get();
-
             return view('aluno.index', compact('alunos', $alunos));
         } catch (\Exception $e) {
             throw new \exception('Não foi possível visualizar os Alunos !');
@@ -58,18 +57,15 @@ class AlunoController extends Controller
     {
         try {
             if (!empty($request['id'])) {
-
                 return $this->update($request, $request['id']);
             }
             $aluno = new Aluno();
-
-            $aluno->tx_nome     = $request->tx_nome;
-            $aluno->username    = $request->username;
+            $aluno->tx_nome = $request->tx_nome;
+            $aluno->username = $request->username;
             $aluno->nu_telefone = $request->nu_telefone;
-            $aluno->nu_celular  = $request->nu_celular;
-            $aluno->nu_semestre      = $request->nu_semestre;
-            $aluno->supervisor_id    = $request->supervisor_id;
-
+            $aluno->nu_celular = $request->nu_celular;
+            $aluno->nu_semestre = $request->nu_semestre;
+            $aluno->supervisor_id = $request->supervisor_id;
             if (key_exists($request['status'], array($request))) {
                 $aluno->status = $request->status;
             }
@@ -106,7 +102,6 @@ class AlunoController extends Controller
             $supervisores = DB::table('tb_supervisor')->get();
             return view('aluno.edit', compact(['aluno', 'supervisores'], $aluno, $supervisores));
         } catch (\Exception $e) {
-
             throw new \exception('Não foi possível salvar o Aluno de id ->' . $id . ' !');
         }
     }
@@ -123,17 +118,15 @@ class AlunoController extends Controller
     {
         try {
             $aluno = Aluno::find($id);
-            $aluno->tx_nome     = $request->tx_nome;
-            $aluno->username    = $request->username;
+            $aluno->tx_nome = $request->tx_nome;
+            $aluno->username = $request->username;
             $aluno->nu_telefone = $request->nu_telefone;
-            $aluno->nu_celular  = $request->nu_celular;
+            $aluno->nu_celular = $request->nu_celular;
             $aluno->nu_semestre = $request->nu_semestre;
-            $aluno->supervisor_id    = $request->supervisor_id;
-
+            $aluno->supervisor_id = $request->supervisor_id;
             if (key_exists($request['status'], array($request))) {
                 $aluno->status = $request->status;
             }
-
             $aluno->save();
             Session::flash('success', 'Operação realizada com sucesso');
             return redirect()->route('aluno.index');

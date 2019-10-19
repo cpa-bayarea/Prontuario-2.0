@@ -209,27 +209,7 @@
             });
         });
 
-        $('.findById').on('click', function() {
-            $.ajax({
-                url: "search/paciente/findById/" + $(this).val(),
-                type: "GET",
-            }).done(function(response) {
-                $('input[id=nome]').val(response.paciente.nome);
-                $('input[id=email]').val(response.paciente.email);
-                $('input[id=nome_social]').val(response.paciente.nome_social);
-                $('input[id=nome_responsavel]').val(response.paciente.nome_responsavel);
-                $('input[id=data_nascimento]').val(response.paciente.data_nascimento);
-                $('input[id=cpf]').val(response.paciente.cpf);
-                $('input[id=rg]').val(response.paciente.rg);
-                $('input[id=endereco]').val(response.paciente.endereco);
-                $("#uf").val(response.cidade[0].uf.id);
-                $("#uf").change();
-
-                $("#cidade option[value=" + response.cidade[0].id + "]").prop("selected", "selected");
-                $("#form_paciente").append('<input type="hidden" value="' + response.paciente.id + '" name="paciente_id">');
-                $('#button_submit').empty().append('Atualizar');
-            });
-        });
+       
     </script>
 
     @section('js')

@@ -24,31 +24,32 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="dsc" class="col-sm-2 control-label">Matrícula</label>
+                                <label for="mat" class="col-sm-2 control-label">Matrícula</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="dsc" name="username"
-                                           value="{{ $supervisor->username }}">
+                                    <input type="text" class="form-control inteiro" id="mat" name="username"
+                                           value="{{ $supervisor->username }}" maxlength="11">
                                 </div>
                             </div>
+
                             <div class="form-group">
                                 <label for="telefone" class="col-sm-2 control-label">Telefone</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="telefone" name="nu_telefone"
-                                           value="{{ $supervisor->nu_telefone }}">
+                                    <input type="text" class="form-control inteiro" id="telefone" name="nu_telefone"
+                                           value="{{ $supervisor->nu_telefone }}" maxlength="8">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="celular" class="col-sm-2 control-label">Celular</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="celular" name="nu_celular"
-                                           value="{{ $supervisor->nu_celular }}">
+                                    <input type="text" class="form-control inteiro" id="celular" name="nu_celular"
+                                           value="{{ $supervisor->nu_celular }}" maxlength="8">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="crp" class="col-sm-2 control-label">CRP</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="crp" name="nu_crp" required
-                                           value="{{ $supervisor->nu_crp }}">
+                                    <input type="text" class="form-control inteiro" id="crp" name="nu_crp"
+                                           value="{{ $supervisor->nu_crp }}" required maxlength="7">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -61,7 +62,9 @@
                                             @php
                                                 $checked = ($supervisor->linha_id == $linha->id ) ? 'selected="true"' : '';
                                             @endphp
-                                            <option {{ $checked  }} value="{{ $linha->id }}">{{ $linha->id  }}-{{ $linha->tx_nome }}</option>
+                                            <option
+                                                {{ $checked  }} value="{{ $linha->id }}">{{ $linha->tx_nome }}
+                                            </option>
                                         @endforeach
 
                                     </select>

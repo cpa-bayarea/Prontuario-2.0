@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Aluno;
-use App\Paciente;
-use App\Prontuario;
-use App\ProntuarioStatus;
+use App\Models\Paciente;
+use App\Models\Prontuario;
+use App\Models\ProntuarioStatus;
+use App\Models\Aluno;
 
 class ProntuarioController extends AbstractController
 {
@@ -18,7 +18,7 @@ class ProntuarioController extends AbstractController
         return compact('aAlunos', 'aPacientes', 'aProntuarioStatus');
     }
 
-    public function  findByPacienteId($pacienteId)
+    public function findByPacienteId($pacienteId)
     {
         $prontuario = Prontuario::where('paciente_id', $pacienteId)->get();
         if (count($prontuario) > 0) {
@@ -31,11 +31,11 @@ class ProntuarioController extends AbstractController
     {
         $prontuario = new Prontuario();
 
-        $prontuario->numero               = 0;
-        $prontuario->aluno_id             = $request->aluno_id;
-        $prontuario->paciente_id          = $request->paciente_id;
+        $prontuario->numero = 0;
+        $prontuario->aluno_id = $request->aluno_id;
+        $prontuario->paciente_id = $request->paciente_id;
         $prontuario->prontuario_status_id = 1;
-        $prontuario->valor                = 0;
+        $prontuario->valor = 0;
 
         $prontuario->save();
     }

@@ -22,25 +22,25 @@
                             <div class="form-group">
                                 <label for="mat" class="col-sm-2 control-label">Matrícula</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="mat" name="username">
+                                    <input type="text" class="form-control inteiro" id="mat" name="username" maxlength="11">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="telefone" class="col-sm-2 control-label">Telefone</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="telefone" name="nu_telefone">
+                                    <input type="text" class="form-control inteiro" id="telefone" name="nu_telefone" maxlength="8">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="celular" class="col-sm-2 control-label">Celular</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="celular" name="nu_celular">
+                                    <input type="text" class="form-control inteiro" id="celular" name="nu_celular" maxlength="8">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="crp" class="col-sm-2 control-label">CRP</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="crp" name="nu_crp" required>
+                                    <input type="text" class="form-control inteiro" id="crp" name="nu_crp" required maxlength="7">
                                 </div>
                             </div>
 

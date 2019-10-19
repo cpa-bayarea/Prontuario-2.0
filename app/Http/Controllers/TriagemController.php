@@ -2,22 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Paciente;
+use App\Models\Triagem;
 use Illuminate\Http\Request;
-use Session;
-use App\Triagem;
-use App\Paciente;
-use App\StatusDeCadastro;
-use App\Telefone;
+use Illuminate\Support\Facades\Session;
 
 class TriagemController extends Controller
 {
-    public function index() {
-     
+    public function index()
+    {
         return view('triagem.index');
     }
 
-    public function store(Request $request) {
-
+    public function store(Request $request)
+    {
         $paciente = new Paciente($request->all());
         $paciente->id_status = 1;                   //id_status = 1 paciente pré cadastrado, contem apenas dados iniciais.
         $paciente->save();
@@ -29,27 +27,30 @@ class TriagemController extends Controller
         // $telefone = new Telefone($request->all());
         // $telefone->paciente_id = $paciente->id;
         // $telefone->save();
-        
+
         Session::flash('success', 'Operação realizada com sucesso');
         return redirect(route('triagem'));
-       
-        
+
+
     }
 
-    public function show() {
-       //
-    }
-
-
-    public function edit() {
-       //
-    }
-
-    public function update() {
+    public function show()
+    {
         //
     }
 
-    public function destroy() {
+    public function edit()
+    {
+        //
+    }
+
+    public function update()
+    {
+        //
+    }
+
+    public function destroy()
+    {
         //
     }
 }
