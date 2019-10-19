@@ -19,7 +19,7 @@
 
                     <div class="form-group">
                         <input type="hidden" value="">
-                        <label>Nome  <span style="color:red">*</span> </label>
+                        <label>Nome  <span class="obrigatorio">*</span> </label>
 
                         <input type="text" class="form-control" name="nome" aria-describedby="emailHelp"
                                value="   {{ $grupo->nome }}" required placeholder="Nome">

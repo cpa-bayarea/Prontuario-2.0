@@ -15,6 +15,6 @@ class Cidade extends Model
 
     public function uf()
     {
-        return $this->hasOne('App\Uf', 'id', 'state_id');
+        return $this->hasOne('App\Models\Uf', 'id', 'state_id');
     }
 }
