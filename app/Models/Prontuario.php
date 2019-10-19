@@ -2,13 +2,11 @@
 
 namespace App\Models;
 
-class Prontuario extends \App\Models\Base\Prontuario
+use Illuminate\Database\Eloquent\Model;
+use App\Models\AbstractModel;
+
+class Prontuario extends AbstractModel
 {
-	protected $fillable = [
-		'numero',
-		'aluno_id',
-		'paciente_id',
-		'prontuario_status_id',
-		'valor'
-	];
+    protected $fillable = ['numero', 'paciente_id', 'aluno_id', 'valor', 'prontuario_status_id'];
+    protected $floats = ['valor'];
 }

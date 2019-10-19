@@ -9,8 +9,8 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class LinhaTeoricaController extends Controller {
-
+class LinhaTeoricaController extends Controller
+{
     /**
      * Create a new controller instance.
      *
@@ -92,11 +92,11 @@ class LinhaTeoricaController extends Controller {
     public function edit($id)
     {
         try {
-            $linha = DB::table('tb_linha_teorica')->where('id', '=', $id)->first();
+            $linha = DB::table('linha_teorica')->where('id', '=', $id)->first();
             return view('linha_teorica.edit', compact('linha', $linha));
         } catch (Exception $e) {
 
-            throw new exception('Não foi possível salvar a Linha Teórica de id ->' . $id. ' !');
+            throw new exception('Não foi possível salvar a Linha Teórica de id ->' . $id . ' !');
         }
     }
 
@@ -141,4 +141,5 @@ class LinhaTeoricaController extends Controller {
             throw new exception('Não foi possível excluir o registro da Linha Teórica ->' . $id . ' !');
         }
     }
+
 }
