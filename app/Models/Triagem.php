@@ -2,16 +2,28 @@
 
 namespace App\Models;
 
-class Triagem extends \App\Models\Base\Triagem
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+
+class Triagem extends Model
 {
-	protected $fillable = [
-		'triador',
-		'supervisor',
-		'queixa_principal',
-		'atendimento',
-		'grupo',
-		'outro',
-		'temporario',
-		'paciente_ids'
-	];
+    use SoftDeletes;
+    protected $fillable = [
+        'triador',
+        'supervisor',
+        'atendimento',
+        'queixa_principal',
+        'temporario',
+        'paciente_id',
+        'grupo',
+        'outro',
+    ];
+
+    /**
+     * Relacionamento de Triagem com Paciente
+     */
+    public function paciente()
+    {
+        return $this->belongsTo('App\Paciente', 'paciente_id');
+    }
 }

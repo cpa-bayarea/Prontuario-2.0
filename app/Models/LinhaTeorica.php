@@ -2,10 +2,23 @@
 
 namespace App\Models;
 
-class LinhaTeorica extends \App\Models\Base\LinhaTeorica
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+
+class LinhaTeorica extends Model
 {
-	protected $fillable = [
-		'tx_nome',
-		'tx_desc'
-	];
+    use SoftDeletes;
+    protected $table = 'linha_teorica';
+    protected $primaryKey = 'id';
+    protected $fillable = [
+        'tx_nome', 'tx_desc'
+    ];
+
+    /**
+     * Relacionamento de linha teórica com Supervisor.
+     */
+    public function getSupervisor()
+    {
+        return $this->hasMany('App\Models\Supervisor');
+    }
 }

@@ -176,7 +176,6 @@ return [
         App\Providers\RouteServiceProvider::class,
         Atnic\Inspinia\Providers\AppServiceProvider::class,
 	    Arcanedev\LogViewer\LogViewerServiceProvider::class,
-        Reliese\Coders\CodersServiceProvider::class,
     ],
 
     /*

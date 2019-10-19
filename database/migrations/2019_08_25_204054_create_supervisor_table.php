@@ -24,7 +24,7 @@ class CreateSupervisorTable extends Migration
 //            $table->char('status', 1)->default('P'); // Opções => [A, I, P] Ativo, Inativo or Pendente
 
             $table->unsignedBigInteger('linha_id');
-            $table->foreign('linha_id')->references('id')->on('tb_linha_teorica');
+            $table->foreign('linha_id')->references('id')->on('linha_teorica');
             $table->timestamps();
             $table->softDeletes();
 
