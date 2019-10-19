@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use \App\Grupo;
+use \App\Models\Grupo;
 
 class GrupoTableSeeder extends Seeder
 {

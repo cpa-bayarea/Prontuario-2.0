@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use \App\GrupoItem;
+use \App\Models\GrupoItem;
 
 class ItensGrupoTableSeeder extends Seeder
 {

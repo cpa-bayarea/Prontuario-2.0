@@ -2,43 +2,45 @@
 
 namespace App\Http\Controllers;
 
-use App\GrupoItem;
+use App\Models\GrupoItem;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
-use Session;
-use Validator;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Validator;
 
 class GrupoItemController extends Controller
 {
     public function index($id)
     {
         $grupoIten = new GrupoItem();
-        $grupoItens = GrupoItem::where('grupo_id',$id)->get();
-        return view('grupo.grupoitem.index', compact('grupoIten', 'grupoItens','id'));
+        $grupoItens = GrupoItem::where('grupo_id', $id)->get();
+        return view('grupo.grupoitem.index', compact('grupoIten', 'grupoItens', 'id'));
     }
+
     public function create()
     {
         //
     }
+
     public function store(Request $request)
-    {   
+    {
         $rules = array(
-            'nome'  => 'required',
-            'grupo_id' =>'required',
-            'ordem'=>'required'
+            'nome' => 'required',
+            'grupo_id' => 'required',
+            'ordem' => 'required'
         );
-        
+
         $validator = Validator::make($request->all(), $rules);
-        
-        if($validator->fails()){
+
+        if ($validator->fails()) {
             Session::flash('error', 'Preencha os campos corretamente');
             return Redirect::back();
         }
 
-        if($request->id){
+        if ($request->id) {
             $grupoIten = GrupoItem::find($request->id);
             Session::flash('success', 'Atualizado com sucesso');
-        }else{
+        } else {
             $grupoIten = new GrupoItem();
             Session::flash('success', 'Cadstrado com sucesso');
         }
@@ -46,19 +48,22 @@ class GrupoItemController extends Controller
         $grupoIten->fill($request->all());
         $grupoIten->save();
 
-        return Redirect::to('/grupoitens/'.$grupoIten->grupo->id);
+        return Redirect::to('/grupoitens/' . $grupoIten->grupo->id);
     }
+
     public function show($id)
     {
         //
     }
+
     public function edit($id)
     {
         $grupoIten = GrupoItem::find($id);
-        $grupoItens = GrupoItem::where('grupo_id',$grupoIten->grupo->id)->get();
+        $grupoItens = GrupoItem::where('grupo_id', $grupoIten->grupo->id)->get();
         $id = $grupoIten->grupo->id;
-        return view('grupo.grupoitem.index', compact('grupoIten', 'grupoItens','id'));
+        return view('grupo.grupoitem.index', compact('grupoIten', 'grupoItens', 'id'));
     }
+
     public function update(Request $request, $id)
     {
         $grupoIten = GrupoItem::find($id);
@@ -67,6 +72,7 @@ class GrupoItemController extends Controller
         Session::flash('success', 'Atualizado com sucesso');
 
     }
+
     public function destroy($id)
     {
         GrupoItem::find($id)->delete();

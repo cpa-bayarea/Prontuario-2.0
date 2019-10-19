@@ -19,26 +19,26 @@ class AbstractController extends Controller
      */
     public function __construct()
     {
-        $classe = substr(get_class($this), strrpos(get_class($this), '\\')+1);
-        if(!$this->_modelName){
-            $this->_modelName = 'App\\' . str_replace('Controller', '', $classe);
+        $classe = substr(get_class($this), strrpos(get_class($this), '\\') + 1);
+        if (!$this->_modelName) {
+            $this->_modelName = 'App\\Models\\' . str_replace('Controller', '', $classe);
         }
 
         $entidade = strtolower(str_replace('Controller', '', $classe));
 
-        if(!$this->_dirView){
+        if (!$this->_dirView) {
             $this->_dirView = $entidade;
         }
 
-        if(!$this->_redirectSave){
+        if (!$this->_redirectSave) {
             $this->_redirectSave = $entidade;
         }
 
-        if(!$this->_redirectDelete){
+        if (!$this->_redirectDelete) {
             $this->_redirectDelete = $entidade;
         }
 
-        if(!is_object($this->_model)){
+        if (!is_object($this->_model)) {
             $this->_model = new $this->_modelName();
         }
     }
@@ -46,7 +46,7 @@ class AbstractController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function index()
     {
@@ -57,7 +57,7 @@ class AbstractController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function create()
     {
@@ -70,12 +70,12 @@ class AbstractController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function store(Request $request)
     {
-        if($id = base64_decode($request->id)){
+        if ($id = base64_decode($request->id)) {
             $this->_model = $this->_model->find($id);
         }
         $this->_model->fill($request->toArray());
@@ -100,7 +100,7 @@ class AbstractController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

@@ -1,7 +1,6 @@
 @extends('layouts.app')
 @section('content-title', 'Triagem')
 @section('content')
-
 <div class="col-12">
     <div class="ibox">
         <div class="ibox-title">
@@ -13,13 +12,8 @@
             </div>
         </div>
         <div class="ibox-content">
-            @if (!empyt($paciente->id))
-                <form action=" triagem/edit/{{$paciente->id}} " method="POST" id="form_triagem" name="triagem">
-                <input type="hidden" name="id" value="{{$paciente->id}}">
-            @else
                 
                 <form action=" {{ route('triagem.store') }} " method="POST" id="form_triagem" name="triagem">
-            @endif
 
                 @csrf
                 <div class="form-group row"><label for="nome" class="col-lg-2 col-form-label">Nome</label>

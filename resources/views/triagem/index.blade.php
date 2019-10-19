@@ -36,7 +36,7 @@
                               <td class="text-center">
                                   <form action="/triagem/delete/" method="POST">
                                     @csrf
-                                    <a href="/triagem/edit/{{$item->id}}" class="btn btn-primary" title="Editar"><span class="fa fa-edit"></span></a>
+                                    <a href="/triagem/edit/{{$item->id}}" class="btn btn-primary disabled" title="Editar"><span class="fa fa-edit"></span></a>
                                     <input type="hidden" name="paciente" value="{{$item->id}}">
                                     <button class="btn btn-danger link-excluir" type="submit" title="Excluir"><span class="fa fa-trash"></span></button>
                                 </form>

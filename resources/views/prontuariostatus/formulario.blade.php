@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('content-title', 'Prontuário')
+@section('content-title', 'Status do Prontuário')
 @section('content')
 
     <div class="row">
@@ -22,9 +22,10 @@
                                 <input type="hidden" name="id" id="id" value="{{base64_encode($model->id)}}">
 
                                 <div class="form-group">
-                                    <label for="nome" class="col-sm-3 control-label">Nome: </label>
+                                    <label for="nome" class="col-sm-3 control-label">Nome <span class="obrigatorio">*</span></label>
                                     <div class="col-sm-9">
-                                        <input type="text" class="form-control" name="nome" id="nome" value="{{$model->nome}}">
+                                        <input type="text" class="form-control" name="nome" id="nome" value="{{$model->nome}}"
+                                        maxlength="20" required>
                                     </div>
                                 </div>
 
