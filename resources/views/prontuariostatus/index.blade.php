@@ -10,8 +10,9 @@
                         <h5>Dados Gerais</h5>
                     </div>
                     <div class="ibox-content">
-                        <a href="{{ route('prontuariostatus.create') }}" class="btn btn-success">
-                            <i class="fa fa-plus"></i>&nbsp;Novo</a>
+                        <a href="{{ route('prontuariostatus.create') }}" class="btn-novo btn btn-success">
+                            <i class="fa fa-plus"></i>&nbsp;Novo
+                        </a>
                         <div class="table-responsive">
                             <table class="table table-striped table-hover table-bordered dataTable">
                                 <thead>
@@ -24,16 +25,16 @@
                                 @foreach($aItens as $item)
                                     <tr>
                                         <td>
-                                            <a href="/prontuariostatus/{{base64_encode($item->id)}}/edit"
+                                            <a href="{{ route('prontuariostatus.edit', base64_encode($item->id)) }}"
                                                class="btn btn-primary" title="Editar">
                                                 <span class="fa fa-edit"></span>
                                             </a>
-                                            <a href="/prontuariostatus/{{base64_encode($item->id)}}/destroy"
+                                            <a href="{{ route('prontuariostatus.delete', base64_encode($item->id)) }}"
                                                class="btn btn-danger link-excluir" title="Excluir">
                                                 <span class="fa fa-trash"></span>
                                             </a>
                                         </td>
-                                        <td>{{$item->nome}}</td>
+                                        <td>{{ $item->nome }}</td>
                                     </tr>
                                 @endforeach
                                 </tbody>

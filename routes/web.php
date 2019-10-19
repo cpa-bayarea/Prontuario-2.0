@@ -94,7 +94,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/prontuario/{id}/destroy', 'ProntuarioController@destroy');
 
     Route::resource('prontuariostatus', 'ProntuarioStatusController');
-    Route::get('/prontuariostatus/{id}/destroy', 'ProntuarioStatusController@destroy');
+    Route::get('/prontuariostatus/{id}/destroy', 'ProntuarioStatusController@destroy')->name('prontuariostatus.delete');
 
 });
 
