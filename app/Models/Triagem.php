@@ -28,6 +28,9 @@ class Triagem extends Model
         return $this->belongsTo('App\Models\Supervisor','supervisor_id');
     }
 
+    public function triagem() {
+        return $this->hasMany('App\Models\Supervisor','supervisor_id');
+    }
     // public function triagemItensGrupo() {
     //     return $this->hasMany('App\TriagemItensGrupo','triagems_id');
     // }
