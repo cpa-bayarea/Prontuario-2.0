@@ -9,7 +9,7 @@
                 <h5>Dados Gerais</h5>
             </div>
             <div class="ibox-content">
-                <a href="{{ route('prontuariostatus.create') }}" class="btn btn-warning"><i class="fa fa-plus"></i>&nbsp;Novo</a>
+                <a href="{{ route('paciente.create') }}" class="btn btn-warning"><i class="fa fa-plus"></i>&nbsp;Novo</a>
                 <div class="table-responsive">
                     <table class="table table-striped table-bordered table-hover dataTable">
                         <thead>
