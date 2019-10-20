@@ -1,44 +1,62 @@
 @extends('layouts.app')
-@section('content-title', 'Consulta - atendimento')
+@section('content-title', 'Consultas')
 @section('content')
-
-    <div class="row">
-        <div class="col-md-12">
-            <div class="ibox float-e-margins">
-                <div class="ibox-title">
-                    <h5>Dados Gerais</h5>
-                    <div class="ibox-tools">
-                        <a class="collapse-link">
-                            <i class="fa fa-chevron-up"></i>
-                        </a>
-                    </div>
-                </div>
-                <div class="ibox-content">
-                    <a href="/consulta/create" class="btn btn-warning">Novo</a>
-                    <div class="table-responsive">
-                        <table class="table table-striped table-hover table-bordered datatable">
-                            <thead>
-                            <tr>
-                                <th>Ações</th>
-                                <th>Nome</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-{{--                            @foreach($aItens as $item)--}}
-{{--                                <tr>--}}
-{{--                                    <td>--}}
-{{--                                        <a href="/prontuariostatus/{{base64_encode($item->id)}}/edit" class="btn btn-primary" title="Editar"><span class="fa fa-edit"></span></a>--}}
-{{--                                        <a href="/prontuariostatus/{{base64_encode($item->id)}}/destroy" class="btn btn-danger link-excluir" title="Excluir"><span class="fa fa-trash"></span></a>--}}
-{{--                                    </td>--}}
-{{--                                    <td>{{$item->nome}}</td>--}}
-{{--                                </tr>--}}
-{{--                            @endforeach--}}
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
+    <div class="col-12">
+        <div class="ibox ">
+            <div class="ibox-title">
+                <h5>Listagem de Alunos</h5>
+                <a class="btn-small btn btn-success" style="margin-left: 93%" type="button"
+                   href="{{ route('aluno.create') }}">
+                    <span class="glyphicon glyphicon-plus"></span>Novo
+                </a>
+            </div>
+            <div class="ibox-content">
+                <table class="table" id="consultas">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Nome</th>
+                        <th>Semestre</th>
+                        <th>Supervisor</th>
+                        <th colspan="2">Ações</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach($alunos as $aluno)
+                        <tr>
+                            <td>{{ $aluno->id }}</td>
+                            <td>{{ $aluno->tx_nome }}</td>
+                            <td>{{ $aluno->nu_semestre }}</td>
+                            <td>{{ $aluno->username }}</td>
+                            <td>{{ $aluno->supervisor->tx_nome }}</td>
+                            <td align="center">
+                                <a href="{{ route('aluno.edit', $aluno->id) }}"
+                                   class="btn btn-primary glyphicon glyphicon-pencil">
+                                </a>
+                            </td>
+                            <td align="center">
+                                <form action="{{ route('aluno.delete', $aluno->id) }}" method="post">
+                                    @csrf
+                                <a>
+                                    <button class="btn btn-danger linha-trash glyphicon glyphicon-trash" type="submit">
+                                    </button>
+                                </a>
+                                </form>
+                            </td>
+                        </tr>
+                    @endforeach
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
-    <p>{{$alunos}}</p>
+
+@endsection
+
+@section('js')
+    <script>
+        $(document).ready( function () {
+            $('#consultas').DataTable();
+        } );
+    </script>
 @endsection
