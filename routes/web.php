@@ -32,7 +32,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/triagem', 'TriagemController@store')->name('triagem.store');
     Route::post('/triagem/delete', 'TriagemController@destroy')->name('triagem.delete');
 
-    // Status_de_cadastro
+    /**  Rotas de Status_de_cadastro **/
     Route::resource('/statusdecadastro', 'StatusDeCadastroController');
     Route::get('/statusdecadastro/{id}/destroy', 'StatusDeCadastroController@destroy')->name('statusdecadastro.delete');
 
@@ -43,7 +43,16 @@ Route::middleware(['auth'])->group(function () {
     Route::post('telefone/create', 'TelefoneController@create')->name('telefone.create');
 
 
-    Route::get('grupos', 'GrupoController@index')->name('grupos');
+    /**  Rotas de Grupos **/
+    Route::resource('/grupos', 'GrupoController');
+    Route::get('/grupos/{id}/destroy', 'GrupoController@destroy')->name('grupos.delete');
+
+    /**  Rotas de Grupo Itens **/
+    Route::resource('/grupoitens', 'GrupoItemController');
+    Route::get('/grupoitens/{id}/destroy', 'GrupoItemController@destroy')->name('grupoitens.delete');
+    Route::get('/grupoitens/grupo/{id}', 'GrupoItemController@getById')->name('grupoitens.findId');
+
+/*    Route::get('grupos', 'GrupoController@index')->name('grupos');
     Route::post('grupos', 'GrupoController@store')->name('grupos.store');
     Route::get('grupos/edit/{id}', 'GrupoController@edit')->name('grupos.edit');
     Route::post('grupos/{id}', 'GrupoController@destroy')->name('grupos.destroy');
@@ -51,7 +60,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('grupoitens/{grupo_id}', 'GrupoItemController@index')->name('grupoItem');
     Route::post('grupoitens', 'GrupoItemController@store')->name('grupoItem.store');
     Route::get('grupoitens/edit/{id}', 'GrupoItemController@edit')->name('grupoItem.edit');
-    Route::post('grupoitens/{id}', 'GrupoItemController@destroy')->name('grupoItem.destroy');
+    Route::post('grupoitens/{id}', 'GrupoItemController@destroy')->name('grupoItem.destroy');*/
 
 
     Route::get('/home', 'HomeController@index')->name('home');

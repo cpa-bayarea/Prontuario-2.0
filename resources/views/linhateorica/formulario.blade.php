@@ -7,7 +7,7 @@
             <div class="col-md-12">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
-                        <h5>Dados Gerais</h5>
+                        <h5>Linha Teórica</h5>
                     </div>
                     <div class="ibox-content">
 

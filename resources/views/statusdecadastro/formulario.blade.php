@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('content-title', 'Status do Cadastro')
+@section('content-title', 'Status de Cadastro')
 @section('content')
 
     <div class="wrapper wrapper-content animated fadeInRight">
@@ -7,7 +7,7 @@
             <div class="col-md-12">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
-                        <h5>Dados Gerais</h5>
+                        <h5>Status de Cadastro</h5>
                     </div>
                     <div class="ibox-content">
                         <form class="form-horizontal" action="{{ route('statusdecadastro.store') }}" method="post">

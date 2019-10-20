@@ -13,13 +13,13 @@ class GrupoTableSeeder extends Seeder
     public function run()
     {
         Grupo::create([
-            'nome' => 'Tipo de Atendimento',
+            'tx_nome' => 'Tipo de Atendimento',
         ]);
         Grupo::create([
-            'nome' => 'Grupo',
+            'tx_nome' => 'Grupo',
         ]);
         Grupo::create([
-            'nome' => 'Temporário',
+            'tx_nome' => 'Temporário',
         ]);
     }
 }

@@ -2,75 +2,46 @@
 @section('content-title', 'Grupos')
 @section('content')
 
-
-
-
-    <div class="container">
-
-
-        <div class="card">
-            <div class="card-body">
-                <form action="/grupos" method="POST">
-                    @if($grupo->id != '')
-                        <input type="hidden"  required value="{{ $grupo->id }}" name="id">
-
-                    @endif
-                    @csrf
-
-                    <div class="form-group">
-                        <input type="hidden" value="">
-                        <label>Nome  <span class="obrigatorio">*</span> </label>
-
-                        <input type="text" class="form-control" name="nome" aria-describedby="emailHelp"
-                               value="   {{ $grupo->nome }}" required placeholder="Nome">
-
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>Dados Gerais</h5>
                     </div>
-                    <div class="form-group">
-                        @if($grupo->id != '')
-                            <input type="submit" class="btn btn-success" value="Atualizar">
-                        @else
-                            <input type="submit" class="btn btn-success" value="Cadastrar">
-                        @endif
-
+                    <div class="ibox-content">
+                        <a href="{{ route('grupos.create') }}" class="btn-novo btn btn-success">
+                            <i class="fa fa-plus"></i>&nbsp;Novo
+                        </a>
+                        <div class="table-responsive">
+                            <table class="table table-striped table-hover table-bordered dataTable">
+                                <thead>
+                                    <tr>
+                                        <th>Ações</th>
+                                        <th>Nome</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                @foreach($aItens as $item)
+                                    <tr>
+                                        <td>
+                                            <a href="{{ route('grupos.edit', base64_encode($item->id)) }}"
+                                               class="btn btn-primary" title="Editar">
+                                                <span class="fa fa-edit"></span>
+                                            </a>
+                                            <a href="{{ route('grupos.delete', base64_encode($item->id)) }}"
+                                               class="btn btn-danger link-excluir" title="Excluir">
+                                                <span class="fa fa-trash"></span>
+                                            </a>
+                                        </td>
+                                        <td>{{ $item->tx_nome }}</td>
+                                    </tr>
+                                @endforeach
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
-
-
-                </form>
-            </div>
-        </div>
-
-
-        <br>
-
-        <div class="card">
-            <div class="card-body">
-
-                <table class="table table-bordered">
-                    @foreach($grupos as $grupo)
-                        <tr>
-
-                            <th scope="col">Nome</th>
-                            <th scope="col">Ações</th>
-
-                        </tr>
-
-
-                        <tr>
-
-                            <td> {{ $grupo->nome }}</td>
-                            <td>
-                                <a class="btn btn-success" href="/grupoitens/{{ $grupo->id }}"> Cadastrar Items</a>
-                                <a class="btn btn-info" href="/grupos/edit/{{ $grupo->id }}"> Editar </a>
-
-                                <form action="/grupos/{{ $grupo->id }}" method="POST">
-                                    @csrf
-                                    <input type="submit" value="Excluir" class="btn btn-danger">
-                                </form>
-                            </td>
-
-                        </tr>
-                    @endforeach
-                </table>
+                </div>
             </div>
         </div>
     </div>

@@ -14,62 +14,62 @@ class ItensGrupoTableSeeder extends Seeder
     {
                 // Tipo de Atendimento
                 GrupoItem::create([
-                    'nome' => 'Criança',
+                    'tx_nome' => 'Criança',
                     'grupo_id' => 1,
-                    'ordem' => 1,
+                    'nu_ordem' => 1,
                 ]);
                 GrupoItem::create([
-                    'nome' => 'Adolescente',
+                    'tx_nome' => 'Adolescente',
                     'grupo_id' => 1,
-                    'ordem' => 2,
+                    'nu_ordem' => 2,
                 ]);
                 GrupoItem::create([
-                    'nome' => 'Adulto',
+                    'tx_nome' => 'Adulto',
                     'grupo_id' => 1,
-                    'ordem' => 3,
+                    'nu_ordem' => 3,
                 ]);
                 GrupoItem::create([
-                    'nome' => 'Idoso',
+                    'tx_nome' => 'Idoso',
                     'grupo_id' => 1,
-                    'ordem' => 4,
+                    'nu_ordem' => 4,
                 ]);
                 // Grupo
                 GrupoItem::create([
-                    'nome' => 'Criança',
+                    'tx_nome' => 'Criança',
                     'grupo_id' => 2,
-                    'ordem' => 1,
+                    'nu_ordem' => 1,
                 ]);
                 GrupoItem::create([
-                    'nome' => 'Mulheres',
+                    'tx_nome' => 'Mulheres',
                     'grupo_id' => 2,
-                    'ordem' => 2,
+                    'nu_ordem' => 2,
                 ]);
                 GrupoItem::create([
-                    'nome' => 'Homens',
+                    'tx_nome' => 'Homens',
                     'grupo_id' => 2,
-                    'ordem' => 3,
+                    'nu_ordem' => 3,
                 ]);
                 GrupoItem::create([
-                    'nome' => 'Educação Familiar',
+                    'tx_nome' => 'Educação Familiar',
                     'grupo_id' => 2,
-                    'ordem' => 4,
+                    'nu_ordem' => 4,
                 ]);
                 // Temporário
                 GrupoItem::create([
-                    'nome' => 'Familiar',
+                    'tx_nome' => 'Familiar',
                     'grupo_id' => 3,
-                    'ordem' => 1,
+                    'nu_ordem' => 1,
                 ]);
                 GrupoItem::create([
-                    'nome' => 'casal',
+                    'tx_nome' => 'casal',
                     'grupo_id' => 3,
-                    'ordem' => 2,
+                    'nu_ordem' => 2,
                 ]);
                 GrupoItem::create([
-                    'nome' => 'outro',
+                    'tx_nome' => 'outro',
                     'grupo_id' => 3,
-                    'ordem' => 3,
-                    'outro' => 'qual?'
+                    'nu_ordem' => 3,
+                    'tx_outro' => 'qual?'
                 ]);
     }
 }

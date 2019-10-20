@@ -22,7 +22,7 @@ class TriagemController extends Controller
 {
     public function index() {
 
-        $paciente = Paciente::where('pacientes.id_status','=',1)->get();
+        $paciente = Paciente::where('pacientes.status_id','=',1)->get();
 
         return view('triagem.index',compact('paciente',$paciente));
     }
@@ -37,7 +37,10 @@ class TriagemController extends Controller
         $grupos = Grupo::find(2);
         $temporario = Grupo::find(3);
 
-        return view('triagem.create',compact('supervisores',$supervisores,'alunos',$alunos,'grupos',$grupos,'tipoAtendimentos',$tipoAtendimentos,'temporario',$temporario,'paciente',$paciente));
+        return view('triagem.create', compact(
+            'supervisores', $supervisores, 'alunos', $alunos, 'grupos',
+            $grupos, 'tipoAtendimentos', $tipoAtendimentos, 'temporario', $temporario, 'paciente', $paciente
+        ));
     }
 
     public function store(TriagemRequest $request) {
@@ -59,17 +62,18 @@ class TriagemController extends Controller
             $temporario = Grupo::find(3);
             // return Redirect::to('/triagem/create')->withInput();
 
-            return view('triagem.create',compact('supervisores',$supervisores,
-                                                 'alunos',$alunos,
-                                                 'grupos',$grupos,
-                                                 'tipoAtendimentos',$tipoAtendimentos,
-                                                 'temporario',$temporario,
-                                                 'paciente',$paciente
-                                                ));
+            return view('triagem.create', compact(
+                'supervisores', $supervisores,
+                'alunos', $alunos,
+                'grupos', $grupos,
+                'tipoAtendimentos', $tipoAtendimentos,
+                'temporario', $temporario,
+                'paciente', $paciente
+            ));
         }
         $paciente->rg = $request->rg;
         $paciente->data_nascimento = $request->data_nascimento;
-        $paciente->id_status = 1;
+        $paciente->status_id = 1;
         $paciente->save();
 
         $telefone = new Telefone();
@@ -78,8 +82,8 @@ class TriagemController extends Controller
         $telefone->save();
 
         $triagem = new Triagem();
-        $triagem->alunos_id = $request->aluno;
-        $triagem->supervisors_id = $request->supervisor;
+        $triagem->aluno_id = $request->aluno;
+        $triagem->supervisor_id = $request->supervisor;
         $triagem->paciente_id = $paciente->id;
         $triagem->queixa_principal = $request->queixa_principal;
         $triagem->save();
@@ -122,13 +126,14 @@ class TriagemController extends Controller
         $grupos = Grupo::find(2);
         $temporario = Grupo::find(3);
 
-        return view('triagem.create',compact('supervisores',$supervisores,
-                                             'alunos',$alunos,
-                                             'grupos',$grupos,
-                                             'tipoAtendimentos',$tipoAtendimentos,
-                                             'temporario',$temporario,
-                                             'paciente',$paciente)
-                                            );
+        return view('triagem.create', compact(
+            'supervisores', $supervisores,
+            'alunos', $alunos,
+            'grupos', $grupos,
+            'tipoAtendimentos', $tipoAtendimentos,
+            'temporario', $temporario,
+            'paciente', $paciente
+        ));
 
     }
 

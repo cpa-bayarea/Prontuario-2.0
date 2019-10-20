@@ -21,11 +21,11 @@ class Triagem extends Model
     }
 
     public function aluno() {
-        return $this->belongsTo('App\Models\Aluno','alunos_id');
+        return $this->belongsTo('App\Models\Aluno','aluno_id');
     }
 
     public function supervisor() {
-        return $this->belongsTo('App\Models\Supervisor','supervisors_id');
+        return $this->belongsTo('App\Models\Supervisor','supervisor_id');
     }
 
     // public function triagemItensGrupo() {
