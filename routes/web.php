@@ -95,5 +95,10 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('prontuariostatus', 'ProntuarioStatusController');
     Route::get('/prontuariostatus/{id}/destroy', 'ProntuarioStatusController@destroy');
 
+    /**  Rotas de Consultas **/
+    Route::resource('consulta', 'ConsultaController');
+    Route::get('/consulta/create/{id_paciente}/{id_aluno}', 'ConsultaController@Create')->name('consulta.consultar');
+    Route::post('/consulta/store', 'ConsultaController@store')->name('consulta.store');
+
 });
 

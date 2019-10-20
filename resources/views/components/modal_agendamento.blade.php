@@ -59,6 +59,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
+                    <a id="btn-consultar" class="btn btn-primary"></a>
                     <button class="btn btn-primary" type="submit" id="btn-acao" onclick="return validaHoraAgendamento();"></button>
                     <a id="btn-status" class="btn btn-primary"></a>
                     <a id="btn-cancelar" class="btn btn-danger" onclick="return confirm('Deseja realmente cancelar este agendamento?')">Cancelar</a>

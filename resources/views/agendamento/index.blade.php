@@ -8,11 +8,6 @@
         <div class="ibox ">
             <div class="ibox-title">
                 <h5>Status de Agendamentos</h5>
-                <div class="ibox-tools">
-                    <a class="collapse-link">
-                        <i class="fa fa-chevron-up"></i>
-                    </a>
-                </div>
             </div>
             <div class="ibox-content no-padding">
                 <ul class="list-group">
@@ -61,6 +56,8 @@
             }
             return true;
         }
+
+        $('#btn-consultar').hide();
 
         document.addEventListener('DOMContentLoaded', function() {
             var calendarEl = document.getElementById('calendar');
@@ -112,8 +109,12 @@
                                     $('#btn-status').html('Confirmar');
                                     $('#btn-status').attr("href", "/agendamento/changestatus/" + data.agendamento.id + "/2");
                                     $('#btn-status').show();
+                                    $('#btn-consultar').hide();
                                     break;
                                 case '2':
+                                    $('#btn-consultar').show();
+                                    $('#btn-consultar').html('Consultar');
+                                    $('#btn-consultar').attr("href", "/consulta/create/" + $("#paciente_id").val() + "/" + $("#aluno_id").val());
                                     $('#btn-cancelar').show();
                                     $('#btn-status').hide();
                                     break;
