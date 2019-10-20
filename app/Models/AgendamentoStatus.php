@@ -4,8 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ProntuarioStatus extends AbstractModel
+class AgendamentoStatus extends Model
 {
-    protected $table = 'prontuario_status';
+    protected $table = 'agendamento_status';
     protected $fillable = ['nome'];
 }

@@ -5,10 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class StatusDeCadastro extends Model
+class TriagemItensGrupo extends Model
 {
     use SoftDeletes;
     protected $fillable = [
-        'status',
+        'outro',
     ];
+    public function triagemItensGrupo(){
+        return $this->belongsTo('App\Models\Triagem');
+    }
 }

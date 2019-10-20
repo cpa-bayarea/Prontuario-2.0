@@ -48,7 +48,7 @@ class SupervisorController extends Controller
      */
     public function create()
     {
-        $linhas = DB::table('tb_linha_teorica')->get();
+        $linhas = DB::table('linha_teorica')->get();
         return view('supervisor.form', compact('linhas', $linhas));
     }
 
@@ -68,12 +68,12 @@ class SupervisorController extends Controller
             }
             $supervisor = new Supervisor();
 
-            $supervisor->tx_nome     = $request->tx_nome;
-            $supervisor->username    = $request->username;
+            $supervisor->tx_nome = $request->tx_nome;
+            $supervisor->username = $request->username;
             $supervisor->nu_telefone = $request->nu_telefone;
-            $supervisor->nu_celular  = $request->nu_celular;
-            $supervisor->nu_crp      = $request->nu_crp;
-            $supervisor->linha_id    = $request->linha_id;
+            $supervisor->nu_celular = $request->nu_celular;
+            $supervisor->nu_crp = $request->nu_crp;
+            $supervisor->linha_id = $request->linha_id;
 
             if (key_exists($request['status'], array($request))) {
                 $supervisor->status = $request->status;
@@ -108,7 +108,7 @@ class SupervisorController extends Controller
     {
         try {
             $supervisor = DB::table('tb_supervisor')->where('id', '=', $id)->first();
-            $linhas = DB::table('tb_linha_teorica')->get();
+            $linhas = DB::table('linha_teorica')->get();
             return view('supervisor.edit', compact(['supervisor', 'linhas'], $supervisor, $linhas));
         } catch (Exception $e) {
 
@@ -128,12 +128,12 @@ class SupervisorController extends Controller
     {
         try {
             $supervisor = Supervisor::find($id);
-            $supervisor->tx_nome     = $request->tx_nome;
-            $supervisor->username    = $request->username;
+            $supervisor->tx_nome = $request->tx_nome;
+            $supervisor->username = $request->username;
             $supervisor->nu_telefone = $request->nu_telefone;
-            $supervisor->nu_celular  = $request->nu_celular;
-            $supervisor->nu_crp      = $request->nu_crp;
-            $supervisor->linha_id    = $request->linha_id;
+            $supervisor->nu_celular = $request->nu_celular;
+            $supervisor->nu_crp = $request->nu_crp;
+            $supervisor->linha_id = $request->linha_id;
 
             if (key_exists($request['status'], array($request))) {
                 $supervisor->status = $request->status;

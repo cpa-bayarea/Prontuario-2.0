@@ -26,10 +26,11 @@ Route::middleware(['auth'])->group(function () {
 
     // Triagem
     Route::get('/triagem', 'TriagemController@index')->name('triagem');
+    Route::get('/triagem/create', 'TriagemController@create')->name('triagem.create');
     Route::get('/triagem/show', 'TriagemController@show')->name('triagem.show');
     Route::get('triagem/edit/{id}', 'TriagemController@edit')->name('triagem.edit');
     Route::post('/triagem', 'TriagemController@store')->name('triagem.store');
-    Route::post('/triagem/delete/{id}', 'TriagemController@delete')->name('triagem.delete');
+    Route::post('/triagem/delete', 'TriagemController@destroy')->name('triagem.delete');
 
     // Status_de_cadastro
     Route::get('/status', 'StatusDeCadastroController@index')->name('status');
@@ -93,7 +94,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/prontuario/{id}/destroy', 'ProntuarioController@destroy');
 
     Route::resource('prontuariostatus', 'ProntuarioStatusController');
-    Route::get('/prontuariostatus/{id}/destroy', 'ProntuarioStatusController@destroy');
+    Route::get('/prontuariostatus/{id}/destroy', 'ProntuarioStatusController@destroy')->name('prontuariostatus.delete');
 
     /**  Rotas de Consultas **/
     Route::resource('consulta', 'ConsultaController');

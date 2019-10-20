@@ -2,12 +2,16 @@
 
 namespace App\Models;
 
-class Telefone extends \App\Models\Base\Telefone
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+
+class Telefone extends Model
 {
-	protected $fillable = [
-		'ddd',
-		'numero',
-		'id_user',
-		'paciente_id'
-	];
+    use SoftDeletes;
+    protected $fillable = ['ddd', 'numero', 'paciente_id'];
+
+    public function paciente()
+    {
+        return $this->belongsTo('App\Models\Paciente', 'id', 'paciente_id');
+    }
 }

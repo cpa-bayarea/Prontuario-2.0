@@ -14,7 +14,7 @@ class CreateGrupoItemsTable extends Migration
     public function up()
     {
         Schema::create('grupo_items', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->string('nome');
             $table->integer('grupo_id')->unsigned();
             $table->foreign('grupo_id')->references('id')->on('grupos');
