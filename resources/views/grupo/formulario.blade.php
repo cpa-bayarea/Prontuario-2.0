@@ -46,8 +46,8 @@
                             <form id="formulario"  name="formulario" method="POST" class="form-horizontal">
                                 @csrf
                                 <input type="hidden" name="req" id="req" value="salvar-grupo-item" />
-                                <input name="id" id="id" type="hidden" />
-                                <input name="grupo_id" id="grupo_id" type="hidden" value="{{ $aGrupos->id }}"/>
+                                <input name="grupo_item_id" id="grupo_item_id" type="hidden" />
+                                <input name="grupo_id" id="grupo_id" type="hidden" value="{{ base64_encode($aGrupos->id) }}"/>
 
                                 <div class="form-group">
                                     <label for="tx_nome_item" class="col-sm-2 control-label">Nome <span class="obrigatorio">*</span></label>
@@ -88,24 +88,7 @@
                                             <th>Outro</th>
                                         </tr>
                                     </thead>
-                                    <tbody id="div-lista-grupo-item">
-                                    @foreach($grupoItems as $aItens)
-                                    <tr>
-                                        <td class="text-center">
-                                            <a title="Alterar" class="editar-grupo-item" href="#" data-gitem="{{ $aItens->id }}">
-                                                <i class="fa fa-pencil"></i>
-                                            </a>
-                                            <a title="excluir" class="excluir-grupo-item" href="#" data-gitem="{{ $aItens->id }}"
-                                               data-grupo="{{ $aGrupos->id }}" style="margin-left: 5px;">
-                                                <i class="fa fa-close"></i>
-                                            </a>
-                                        </td>
-                                        <td>{{ $aItens->tx_nome }}</td>
-                                        <td>{{ $aItens->nu_ordem }}</td>
-                                        <td>{{ $aItens->tx_outro }}</td>
-                                    </tr>
-                                    @endforeach
-                                    </tbody>
+                                    <tbody id="body-grupo-item"></tbody>
                                 </table>
                             </div>
                         </div>
@@ -119,23 +102,54 @@
 @section('js')
     <script type="text/javascript">
         $(document).ready(function () {
-            function atualizaLista() {
-                $.ajax({
-                    url: "{{ route('grupoitens.findId', $aGrupos->id) }}",
-                    type: "GET",
-                    datatype: 'json',
-                    data: {
-                        grupo_id: $('#grupo_id').val(),
-                    },
-                    success: function(data) {
-                        // alert(data)
-                        console.log(data);
-                        // $('#div-lista-grupo-item').html(data);
-                    }
-                });
+
+            function loadListagemGrupoItem() {
+                var grupo_id = $('#grupo_id').val();
+                if (grupo_id !== null || grupo_id !== '') {
+                    $.ajax({
+                        url: "/grupoitens/grupo/" + grupo_id,
+                        type: "GET",
+                        datatype: 'json',
+                        data:{
+                            grupo_id: grupo_id
+                        },
+                        success: function ( data ) {
+                            $('#body-grupo-item').empty();
+                            $.each(data, function (key, value) {
+                                html = '<tr>';
+                                html += '<td class="text-center">';
+                                html += '<a title="Alterar" class="editar-grupo-item" data-gitem="' + value.id + '">';
+                                html += '<i class="fa fa-pencil"></i>';
+                                html += '<a title="Excluir" class="excluir-grupo-item" data-gitem="' + value.id + '" style="margin-left: 5px;">';
+                                html += '<i class="fa fa-close"></i>';
+                                html += '</td>';
+                                html += '<td>' + value.tx_nome + '</td>';
+                                html += '<td>' + value.nu_ordem + '</td>';
+                                html += '<td>' + value.tx_outro + '</td>';
+                                html += '</tr>';
+
+                                $('#body-grupo-item').append(html);
+                            });
+                            $('.editar-grupo-item').click(function () {
+                                var data = $(this).data('gitem');
+                                alert(data);
+                            });
+
+                            $('.excluir-grupo-item').click(function () {
+                                var data = $(this).data('gitem');
+                                alert(data);
+                            });
+                        },
+                        error: function(jqXHR, textStatus, errorThrown) {
+                            console.log(textStatus);
+                        }
+                    });
+                }
             }
+            loadListagemGrupoItem();
 
             function limpaCamposFormulario() {
+                $('#grupo_item_id').val('');
                 $('#tx_nome_item').val('');
                 $('#nu_ordem_item').val('');
                 $('#tx_outro_item').val('');
@@ -144,7 +158,6 @@
             $('#btn-salvar-grupo-item').click(function (e) {
                 e.preventDefault();
 
-                var data = $('#formulario').serialize();
                 $.ajax({
                     url: "{{ route('grupoitens.store') }}",
                     type: "POST",
@@ -157,11 +170,21 @@
                         _token: "{{ csrf_token() }}"
                     },
                     success: function(data) {
-                        atualizaLista();
                         limpaCamposFormulario();
+                        loadListagemGrupoItem();
                     }
                 });
-            })
+            });
+
+            $('.editar-grupo-item').click(function () {
+                var data = $(this).data('gitem');
+                alert(data);
+            });
+
+            $('.excluir-grupo-item').click(function () {
+                var data = $(this).data('gitem');
+                alert(data);
+            });
         });
     </script>
 @endsection
