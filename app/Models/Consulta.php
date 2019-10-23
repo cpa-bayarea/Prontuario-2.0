@@ -19,7 +19,7 @@ class Consulta extends Model
      */
     public function aluno()
     {
-        return $this->belongsTo(App\Models\Aluno::class, 'aluno_id', 'id');
+        return $this->hasOne('App\Models\Aluno', 'id', 'aluno_id');
     }
 
     /**
@@ -27,7 +27,7 @@ class Consulta extends Model
      */
     public function paciente()
     {
-        return $this->belongsTo(App\Models\Paciente::class, 'paciente_id', 'id');
+        return $this->hasOne('App\Models\Paciente', 'id', 'paciente_id');
     }
 
     /**
@@ -35,6 +35,6 @@ class Consulta extends Model
      */
     public function supervisor()
     {
-        return $this->belongsTo(App\Models\Supervisor::class, 'paciente_id', 'id');
+        return $this->hasOne('App\Models\Supervisor', 'id', 'supervisor_id');
     }
 }

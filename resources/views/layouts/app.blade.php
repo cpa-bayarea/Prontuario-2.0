@@ -26,6 +26,11 @@
             </a>
         </li>
         <li class="">
+            <a href="{{ route('consulta') }}"><i class="fa fa-file-text-o"></i>
+                <span class="nav-label">Consultas</span>
+            </a>
+        </li>
+        <li class="">
             <a href="{{ route('paciente') }}"><i class="fa fa-user"></i>
                 <span class="nav-label">Paciente</span>
             </a>

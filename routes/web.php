@@ -97,8 +97,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/prontuariostatus/{id}/destroy', 'ProntuarioStatusController@destroy')->name('prontuariostatus.delete');
 
     /**  Rotas de Consultas **/
-    Route::resource('consulta', 'ConsultaController');
-    Route::get('/consulta/create/{id_paciente}/{id_aluno}', 'ConsultaController@Create')->name('consulta.consultar');
+    Route::get('consulta', 'ConsultaController@index')->name('consulta');
+    Route::get('/consulta/create/{id_paciente?}/{id_aluno?}', 'ConsultaController@Create')->name('consulta.consultar');
     Route::post('/consulta/store', 'ConsultaController@store')->name('consulta.store');
 
 });

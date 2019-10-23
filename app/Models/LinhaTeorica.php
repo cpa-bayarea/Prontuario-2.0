@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class LinhaTeorica extends Model
 {
     use SoftDeletes;
-    protected $table = 'linha_teorica';
+    protected $table = 'tb_linha_teorica';
     protected $primaryKey = 'id';
     protected $fillable = [
         'tx_nome', 'tx_desc'

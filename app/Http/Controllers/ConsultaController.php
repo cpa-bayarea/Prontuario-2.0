@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Aluno;
-use App\Models\Base\Supervisor;
+use App\Models\Supervisor;
 use App\Models\Consulta;
 use App\Models\Paciente;
 use Illuminate\Http\Request;
@@ -13,11 +13,12 @@ class ConsultaController extends Controller
 {
     public function index()
     {
+        $consultas = Consulta::all();
         $alunos       = Aluno::orderBy('tx_nome', 'asc')->get();
         $pacientes    = Paciente::orderBy('nome', 'asc')->get();
         $supervisores = Supervisor::orderBy('tx_nome', 'asc')->get();
 
-        return view("consulta.index", compact('alunos','supervisores','pacientes'));
+        return view("consulta.index", compact('consultas', 'alunos','supervisores','pacientes'));
     }
 
     public function create($id_paciente, $id_aluno)
