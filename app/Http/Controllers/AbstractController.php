@@ -50,13 +50,8 @@ class AbstractController extends Controller
      */
     public function index()
     {
-        $orderBy = $this->_model->getFillable()[0] ?? NULL;
-
-        if (!empty($order)) {
-            $aItens = $this->_model->orderBy("{$orderBy}", "asc")->get();
-        } else {
-            $aItens = $this->_model->all();
-        }
+        $orderBy = $this->_model->getFillable()[0];
+        $aItens = $this->_model->orderBy("{$orderBy}", "asc")->get();
 
         return view("{$this->_dirView}.index", compact('aItens'));
     }
