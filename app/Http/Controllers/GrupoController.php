@@ -2,21 +2,25 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\GrupoItem;
+use Illuminate\Http\Request;
 
 class GrupoController extends AbstractController
 {
 
-    public function edit($id)
+    /**
+     * Salva/Altera um pedido e retorna para a mesma página.
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    public function store(Request $request)
     {
-        $id = base64_decode($id);
+        if ($id = base64_decode($request->id)) {
+            $this->_model = $this->_model->find($id);
+        }
+        $this->_model->fill($request->toArray());
+        $this->_model->save();
 
-        $aDados = $this->_recuperarDados();
-        $aGrupos = $this->_model->find($id);
-
-        $grupoItems = GrupoItem::where('grupo_id', $aGrupos->id)->get();
-
-        return view("{$this->_dirView}.formulario", compact(['aGrupos', 'grupoItems'],[$aGrupos, $grupoItems]));
+        return redirect()->route('grupos.edit', base64_encode($this->_model->id));
     }
-
 }

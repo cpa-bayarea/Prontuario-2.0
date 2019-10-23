@@ -8,17 +8,36 @@ use Illuminate\Http\Request;
 class GrupoItemController extends AbstractController
 {
 
-    public function getById(Request $request)
+    public function edit($id)
     {
-        if (key_exists('grupo_id', ($request->all()))) {
-            $id = base64_decode($request->grupo_id);
-            $return = GrupoItem::where('grupo_id', $id)->get();
+        $aDados = $this->_recuperarDados();
+        $aDados = $this->_model->find($id);
 
+        if (!empty($aDados)) {
+            $response = [
+                "type" => "success",
+                "data" => $aDados
+            ];
         } else {
-            $return = null;
+            $response = [
+                "type" => "error",
+                "data" => "Registro não existente!"
+            ];
         }
 
-        return $return;
+        return $response;
+    }
+
+    /**
+     * Carrega listagem da tela de ordemItems.
+     *
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function getById($id)
+    {
+        $aGrupoItem = GrupoItem::where('grupo_id', base64_decode($id))->orderBy('nu_ordem')->get();
+        return view('grupoitem.index', compact('aGrupoItem'));
     }
 
     public function store(Request $request)
@@ -28,12 +47,10 @@ class GrupoItemController extends AbstractController
         }
         $grupo_id = base64_decode($request->grupo_id);
 
-        $this->_model::create([
-            'grupo_id'  => $grupo_id,
-            'tx_nome'   => $request->tx_nome,
-            'nu_ordem'  => $request->nu_ordem,
-            'tx_outro'  => $request->tx_outro,
-        ]);
+        $this->_model->grupo_id = $grupo_id;
+        $this->_model->tx_nome  = $request->tx_nome;
+        $this->_model->nu_ordem = $request->nu_ordem;
+        $this->_model->tx_outro = $request->tx_outro;
         $this->_model->save();
         return response()->json(['success' => 'mensagem', 'Operação realizada com sucesso!']);
     }

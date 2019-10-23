@@ -10,7 +10,7 @@ class Cidade extends Model
 
     public function paciente()
     {
-        return $this->belongsTo('App\Paciente');
+        return $this->belongsTo('App\Models\Paciente');
     }
 
     public function uf()
