@@ -16,7 +16,9 @@ class Supervisor extends AbstractModel
     {
         return $this->belongsTo('App\Models\LinhaTeorica', 'linha_id', 'id');
     }
-    public function triagem() {
+
+    public function triagem()
+    {
         return $this->hasMany('App\Models\Triagem');
     }
 }
