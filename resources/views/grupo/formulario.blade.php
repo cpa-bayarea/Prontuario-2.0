@@ -11,7 +11,7 @@
                     </div>
                     <div class="ibox-content">
 
-                        <form class="form-horizontal" action="{{ route('grupos.store') }}" method="post">
+                        <form class="form-horizontal" action="{{ route('grupo.store') }}" method="post">
                             @csrf
                             <input type="hidden" name="id" id="id" value="{{ base64_encode($model->id) }}">
 
@@ -26,7 +26,7 @@
                             <div class="form-group">
                                 <div class="text-center">
                                     <button class="btn btn-primary" type="submit"><span class="fa fa-check"></span> Salvar</button>
-                                    <a href="{{ route('grupos.index') }}" class="btn btn-warning">
+                                    <a href="{{ route('grupo.index') }}" class="btn btn-warning">
                                         <span class="fa fa-arrow-left"></span> Voltar
                                     </a>
                                 </div>

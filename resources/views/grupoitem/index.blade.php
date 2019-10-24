@@ -12,7 +12,7 @@
         @foreach($aGrupoItem as $item)
             <tr>
                 <td class="text-center">
-                    <a href="{{ route('grupoitens.edit', base64_encode($item->id)) }}" title="Editar">
+                    <a href="{{ route('grupoitens.edit', base64_encode($item->id)) }}" class="link-editar" title="Editar">
                         <i class="fa fa-pencil"></i>
                     </a>
                     &nbsp;&nbsp;
@@ -28,3 +28,38 @@
         </tbody>
     </table>
 </div>
+
+
+<script>
+    $('.link-editar').on('click', function (e) {
+        e.preventDefault();
+        var href = $(this).attr('href');
+        $.get(href, function (response) {
+            $('#grupo_id').val(response.data.grupo_id);
+            $('#grupo_item_id').val(response.data.id);
+            $('#tx_nome_item').val(response.data.tx_nome);
+            $('#nu_ordem_item').val(response.data.nu_ordem);
+            $('#tx_outro_item').val(response.data.tx_outro);
+        });
+    });
+
+    $('.link-excluir').on('click', function () {
+        var href = $(this).attr('href');
+        swal({
+                title: "Atenção!",
+                text: "Deseja realmente excluir o registro ?",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "Sim, estou certo!",
+                ButtonCancelText: "Cancelar",
+                closeOnConfirm: true
+            },
+            function () {
+                $.get(href, function (response) {
+                    $('#div_listagem_grupo_item').load('/grupoitens/grupo/' + response);
+                });
+            });
+        return false;
+    });
+</script>

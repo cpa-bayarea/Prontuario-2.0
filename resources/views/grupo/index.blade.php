@@ -10,7 +10,7 @@
                         <h5>Dados Gerais</h5>
                     </div>
                     <div class="ibox-content">
-                        <a href="{{ route('grupos.create') }}" class="btn-novo btn btn-success">
+                        <a href="{{ route('grupo.create') }}" class="btn-novo btn btn-success">
                             <i class="fa fa-plus"></i>&nbsp;Novo
                         </a>
                         <div class="table-responsive">
@@ -25,11 +25,11 @@
                                 @foreach($aItens as $item)
                                     <tr>
                                         <td>
-                                            <a href="{{ route('grupos.edit', base64_encode($item->id)) }}"
+                                            <a href="{{ route('grupo.edit', base64_encode($item->id)) }}"
                                                class="btn btn-primary" title="Editar">
                                                 <span class="fa fa-edit"></span>
                                             </a>
-                                            <a href="{{ route('grupos.delete', base64_encode($item->id)) }}"
+                                            <a href="{{ route('grupo.delete', base64_encode($item->id)) }}"
                                                class="btn btn-danger link-excluir" title="Excluir">
                                                 <span class="fa fa-trash"></span>
                                             </a>

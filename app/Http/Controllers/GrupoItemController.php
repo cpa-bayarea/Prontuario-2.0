@@ -11,19 +11,13 @@ class GrupoItemController extends AbstractController
     public function edit($id)
     {
         $aDados = $this->_recuperarDados();
-        $aDados = $this->_model->find($id);
+        $aDados = $this->_model->find(base64_decode($id));
+        $aDados->grupo_id = base64_encode($aDados->grupo_id);
 
-        if (!empty($aDados)) {
-            $response = [
-                "type" => "success",
-                "data" => $aDados
-            ];
-        } else {
-            $response = [
-                "type" => "error",
-                "data" => "Registro não existente!"
-            ];
-        }
+        $response = [
+            "type" => "success",
+            "data" => $aDados
+        ];
 
         return $response;
     }
@@ -42,7 +36,7 @@ class GrupoItemController extends AbstractController
 
     public function store(Request $request)
     {
-        if ($id = base64_decode($request->id)) {
+        if ($id = $request->id) {
             $this->_model = $this->_model->find($id);
         }
         $grupo_id = base64_decode($request->grupo_id);
@@ -53,5 +47,12 @@ class GrupoItemController extends AbstractController
         $this->_model->tx_outro = $request->tx_outro;
         $this->_model->save();
         return response()->json(['success' => 'mensagem', 'Operação realizada com sucesso!']);
+    }
+
+    public function destroy($id)
+    {
+        $this->_model = $this->_model->find(base64_decode($id));
+        $this->_model->delete();
+        return base64_encode($this->_model->grupo_id);
     }
 }

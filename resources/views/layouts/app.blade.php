@@ -52,7 +52,7 @@
                     </a>
                 </li>
                 <li class="">
-                    <a href="{{ route('grupos.index') }}">
+                    <a href="{{ route('grupo.index') }}">
                         <span class="nav-label">Grupos</span>
                     </a>
                 </li>

@@ -44,8 +44,8 @@ Route::middleware(['auth'])->group(function () {
 
 
     /**  Rotas de Grupos **/
-    Route::resource('/grupos', 'GrupoController');
-    Route::get('/grupos/{id}/destroy', 'GrupoController@destroy')->name('grupos.delete');
+    Route::resource('/grupo', 'GrupoController');
+    Route::get('/grupo/{id}/destroy', 'GrupoController@destroy')->name('grupo.delete');
 
     /**  Rotas de Grupo Itens **/
     Route::resource('/grupoitens', 'GrupoItemController');
