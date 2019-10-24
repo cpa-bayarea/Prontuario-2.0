@@ -21,6 +21,6 @@ class GrupoController extends AbstractController
         $this->_model->fill($request->toArray());
         $this->_model->save();
 
-        return redirect()->route('grupos.edit', base64_encode($this->_model->id));
+        return redirect()->route('grupo.edit', base64_encode($this->_model->id));
     }
 }
