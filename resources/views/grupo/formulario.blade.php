@@ -60,23 +60,28 @@
 
             $('#btn-salvar-grupo-item').click(function (e) {
                 e.preventDefault();
-                $.ajax({
-                    url: "{{ route('grupoitens.store') }}",
-                    type: "POST",
-                    datatype: 'json',
-                    data: {
-                        id: $('#grupo_item_id').val(),
-                        grupo_id: $('#grupo_id').val(),
-                        tx_nome: $('#tx_nome_item').val(),
-                        nu_ordem: $('#nu_ordem_item').val(),
-                        tx_outro: $('#tx_outro_item').val(),
-                        _token: "{{ csrf_token() }}"
-                    },
-                    success: function(data) {
-                        limpaCamposFormulario();
-                        $('#div_listagem_grupo_item').load('/grupoitens/grupo/' + id);
-                    }
-                });
+                var ordem = $('#nu_ordem_item').val();
+                var nome = $('#tx_nome_item').val();
+
+                if ( (ordem !== null && ordem !== '') && (nome !== null && nome !== '') ) {
+                    $.ajax({
+                        url: "{{ route('grupoitens.store') }}",
+                        type: "POST",
+                        datatype: 'json',
+                        data: {
+                            id: $('#grupo_item_id').val(),
+                            grupo_id: $('#grupo_id').val(),
+                            tx_nome: $('#tx_nome_item').val(),
+                            nu_ordem: $('#nu_ordem_item').val(),
+                            tx_outro: $('#tx_outro_item').val(),
+                            _token: "{{ csrf_token() }}"
+                        },
+                        success: function(data) {
+                            limpaCamposFormulario();
+                            $('#div_listagem_grupo_item').load('/grupoitens/grupo/' + id);
+                        }
+                    });
+                }
             });
         });
     </script>
