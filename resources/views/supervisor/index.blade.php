@@ -28,11 +28,11 @@
                                 @foreach($aItens as $supervisor)
                                     <tr>
                                         <td>
-                                            <a href="{{ route('supervisor.edit', base64_encode($item->id)) }}"
+                                            <a href="{{ route('supervisor.edit', base64_encode($supervisor->id)) }}"
                                                class="btn btn-primary" title="Editar">
                                                 <span class="fa fa-edit"></span>
                                             </a>
-                                            <a href="{{ route('supervisor.delete', base64_encode($item->id)) }}"
+                                            <a href="{{ route('supervisor.delete', base64_encode($supervisor->id)) }}"
                                                class="btn btn-danger link-excluir" title="Excluir">
                                                 <span class="fa fa-trash"></span>
                                             </a>

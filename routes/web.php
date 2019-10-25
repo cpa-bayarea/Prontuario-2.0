@@ -52,17 +52,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/grupoitens/{id}/destroy', 'GrupoItemController@destroy')->name('grupoitens.delete');
     Route::get('/grupoitens/grupo/{id}', 'GrupoItemController@getById')->name('grupoitens.findId');
 
-/*    Route::get('grupos', 'GrupoController@index')->name('grupos');
-    Route::post('grupos', 'GrupoController@store')->name('grupos.store');
-    Route::get('grupos/edit/{id}', 'GrupoController@edit')->name('grupos.edit');
-    Route::post('grupos/{id}', 'GrupoController@destroy')->name('grupos.destroy');
-
-    Route::get('grupoitens/{grupo_id}', 'GrupoItemController@index')->name('grupoItem');
-    Route::post('grupoitens', 'GrupoItemController@store')->name('grupoItem.store');
-    Route::get('grupoitens/edit/{id}', 'GrupoItemController@edit')->name('grupoItem.edit');
-    Route::post('grupoitens/{id}', 'GrupoItemController@destroy')->name('grupoItem.destroy');*/
-
-
     Route::get('/home', 'HomeController@index')->name('home');
 
     /**  Rotas de Linhas Teóricas **/
@@ -70,11 +59,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/linhateorica/{id}/destroy', 'LinhaTeoricaController@destroy')->name('linhateorica.delete');
 
     /**  Rotas de Supervisores **/
-    Route::get('/supervisor', 'SupervisorController@index')->name('supervisor.index');
-    Route::get('/supervisor/create', 'SupervisorController@create')->name('supervisor.create');
-    Route::post('/supervisor/store', 'SupervisorController@store')->name('supervisor.store');
-    Route::get('/supervisor/edit/{id}', 'SupervisorController@edit')->name('supervisor.edit');
-    Route::post('/supervisor/delete/{id}', 'SupervisorController@destroy')->name('supervisor.delete');
+    Route::resource('supervisor', 'SupervisorController');
+    Route::get('/supervisor/{id}/destroy', 'SupervisorController@destroy')->name('supervisor.delete');
+
 
     /**  Rotas de Alunos **/
     Route::get('/aluno', 'AlunoController@index')->name('aluno.index');
