@@ -19,8 +19,8 @@
                             <form action="{{ route('consulta.store') }}" method="post" class="form-horizontal">
                                 @csrf
 
-                                <input type="hidden" name="id" id="id">
-                                <input type="hidden" name="data" value="{{date('Y-m-d')}}">
+                                <input type="hidden" name="id" id="id" value="{{$consulta->id}}">
+                                <input type="hidden" name="data" value="{{$consulta->data}}">
 
                                 <div class="form-group">
                                     <label for="nome" class="col-sm-3 control-label">Paciente</label>
@@ -29,7 +29,7 @@
                                             <option></option>
                                             @foreach($pacientes as $p)
                                                 @php
-                                                    $checked = ($p->id == $paciente->id ) ? 'selected="true"' : '';
+                                                    $checked = ($p->id == $consulta->paciente->id ) ? 'selected="true"' : '';
                                                 @endphp
                                                 <option {{ $checked  }} value="{{ $p->id }}">{{$p->nome}}</option>
                                             @endforeach
@@ -44,7 +44,7 @@
                                             <option></option>
                                             @foreach($alunos as $a)
                                                 @php
-                                                    $checked = ($a->id == $aluno->id) ? 'selected="true"' : '';
+                                                    $checked = ($a->id == $consulta->aluno->id) ? 'selected="true"' : '';
                                                 @endphp
                                                 <option {{ $checked  }} value="{{ $a->id }}">{{$a->tx_nome}}</option>
                                             @endforeach
@@ -59,7 +59,7 @@
                                             <option></option>
                                             @foreach($supervisores as $s)
                                                 @php
-                                                    $checked = ($s->id == $aluno->supervisor_id ) ? 'selected="true"' : '';
+                                                    $checked = ($s->id == $consulta->supervisor_id ) ? 'selected="true"' : '';
                                                 @endphp
                                                 <option {{ $checked  }} value="{{ $s->id }}">{{$s->tx_nome}}</option>
                                             @endforeach
@@ -70,14 +70,14 @@
                                 <div class="form-group">
                                     <label for="relato" class="col-sm-3 control-label">Relato</label>
                                     <div class="col-sm-9">
-                                        <textarea name="relato" id="relato" rows="10" class="form-control" style="resize: none" required></textarea>
+                                        <textarea name="relato" id="relato" rows="10" class="form-control" style="resize: none" required>{{$consulta->relato}}</textarea>
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <div class="text-center">
                                         <button class="btn btn-primary" type="submit" id="btn-salvar" onclick="return validaRelatoConsulta();"><span class="fa fa-check"></span> Salvar</button>
-                                        <a href="/agendamento" class="btn btn-danger"><span class="fa fa-hand-o-left"></span> Voltar</a>
+                                        <a href="/consulta" class="btn btn-danger"><span class="fa fa-hand-o-left"></span> Voltar</a>
                                     </div>
                                 </div>
                             </form>
@@ -100,4 +100,3 @@
         }
     </script>
 @endsection
-

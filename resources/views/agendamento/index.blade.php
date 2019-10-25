@@ -59,6 +59,24 @@
 
         $('#btn-consultar').hide();
 
+        $('#btn-cancelar').click(function () {
+            var href = $(this).attr('href');
+            swal({
+                    title: "Atenção!",
+                    text: "Deseja realmente cancelar este agendamento?",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    cancelButtonText: "Não",
+                    confirmButtonText: "Sim",
+                    closeOnConfirm: false
+                },
+                function () {
+                    window.location.href = href;
+                });
+            return false;
+        });
+
         document.addEventListener('DOMContentLoaded', function() {
             var calendarEl = document.getElementById('calendar');
 
@@ -115,6 +133,9 @@
                                     $('#btn-consultar').show();
                                     $('#btn-consultar').html('Consultar');
                                     $('#btn-consultar').attr("href", "/consulta/create/" + $("#paciente_id").val() + "/" + $("#aluno_id").val());
+                                    $("#paciente_id,#aluno_id").change(() => {
+                                        $('#btn-consultar').attr("href", "/consulta/create/" + $("#paciente_id").val() + "/" + $("#aluno_id").val());
+                                    });
                                     $('#btn-cancelar').show();
                                     $('#btn-status').hide();
                                     break;
@@ -208,5 +229,6 @@
                 }
             });
         });
+
     </script>
 @endsection
