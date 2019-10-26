@@ -15,15 +15,16 @@
 
     <!-- Styles -->
     @section('styles')
-    <link href="{{ mix('/css/inspinia.css') }}" rel="stylesheet">
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.3/css/bootstrap-select.min.css" />
-    <link href='{{asset("/js/plugins/fullcalendar/core/fullcalendar.min.css")}}' rel='stylesheet' />
-    <link href='{{asset("/js/plugins/fullcalendar/core/main.css")}}' rel='stylesheet' />
-    <link href='{{asset("/js/plugins/fullcalendar/daygrid/main.css")}}' rel='stylesheet' />
-    <link href='{{asset("/js/plugins/fullcalendar/timegrid/main.css")}}' rel='stylesheet' />
-    <link href='{{asset("/js/plugins/fullcalendar/list/main.css")}}' rel='stylesheet' />
-    <link href='{{asset("css/calendario.css")}}' rel='stylesheet' />
-    <link href='{{asset("css/plugins/dataTables/datatables.min.css")}}' rel='stylesheet' />
+        <link href="{{ mix('/css/inspinia.css') }}" rel="stylesheet">
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.3/css/bootstrap-select.min.css" />
+        <link href='{{asset("/js/plugins/fullcalendar/core/fullcalendar.min.css")}}' rel='stylesheet' />
+        <link href='{{asset("/js/plugins/fullcalendar/core/main.css")}}' rel='stylesheet' />
+        <link href='{{asset("/js/plugins/fullcalendar/daygrid/main.css")}}' rel='stylesheet' />
+        <link href='{{asset("/js/plugins/fullcalendar/timegrid/main.css")}}' rel='stylesheet' />
+        <link href='{{asset("/js/plugins/fullcalendar/list/main.css")}}' rel='stylesheet' />
+        <link href='{{asset("css/calendario.css")}}' rel='stylesheet' />
+        <link href='{{asset("css/plugins/dataTables/datatables.min.css")}}' rel='stylesheet' />
+        <link href='{{asset("css/plugins/sweetalert/sweetalert.css")}}' rel='stylesheet' />
     @show
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -45,96 +46,93 @@
 
     @section('scripts')
 
-    <script src="{{ asset('js/jquery-3.4.1.min.js') }}" charset="utf-8"></script>
-    <script src="{{ asset('js/popper.min.js') }}"></script>
-    <script src="{{ asset('js/plugins/metisMenu/jquery.metisMenu.js') }}"></script>
-    <script src="{{ asset('js/plugins/slimscroll/jquery.slimscroll.min.js')}}"></script>
-    <script src="{{ asset('js/plugins/dataTables/datatables.min.js') }}"></script>
-    <script src="{{ asset('js/plugins/dataTables/dataTables.bootstrap4.min.js') }}"></script>
-    <script src="{{ asset('js/bootstrap.js') }}"></script>
-    <script src="{{ asset('js/inspinia.js') }}"></script>
-    <script src="{{ asset('js/jasny-bootstrap.min.js') }}" charset="utf-8"></script>
-    <script src="{{ asset('js/select2.min.js') }}" charset="utf-8"></script>
-    <script src="{{ asset('js/choose.jquery.js') }}" charset="utf-8"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.3/js/bootstrap-select.min.js"></script>
-    <script src='{{asset("/js/plugins/fullcalendar/core/main.js")}}'></script>
-    <script src='{{asset("/js/plugins/fullcalendar/interaction/main.js")}}'></script>
-    <script src='{{asset("/js/plugins/fullcalendar/daygrid/main.js")}}'></script>
-    <script src='{{asset("/js/plugins/fullcalendar/timegrid/main.js")}}'></script>
-    <script src='{{asset("/js/plugins/fullcalendar/list/main.js")}}'></script>
-    <script src='{{asset("/js/plugins/fullcalendar/core/locales/pt-br.js")}}'></script>
-    <script src='{{asset("/js/plugins/fullcalendar/moment/main.min.js")}}'></script>
-
+        <script src="{{ asset('js/jquery-3.4.1.min.js') }}" charset="utf-8"></script>
+        <script src="{{ asset('js/popper.min.js') }}"></script>
+        <script src="{{ asset('js/plugins/metisMenu/jquery.metisMenu.js') }}"></script>
+        <script src="{{ asset('js/plugins/slimscroll/jquery.slimscroll.min.js')}}"></script>
+        <script src="{{ asset('js/plugins/dataTables/datatables.min.js') }}"></script>
+        <script src="{{ asset('js/plugins/dataTables/dataTables.bootstrap4.min.js') }}"></script>
+        <script src="{{ asset('js/bootstrap.js') }}"></script>
+        <script src="{{ asset('js/inspinia.js') }}"></script>
+        <script src="{{ asset('js/jasny-bootstrap.min.js') }}" charset="utf-8"></script>
+        <script src="{{ asset('js/select2.min.js') }}" charset="utf-8"></script>
+        <script src="{{ asset('js/choose.jquery.js') }}" charset="utf-8"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.3/js/bootstrap-select.min.js"></script>
+        <script src='{{asset("/js/plugins/fullcalendar/core/main.js")}}'></script>
+        <script src='{{asset("/js/plugins/fullcalendar/interaction/main.js")}}'></script>
+        <script src='{{asset("/js/plugins/fullcalendar/daygrid/main.js")}}'></script>
+        <script src='{{asset("/js/plugins/fullcalendar/timegrid/main.js")}}'></script>
+        <script src='{{asset("/js/plugins/fullcalendar/list/main.js")}}'></script>
+        <script src='{{asset("/js/plugins/fullcalendar/core/locales/pt-br.js")}}'></script>
+        <script src='{{asset("/js/plugins/fullcalendar/moment/main.min.js")}}'></script>
+        <!-- Sweet alert -->
+        <script src="{{ asset('js/plugins/sweetalert/sweetalert.min.js') }}"></script>
     @show
     @stack('body')
 
     @if(Session::has('error'))
-    <script>
-        $(document).ready(function() {
-            setTimeout(function() {
-                toastr.options = {
-                    closeButton: true,
-                    progressBar: true,
-                    showMethod: 'slideDown',
-                    timeOut: 6000
-                };
-                toastr.error('', '{{ Session::get('
-                    error ') }}');
-            }, 1300);
-        });
-    </script>
+        <script>
+            $(document).ready(function() {
+                setTimeout(function() {
+                    toastr.options = {
+                        closeButton: true,
+                        progressBar: true,
+                        showMethod: 'slideDown',
+                        timeOut: 6000
+                    };
+                    toastr.error('', '{{ Session::get('error ') }}');
+                }, 1300);
+            });
+        </script>
     @endif
 
     @if(Session::has('info'))
-    <script>
-        $(document).ready(function() {
-            setTimeout(function() {
-                toastr.options = {
-                    closeButton: true,
-                    progressBar: true,
-                    showMethod: 'slideDown',
-                    timeOut: 4000
-                };
-                toastr.info('Informação!', '{{ Session::get('
-                    info ') }}');
-            }, 1300);
-        });
-    </script>
+        <script>
+            $(document).ready(function() {
+                setTimeout(function() {
+                    toastr.options = {
+                        closeButton: true,
+                        progressBar: true,
+                        showMethod: 'slideDown',
+                        timeOut: 4000
+                    };
+                    toastr.info('Informação!', '{{ Session::get('info ') }}');
+                }, 1300);
+            });
+        </script>
     @endif
 
     @if(Session::has('warning'))
-    <script>
-        $(document).ready(function() {
-            setTimeout(function() {
-                toastr.options = {
-                    closeButton: true,
-                    progressBar: true,
-                    showMethod: 'slideDown',
-                    timeOut: 4000
-                };
-                toastr.warning('Atenção!', '{{ Session::get('
-                    warning ') }}');
-            }, 1300);
-        });
-    </script>
+        <script>
+            $(document).ready(function() {
+                setTimeout(function() {
+                    toastr.options = {
+                        closeButton: true,
+                        progressBar: true,
+                        showMethod: 'slideDown',
+                        timeOut: 4000
+                    };
+                    toastr.warning('Atenção!', '{{ Session::get('warning ') }}');
+                }, 1300);
+            });
+        </script>
     @endif
 
 
     @if(Session::has('success'))
-    <script>
-        $(document).ready(function() {
-            setTimeout(function() {
-                toastr.options = {
-                    closeButton: true,
-                    progressBar: true,
-                    showMethod: 'slideDown',
-                    timeOut: 4000
-                };
-                toastr.success('Ok!', '{{ Session::get('
-                    success ') }}');
-            }, 1300);
-        });
-    </script>
+        <script>
+            $(document).ready(function() {
+                setTimeout(function() {
+                    toastr.options = {
+                        closeButton: true,
+                        progressBar: true,
+                        showMethod: 'slideDown',
+                        timeOut: 4000
+                    };
+                    toastr.success('Ok!', '{{ Session::get('success ') }}');
+                }, 1300);
+            });
+        </script>
     @endif
 
     <script>
@@ -196,6 +194,51 @@
     </script>
 
     <script>
+        $(document).ready(function () {
+
+            /**
+             * @class Classe para exclusão de registros.
+             *
+             */
+            $('.link-excluir').click(function () {
+                var href = $(this).attr('href');
+                swal({
+                        title: "Atenção!",
+                        text: "Deseja realmente excluir o registro ?",
+                        type: "warning",
+                        showCancelButton: true,
+                        confirmButtonColor: "#DD6B55",
+                        confirmButtonText: "Sim, estou certo!",
+                        ButtonCancelText: "Cancelar",
+                        closeOnConfirm: false
+                    },
+                    function () {
+                        window.location.href = href;
+                    });
+
+                return false;
+            });
+
+            /**
+             * Inicialização do Datatables no projeto para qualquer listagem que tiver a classe dataTable.
+             *
+             */
+            $('.dataTable').DataTable({
+                pageLength: 25,
+                responsive: true
+            });
+        });
+
+        /**
+         * Obriga que os valores inseridos sejam do tipo inteiro (valor).
+         *
+         */
+        $('input.inteiro').keyup(function () {
+            $($(this)).val($(this).val().replace(/[^0-9]/g, ''));
+        });
+
+        // @todo refatorar para arquivo externo. Retirando o js de todas as páginas do sistema.
+
         $('#uf').on('change', function() {
             $.ajax({
                 url: "/search/cidadebyuf/" + $('#uf').val(),
@@ -209,7 +252,7 @@
             });
         });
 
-       
+
     </script>
 
     @section('js')
