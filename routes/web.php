@@ -96,5 +96,9 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('prontuariostatus', 'ProntuarioStatusController');
     Route::get('/prontuariostatus/{id}/destroy', 'ProntuarioStatusController@destroy')->name('prontuariostatus.delete');
 
+    /* Rotas da Permissions */
+    Route::resource('/permissao', 'PermissionController');
+    Route::post('/updatePermission', 'PermissionController@updatePermissions')->name('permissao.updatePermissions');
+
 });
 

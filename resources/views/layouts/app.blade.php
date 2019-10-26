@@ -71,6 +71,11 @@
                         <span class="nav-label">Status de cadastros</span>
                     </a>
                 </li>
+                <li class="">
+                    <a href="{{ route('permissao.index') }}">
+                        <span class="nav-label">Permissões</span>
+                    </a>
+                </li>
             </ul>
         </li>
     </ul>

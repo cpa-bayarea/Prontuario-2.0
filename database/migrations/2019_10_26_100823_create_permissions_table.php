@@ -17,7 +17,7 @@ class CreatePermissionsTable extends Migration
             
             $table->increments('id');
             $table->string('nome',50);
-            $table->string('descricao',200);
+            $table->string('descricao',200)->nullable();
             $table->timestamps();
             
         });
