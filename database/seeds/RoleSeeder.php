@@ -13,17 +13,16 @@ class RoleSeeder extends Seeder
     {
        \DB::table('roles')->insert(array (
             0 => array (               
-                'name' => 'SuperAdmin',
-                'descricao' => 'Acesso total ao sistema'
+                'nome' => 'SuperAdmin'               
             ),
             1 => array(
-                'name' => 'Admin'                
+                'nome' => 'Admin'                
             ),
             2 => array(
-                'name' => 'Supervisor'                
+                'nome' => 'Supervisor'                
             ),
             3 => array(
-                'name' => 'Aluno'
+                'nome' => 'Aluno'
             )
       ));
     }
