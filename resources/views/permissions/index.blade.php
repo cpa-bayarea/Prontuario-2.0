@@ -38,10 +38,10 @@
                 <div class="ibox-title">
                     <h5>Permissões</h5>
                     <div class="ibox-tools">
-                        <form action="/updatePermission" method="POST">
-                        @csrf
-                            <input class="btn btn-info" type="submit" value="Atualizar Permissões">
-                        </form>
+
+
+                        <button class="btn btn-info" id="updatePermission" type="submit">Atualizar Permissões</button>
+
                         <a class="collapse-link">
                             <i class="fa fa-chevron-up"></i>
                         </a>
@@ -67,4 +67,32 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('js')
+<script>
+    $('#updatePermission').click(() => {
+
+
+
+        $.ajax({
+            type: 'POST',
+            url: '/updatePermission',
+            data: {
+                "_token": "{{ csrf_token() }}"
+            },
+            success: function(data) {
+
+                $('#updatePermission').text('Atualizado');
+                $('#updatePermission').prop('disabled',true);
+                
+            },
+            error: function(error) {
+                console.log(error);
+            }
+        })
+    });
+</script>
+
+
 @endsection
