@@ -24,16 +24,18 @@ class PermissionController extends Controller
 
     public function updatePermissions()
     {
-        
-        foreach (Route::getRoutes() as $route) {
-            if ($route->getName()) {
-                Permission::firstOrCreate([
-                    'nome' => $route->getName()
-                ]);
+        try {
+            foreach (Route::getRoutes() as $route) {
+                if ($route->getName()) {
+                    Permission::firstOrCreate([
+                        'nome' => $route->getName()
+                    ]);
+                }
             }
+            return ["success" => true];
+        } catch (Exception  $e) {
+            return ["error" => $e->getMessage()];
         }
-
-        return true;
     }
 
     /**
