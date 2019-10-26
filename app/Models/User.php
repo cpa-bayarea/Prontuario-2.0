@@ -44,19 +44,17 @@ class User extends Authenticatable
     }
     
     
-     public function hasPermission(Permission $permission)
-    {
+     public function hasPermission()
+    {   
         if (Auth::user()->hasAnyRoles('SuperAdmin')) {
             return true;
         }
-        return $this->hasAnyRoles($permission->roles);
+      
+        return $this->hasAnyRoles(Permission::with('roles')->get());
     }
     
     public function hasAnyRoles($roles)
     {   
-        
-        
-
         if(is_array($roles) || is_object($roles) ) {            
             return !! $roles->intersect($this->roles)->count();            
         }              

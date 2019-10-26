@@ -22,6 +22,7 @@ class DatabaseSeeder extends Seeder
             GrupoTableSeeder::class,
             ItensGrupoTableSeeder::class,
             RoleSeeder::class,
+            RoleUserSeeder::class,
         ]);
     }
 }

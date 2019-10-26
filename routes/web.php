@@ -16,9 +16,10 @@ Auth::routes();
 
 Route::middleware(['auth'])->group(function () {
 
-    Route::group(['middleware' => 'role'], function () {
+    Route::get('/home', 'HomeController@index')->name('home');
+    Route::get('/', 'AgendamentoController@index');
 
-        Route::get('/', 'AgendamentoController@index');
+    Route::group(['middleware' => 'role'], function () {      
 
         Route::get('/paciente', 'PacienteController@index')->name('paciente');
         Route::get('/paciente/create', 'PacienteController@create')->name('paciente.create');
@@ -58,10 +59,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('grupoitens/{grupo_id}', 'GrupoItemController@index')->name('grupoItem');
         Route::post('grupoitens', 'GrupoItemController@store')->name('grupoItem.store');
         Route::get('grupoitens/edit/{id}', 'GrupoItemController@edit')->name('grupoItem.edit');
-        Route::post('grupoitens/{id}', 'GrupoItemController@destroy')->name('grupoItem.destroy');
-
-
-        Route::get('/home', 'HomeController@index')->name('home');
+        Route::post('grupoitens/{id}', 'GrupoItemController@destroy')->name('grupoItem.destroy');        
 
         /**  Rotas de Linhas Teóricas **/
         Route::get('/linha_teorica', 'LinhaTeoricaController@index')->name('linha_teorica.index');
