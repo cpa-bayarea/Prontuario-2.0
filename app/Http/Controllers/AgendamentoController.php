@@ -104,8 +104,13 @@ class AgendamentoController extends Controller
             $agendamento->start = $request->start;
             $agendamento->end   = $request->end;
 
-            $agendamento->save();
-            return redirect()->route('agendamento.index');
+            if ($this->saveAgendamento($agendamento, $agendamento->aluno_id, $agendamento->start, $agendamento->end, [1, 2], $agendamento->id, null)) {
+                Session::flash('success', 'Operação realizada com sucesso');
+                return redirect()->route('agendamento.index');
+            } else {
+                Session::flash('error', 'Já existe agendamento para o terapeuta no intervalo de tempo informado!');
+                return redirect()->route('agendamento.index');
+            }
         } catch (Exception $e) {
             throw new exception('Não foi possível alterar o agendamento!');
         }
@@ -135,9 +140,13 @@ class AgendamentoController extends Controller
                 $prontuario = (new ProntuarioController())->createByAgendamento($request);
             }
 
-            $agendamento->save();
-            Session::flash('success', 'Operação realizada com sucesso');
-            return redirect()->route('agendamento.index');
+            if ($this->saveAgendamento($agendamento, $agendamento->aluno_id, $agendamento->start, $agendamento->end, [1, 2], $agendamento->id, null)) {
+                Session::flash('success', 'Operação realizada com sucesso');
+                return redirect()->route('agendamento.index');
+            } else {
+                Session::flash('error', 'Já existe agendamento para o terapeuta no intervalo de tempo informado!');
+                return redirect()->route('agendamento.index');
+            }
         } catch (Exception $e) {
             throw new exception('Não foi possível alterar o agendamento!');
         }

@@ -187,9 +187,9 @@
                     id =  event.event._def.publicId;
 
                     start = moment.parseZone(event.event._instance.range.start).utc().format('YYYY-MM-DD HH:mm');
-                    if(event.event._instance.range.end){
+                    if (event.event._instance.range.end) {
                         end = moment.parseZone(event.event._instance.range.end).utc().format('YYYY-MM-DD HH:mm');
-                    }else{
+                    } else {
                         end = start;
                     }
 
