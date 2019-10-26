@@ -61,6 +61,7 @@ Route::middleware(['auth'])->group(function () {
     /**  Rotas de Supervisores **/
     Route::resource('supervisor', 'SupervisorController');
     Route::get('/supervisor/{id}/destroy', 'SupervisorController@destroy')->name('supervisor.delete');
+    Route::get('/supervisor/{nu_crp}/crp', 'SupervisorController@searchCrp')->name('supervisor.search-crp');
 
 
     /**  Rotas de Alunos **/
@@ -82,6 +83,11 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('prontuario', 'ProntuarioController');
     Route::get('search/prontuario/findByPacienteId/{id}', 'ProntuarioController@findByPacienteId')->name('prontuario.findByPacienteId');
     Route::get('/prontuario/{id}/destroy', 'ProntuarioController@destroy');
+
+    Route::resource('users', 'UserController');
+    Route::get('/users/{id}/destroy', 'UserController@destroy')->name('users.delete');
+    Route::get('/users/{username}/search', 'UserController@searchUsername')->name('users.search-username');
+    Route::get('/users/{email}/email', 'UserController@searchEmail')->name('users.search-email');
 
     Route::resource('prontuariostatus', 'ProntuarioStatusController');
     Route::get('/prontuariostatus/{id}/destroy', 'ProntuarioStatusController@destroy')->name('prontuariostatus.delete');

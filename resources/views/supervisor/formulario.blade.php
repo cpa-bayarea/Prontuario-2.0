@@ -13,17 +13,37 @@
 
                         <form class="form-horizontal" action="{{ route('supervisor.store') }}" method="post">
                             @csrf
-                            <input type="hidden" name="id" id="id" value="{{base64_encode($model->id)}}">
+                            <input type="text" name="id" id="id" value="{{base64_encode($model->id)}}">
 
                             <div class="form-group">
-                                <label for="tx_nome" class="col-sm-2 control-label">Nome <span class="obrigatorio">*</span></label>
+                                <label for="name" class="col-sm-2 control-label">Nome <span class="obrigatorio">*</span></label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" name="tx_nome" id="tx_nome"
-                                           value="{{ $model->tx_nome }}" maxlength="255" required>
+                                    <input type="text" class="form-control" name="name" id="name"
+                                           value="{{ $model->name }}" maxlength="255" required>
                                 </div>
                             </div>
 
                             <div class="form-group">
+                                <div class="alert alert-warning col-sm-12 alert-dismissible" role="alert" id="alert-email">
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                    <strong>Atenção!</strong> E-mail em uso.
+                                </div>
+                                <label for="email" class="col-sm-2 control-label">E-mail <span class="obrigatorio">*</span></label>
+                                <div class="col-sm-10">
+                                    <input type="email" class="form-control" name="email" id="email"
+                                           value="{{ $model->email }}" maxlength="255" required>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="alert alert-warning col-sm-12 alert-dismissible" role="alert" id="alert-username">
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                    <strong>Atenção!</strong> Número de matrícula em uso.
+                                </div>
                                 <label for="username" class="col-sm-2 control-label">Matrícula <span class="obrigatorio">*</span></label>
                                 <div class="col-sm-10">
                                     <input type="text" class="form-control inteiro" name="username" id="username"
@@ -48,26 +68,49 @@
                             </div>
 
                             <div class="form-group">
+                                <div class="alert alert-warning col-sm-12 alert-dismissible" role="alert" id="alert-crp">
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                    <strong>Atenção!</strong> Número de CRP em uso.
+                                </div>
                                 <label for="nu_crp" class="col-sm-2 control-label">CRP <span class="obrigatorio">*</span></label>
                                 <div class="col-sm-10">
                                     <input type="text" class="form-control inteiro" id="nu_crp" name="nu_crp"
-                                           value="{{ $model->nu_celular }}" required maxlength="7">
+                                           value="{{ $model->nu_crp }}" required maxlength="7">
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <label class="col-sm-2 control-label" for="linha_teorica">Linha Teórica <span class="obrigatorio">*</span></label>
-                                <div class="col-lg-10">
+                                <label class="col-sm-2 control-label" for="linha_id">Linha Teórica <span class="obrigatorio">*</span></label>
+                                <div class="col-sm-10">
                                     <select name="linha_id" class="form-control" data-show-subtext="true"
-                                            id="linha_teorica" data-live-search="true" required>
+                                        id="linha_id" data-live-search="true" required>
                                         <option selected disabled>Selecione</option>
-                                            @foreach($linhas as $linha)
-                                                <option value="{{$linha->id}}" {{ ($model->linha_id == $linha->id) ? 'selected' : '' }}>
-                                                    {{ $linha->tx_nome }}
-                                                </option>
-                                            @endforeach
+                                        @foreach($linhas as $linha)
+                                            <option value="{{$linha->id}}" {{ ($model->linha_id == $linha->id) ? 'selected' : '' }}>
+                                                {{ $linha->tx_nome }}
+                                            </option>
+                                        @endforeach
 
                                     </select>
+                                </div>
+                            </div>
+                            <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
+                                <label class="col-sm-2 control-label" for="password">Senha </label>
+                                <div class="col-sm-10">
+                                    <input type="password" id="password" class="form-control" placeholder="Password" name="password">
+                                    @if ($errors->has('password'))
+                                        <span class="help-block">
+                                            <strong>{{ $errors->first('password') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label" for="passwordConfirm">Confirmação de Senha </label>
+                                <div class="col-sm-10">
+                                    <input type="password" id="passwordConfirm" class="form-control" placeholder="Confirm Password" name="password_confirmation">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -90,4 +133,47 @@
         </div>
     </div>
 
+@endsection
+@section('js')
+    <script type="text/javascript">
+        $(function () {
+            const id = $('#id').val();
+            $('#alert-username').hide();
+            $('#alert-crp').hide();
+            $('#alert-email').hide();
+
+            $('#username').on('change', function () {
+                $.get('/users/' + $(this).val() + '/search', function (response) {
+                    if (response.type === 'error') {
+                        $('#alert-username').show();
+                        $('#username').val('');
+                    } else {
+                        $('#alert-username').hide();
+                    }
+                });
+            });
+
+            $('#nu_crp').on('change', function () {
+                $.get('/supervisor/' + $(this).val() + '/crp', function (response) {
+                    if (response.type === 'error') {
+                        $('#alert-crp').show();
+                        $('#nu_crp').val('');
+                    } else {
+                        $('#alert-crp').hide();
+                    }
+                });
+            });
+
+            $('#email').on('change', function () {
+                $.get('/users/' + $(this).val() + '/email', function (response) {
+                    if (response.type === 'error') {
+                        $('#alert-email').show();
+                        $('#email').val('');
+                    } else {
+                        $('#alert-email').hide();
+                    }
+                });
+            });
+        });
+    </script>
 @endsection

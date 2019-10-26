@@ -18,7 +18,7 @@ class CreateTelefonesTable extends Migration
             $table->string('ddd', 3)->nullable();
             $table->string('numero', 15);
 
-            $table->integer('user_id')->unsigned()->nullable();
+            $table->unsignedBigInteger('user_id')->unsigned()->nullable();
             $table->foreign('user_id')->references('id')->on('users');
 
             $table->unsignedBigInteger('paciente_id')->unsigned()->nullable();

@@ -15,20 +15,17 @@ class CreateSupervisorTable extends Migration
     {
         Schema::create('supervisores', function (Blueprint $table) {
             $table->bigIncrements('id');
-
-            $table->string('tx_nome', 100);
-            $table->string('username', 11)->unique(); // Matrícula
-            $table->string('nu_telefone', 15);
-            $table->string('nu_celular', 15)->nullable();
             $table->string('nu_crp', 7)->unique();
-//            $table->char('status', 1)->default('P'); // Opções => [A, I, P] Ativo, Inativo or Pendente
 
             $table->unsignedBigInteger('linha_id');
             $table->foreign('linha_id')->references('id')->on('linhas_teoricas');
+
+            $table->unsignedbiginteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users');
+
             $table->timestamps();
             $table->softDeletes();
-
-//            $table->index(['id', 'username', 'nu_crp']);
+            $table->index(['id', 'nu_crp']);
         });
     }
 

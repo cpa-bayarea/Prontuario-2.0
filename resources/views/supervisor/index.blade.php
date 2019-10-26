@@ -37,9 +37,9 @@
                                                 <span class="fa fa-trash"></span>
                                             </a>
                                         </td>
-                                        <td>{{ $supervisor->tx_nome }}</td>
+                                        <td>{{ $supervisor->user->name }}</td>
                                         <td>{{ $supervisor->nu_crp }}</td>
-                                        <td>{{ $supervisor->username }}</td>
+                                        <td>{{ $supervisor->user->username }}</td>
                                         <td>{{ $supervisor->linhateorica->tx_nome }}</td>
                                     </tr>
                                 @endforeach
