@@ -12,8 +12,7 @@ class RoleSeeder extends Seeder
     public function run()
     {
        \DB::table('roles')->insert(array (
-            0 => array (
-               
+            0 => array (               
                 'name' => 'SuperAdmin',
                 'descricao' => 'Acesso total ao sistema'
             ),
