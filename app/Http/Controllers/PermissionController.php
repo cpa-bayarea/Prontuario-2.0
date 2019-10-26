@@ -17,20 +17,23 @@ class PermissionController extends Controller
      */
     public function index()
     {
-        $roles = Role::all();                
-        return view('permissions.index',compact('roles'));
-
+        $roles = Role::all();
+        return view('permissions.index', compact('roles'));
     }
 
 
     public function updatePermissions()
     {
+        
         foreach (Route::getRoutes() as $route) {
-            Permission::create([
-                'nome' => $route->getName()
-            ]);
-            
+            if ($route->getName()) {
+                Permission::firstOrCreate([
+                    'nome' => $route->getName()
+                ]);
+            }
         }
+
+        return true;
     }
 
     /**
