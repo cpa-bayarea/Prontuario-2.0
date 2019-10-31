@@ -18,7 +18,7 @@ Nome                              |  E-mail                          |  Cargo   
 André Mendes                      | andre@gmail.com                  |        Desenvolvedor         |
 Douglas Santana                   | douglasantana007@gmail.com       |        Desenvolvedor         |
 João Lima                         | jlima@gmail.com                  |        Scrum Master          |
-Luiz Resplandes                   | lresplandes@gmail.com            |        Desenvolvedor         |
+Luiz Resplandes                   | luizresplandeoliveira@gmail.com  |        Desenvolvedor         |
 Victor                            | victor@gmail.com                 |        Analista de Sistemas  |
 Renan Ribeiro                     | renan@gmail.com                  |        Analista de Sistemas  |
 
