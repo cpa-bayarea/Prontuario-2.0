@@ -23,4 +23,9 @@ class Supervisor extends AbstractModel
     {
         return $this->hasMany('App\Models\Triagem');
     }
+
+    public function aluno()
+    {
+        return $this->hasMany('App\Models\Aluno', 'supervisor_id');
+    }
 }

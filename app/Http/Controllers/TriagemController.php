@@ -31,8 +31,8 @@ class TriagemController extends Controller
 
         $paciente = new Paciente();
 
-        $supervisores = Supervisor::orderBy('tx_nome', 'asc')->get();
-        $alunos = Aluno::orderBy('tx_nome', 'asc')->get();
+        $supervisores = Supervisor::all();
+        $alunos = Aluno::all();
         $tipoAtendimentos = Grupo::find(1);
         $grupos = Grupo::find(2);
         $temporario = Grupo::find(3);

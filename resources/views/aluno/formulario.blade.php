@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('content-title', 'Supervisor')
+@section('content-title', 'Cadastro de Aluno')
 @section('content')
 
     <div class="wrapper wrapper-content animated fadeInRight">
@@ -11,7 +11,7 @@
                     </div>
                     <div class="ibox-content">
 
-                        <form class="form-horizontal" action="{{ route('supervisor.store') }}" method="post">
+                        <form class="form-horizontal" action="{{ route('aluno.store') }}" method="post">
                             @csrf
                             <input type="hidden" name="id" id="id" value="{{base64_encode($model->id)}}">
 
@@ -66,30 +66,24 @@
                                            value="{{ $model->nu_celular }}" maxlength="8" required>
                                 </div>
                             </div>
-
                             <div class="form-group">
-                                <div class="alert alert-warning col-sm-12 alert-dismissible" role="alert" id="alert-crp">
-                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                    <strong>Atenção!</strong> Número de CRP em uso.
-                                </div>
-                                <label for="nu_crp" class="col-sm-2 control-label">CRP <span class="obrigatorio">*</span></label>
+                                <label for="nu_semestre" class="col-sm-2 control-label">Semestre
+                                    <span class="obrigatorio">*</span>
+                                </label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control inteiro" id="nu_crp" name="nu_crp"
-                                           value="{{ $model->nu_crp }}" required maxlength="7">
+                                    <input type="text" class="form-control inteiro" id="nu_semestre" name="nu_semestre"
+                                           value="{{ $model->nu_semestre }}" required maxlength="2">
                                 </div>
                             </div>
-
                             <div class="form-group">
-                                <label class="col-sm-2 control-label" for="linha_id">Linha Teórica <span class="obrigatorio">*</span></label>
+                                <label class="col-sm-2 control-label" for="supervisor_id">Supervisor <span class="obrigatorio">*</span></label>
                                 <div class="col-sm-10">
-                                    <select name="linha_id" class="form-control" data-show-subtext="true"
-                                        id="linha_id" data-live-search="true" required>
+                                    <select name="supervisor_id" class="form-control" data-show-subtext="true"
+                                            id="supervisor_id" data-live-search="true" required>
                                         <option selected disabled>Selecione</option>
-                                        @foreach($linhas as $linha)
-                                            <option value="{{$linha->id}}" {{ ($model->linha_id == $linha->id) ? 'selected' : '' }}>
-                                                {{ $linha->tx_nome }}
+                                        @foreach($supervisores as $supervisor)
+                                            <option value="{{$supervisor->id}}" {{ ($model->supervisor_id == $supervisor->id) ? 'selected' : '' }}>
+                                                {{ $supervisor->user->name }}
                                             </option>
                                         @endforeach
 
@@ -119,7 +113,7 @@
                                         <span class="glyphicon glyphicon-send"></span>
                                         Salvar
                                     </button>
-                                    <a href="{{ route('supervisor.index') }}" class="btn btn-danger">
+                                    <a href="{{ route('aluno.index') }}" class="btn btn-danger">
                                         <span class="fa fa-reply"></span>
                                         Voltar
                                     </a>
@@ -149,17 +143,6 @@
                         $('#username').val('');
                     } else {
                         $('#alert-username').hide();
-                    }
-                });
-            });
-
-            $('#nu_crp').on('change', function () {
-                $.get('/supervisor/' + $(this).val() + '/crp', function (response) {
-                    if (response.type === 'error') {
-                        $('#alert-crp').show();
-                        $('#nu_crp').val('');
-                    } else {
-                        $('#alert-crp').hide();
                     }
                 });
             });

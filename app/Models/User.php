@@ -40,4 +40,9 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Models\Supervisor');
     }
+
+    public function aluno()
+    {
+        return $this->hasMany('App\Models\Aluno');
+    }
 }

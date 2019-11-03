@@ -6,7 +6,7 @@ class Aluno extends AbstractModel
 {
     protected $table = 'alunos';
     protected $fillable = [
-        'tx_nome', 'username', 'nu_telefone', 'nu_celular', 'nu_semestre', 'supervisor_id'
+        'nu_semestre', 'supervisor_id', 'user_id'
     ];
 
     /**
@@ -14,11 +14,16 @@ class Aluno extends AbstractModel
      */
     public function supervisor()
     {
-        return $this->belongsTo('App\Models\Supervisor', 'supervisor_id', 'id');
+        return $this->belongsTo('App\Models\Supervisor', 'supervisor_id');
     }
 
     public function triagem() {
         return $this->hasMany('App\Models\Triagem');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo('App\Models\User');
     }
 
 }
