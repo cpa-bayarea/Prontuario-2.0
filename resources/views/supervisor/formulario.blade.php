@@ -135,12 +135,17 @@
 
 @endsection
 @section('js')
+    <script src="{{ asset('js/jquery.mask.min.js') }}"></script>
+
     <script type="text/javascript">
         $(function () {
             const id = $('#id').val();
             $('#alert-username').hide();
             $('#alert-crp').hide();
             $('#alert-email').hide();
+            $("#nu_crp").mask("000/0000");
+            $("#nu_celular").mask("0000-0000");
+            $("#nu_telefone").mask("0000-0000");
 
             $('#username').on('change', function () {
                 $.get('/users/' + $(this).val() + '/search', function (response) {
