@@ -21,6 +21,8 @@ class DatabaseSeeder extends Seeder
             AgendamentoStatusTableSeeder::class,
             GrupoTableSeeder::class,
             ItensGrupoTableSeeder::class,
+            RoleSeeder::class,
+            RoleUserSeeder::class,
         ]);
     }
 }
