@@ -15,7 +15,7 @@ class CreatePermissionsTable extends Migration
     {
         Schema::create('permissions', function (Blueprint $table) {
             
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->string('nome',50)->unique();
             $table->string('descricao',200)->nullable();
             $table->timestamps();
@@ -24,14 +24,14 @@ class CreatePermissionsTable extends Migration
         
         Schema::create('permission_roles', function (Blueprint $table) {
             
-            $table->increments('id');
-            $table->integer('role_id')->unsigned();
+            $table->bigIncrements('id');
+            $table->bigInteger('role_id')->unsigned();
             
             $table->foreign('role_id')
                 ->references('id')
                 ->on('roles');
             
-            $table->integer('permission_id')->unsigned();
+            $table->bigInteger('permission_id')->unsigned();
             $table->foreign('permission_id')
                 ->references('id')
                 ->on('permissions');

@@ -15,7 +15,7 @@ class CreateRolesTable extends Migration
     {
         Schema::create('roles', function (Blueprint $table) {
             
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->string('nome',50);
             $table->string('descricao',200)->nullable();
             $table->timestamps();
@@ -23,21 +23,17 @@ class CreateRolesTable extends Migration
         });
         
         Schema::create('role_users', function (Blueprint $table) {
-            
-            $table->increments('id');
-            
-            $table->integer('user_id')->unsigned();
-            $table->foreign('user_id')
-                ->references('id')
-                ->on('users');
-                
-            $table->integer('role_id')->unsigned();   
-            $table->foreign('role_id')
-                ->references('id')
-                ->on('roles');
-            
+
+            $table->bigIncrements('id');
+
+            $table->bigInteger('user_id')->unsigned();
+            $table->foreign('user_id')->references('id')->on('users');
+
+            $table->bigInteger('role_id')->unsigned();
+            $table->foreign('role_id')->references('id')->on('roles');
+
             $table->timestamps();
-            
+
         });
     }
 
