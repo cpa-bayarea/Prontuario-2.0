@@ -6,12 +6,7 @@
         <div class="col-md-12">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
-                    <h5>Dados Gerais</h5>
-                    <div class="ibox-tools">
-                        <a class="collapse-link">
-                            <i class="fa fa-chevron-up"></i>
-                        </a>
-                    </div>
+                    <h5>Prontuário</h5>
                 </div>
                 <div class="ibox-content">
                     <div class="row">

@@ -41,7 +41,9 @@
                     </div>
 
                     <div class="form-group row"><label class="col-lg-2 col-form-label" for="cpf">CPF</label>
-                        <div class="col-lg-10"><input type="text" placeholder="000.000.000-00" data-mask="999.999.999-99" required name="cpf" id="cpf" class="form-control"></div>
+                        <div class="col-lg-10">
+                            <input type="text" placeholder="000.000.000-00" data-mask="999.999.999-99" required name="cpf" id="cpf" class="form-control">
+                        </div>
                     </div>
 
                     <div class="form-group row"><label class="col-lg-2 col-form-label" for="rg">RG</label>

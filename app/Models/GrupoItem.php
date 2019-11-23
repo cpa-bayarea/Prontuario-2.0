@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class GrupoItem extends Model
 {
-    protected $fillable = ['nome', 'grupo_id', 'ordem', 'outro'];
+    protected $fillable = ['tx_nome', 'nu_ordem', 'tx_outro', 'grupo_id'];
 
     public function grupo()
     {

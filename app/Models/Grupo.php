@@ -2,11 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
-
-class Grupo extends Model
+class Grupo extends AbstractModel
 {
-    protected $fillable = ['nome'];
+    protected $fillable = ['tx_nome'];
 
     public function grupoItem(){
         return $this->hasMany('App\Models\GrupoItem','grupo_id');

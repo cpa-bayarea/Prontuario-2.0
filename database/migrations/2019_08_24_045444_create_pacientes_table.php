@@ -21,16 +21,16 @@ class CreatePacientesTable extends Migration
             $table->string('nome_responsavel')->nullable();
             $table->date('data_nascimento');
             $table->string('cpf',14)->unique()->nullable();
-            $table->string('rg')->nullable();
+            $table->string('rg', 15)->nullable();
             $table->string('endereco')->nullable();
             $table->string('email')->nullable();
 
             $table->integer('cidade_id')->unsigned()->nullable();
             $table->foreign('cidade_id')->references('id')->on('cities');
 
-            $table->unsignedBigInteger('id_status');
-            $table->foreign('id_status')->references('id')->on('status_de_cadastros');
-           
+            $table->unsignedBigInteger('status_id');
+            $table->foreign('status_id')->references('id')->on('status_de_cadastros');
+
             $table->timestamps();
             $table->softDeletes();
         });

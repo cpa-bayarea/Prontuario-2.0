@@ -42,9 +42,9 @@ class PacienteController extends Controller
         } else {
             $paciente = new Paciente();
         }
-        $paciente->id_status = 1;
+        $paciente->status_id = 1;
         $paciente->fill($request->all());
-        $paciente->save();
+//        $paciente->save();
 
         if ($request->telefone) {
 

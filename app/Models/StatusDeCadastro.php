@@ -2,13 +2,7 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
-
-class StatusDeCadastro extends Model
+class StatusDeCadastro extends AbstractModel
 {
-    use SoftDeletes;
-    protected $fillable = [
-        'status',
-    ];
+    protected $fillable = ['status'];
 }

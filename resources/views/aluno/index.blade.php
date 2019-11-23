@@ -1,53 +1,53 @@
 @extends('layouts.app')
 @section('content-title', 'Alunos')
 @section('content')
-    <div class="col-12">
-        <div class="ibox ">
-            <div class="ibox-title">
-                <h5>Listagem de Alunos</h5>
-                <a class="btn-small btn btn-success" style="margin-left: 93%" type="button"
-                   href="{{ route('aluno.create') }}">
-                    <span class="glyphicon glyphicon-plus"></span>Novo
-                </a>
-            </div>
-            <div class="ibox-content">
-                <table class="table">
-                    <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Nome</th>
-                        <th>Semestre</th>
-                        <th>Matrícula</th>
-                        <th>Supervisor</th>
-                        <th colspan="2">Ações</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    @foreach($alunos as $aluno)
-                        <tr>
-                            <td>{{ $aluno->id }}</td>
-                            <td>{{ $aluno->tx_nome }}</td>
-                            <td>{{ $aluno->nu_semestre }}</td>
-                            <td>{{ $aluno->username }}</td>
-                            <td>{{ $aluno->supervisor->tx_nome }}</td>
-                            <td align="center">
-                                <a href="{{ route('aluno.edit', $aluno->id) }}"
-                                   class="btn btn-primary glyphicon glyphicon-pencil">
-                                </a>
-                            </td>
-                            <td align="center">
-                                <form action="{{ route('aluno.delete', $aluno->id) }}" method="post">
-                                    @csrf
-                                <a>
-                                    <button class="btn btn-danger linha-trash glyphicon glyphicon-trash" type="submit">
-                                    </button>
-                                </a>
-                                </form>
-                            </td>
-                        </tr>
-                    @endforeach
-                    </tbody>
-                </table>
+
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>Dados Gerais</h5>
+                    </div>
+                    <div class="ibox-content">
+                        <a href="{{ route('aluno.create') }}" class="btn-novo btn btn-success">
+                            <i class="fa fa-plus"></i>&nbsp;Novo
+                        </a>
+                        <div class="table-responsive">
+                            <table class="table table-striped table-hover table-bordered dataTable">
+                                <thead>
+                                <tr>
+                                    <th>Ações</th>
+                                    <th>Nome</th>
+                                    <th>Semestre</th>
+                                    <th>Matrícula</th>
+                                    <th>Supervisor</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @foreach($aItens as $aluno)
+                                    <tr>
+                                        <td>
+                                            <a href="{{ route('aluno.edit', base64_encode($aluno->id)) }}"
+                                               class="btn btn-primary" title="Editar">
+                                                <span class="fa fa-edit"></span>
+                                            </a>
+                                            <a href="{{ route('aluno.delete', base64_encode($aluno->id)) }}"
+                                               class="btn btn-danger link-excluir" title="Excluir">
+                                                <span class="fa fa-trash"></span>
+                                            </a>
+                                        </td>
+                                        <td>{{ $aluno->user->name }}</td>
+                                        <td>{{ $aluno->nu_semestre }}</td>
+                                        <td>{{ $aluno->user->username }}</td>
+                                        <td>{{ $aluno->supervisor->user->name }}</td>
+                                    </tr>
+                                @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

@@ -2,156 +2,67 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Aluno;
+use App\Models\Supervisor;
+use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Session;
 
-class AlunoController extends Controller
+class AlunoController extends AbstractController
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     * @throws \exception
-     */
-    public function index()
-    {
-        try {
-            $alunos = Aluno::orderBy('tx_nome', 'asc')->get();
-            return view('aluno.index', compact('alunos', $alunos));
-        } catch (\Exception $e) {
-            throw new \exception('Não foi possível visualizar os Alunos !');
-        }
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        $supervisores = DB::table('tb_supervisor')->get();
-        return view('aluno.form', compact('supervisores', $supervisores));
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
-     * @throws \exception
-     */
     public function store(Request $request)
     {
-        try {
-            if (!empty($request['id'])) {
-                return $this->update($request, $request['id']);
-            }
-            $aluno = new Aluno();
-            $aluno->tx_nome = $request->tx_nome;
-            $aluno->username = $request->username;
-            $aluno->nu_telefone = $request->nu_telefone;
-            $aluno->nu_celular = $request->nu_celular;
-            $aluno->nu_semestre = $request->nu_semestre;
-            $aluno->supervisor_id = $request->supervisor_id;
-            if (key_exists($request['status'], array($request))) {
-                $aluno->status = $request->status;
-            }
-            $aluno->save();
-            return redirect()->route('aluno.index');
-        } catch (\Exception $e) {
-            dd($e);
-            throw new \exception('Não foi possível salvar o Aluno ' . $request->tx_nome . ' !');
+        if ($id = base64_decode($request->id)) {
+            $this->_model = $this->_model->find($id);
+            $user = User::find($id);
+        } else {
+            $user = new User();
         }
+
+        if (!empty($request->password)) {
+            if ($request->password !== $request->password_confirmation ) {
+                return redirect()->back();
+            } else {
+                $user->password =  bcrypt($request->password);
+            }
+        }
+
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->username = $request->username;
+        $user->nu_telefone = $request->nu_telefone;
+        $user->nu_celular = $request->nu_celular;
+        $user->save();
+
+        $this->_model->user_id = $user->id;
+        $this->_model->supervisor_id = $request->supervisor_id;
+        $this->_model->nu_semestre = $request->nu_semestre;
+        $this->_model->save();
+
+        return redirect($this->_redirectSave);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+    public function create()
     {
-        //
+        $aDados = $this->_recuperarDados();
+        $aDados['model'] = $this->_model;
+        $aDados['supervisores'] = Supervisor::all();
+
+        return view("{$this->_dirView}.formulario", $aDados);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     * @throws \exception
-     */
     public function edit($id)
     {
-        try {
-            $aluno = DB::table('tb_aluno')->where('id', '=', $id)->first();
-            $supervisores = DB::table('tb_supervisor')->get();
-            return view('aluno.edit', compact(['aluno', 'supervisores'], $aluno, $supervisores));
-        } catch (\Exception $e) {
-            throw new \exception('Não foi possível salvar o Aluno de id ->' . $id . ' !');
-        }
-    }
+        $aDados = $this->_recuperarDados();
+        $aDados['model'] = $this->_model->find(base64_decode($id));
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @param int $id
-     * @return \Illuminate\Http\Response]
-     * @throws \exception
-     */
-    public function update(Request $request, $id)
-    {
-        try {
-            $aluno = Aluno::find($id);
-            $aluno->tx_nome = $request->tx_nome;
-            $aluno->username = $request->username;
-            $aluno->nu_telefone = $request->nu_telefone;
-            $aluno->nu_celular = $request->nu_celular;
-            $aluno->nu_semestre = $request->nu_semestre;
-            $aluno->supervisor_id = $request->supervisor_id;
-            if (key_exists($request['status'], array($request))) {
-                $aluno->status = $request->status;
-            }
-            $aluno->save();
-            Session::flash('success', 'Operação realizada com sucesso');
-            return redirect()->route('aluno.index');
-        } catch (\Exception $e) {
-            dd($e);
-            throw new \exception('Não foi possível alterar o registro do Aluno ' . $request['tx_nome'] . ' !');
-        }
-    }
+        $aDados['model']->name = $aDados['model']->user->name;
+        $aDados['model']->email = $aDados['model']->user->email;
+        $aDados['model']->username = $aDados['model']->user->username;
+        $aDados['model']->nu_telefone = $aDados['model']->user->nu_telefone;
+        $aDados['model']->nu_celular = $aDados['model']->user->nu_celular;
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     * @throws \exception
-     */
-    public function destroy($id)
-    {
-        try {
-            $aluno = Aluno::where('id', $id)->first();
-            $aluno->delete();
-            Session::flash('success', 'Operação realizada com sucesso');
-            return redirect()->route('aluno.index');
-        } catch (\Exception $e) {
-            throw new \exception('Não foi possível excluir o registro do Aluno ->' . $id . ' !');
-        }
+        $aDados['supervisores'] = Supervisor::all()->sortBy('tx_nome');
+
+        return view("{$this->_dirView}.formulario", $aDados);
     }
 }

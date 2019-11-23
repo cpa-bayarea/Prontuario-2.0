@@ -2,28 +2,30 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
-
-class Supervisor extends Model
+class Supervisor extends AbstractModel
 {
-    use SoftDeletes;
-    protected $table = 'tb_supervisor';
-    protected $primaryKey = 'id';
+    protected $table = 'supervisores';
     protected $fillable = [
-        'tx_nome', 'username', 'nu_telefone', 'nu_celular', 'nu_crp',
-//        'status',
-        'linha_id'
+        'nu_crp', 'linha_id'
     ];
 
-    /**
-     * Relacionamento de linha teorica com supervisor
-     */
+    public function user()
+    {
+        return $this->belongsTo('App\Models\User');
+    }
+
     public function linhateorica()
     {
         return $this->belongsTo('App\Models\LinhaTeorica', 'linha_id', 'id');
     }
-    public function triagem() {
+
+    public function triagem()
+    {
         return $this->hasMany('App\Models\Triagem');
+    }
+
+    public function aluno()
+    {
+        return $this->hasMany('App\Models\Aluno', 'supervisor_id');
     }
 }

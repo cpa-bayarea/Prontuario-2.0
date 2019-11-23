@@ -20,7 +20,7 @@ class AgendamentoController extends Controller
     public function index()
     {
         $agendamentos = Agendamento::all();
-        $alunos = Aluno::orderBy('tx_nome', 'asc')->get();
+        $alunos = Aluno::all();
         $pacientes = Paciente::orderBy('nome', 'asc')->get();
         return view('agendamento.index', compact('agendamentos', 'alunos', 'pacientes'));
     }

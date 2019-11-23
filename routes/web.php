@@ -12,14 +12,12 @@
 */
 Auth::routes();
 
-
-
 Route::middleware(['auth'])->group(function () {
 
     Route::get('/home', 'HomeController@index')->name('home');
     Route::get('/', 'AgendamentoController@index');
 
-    Route::group(['middleware' => 'role'], function () {      
+    Route::group(['middleware' => 'role'], function () {
 
         Route::get('/paciente', 'PacienteController@index')->name('paciente');
         Route::get('/paciente/create', 'PacienteController@create')->name('paciente.create');
@@ -37,12 +35,9 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/triagem', 'TriagemController@store')->name('triagem.store');
         Route::post('/triagem/delete', 'TriagemController@destroy')->name('triagem.delete');
 
-        // Status_de_cadastro
-        Route::get('/status', 'StatusDeCadastroController@index')->name('status');
-        Route::get('/status/show', 'StatusDeCadastroController@show')->name('status.show');
-        Route::get('/status/edit/{id}', 'StatusDeCadastroController@edit')->name('status.edit');
-        Route::post('/status', 'StatusDeCadastroController@store')->name('status.store');
-        Route::post('/status/delete/{id}', 'StatusDeCadastroController@delete')->name('status.delete');
+        /**  Rotas de Status_de_cadastro **/
+        Route::resource('/statusdecadastro', 'StatusDeCadastroController');
+        Route::get('/statusdecadastro/{id}/destroy', 'StatusDeCadastroController@destroy')->name('statusdecadastro.delete');
 
 
         Route::get('search/telefonebypacienteid/{paciente_id}', 'TelefoneController@findTelefoneByPaciente')->name('telefone.by.paciente');
@@ -51,29 +46,26 @@ Route::middleware(['auth'])->group(function () {
         Route::post('telefone/create', 'TelefoneController@create')->name('telefone.create');
 
 
-        Route::get('grupos', 'GrupoController@index')->name('grupos');
-        Route::post('grupos', 'GrupoController@store')->name('grupos.store');
-        Route::get('grupos/edit/{id}', 'GrupoController@edit')->name('grupos.edit');
-        Route::post('grupos/{id}', 'GrupoController@destroy')->name('grupos.destroy');
+        /**  Rotas de Grupos **/
+        Route::resource('/grupo', 'GrupoController');
+        Route::get('/grupo/{id}/destroy', 'GrupoController@destroy')->name('grupo.delete');
 
-        Route::get('grupoitens/{grupo_id}', 'GrupoItemController@index')->name('grupoItem');
-        Route::post('grupoitens', 'GrupoItemController@store')->name('grupoItem.store');
-        Route::get('grupoitens/edit/{id}', 'GrupoItemController@edit')->name('grupoItem.edit');
-        Route::post('grupoitens/{id}', 'GrupoItemController@destroy')->name('grupoItem.destroy');        
+        /**  Rotas de Grupo Itens **/
+        Route::resource('/grupoitens', 'GrupoItemController');
+        Route::get('/grupoitens/{id}/destroy', 'GrupoItemController@destroy')->name('grupoitens.delete');
+        Route::get('/grupoitens/grupo/{id}', 'GrupoItemController@getById')->name('grupoitens.findId');
+
+        Route::get('/home', 'HomeController@index')->name('home');
 
         /**  Rotas de Linhas Teóricas **/
-        Route::get('/linha_teorica', 'LinhaTeoricaController@index')->name('linha_teorica.index');
-        Route::get('/linha_teorica/create', 'LinhaTeoricaController@create')->name('linha_teorica.create');
-        Route::post('/linha_teorica/store', 'LinhaTeoricaController@store')->name('linha_teorica.store');
-        Route::get('/linha_teorica/edit/{id}', 'LinhaTeoricaController@edit')->name('linha_teorica.edit');
-        Route::post('/linha_teorica/delete/{id}', 'LinhaTeoricaController@destroy')->name('linha_teorica.delete');
+        Route::resource('linhateorica', 'LinhaTeoricaController');
+        Route::get('/linhateorica/{id}/destroy', 'LinhaTeoricaController@destroy')->name('linhateorica.delete');
 
         /**  Rotas de Supervisores **/
-        Route::get('/supervisor', 'SupervisorController@index')->name('supervisor.index');
-        Route::get('/supervisor/create', 'SupervisorController@create')->name('supervisor.create');
-        Route::post('/supervisor/store', 'SupervisorController@store')->name('supervisor.store');
-        Route::get('/supervisor/edit/{id}', 'SupervisorController@edit')->name('supervisor.edit');
-        Route::post('/supervisor/delete/{id}', 'SupervisorController@destroy')->name('supervisor.delete');
+        Route::resource('supervisor', 'SupervisorController');
+        Route::get('/supervisor/{id}/destroy', 'SupervisorController@destroy')->name('supervisor.delete');
+        Route::get('/supervisor/{nu_crp}/crp', 'SupervisorController@searchCrp')->name('supervisor.search-crp');
+
 
         /**  Rotas de Alunos **/
         Route::get('/aluno', 'AlunoController@index')->name('aluno.index');
@@ -94,6 +86,11 @@ Route::middleware(['auth'])->group(function () {
         Route::resource('prontuario', 'ProntuarioController');
         Route::get('search/prontuario/findByPacienteId/{id}', 'ProntuarioController@findByPacienteId')->name('prontuario.findByPacienteId');
         Route::get('/prontuario/{id}/destroy', 'ProntuarioController@destroy');
+
+        Route::resource('users', 'UserController');
+        Route::get('/users/{id}/destroy', 'UserController@destroy')->name('users.delete');
+        Route::get('/users/{username}/search', 'UserController@searchUsername')->name('users.search-username');
+        Route::get('/users/{email}/email', 'UserController@searchEmail')->name('users.search-email');
 
         Route::resource('prontuariostatus', 'ProntuarioStatusController');
         Route::get('/prontuariostatus/{id}/destroy', 'ProntuarioStatusController@destroy')->name('prontuariostatus.delete');

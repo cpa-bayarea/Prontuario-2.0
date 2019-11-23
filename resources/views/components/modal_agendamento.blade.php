@@ -15,8 +15,7 @@
                         <input type="hidden" id="id" name="id">
                         <input type="hidden" id="prontuario_id" name="prontuario_id">
                         <input type="hidden" id="status_id" name="status_id">
-
-                        <div class="form-group row"><label class="col-sm-4 col-form-label">Paciente</label>
+                        <div class="form-group row"><label class="col-sm-4 col-form-label" for="paciente_id">Paciente</label>
                             <div class="col-sm-8">
                                 <select class="form-control m-b" id="paciente_id" name="paciente_id" required>
                                     <option></option>
@@ -27,30 +26,30 @@
                             </div>
                         </div>
 
-                        <div class="form-group row"><label class="col-sm-4 col-form-label">Terapeuta</label>
+                        <div class="form-group row"><label class="col-sm-4 col-form-label" for="aluno_id">Terapeuta</label>
                             <div class="col-sm-8">
                                 <select class="form-control m-b" id="aluno_id" name="aluno_id" required>
                                     <option></option>
                                     @foreach($alunos as $a)
-                                        <option value="{{ $a->id }}">{{$a->tx_nome}}</option>
+                                        <option value="{{ $a->id }}">{{ $a->user->name }}</option>
                                     @endforeach
                                 </select>
                             </div>
                         </div>
 
-                        <div class="form-group row"><label class="col-sm-4 col-form-label">Data</label>
+                        <div class="form-group row"><label class="col-sm-4 col-form-label" for="date">Data</label>
                             <div class="col-sm-8">
                                 <input type="date" class="form-control" id="date" name="date" required>
                             </div>
                         </div>
 
-                        <div class="form-group row"><label class="col-sm-4 col-form-label">Início da consulta</label>
+                        <div class="form-group row"><label class="col-sm-4 col-form-label" for="start">Início da consulta</label>
                             <div class="col-sm-8">
                                 <input type="time" class="form-control" id="start" name="start" required>
                             </div>
                         </div>
 
-                        <div class="form-group row"><label class="col-sm-4 col-form-label">Fim da consulta</label>
+                        <div class="form-group row"><label class="col-sm-4 col-form-label" for="end">Fim da consulta</label>
                             <div class="col-sm-8">
                                 <input type="time" class="form-control" id="end" name="end" required>
                             </div>

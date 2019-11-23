@@ -4,79 +4,55 @@ namespace App\Http\Controllers;
 
 use App\Models\GrupoItem;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Redirect;
-use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\Validator;
 
-class GrupoItemController extends Controller
+class GrupoItemController extends AbstractController
 {
-    public function index($id)
+
+    public function edit($id)
     {
-        $grupoIten = new GrupoItem();
-        $grupoItens = GrupoItem::where('grupo_id', $id)->get();
-        return view('grupo.grupoitem.index', compact('grupoIten', 'grupoItens', 'id'));
+        $aDados = $this->_recuperarDados();
+        $aDados = $this->_model->find(base64_decode($id));
+        $aDados->grupo_id = base64_encode($aDados->grupo_id);
+
+        $response = [
+            "type" => "success",
+            "data" => $aDados
+        ];
+
+        return $response;
     }
 
-    public function create()
+    /**
+     * Carrega listagem da tela de ordemItems.
+     *
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function getById($id)
     {
-        //
+        $aGrupoItem = GrupoItem::where('grupo_id', base64_decode($id))->orderBy('nu_ordem')->get();
+        return view('grupoitem.index', compact('aGrupoItem'));
     }
 
     public function store(Request $request)
     {
-        $rules = array(
-            'nome' => 'required',
-            'grupo_id' => 'required',
-            'ordem' => 'required'
-        );
-
-        $validator = Validator::make($request->all(), $rules);
-
-        if ($validator->fails()) {
-            Session::flash('error', 'Preencha os campos corretamente');
-            return Redirect::back();
+        if ($id = $request->id) {
+            $this->_model = $this->_model->find($id);
         }
+        $grupo_id = base64_decode($request->grupo_id);
 
-        if ($request->id) {
-            $grupoIten = GrupoItem::find($request->id);
-            Session::flash('success', 'Atualizado com sucesso');
-        } else {
-            $grupoIten = new GrupoItem();
-            Session::flash('success', 'Cadstrado com sucesso');
-        }
-
-        $grupoIten->fill($request->all());
-        $grupoIten->save();
-
-        return Redirect::to('/grupoitens/' . $grupoIten->grupo->id);
-    }
-
-    public function show($id)
-    {
-        //
-    }
-
-    public function edit($id)
-    {
-        $grupoIten = GrupoItem::find($id);
-        $grupoItens = GrupoItem::where('grupo_id', $grupoIten->grupo->id)->get();
-        $id = $grupoIten->grupo->id;
-        return view('grupo.grupoitem.index', compact('grupoIten', 'grupoItens', 'id'));
-    }
-
-    public function update(Request $request, $id)
-    {
-        $grupoIten = GrupoItem::find($id);
-        $grupoIten->fill($request->all());
-        $grupoIten->save();
-        Session::flash('success', 'Atualizado com sucesso');
-
+        $this->_model->grupo_id = $grupo_id;
+        $this->_model->tx_nome  = $request->tx_nome;
+        $this->_model->nu_ordem = $request->nu_ordem;
+        $this->_model->tx_outro = $request->tx_outro;
+        $this->_model->save();
+        return response()->json(['success' => 'mensagem', 'Operação realizada com sucesso!']);
     }
 
     public function destroy($id)
     {
-        GrupoItem::find($id)->delete();
-        Session::flash('success', 'Excluído com sucesso!');
-        return Redirect::to('grupos');
+        $this->_model = $this->_model->find(base64_decode($id));
+        $this->_model->delete();
+        return base64_encode($this->_model->grupo_id);
     }
 }

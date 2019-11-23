@@ -2,167 +2,86 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\LinhaTeorica;
 use App\Models\Supervisor;
-use exception;
-use Illuminate\Support\Facades\Session;
+use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
-class SupervisorController extends Controller
+class SupervisorController extends AbstractController
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     * @throws exception
-     */
-    public function index()
-    {
-        try {
-            $supervisores = Supervisor::orderBy('tx_nome', 'asc')->get();
-
-            // debug para buscar os excluídos
-            // $supervisores = Supervisor::withTrashed()->get();
-            // dd($supervisores);
-
-            return view('supervisor.index', compact('supervisores', $supervisores));
-        } catch (Exception $e) {
-            throw new exception('Não foi possível visualizar os Supervisores !');
-        }
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        $linhas = DB::table('linha_teorica')->get();
-        return view('supervisor.form', compact('linhas', $linhas));
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
-     * @throws exception
-     */
     public function store(Request $request)
     {
-        try {
-            if (!empty($request['id'])) {
-
-                return $this->update($request, $request['id']);
-            }
-            $supervisor = new Supervisor();
-
-            $supervisor->tx_nome = $request->tx_nome;
-            $supervisor->username = $request->username;
-            $supervisor->nu_telefone = $request->nu_telefone;
-            $supervisor->nu_celular = $request->nu_celular;
-            $supervisor->nu_crp = $request->nu_crp;
-            $supervisor->linha_id = $request->linha_id;
-
-            if (key_exists($request['status'], array($request))) {
-                $supervisor->status = $request->status;
-            }
-            $supervisor->save();
-            return redirect()->route('supervisor.index');
-        } catch (Exception $e) {
-            dd($e);
-            throw new exception('Não foi possível salvar o Supervisor ' . $request->tx_nome . ' !');
+        if ($id = base64_decode($request->id)) {
+            $this->_model = $this->_model->find($id);
+            $user = User::find($id);
+        } else {
+            $user = new User();
         }
+
+        if (!empty($request->password)) {
+            if ($request->password !== $request->password_confirmation ) {
+                return redirect()->back();
+            } else {
+                $user->password =  bcrypt($request->password);
+            }
+        }
+
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->username = $request->username;
+        $user->nu_telefone = $request->nu_telefone;
+        $user->nu_celular = $request->nu_celular;
+        $user->save();
+
+        $this->_model->user_id = $user->id;
+        $this->_model->linha_id = $request->linha_id;
+        $this->_model->nu_crp = $request->nu_crp;
+        $this->_model->save();
+
+        return redirect($this->_redirectSave);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+    public function create()
     {
-        //
+        $aDados = $this->_recuperarDados();
+        $aDados['model'] = $this->_model;
+        $aDados['linhas'] = LinhaTeorica::all()->sortBy('tx_nome');
+
+        return view("{$this->_dirView}.formulario", $aDados);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     * @throws exception
-     */
     public function edit($id)
     {
-        try {
-            $supervisor = DB::table('tb_supervisor')->where('id', '=', $id)->first();
-            $linhas = DB::table('linha_teorica')->get();
-            return view('supervisor.edit', compact(['supervisor', 'linhas'], $supervisor, $linhas));
-        } catch (Exception $e) {
+        $aDados = $this->_recuperarDados();
+        $aDados['model'] = $this->_model->find(base64_decode($id));
 
-            throw new exception('Não foi possível salvar o Supervisor de id ->' . $id . ' !');
-        }
+        $aDados['model']->name = $aDados['model']->user->name;
+        $aDados['model']->email = $aDados['model']->user->email;
+        $aDados['model']->username = $aDados['model']->user->username;
+        $aDados['model']->nu_telefone = $aDados['model']->user->nu_telefone;
+        $aDados['model']->nu_celular = $aDados['model']->user->nu_celular;
+
+        $aDados['linhas'] = LinhaTeorica::all()->sortBy('tx_nome');
+
+        return view("{$this->_dirView}.formulario", $aDados);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @param int $id
-     * @return \Illuminate\Http\Response]
-     * @throws exception
-     */
-    public function update(Request $request, $id)
+    public function searchCrp($crp)
     {
-        try {
-            $supervisor = Supervisor::find($id);
-            $supervisor->tx_nome = $request->tx_nome;
-            $supervisor->username = $request->username;
-            $supervisor->nu_telefone = $request->nu_telefone;
-            $supervisor->nu_celular = $request->nu_celular;
-            $supervisor->nu_crp = $request->nu_crp;
-            $supervisor->linha_id = $request->linha_id;
-
-            if (key_exists($request['status'], array($request))) {
-                $supervisor->status = $request->status;
-            }
-
-            $supervisor->save();
-            Session::flash('success', 'Operação realizada com sucesso');
-            return redirect()->route('supervisor.index');
-        } catch (Exception $e) {
-            throw new exception('Não foi possível alterar o registro do Supervisor ' . $request['tx_nome'] . ' !');
+        $registro = Supervisor::where('nu_crp', $crp)->first();
+        if (empty($registro)) {
+            $return = [
+                "type" => "success",
+                "msg"  => "Nenhuma informação"
+            ];
+        } else {
+            $return = [
+                "type" => "error",
+                "msg"  => "Número de CRP em uso!"
+            ];
         }
-    }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     * @throws exception
-     */
-    public function destroy($id)
-    {
-        try {
-            $supervisor = Supervisor::where('id', $id)->first();
-            $supervisor->delete();
-            Session::flash('success', 'Operação realizada com sucesso');
-            return redirect()->route('supervisor.index');
-        } catch (Exception $e) {
-            throw new exception('Não foi possível excluir o registro do Supervisor ->' . $id . ' !');
-        }
+        return $return;
     }
 }

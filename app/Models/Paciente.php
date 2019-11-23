@@ -10,7 +10,7 @@ class Paciente extends Model
     use SoftDeletes;
     protected $fillable = [
         'nome', 'nome_social', 'nome_responsavel', 'data_nascimento', 'cpf', 'rg', 'endereco',
-        'cidade_id', 'email', 'id_status'
+        'cidade_id', 'email', 'status_id'
     ];
 
     public function cidade()
@@ -27,6 +27,6 @@ class Paciente extends Model
     }
 
     public function status() {
-        return $this->belongsTo('App\Models\StatusDeCadastro','id_status');
+        return $this->belongsTo('App\Models\StatusDeCadastro','status_id');
     }
 }

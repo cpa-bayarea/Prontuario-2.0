@@ -2,18 +2,11 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
-
-class Aluno extends Model
+class Aluno extends AbstractModel
 {
-    use SoftDeletes;
-    protected $table = 'tb_aluno';
-    protected $primaryKey = 'id';
+    protected $table = 'alunos';
     protected $fillable = [
-        'tx_nome', 'username', 'nu_telefone', 'nu_celular', 'nu_semestre',
-//        'status',
-        'supervisor_id'
+        'nu_semestre', 'supervisor_id', 'user_id'
     ];
 
     /**
@@ -21,11 +14,16 @@ class Aluno extends Model
      */
     public function supervisor()
     {
-        return $this->belongsTo('App\Models\Supervisor', 'supervisor_id', 'id');
+        return $this->belongsTo('App\Models\Supervisor', 'supervisor_id');
     }
 
     public function triagem() {
         return $this->hasMany('App\Models\Triagem');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo('App\Models\User');
     }
 
 }

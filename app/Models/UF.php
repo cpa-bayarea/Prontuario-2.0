@@ -10,6 +10,6 @@ class UF extends Model
 
     public function cidade()
     {
-        return $this->belongsTo('App\Cidade');
+        return $this->belongsTo('App\Models\Cidade');
     }
 }

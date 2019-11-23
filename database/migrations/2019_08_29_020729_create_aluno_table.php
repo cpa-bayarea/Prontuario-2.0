@@ -13,22 +13,20 @@ class CreateAlunoTable extends Migration
      */
     public function up()
     {
-        Schema::create('tb_aluno', function (Blueprint $table) {
+        Schema::create('alunos', function (Blueprint $table) {
             $table->bigIncrements('id');
-
-            $table->string('tx_nome', 100);
-            $table->string('username', 11)->unique(); // Matrícula
-            $table->string('nu_telefone', 15);
-            $table->string('nu_celular', 15)->nullable();
             $table->string('nu_semestre', 2);
-//            $table->char('status', 1)->default('P'); // Opções => [A, I, P] Ativo, Inativo or Pendente
 
             $table->unsignedBigInteger('supervisor_id');
-            $table->foreign('supervisor_id')->references('id')->on('tb_supervisor');
+            $table->foreign('supervisor_id')->references('id')->on('supervisores');
+
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users');
+
+            $table->index(['id', 'supervisor_id', 'user_id']);
             $table->timestamps();
             $table->softDeletes();
 
-//            $table->index(['id', 'username', 'nu_crp']);
         });
     }
 
@@ -39,6 +37,6 @@ class CreateAlunoTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tb_aluno');
+        Schema::dropIfExists('alunos');
     }
 }

@@ -15,11 +15,12 @@ class CreateGrupoItemsTable extends Migration
     {
         Schema::create('grupo_items', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('nome');
+            $table->string('tx_nome');
             $table->integer('grupo_id')->unsigned();
             $table->foreign('grupo_id')->references('id')->on('grupos');
-            $table->integer('ordem');
-            $table->string('outro')->nullable();
+            $table->integer('nu_ordem');
+            $table->string('tx_outro')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

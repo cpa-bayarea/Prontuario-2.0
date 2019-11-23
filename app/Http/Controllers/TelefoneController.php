@@ -61,8 +61,9 @@ class TelefoneController extends Controller
 
     protected function _separarDddNumero($numero)
     {
-        $array['ddd'] = substr($numero, 0, 4);
-        $array['numero'] = substr($numero, 5);
+        # Remove os parenteses e pega os 2 primeiros digitos.
+        $array['ddd'] = substr(str_replace(['(', ')'], '', $numero),0,2);
+        $array['numero'] = substr(str_replace( '-','', $numero), 5);
         return $array;
     }
 

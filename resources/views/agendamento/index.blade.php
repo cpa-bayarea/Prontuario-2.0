@@ -56,7 +56,7 @@
 
         function validaHoraAgendamento() {
             if ($('#end').val() <= $('#start').val()) {
-                alert ("Informe um intervalo válido para realizar o agendamento. Verifique!");
+                swal("Atenção!", "Informe um intervalo válido para realizar o agendamento!.", "warning");
                 return false;
             }
             return true;
@@ -80,7 +80,7 @@
                 navLinks: true,
                 businessHours: true,
                 locale: 'pt-br',
-                events: {!! $agendamentos !!},
+                events: '{!! $agendamentos !!}',
                 eventClick: function(info) {
                     // Update/Delete
 

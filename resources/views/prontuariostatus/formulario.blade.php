@@ -1,12 +1,12 @@
 @extends('layouts.app')
-@section('content-title', 'Status de Prontuário')
+@section('content-title', 'Status do Prontuário')
 @section('content')
 
     <div class="row">
         <div class="col-md-12">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
-                    <h5>Dados Gerais</h5>
+                    <h5>Status do Prontuário</h5>
                 </div>
                 <div class="ibox-content">
                     <div class="row">

@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('content-title', 'Supervisor')
+@section('content-title', 'Status do Cadastro')
 @section('content')
 
     <div class="wrapper wrapper-content animated fadeInRight">
@@ -10,37 +10,31 @@
                         <h5>Dados Gerais</h5>
                     </div>
                     <div class="ibox-content">
-                        <a href="{{ route('supervisor.create') }}" class="btn-novo btn btn-success">
+                        <a href="{{ route('statusdecadastro.create') }}" class="btn-novo btn btn-success">
                             <i class="fa fa-plus"></i>&nbsp;Novo
                         </a>
                         <div class="table-responsive">
                             <table class="table table-striped table-hover table-bordered dataTable">
                                 <thead>
-                                <tr>
-                                    <th>Ações</th>
-                                    <th>Nome</th>
-                                    <th>CRP</th>
-                                    <th>Matrícula</th>
-                                    <th>Linha Teórica</th>
-                                </tr>
+                                    <tr>
+                                        <th>Ações</th>
+                                        <th>Nome</th>
+                                    </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($aItens as $supervisor)
+                                @foreach($aItens as $item)
                                     <tr>
                                         <td>
-                                            <a href="{{ route('supervisor.edit', base64_encode($supervisor->id)) }}"
+                                            <a href="{{ route('statusdecadastro.edit', base64_encode($item->id)) }}"
                                                class="btn btn-primary" title="Editar">
                                                 <span class="fa fa-edit"></span>
                                             </a>
-                                            <a href="{{ route('supervisor.delete', base64_encode($supervisor->id)) }}"
+                                            <a href="{{ route('statusdecadastro.delete', base64_encode($item->id)) }}"
                                                class="btn btn-danger link-excluir" title="Excluir">
                                                 <span class="fa fa-trash"></span>
                                             </a>
                                         </td>
-                                        <td>{{ $supervisor->user->name }}</td>
-                                        <td>{{ $supervisor->nu_crp }}</td>
-                                        <td>{{ $supervisor->user->username }}</td>
-                                        <td>{{ $supervisor->linhateorica->tx_nome }}</td>
+                                        <td>{{ $item->status }}</td>
                                     </tr>
                                 @endforeach
                                 </tbody>
@@ -53,3 +47,4 @@
     </div>
 
 @endsection
+
