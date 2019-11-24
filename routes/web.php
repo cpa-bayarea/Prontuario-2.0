@@ -68,11 +68,8 @@ Route::middleware(['auth'])->group(function () {
 
 
         /**  Rotas de Alunos **/
-        Route::get('/aluno', 'AlunoController@index')->name('aluno.index');
-        Route::get('/aluno/create', 'AlunoController@create')->name('aluno.create');
-        Route::post('/aluno/store', 'AlunoController@store')->name('aluno.store');
-        Route::get('/aluno/edit/{id}', 'AlunoController@edit')->name('aluno.edit');
-        Route::post('/aluno/delete/{id}', 'AlunoController@destroy')->name('aluno.delete');
+        Route::resource('terapeuta', 'AlunoController');
+        Route::get('/terapeuta/{id}/destroy', 'AlunoController@destroy')->name('terapeuta.delete');
 
         /**  Rotas de Agendamentos **/
         Route::get('/agendamento', 'AgendamentoController@index')->name('agendamento.index');

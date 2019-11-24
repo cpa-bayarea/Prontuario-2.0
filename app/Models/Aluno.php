@@ -17,7 +17,8 @@ class Aluno extends AbstractModel
         return $this->belongsTo('App\Models\Supervisor', 'supervisor_id');
     }
 
-    public function triagem() {
+    public function triagem()
+    {
         return $this->hasMany('App\Models\Triagem');
     }
 

@@ -24,6 +24,8 @@ class DatabaseSeeder extends Seeder
             RoleTableSeeder::class,
             RoleUserTableSeeder::class,
             PermissionsTableSeeder::class,
+            SupervisoresTableSeeder::class,
+            TerapeutasTableSeeder::class,
         ]);
     }
 }

@@ -42,7 +42,7 @@
         </a>
         <ul class="nav nav-second-level collapse" aria-expanded="false">
             <li class="">
-                <a href="{{ route('aluno.index') }}">
+                <a href="{{ route('terapeuta.index') }}">
                     <span class="nav-label">Terapeuta</span>
                 </a>
             </li>

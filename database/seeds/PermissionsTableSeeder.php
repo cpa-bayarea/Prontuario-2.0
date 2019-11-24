@@ -84,11 +84,11 @@ class PermissionsTableSeeder extends Seeder
         Permissao::create(['nome' => 'supervisor.destroy']);
         Permissao::create(['nome' => 'supervisor.delete']);
         Permissao::create(['nome' => 'supervisor.search-crp']);
-        Permissao::create(['nome' => 'aluno.index']);
-        Permissao::create(['nome' => 'aluno.create']);
-        Permissao::create(['nome' => 'aluno.store']);
-        Permissao::create(['nome' => 'aluno.edit']);
-        Permissao::create(['nome' => 'aluno.delete']);
+        Permissao::create(['nome' => 'terapeuta.index']);
+        Permissao::create(['nome' => 'terapeuta.create']);
+        Permissao::create(['nome' => 'terapeuta.store']);
+        Permissao::create(['nome' => 'terapeuta.edit']);
+        Permissao::create(['nome' => 'terapeuta.delete']);
         Permissao::create(['nome' => 'agendamento.index']);
         Permissao::create(['nome' => 'agendamento.store']);
         Permissao::create(['nome' => 'agendamento.byid']);

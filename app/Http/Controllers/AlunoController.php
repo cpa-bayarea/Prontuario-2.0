@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 
 class AlunoController extends AbstractController
 {
+    protected $_redirectSave = "terapeuta";
+    protected $_redirectDelete = "terapeuta";
 
     public function store(Request $request)
     {

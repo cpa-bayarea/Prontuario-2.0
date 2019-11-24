@@ -56,7 +56,7 @@ class User extends Authenticatable
     }
 
 
-     public function hasPermission(Permission $permission)
+    public function hasPermission(Permission $permission)
     {
         if (Auth::user()->hasAnyRoles('SuperAdmin')) {
             return true;
