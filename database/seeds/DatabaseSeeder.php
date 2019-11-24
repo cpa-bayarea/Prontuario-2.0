@@ -23,6 +23,8 @@ class DatabaseSeeder extends Seeder
             ItensGrupoTableSeeder::class,
             RoleSeeder::class,
             RoleUserSeeder::class,
+            SupervisorTableSeeder::class,
+            TerapeutaTableSeeder::class,
         ]);
     }
 }

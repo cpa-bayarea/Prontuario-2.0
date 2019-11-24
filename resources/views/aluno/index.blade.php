@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('content-title', 'Alunos')
+@section('content-title', 'Terapeutas')
 @section('content')
 
     <div class="wrapper wrapper-content animated fadeInRight">
@@ -10,7 +10,7 @@
                         <h5>Dados Gerais</h5>
                     </div>
                     <div class="ibox-content">
-                        <a href="{{ route('aluno.create') }}" class="btn-novo btn btn-success">
+                        <a href="{{ route('terapeuta.create') }}" class="btn-novo btn btn-success">
                             <i class="fa fa-plus"></i>&nbsp;Novo
                         </a>
                         <div class="table-responsive">
@@ -28,11 +28,11 @@
                                 @foreach($aItens as $aluno)
                                     <tr>
                                         <td>
-                                            <a href="{{ route('aluno.edit', base64_encode($aluno->id)) }}"
+                                            <a href="{{ route('terapeuta.edit', base64_encode($aluno->id)) }}"
                                                class="btn btn-primary" title="Editar">
                                                 <span class="fa fa-edit"></span>
                                             </a>
-                                            <a href="{{ route('aluno.delete', base64_encode($aluno->id)) }}"
+                                            <a href="{{ route('terapeuta.delete', base64_encode($aluno->id)) }}"
                                                class="btn btn-danger link-excluir" title="Excluir">
                                                 <span class="fa fa-trash"></span>
                                             </a>

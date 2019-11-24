@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('content-title', 'Cadastro de Aluno')
+@section('content-title', 'Cadastro de Terapeuta')
 @section('content')
 
     <div class="wrapper wrapper-content animated fadeInRight">
@@ -11,7 +11,7 @@
                     </div>
                     <div class="ibox-content">
 
-                        <form class="form-horizontal" action="{{ route('aluno.store') }}" method="post">
+                        <form class="form-horizontal" action="{{ route('terapeuta.store') }}" method="post">
                             @csrf
                             <input type="hidden" name="id" id="id" value="{{base64_encode($model->id)}}">
 
@@ -113,7 +113,7 @@
                                         <span class="glyphicon glyphicon-send"></span>
                                         Salvar
                                     </button>
-                                    <a href="{{ route('aluno.index') }}" class="btn btn-danger">
+                                    <a href="{{ route('terapeuta.index') }}" class="btn btn-danger">
                                         <span class="fa fa-reply"></span>
                                         Voltar
                                     </a>
