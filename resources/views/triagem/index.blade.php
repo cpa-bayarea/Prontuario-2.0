@@ -5,7 +5,7 @@
     <div class="col-md-12">
         <div class="ibox float-e-margins">
             <div class="ibox-title">
-                <h5>Listagem Triagem</h5>
+                <h5>Dados Gerais</h5>
                 <div class="ibox-tools">
                     <a class="collapse-link">
                         <i class="fa fa-chevron-up"></i>
@@ -33,18 +33,20 @@
                         <tbody>
                         @foreach($paciente as $item)
                           <tr>
-                              <td class="text-center">
-                                  <form action="/triagem/delete/" method="POST">
-                                    @csrf
-                                    <a href="/triagem/edit/{{$item->id}}" class="btn btn-primary disabled" title="Editar"><span class="fa fa-edit"></span></a>
-                                    <input type="hidden" name="paciente" value="{{$item->id}}">
-                                    <button class="btn btn-danger link-excluir" type="submit" title="Excluir"><span class="fa fa-trash"></span></button>
-                                </form>
+                              <td>
+                                  <a href="{{ route('triagem.edit', $item->id ) }}"
+                                     class="btn btn-primary" title="Editar">
+                                      <span class="fa fa-edit"></span>
+                                  </a>
+                                  <a href="{{ route('triagem.delete', $item->id ) }}"
+                                     class="btn btn-danger link-excluir" title="Excluir">
+                                      <span class="fa fa-trash"></span>
+                                  </a>
                               </td>
                               <td> {{ $item->nome }} </td>
                               <td> {{ $item->cpf }} </td>
                               <td> {{ $dataNascimento = date("m-d-Y", strtotime($item->data_nascimento))  }} </td>
-                              <td> {{ $item->triagem->aluno->tx_nome }} </td>
+                              <td> {{ $item->triagem->aluno->user->name }} </td>
                               <td> {{ $item->status->status }} </td>
                           </tr>
                         @endforeach

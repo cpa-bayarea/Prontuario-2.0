@@ -33,7 +33,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/triagem/show', 'TriagemController@show')->name('triagem.show');
         Route::get('triagem/edit/{id}', 'TriagemController@edit')->name('triagem.edit');
         Route::post('/triagem', 'TriagemController@store')->name('triagem.store');
-        Route::post('/triagem/delete', 'TriagemController@destroy')->name('triagem.delete');
+        Route::post('triagem/delete/{id}', 'TriagemController@destroy')->name('triagem.delete');
 
         /**  Rotas de Status_de_cadastro **/
         Route::resource('/statusdecadastro', 'StatusDeCadastroController');

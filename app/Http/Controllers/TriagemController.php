@@ -2,21 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Paciente;
-use App\Models\Triagem;
+use App\Models\{
+    Paciente,
+    TriagemItensGrupo,
+    Triagem,
+    Grupo,
+    Supervisor,
+    Aluno,
+    Telefone
+};
 use Illuminate\Http\Request;
-use Session;
-
-use App\Models\Grupo;
-use App\Models\Supervisor;
-use App\Models\Aluno;
-use App\Models\Telefone;
-use App\Models\TriagemItensGrupo;
-use Illuminate\Support\Facades\DB;
-// use Illuminate\Support\Facades\Redirect;
-
 use App\Http\Requests\TriagemRequest;
-
+use Session;
 
 class TriagemController extends Controller
 {
@@ -55,8 +52,8 @@ class TriagemController extends Controller
             Session::flash('error', 'Infome CPF Valido.');
             $paciente = new Paciente();
 
-            $supervisores = Supervisor::orderBy('tx_nome', 'asc')->get();
-            $alunos = Aluno::orderBy('tx_nome', 'asc')->get();
+            $supervisores = Supervisor::all();
+            $alunos = Aluno::all();
             $tipoAtendimentos = Grupo::find(1);
             $grupos = Grupo::find(2);
             $temporario = Grupo::find(3);
@@ -120,8 +117,8 @@ class TriagemController extends Controller
 
         $paciente = Paciente::find($id);
 
-        $supervisores = Supervisor::orderBy('tx_nome', 'asc')->get();
-        $alunos = Aluno::orderBy('tx_nome', 'asc')->get();
+        $supervisores = Supervisor::all();
+        $alunos = Aluno::all();
         $tipoAtendimentos = Grupo::find(1);
         $grupos = Grupo::find(2);
         $temporario = Grupo::find(3);
@@ -151,10 +148,10 @@ class TriagemController extends Controller
     }
 
     protected function validaCPF($cpf) {
- 
+
         // Extrai somente os números
         $cpf = preg_replace( '/[^0-9]/is', '', $cpf );
-         
+
         // Verifica se foi informado todos os digitos corretamente
         if (strlen($cpf) != 11) {
             return false;
