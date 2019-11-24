@@ -39,7 +39,7 @@
                                         <select name="aluno_id" class="form-control" id="aluno_id" required>
                                             <option value="">Selecione</option>
                                             @foreach($aAlunos as $aluno)
-                                                <option  {{ $aluno->id == $model->aluno_id ? 'selected="selected"' : ''}} value="{{$aluno->id}}">{{$aluno->tx_nome}}</option>
+                                                <option  {{ $aluno->id == $model->aluno_id ? 'selected="selected"' : ''}} value="{{ $aluno->id }}">{{ $aluno->user->name }}</option>
                                             @endforeach
                                         </select>
                                     </div>

@@ -82,7 +82,7 @@ Route::middleware(['auth'])->group(function () {
 
         Route::resource('prontuario', 'ProntuarioController');
         Route::get('search/prontuario/findByPacienteId/{id}', 'ProntuarioController@findByPacienteId')->name('prontuario.findByPacienteId');
-        Route::get('/prontuario/{id}/destroy', 'ProntuarioController@destroy');
+        Route::get('/prontuario/{id}/destroy', 'ProntuarioController@destroy')->name('prontuario.delete');
 
         Route::resource('users', 'UserController');
         Route::get('/users/{id}/destroy', 'UserController@destroy')->name('users.delete');
