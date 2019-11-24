@@ -5,7 +5,6 @@ namespace App\Models;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use App\Permission;
 use Illuminate\Support\Facades\Auth;
 
 class User extends Authenticatable
@@ -49,9 +48,10 @@ class User extends Authenticatable
     }
 
 
-    public function roles(){
+    public function roles()
+    {
 
-        return $this->belongsToMany('App\Role','role_users');
+        return $this->belongsToMany('App\Models\Role', 'role_users');
 
     }
 
@@ -66,9 +66,9 @@ class User extends Authenticatable
 
     public function hasAnyRoles($roles)
     {
-        if(is_array($roles) || is_object($roles) ) {
+        if (is_array($roles) || is_object($roles)) {
 
-            return  $roles->intersect($this->roles)->count();
+            return $roles->intersect($this->roles)->count();
         }
 
         return $this->roles->contains('nome', $roles);

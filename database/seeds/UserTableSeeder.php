@@ -18,17 +18,17 @@ class UserTableSeeder extends Seeder
             [
                 'username' => '1234567',
                 'nu_telefone' => '23565656',
-                'name' => 'admin',
+                'name' => 'Super Usuário',
                 'email' => 'admin@gmail.com',
                 'password' => bcrypt('admin'),
             ],
             [
-                'username' => 'admin 2',
+                'username' => '7654321',
                 'name' => 'admin',
                 'nu_telefone' => '23565657',
                 'email' => 'admin@admin.com',
                 'password' => bcrypt('admin'),
             ]
-            ]);
+        ]);
     }
 }

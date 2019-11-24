@@ -52,12 +52,12 @@
                 </a>
             </li>
             <li class="">
-                <a href="{{ route('grupos') }}">
+                <a href="{{ route('grupo.index') }}">
                     <span class="nav-label">Grupos</span>
                 </a>
             </li>
             <li class="">
-                <a href="{{ route('linha_teorica.index') }}">
+                <a href="{{ route('linhateorica.index') }}">
                     <span class="nav-label">Linha Teórica</span>
                 </a>
             </li>
@@ -67,16 +67,16 @@
                 </a>
             </li>
             <li class="">
-                <a href="{{ route('status') }}">
+                <a href="{{ route('statusdecadastro.index') }}">
                     <span class="nav-label">Status de cadastros</span>
                 </a>
             </li>
             @can('permissao.index')
-            <li class="">
-                <a href="{{ route('permissao.index') }}">
-                    <span class="nav-label">Permissões</span>
-                </a>
-            </li>
+                <li class="">
+                    <a href="{{ route('permissao.index') }}">
+                        <span class="nav-label">Permissões</span>
+                    </a>
+                </li>
             @endcan
         </ul>
     </li>

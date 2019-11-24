@@ -2,12 +2,10 @@
 
 namespace App\Providers;
 
-use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\{Auth, Gate};
 use Illuminate\Contracts\Auth\Access\Gate as GateContract;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
-use App\Permission;
-use App\Models\User;
-use Illuminate\Support\Facades\Auth;
+use App\Models\{User, Permission};
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -29,23 +27,20 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies($gate);
 
-
         $permissions = Permission::with('roles')->get();
 
-
-        foreach ($permissions as $permission) {         
-            $gate->define($permission->nome, function (User $user) use ($permission) {                
+        foreach ($permissions as $permission) {
+            $gate->define($permission->nome, function (User $user) use ($permission) {
                 return $user->hasPermission($permission);
             });
         }
 
-        
         Gate::before(function ($user, $ability) {
-         
-            if ($user->hasAnyRoles('SuperAdmin') ) {
+
+            if ($user->hasAnyRoles('SuperAdmin')) {
                 return true;
             }
-            
+
         });
     }
 }

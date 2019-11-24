@@ -15,14 +15,15 @@ class DatabaseSeeder extends Seeder
             UserTableSeeder::class,
             CityTableSeeder::class,
             StateTableSeeder::class,
-            LinhaTeoricaSeeder::class,
+            LinhaTeoricaTableSeeder::class,
             StatusTableSeeder::class,
             ProntuarioStatusTableSeeder::class,
             AgendamentoStatusTableSeeder::class,
             GrupoTableSeeder::class,
             ItensGrupoTableSeeder::class,
-            RoleSeeder::class,
-            RoleUserSeeder::class,
+            RoleTableSeeder::class,
+            RoleUserTableSeeder::class,
+            PermissionsTableSeeder::class,
         ]);
     }
 }
