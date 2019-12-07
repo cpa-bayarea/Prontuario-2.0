@@ -21,7 +21,7 @@
         </a>
     </li>
     <li class="">
-        <a href="{{ route('triagem') }}"><i class="fa fa-address-card"></i>
+        <a href="{{ route('triagem.index') }}"><i class="fa fa-address-card"></i>
             <span class="nav-label">Triagem</span>
         </a>
     </li>
