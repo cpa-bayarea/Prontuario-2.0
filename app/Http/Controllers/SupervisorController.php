@@ -36,7 +36,7 @@ class SupervisorController extends AbstractController
 
         $this->_model->user_id = $user->id;
         $this->_model->linha_id = $request->linha_id;
-        $this->_model->nu_crp = $request->nu_crp;
+        $this->_model->nu_crp = str_replace('/', '', $request->nu_crp);
         $this->_model->save();
 
         return redirect($this->_redirectSave);
