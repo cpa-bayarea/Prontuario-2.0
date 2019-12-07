@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'username', 'nu_telefone', 'nu_celular', 'active', 'supervisor_id', 'aluno_id',
+        'name', 'email', 'password', 'username', 'nu_telefone', 'nu_celular', 'supervisor_id', 'aluno_id',
     ];
 
     /**
@@ -25,7 +25,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password', 'remember_token', 'active'
     ];
 
     /**
@@ -47,16 +47,12 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\Aluno');
     }
 
-
     public function roles()
     {
-
         return $this->belongsToMany('App\Models\Role', 'role_users');
-
     }
 
-
-     public function hasPermission(Permission $permission)
+    public function hasPermission(Permission $permission)
     {
         if (Auth::user()->hasAnyRoles('SuperAdmin')) {
             return true;
