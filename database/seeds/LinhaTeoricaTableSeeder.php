@@ -3,7 +3,7 @@
 use Illuminate\Database\Seeder;
 use \App\Models\LinhaTeorica as Linha;
 
-class LinhaTeoricaSeeder extends Seeder
+class LinhaTeoricaTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.

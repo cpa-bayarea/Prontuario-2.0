@@ -40,7 +40,7 @@ return [
      |  Make your own theme by adding a folder to the views directory and specifying it here.
      */
 
-    'theme'         => 'bootstrap-4',
+    'theme'         => 'bootstrap-3',
 
     /* -----------------------------------------------------------------
      |  Route settings
@@ -51,7 +51,7 @@ return [
         'enabled'    => true,
 
         'attributes' => [
-            'prefix'     => 'log-viewer',
+            'prefix'     => 'logs',
 
             'middleware' => env('ARCANEDEV_LOGVIEWER_MIDDLEWARE') ? explode(',', env('ARCANEDEV_LOGVIEWER_MIDDLEWARE')) : null,
         ],
