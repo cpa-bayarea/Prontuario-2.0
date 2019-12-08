@@ -34,7 +34,7 @@ class ProntuarioController extends AbstractController
         $prontuario->numero = 0;
         $prontuario->aluno_id = $request->aluno_id;
         $prontuario->paciente_id = $request->paciente_id;
-        $prontuario->prontuario_status_id = 1;
+        $prontuario->prontuario_status_id = ProntuarioStatus::P_STATUS_EM_ATENDIMENTO;
         $prontuario->valor = 0;
 
         $prontuario->save();

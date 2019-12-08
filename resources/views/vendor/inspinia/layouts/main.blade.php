@@ -25,6 +25,7 @@
         <link href='{{asset("css/calendario.css")}}' rel='stylesheet' />
         <link href='{{asset("css/plugins/dataTables/datatables.min.css")}}' rel='stylesheet' />
         <link href='{{asset("css/plugins/sweetalert/sweetalert.css")}}' rel='stylesheet' />
+        <link href='{{ asset("css/plugins/iCheck/custom.css") }}' rel='stylesheet' >
     @show
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->

@@ -19,8 +19,8 @@
                             <div class="col-sm-8">
                                 <select class="form-control m-b" id="paciente_id" name="paciente_id" required>
                                     <option></option>
-                                    @foreach($pacientes as $p)
-                                        <option value="{{ $p->id }}">{{ $p->nome }}</option>
+                                    @foreach($pacientes as $paciente)
+                                        <option value="{{ $paciente->id }}">{{ $paciente->tx_nome }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -30,8 +30,8 @@
                             <div class="col-sm-8">
                                 <select class="form-control m-b" id="aluno_id" name="aluno_id" required>
                                     <option></option>
-                                    @foreach($alunos as $a)
-                                        <option value="{{ $a->id }}">{{ $a->user->name }}</option>
+                                    @foreach($terapeutas as $terapeuta)
+                                        <option value="{{ $terapeuta->id }}">{{ $terapeuta->user->name }}</option>
                                     @endforeach
                                 </select>
                             </div>

@@ -2,13 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Agendamento;
-use App\Models\Aluno;
-use App\Models\Paciente;
-use Exception;
+use App\Models\{AgendamentoStatus, Agendamento, Aluno, Paciente};
+use Illuminate\Support\Facades\{DB, Session};
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Session;
+use Exception;
 
 class AgendamentoController extends Controller
 {
@@ -20,19 +17,9 @@ class AgendamentoController extends Controller
     public function index()
     {
         $agendamentos = Agendamento::all();
-        $alunos = Aluno::all();
-        $pacientes = Paciente::orderBy('nome', 'asc')->get();
-        return view('agendamento.index', compact('agendamentos', 'alunos', 'pacientes'));
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        $terapeutas = Aluno::all();
+        $pacientes = Paciente::orderBy('tx_nome', 'asc')->get();
+        return view('agendamento.index', compact('agendamentos', 'terapeutas', 'pacientes'));
     }
 
     /**
@@ -54,14 +41,14 @@ class AgendamentoController extends Controller
             $aluno = Aluno::find($request->aluno_id);
             $paciente = Paciente::find($request->paciente_id);
             $agendamento = new Agendamento();
-            $agendamento->title = $aluno->tx_nome . " - " . $paciente->nome;
+            $agendamento->title = $aluno->user->name . " - " . $paciente->tx_nome;
             $agendamento->color = '#f8ac59';
             $agendamento->aluno_id = $request->aluno_id;
             $agendamento->paciente_id = $request->paciente_id;
-            $agendamento->status_id = 1;
+            $agendamento->status_id = AgendamentoStatus::AGSTATUS_AGENDADO;
             $agendamento->start = $request->date . " " . $request->start;
             $agendamento->end = $request->date . " " . $request->end;
-            $checkAgendamento = $this->checkAgendamento($agendamento->aluno_id, $agendamento->start, $agendamento->end);
+            $checkAgendamento = $this->_checkAgendamento($agendamento->aluno_id, $agendamento->start, $agendamento->end);
             if (count($checkAgendamento) == 0) {
                 if ($request->prontuario_id == null) {
                     $prontuario = (new ProntuarioController())->createByAgendamento($request);
@@ -74,19 +61,8 @@ class AgendamentoController extends Controller
                 return redirect()->route('agendamento.index');
             }
         } catch (Exception $e) {
-            throw new exception('Não foi possível realizar o agendamento!');
+            return back()->with('error', 'Não foi possível realizar a agendamento!');
         }
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
     }
 
     /**
@@ -118,10 +94,10 @@ class AgendamentoController extends Controller
     public function update(Request $request, $id)
     {
         try {
-            $aluno = Aluno::find($request->aluno_id);
+            $terapeuta = Aluno::find($request->aluno_id);
             $paciente = Paciente::find($request->paciente_id);
             $agendamento = Agendamento::find($id);
-            $agendamento->title = $aluno->tx_nome . " - " . $paciente->nome;
+            $agendamento->title = $terapeuta->user->name . " - " . $paciente->tx_nome;
             $agendamento->paciente_id = $request->paciente_id;
             $agendamento->aluno_id = $request->aluno_id;
             $agendamento->start = $request->date . " " . $request->start;
@@ -182,7 +158,7 @@ class AgendamentoController extends Controller
         return ['agendamento' => $agendamento];
     }
 
-    private function checkAgendamento($aluno_id, $start, $end)
+    private function _checkAgendamento($aluno_id, $start, $end)
     {
         return DB::table('agendamentos')
             ->where(function ($query) use ($start, $end) {

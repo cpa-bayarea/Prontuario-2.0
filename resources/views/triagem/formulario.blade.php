@@ -10,163 +10,197 @@
                         <h5>Dados Gerais</h5>
                     </div>
                     <div class="ibox-content">
-                    <form action=" {{ route('triagem.store') }} " method="POST" id="form_triagem" name="triagem">
-                    @csrf
-                    <div class="form-group row"><label for="nome" class="col-lg-2 col-form-label">Nome</label>
-                    <div class="col-lg-10"><input type="text" placeholder="Nome" value="{{$paciente->nome}}" required name="nome" id="nome" class="form-control">
-                        </div>
-                    </div>
-                    <div class="form-group row"><label class="col-lg-2 col-form-label" for="cpf">CPF</label>
-                        <div class="col-lg-10"><input type="text" value="{{$paciente->cpf}}"  data-mask="999.999.999-99" required name="cpf" id="cpf" class="form-control"></div>
-                    </div>
+                        <form class="form-horizontal" action="{{ route('triagem.store') }}" method="post">
+                            @csrf
+                            <input type="hidden" name="id" id="id" value="{{ base64_encode($model->id) }}">
 
-                    <div class="form-group row"><label class="col-lg-2 col-form-label" for="rg">RG</label>
-                        <div class="col-lg-10"><input type="text" name="rg" value="{{$paciente->rg}}" data-mask="9999999" id="rg" class="form-control"></div>
-                    </div>
-                    <div class="form-group row"><label class="col-lg-2 col-form-label" for="telefone">Telefone</label>
+                            <div class="form-group">
+                                <label for="tx_nome" class="col-sm-2 control-label">Nome <span class="obrigatorio">*</span></label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="tx_nome" id="tx_nome"
+                                        value="{{ $paciente->tx_nome }}" maxlength="100" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="nu_cpf" class="col-sm-2 control-label">CPF <span class="obrigatorio">*</span></label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control inteiro" name="nu_cpf" id="nu_cpf"
+                                        value="{{ $paciente->nu_cpf }}" maxlength="15" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="nu_rg" class="col-sm-2 control-label">RG <span class="obrigatorio">*</span></label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control inteiro" name="nu_rg" id="nu_rg"
+                                        value="{{ $paciente->nu_rg }}" maxlength="15" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="nu_telefone" class="col-sm-2 control-label">Telefone <span class="obrigatorio">*</span></label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control inteiro" name="telefone" id="nu_telefone"
+                                        value="{{ $paciente->telefone }}" maxlength="15" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="dt_nascimento" class="col-sm-2 control-label">Data de Nascimento
+                                    <span class="obrigatorio">*</span>
+                                </label>
+                                <div class="col-sm-10">
+                                    <input type="date" class="form-control inteiro" name="dt_nascimento" id="dt_nascimento"
+                                        value="{{ $paciente->dt_nascimento }}" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label" for="aluno_id">Terapeuta
+                                    <span class="obrigatorio">*</span>
+                                </label>
+                                <div class="col-sm-10">
+                                    <select name="aluno_id" class="form-control" data-show-subtext="true"
+                                            id="aluno_id" data-live-search="true" required>
+                                        <option selected disabled>Selecione</option>
+                                        @foreach($terapeutas as $terapeuta)
+                                            <option value="{{$terapeuta->id}}" {{ ($model->aluno_id == $terapeuta->id) ? 'selected' : '' }}>
+                                                {{ $terapeuta->user->name }}
+                                            </option>
+                                        @endforeach
 
-                        @if (!$paciente->id)
-                            <div class="col-lg-10"><input type="text" name="telefone"  data-mask="(99) 99999-9999"  id="telefone" class="form-control"></div>
-                        @else
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label" for="supervisor_id">Supervisor
+                                    <span class="obrigatorio">*</span>
+                                </label>
+                                <div class="col-sm-10">
+                                    <select name="supervisor_id" class="form-control" data-show-subtext="true"
+                                            id="supervisor_id" data-live-search="true" required>
+                                        <option selected disabled>Selecione</option>
+                                        @foreach($supervisores as $supervisor)
+                                            <option value="{{$supervisor->id}}" {{ ($model->supervisor_id == $supervisor->id) ? 'selected' : '' }}>
+                                                {{ $supervisor->user->name }}
+                                            </option>
+                                        @endforeach
 
-                            @foreach ($paciente->telefones as $telefones)
-                                <div class="col-lg-10"><input type="text" value=" {{ $telefones->numero }} " name="telefone"  data-mask="(99) 99999-9999"  id="telefone" class="form-control"></div>
-                                <?php break ?>
-                            @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-lg-2 col-sm-2 control-label">{{ $tipoAtendimentos->tx_nome }}</label>
+                                <div class="col-sm-10">
+                                    @foreach ($tipoAtendimentos->grupoItem as $item)
+                                        <div class="checkbox-inline i-checks">
+                                            <label>
+                                                <div class="iradio_square-green" style="position: relative;">
+                                                    <input required type="radio" value=" {{ $item->id }} " name="atendimento" style="position: absolute; opacity: 0;">
+                                                    <ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins>
+                                                </div><i></i> {{ $item->tx_nome }}
+                                            </label>
+                                        </div>
+                                    @endforeach
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="supervisor" class="col-lg-2 col-sm-2 control-label">{{ $grupos->tx_nome }}</label>
+                                <div class="col-sm-10">
+                                    @foreach ($grupos->grupoItem as $item)
+                                        <div class="checkbox-inline i-checks">
+                                            <label>
+                                                <div class="iradio_square-green" style="position: relative;">
+                                                    <input required type="radio" value=" {{ $item->id }} " name="grupo" style="position: absolute; opacity: 0;">
+                                                    <ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;">
+                                                    </ins>
+                                                </div><i></i> {{ $item->tx_nome }}
+                                            </label>
+                                        </div>
+                                    @endforeach
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="supervisor" class="col-lg-2 control-label">{{ $temporario->tx_nome }}</label>
+                                <div class="col-sm-10">
+                                    @foreach ($temporario->grupoItem as $item)
 
-                        @endif
-
-                    </div>
-                    <div class="form-group row"><label for="Data Nascimento" class="col-lg-2 col-form-label">Idade</label>
-                        <div class="col-lg-10"><input type="date" value="{{$paciente->data_nascimento}}" placeholder="Data Nascimento" required name="data_nascimento" id="data_nascimento" class="form-control">
-                        </div>
-                    </div>
-                    <div class="form-group row"><label for="triador" class="col-lg-2 col-form-label">Aluno</label>
-                        <div class="col-lg-10">
-                            <select class="form-control m-b" name="aluno" required>
-
-                                @if (!empty($paciente->triagem->aluno->id))
-
-                                @else
-                                    <option value="" selected>Selecione</option>
-                                @endif
-
-                                @foreach ($alunos as $aluno)
-
-                                @if (!empty($paciente->triagem->aluno->id))
-                                    @if ($paciente->triagem->aluno->id != $aluno->id)
-                                        <option value="{{ $aluno->id }}">{{ $aluno->tx_nome }}</option>
-                                    @else
-                                        <option value="{{ $aluno->id }}" selected>{{ $aluno->tx_nome }}</option>
-                                    @endif
-                                @else
-                                    <option value="{{ $aluno->id }}">{{ $aluno->tx_nome }}</option>
-                                @endif
-
-                                @endforeach
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-group row"><label for="triador" class="col-lg-2 col-form-label">Supervisor</label>
-                        <div class="col-lg-10">
-                            <select class="form-control m-b" name="supervisor" required>
-                                @if (!empty($paciente->triagem->supervisor->id))
-
-                                @else
-                                    <option value="" selected>Selecione</option>
-                                @endif
-                                @foreach ($supervisores as $supervisor)
-                                    @if (!empty($paciente->triagem->supervisor->id))
-                                        @if ($paciente->triagem->supervisor->id != $supervisor->id)
-                                            <option value="{{ $supervisor->id }}">{{ $supervisor->tx_nome }}</option>
+                                        @if ($item->outro != null)
+                                            <div class="checkbox-inline i-checks">
+                                                <label>
+                                                    <div class="iradio_square-green" style="position: relative;">
+                                                        <input required type="radio" value=" {{ $item->id }} " name="temporario" style="position: absolute; opacity: 0;">
+                                                        <ins class="iCheck-helper btn-toggle"  data-element="#minhaDiv" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins>
+                                                    </div> <i></i> {{ $item->tx_nome }}
+                                                </label>
+                                            </div>
+                                            <div class="checkbox-inline i-checks" id="minhaDiv" style="display: none;">
+                                                <textarea rows="5" name="outro" cols="50"></textarea>
+                                            </div>
                                         @else
-                                            <option value="{{ $supervisor->id }}" selected>{{ $supervisor->tx_nome }}</option>
+                                            <div class="checkbox-inline i-checks">
+                                                <label>
+                                                    <div class="iradio_square-green" style="position: relative;">
+                                                        <input required type="radio" value=" {{ $item->id }} " name="temporario" style="position: absolute; opacity: 0;">
+                                                        <ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins>
+                                                    </div> <i></i> {{ $item->tx_nome }}
+                                                </label>
+                                            </div>
                                         @endif
-                                    @else
-                                        <option value="{{ $supervisor->id }}">{{ $supervisor->tx_nome }}</option>
-                                    @endif
-                                @endforeach
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="hr-line-dashed"></div>
-                    <div class="form-group row"><label for="supervisor" class="col-lg-2 col-form-label">{{$tipoAtendimentos->nome}}</label>
-                        <div class="col-sm-10">
-                            @foreach ($tipoAtendimentos->grupoItem as $item)
-
-                                <div class="checkbox-inline i-checks">
-                                    <label> <div class="iradio_square-green" style="position: relative;">
-                                        <input required type="radio" value="{{ $item->id }}" name="atendimento" style="position: absolute; opacity: 0;">
-                                        <ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;">
-                                        </ins>
-                                        </div>
-                                        {{ $item->nome }}
-                                    </label>
+                                    @endforeach
                                 </div>
-
-                            @endforeach
-                        </div>
-                    </div>
-
-
-                    <div class="hr-line-dashed"></div>
-                    <div class="form-group row"><label for="supervisor" class="col-lg-2 col-form-label">{{ $grupos->nome }}</label>
-                        <div class="col-sm-10">
-                            @foreach ($grupos->grupoItem as $item)
-                                <div class="checkbox-inline i-checks">
-                                    <label>
-                                        <div class="iradio_square-green" style="position: relative;">
-                                            <input required type="radio" value=" {{ $item->id }} " name="grupo" style="position: absolute; opacity: 0;">
-                                            <ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;">
-                                            </ins>
-                                        </div>
-                                        {{ $item->nome }}
-                                    </label>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                <label for="queixa_principal" class="col-sm-2 control-label">Queixa Principal
+                                    <span class="obrigatorio">*</span>
+                                </label>
+                                <div class="col-sm-10">
+                                    <textarea name="queixa_principal" id="queixa_principal" cols="104" rows="5" required>{{ $model->queixa_principal }}</textarea>
                                 </div>
-                            @endforeach
-                        </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-offset-2 col-sm-10">
+                                    <button type="submit" class="btn btn-success">
+                                        <span class="glyphicon glyphicon-send"></span>
+                                        Salvar
+                                    </button>
+                                    <a href="{{ route('triagem.index') }}" class="btn btn-danger">
+                                        <span class="fa fa-reply"></span>
+                                        Voltar
+                                    </a>
+                                </div>
+                            </div>
+                            {{--<div class="col-12 text-right">
+                                <section class="progress-demo">
+                                    <a href="{{ route('triagem.index') }}" class="btn-small btn btn-success">Voltar</a>
+                                    <button class="btn-small btn btn-success" type="submit" data-style="expand-left">Cadastrar</button>
+                                </section>
+                            </div>--}}
+                        </form>
                     </div>
-
-                    <div class="hr-line-dashed"></div>
-                    <div class="form-group row"><label for="supervisor" class="col-lg-2 col-form-label"> {{ $temporario->nome }} </label>
-                        <div class="col-sm-10">
-                            @foreach ($temporario->grupoItem as $item)
-
-                                @if ($item->outro != null)
-                                    <div class="checkbox-inline i-checks"><label> <div class="iradio_square-green" style="position: relative;"><input required type="radio" value=" {{ $item->id }} " name="temporario" style="position: absolute; opacity: 0;"><ins class="iCheck-helper btn-toggle"  data-element="#minhaDiv" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins></div> <i></i> {{ $item->nome }} </label></div>
-                                    <div class="checkbox-inline i-checks" id="minhaDiv" style="display: none;"><textarea rows="5" name="outro" cols="50"></textarea></div>
-                                @else
-                                    <div class="checkbox-inline i-checks"><label> <div class="iradio_square-green" style="position: relative;"><input required type="radio" value=" {{ $item->id }} " name="temporario" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins></div> <i></i> {{ $item->nome }} </label></div>
-                                @endif
-
-                            @endforeach
-                        </div>
-                    </div>
-
-                    <div class="hr-line-dashed"></div>
-                    <div class="form-group row"><label for="supervisor" class="col-lg-2 col-form-label">Queixa Principal</label>
-                        <div class="col-lg-10"><input type="textarea" placeholder="Queixa" required name="queixa_principal" id="queixa_principal" class="form-control">
-                        </div>
-                    </div>
-                    <div class="col-12 text-right">
-                        <section class="progress-demo">
-                            <a href="{{ route('triagem') }}" class="btn-small btn btn-success">Voltar</a>
-                            <button class="btn-small btn btn-success" type="submit" data-style="expand-left">Cadastrar</button>
-                        </section>
-                    </div>
-                </form>
+                </div>
             </div>
         </div>
     </div>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-<script>
-$(function(){
-        $(".btn-toggle").click(function(e){
-            e.preventDefault();
-            el = $(this).data('element');
-            $(el).toggle();
+@endsection
+@section('js')
+    <script src="{{ asset('js/jquery.mask.min.js') }}"></script>
+    <script src="{{ asset('js/plugins/iCheck/icheck.min.js') }}"></script>
+
+    <script type="text/javascript">
+        $(function () {
+            $("#nu_cpf").mask("000.000.000-00");
+            $("#nu_rg").mask("0000.000");
+            $("#nu_telefone").mask("0000-0000");
+
+            $(".btn-toggle").click(function(e){
+                e.preventDefault();
+                el = $(this).data('element');
+                $(el).toggle();
+            });
         });
-    });
-</script>
+        $(document).ready(function () {
+            $('.i-checks').iCheck({
+                checkboxClass: 'icheckbox_square-green',
+                radioClass: 'iradio_square-green',
+            });
+        });
+    </script>
 @endsection

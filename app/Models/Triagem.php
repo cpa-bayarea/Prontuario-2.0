@@ -4,7 +4,7 @@ namespace App\Models;
 
 class Triagem extends AbstractModel
 {
-    protected $fillable = ['queixa_principal'];
+    protected $fillable = ['queixa_principal', 'aluno_id', 'paciente_id', 'supervisor_id'];
 
     /**
      * Relacionamento de Triagem com Paciente

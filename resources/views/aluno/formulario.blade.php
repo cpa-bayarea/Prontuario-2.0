@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('content-title', 'Cadastro de Aluno')
+@section('content-title', 'Cadastro de Terapeuta')
 @section('content')
 
     <div class="wrapper wrapper-content animated fadeInRight">
@@ -129,12 +129,16 @@
 
 @endsection
 @section('js')
+    <script src="{{ asset('js/jquery.mask.min.js') }}"></script>
+
     <script type="text/javascript">
         $(function () {
             const id = $('#id').val();
             $('#alert-username').hide();
             $('#alert-crp').hide();
             $('#alert-email').hide();
+            $("#nu_celular").mask("0000-0000");
+            $("#nu_telefone").mask("0000-0000");
 
             $('#username').on('change', function () {
                 $.get('/users/' + $(this).val() + '/search', function (response) {

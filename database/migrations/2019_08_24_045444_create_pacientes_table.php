@@ -16,14 +16,14 @@ class CreatePacientesTable extends Migration
         Schema::create('pacientes', function (Blueprint $table) {
 
             $table->bigIncrements('id');
-            $table->string('nome');
-            $table->string('nome_social')->nullable();
-            $table->string('nome_responsavel')->nullable();
-            $table->date('data_nascimento');
-            $table->string('cpf',14)->unique()->nullable();
-            $table->string('rg', 15)->nullable();
-            $table->string('endereco')->nullable();
-            $table->string('email')->nullable();
+            $table->string('tx_nome');
+            $table->string('tx_nome_social')->nullable();
+            $table->string('tx_nome_responsavel')->nullable();
+            $table->date('dt_nascimento');
+            $table->string('nu_cpf',14)->unique();
+            $table->string('nu_rg', 15);
+            $table->string('tx_endereco')->nullable();
+            $table->string('tx_email')->nullable();
 
             $table->integer('cidade_id')->unsigned()->nullable();
             $table->foreign('cidade_id')->references('id')->on('cities');

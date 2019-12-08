@@ -26,28 +26,28 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($pacientes as $paciente)
-                                    <tr>
-                                        <td class="text-center">
-                                            <a href="{{ route('triagem.edit', base64_encode($paciente->id)) }}"
-                                               class="btn btn-primary" title="Editar">
-                                                <span class="fa fa-edit"></span>
-                                            </a>
-                                            <a href="{{ route('triagem.delete', base64_encode($paciente->id)) }}"
-                                               class="btn btn-danger link-excluir" title="Excluir">
-                                                <span class="fa fa-trash"></span>
-                                            </a>
-                                        </td>
-                                        <td> {{ $paciente->nome }} </td>
-                                        <td> {{ $paciente->cpf }} </td>
-                                        <td> {{ $dataNascimento = date("m-d-Y", strtotime($paciente->data_nascimento))  }} </td>
-                                        <td> {{ $paciente->triagem->aluno->tx_nome }} </td>
-                                        <td> {{ $paciente->status->status }} </td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
+                                    @foreach($pacientes as $paciente)
+                                        <tr>
+                                            <td>
+                                                <a href="{{ route('triagem.edit', base64_encode($paciente->id)) }}"
+                                                   class="btn btn-primary" title="Editar">
+                                                    <span class="fa fa-edit"></span>
+                                                </a>
+                                                <a href="{{ route('triagem.delete', base64_encode($paciente->id)) }}"
+                                                   class="btn btn-danger link-excluir" title="Excluir">
+                                                    <span class="fa fa-trash"></span>
+                                                </a>
+                                            </td>
+                                            <td> {{ $paciente->tx_nome }} </td>
+                                            <td> {{ $paciente->nu_cpf }} </td>
+                                            <td> {{ date("d/m/Y", strtotime($paciente->dt_nascimento))  }} </td>
+                                            <td> {{ $paciente->triagem->aluno->user->name }} </td>
+                                            <td> {{ $paciente->status->status }} </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>

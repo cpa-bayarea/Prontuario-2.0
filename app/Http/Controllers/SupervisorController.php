@@ -14,7 +14,7 @@ class SupervisorController extends AbstractController
     {
         if ($id = base64_decode($request->id)) {
             $this->_model = $this->_model->find($id);
-            $user = User::find($id);
+            $user = User::find($this->_model->user_id);
         } else {
             $user = new User();
         }

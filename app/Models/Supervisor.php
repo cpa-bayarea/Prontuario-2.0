@@ -38,7 +38,7 @@ class Supervisor extends AbstractModel
     public function getNuCrpAttribute($value)
     {
         if (strlen($value) == 7) {
-            $nu_crp = substr($value, 0, 3) .'/'. substr($value, 3, 4);
+            $nu_crp = substr($value, 0, 3) . '/' . substr($value, 3, 4);
         } else {
             $nu_crp = $value;
         }
