@@ -65,7 +65,7 @@
         <script src='{{asset("/js/plugins/fullcalendar/timegrid/main.js")}}'></script>
         <script src='{{asset("/js/plugins/fullcalendar/list/main.js")}}'></script>
         <script src='{{asset("/js/plugins/fullcalendar/core/locales/pt-br.js")}}'></script>
-        <script src='{{asset("/js/plugins/fullcalendar/moment/main.min.js")}}'></script>
+        <script src='{{asset("/js/plugins/fullcalendar/moment/moment.js")}}'></script>
         <!-- Sweet alert -->
         <script src="{{ asset('js/plugins/sweetalert/sweetalert.min.js') }}"></script>
     @show

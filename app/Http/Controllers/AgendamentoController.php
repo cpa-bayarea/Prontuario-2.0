@@ -78,9 +78,11 @@ class AgendamentoController extends Controller
             $agendamento->start = $request->start;
             $agendamento->end = $request->end;
             $agendamento->save();
-            return redirect()->route('agendamento.index');
+            $response = response()->json([$agendamento->title, "msg" => "Dados atualizados com sucesso!"]);
+            return $response;
         } catch (Exception $e) {
-            throw new exception('Não foi possível alterar o agendamento!');
+            $response = response()->json([$agendamento->title, "msg" => "Não foi possível alterar o agendamento!"]);
+            return $response;
         }
     }
 
