@@ -12,9 +12,9 @@ class AgendamentoStatusTableSeeder extends Seeder
     public function run()
     {
         DB::table('agendamento_status')->insert([
-            ['nome'=>'Agendado'],
-            ['nome'=>'Confirmado'],
-            ['nome'=>'Cancelado'],
+            ['tx_nome' => 'Agendado'],
+            ['tx_nome' => 'Confirmado'],
+            ['tx_nome' => 'Cancelado'],
         ]);
     }
 }
