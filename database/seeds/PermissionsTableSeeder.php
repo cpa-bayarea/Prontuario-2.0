@@ -109,6 +109,7 @@ class PermissionsTableSeeder extends Seeder
         Permissao::create(['nome' => 'prontuario.edit']);
         Permissao::create(['nome' => 'prontuario.update']);
         Permissao::create(['nome' => 'prontuario.destroy']);
+        Permissao::create(['nome' => 'prontuario.delete']);
         Permissao::create(['nome' => 'prontuario.findByPacienteId']);
         Permissao::create(['nome' => 'users.index']);
         Permissao::create(['nome' => 'users.create']);
