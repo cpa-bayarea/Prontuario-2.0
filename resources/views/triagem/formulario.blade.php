@@ -167,12 +167,6 @@
                                     </a>
                                 </div>
                             </div>
-                            {{--<div class="col-12 text-right">
-                                <section class="progress-demo">
-                                    <a href="{{ route('triagem.index') }}" class="btn-small btn btn-success">Voltar</a>
-                                    <button class="btn-small btn btn-success" type="submit" data-style="expand-left">Cadastrar</button>
-                                </section>
-                            </div>--}}
                         </form>
                     </div>
                 </div>

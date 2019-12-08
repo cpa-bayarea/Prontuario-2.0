@@ -27,7 +27,8 @@ class PermissionsTableSeeder extends Seeder
         Permissao::create(['nome' => 'password.reset']);
         Permissao::create(['nome' => 'password.update']);
         Permissao::create(['nome' => 'home']);
-        Permissao::create(['nome' => 'paciente']);
+        Permissao::create(['nome' => 'paciente.index']);
+        Permissao::create(['nome' => 'paciente.edit']);
         Permissao::create(['nome' => 'paciente.create']);
         Permissao::create(['nome' => 'paciente.find']);
         Permissao::create(['nome' => 'paciente.store']);

@@ -26,7 +26,7 @@
         </a>
     </li>
     <li class="">
-        <a href="{{ route('paciente') }}"><i class="fa fa-user"></i>
+        <a href="{{ route('paciente.index') }}"><i class="fa fa-user"></i>
             <span class="nav-label">Paciente</span>
         </a>
     </li>
