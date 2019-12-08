@@ -2,16 +2,12 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
-
-class TriagemItensGrupo extends Model
+class TriagemItensGrupo extends AbstractModel
 {
-    use SoftDeletes;
-    protected $fillable = [
-        'outro',
-    ];
-    public function triagemItensGrupo(){
+    protected $fillable = ['outro'];
+
+    public function triagemItensGrupo()
+    {
         return $this->belongsTo('App\Models\Triagem');
     }
 }

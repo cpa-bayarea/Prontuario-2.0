@@ -114,6 +114,6 @@ class AbstractController extends Controller
 
     protected function _recuperarDados()
     {
-        return null;
+        return [];
     }
 }

@@ -25,6 +25,7 @@
         <link href='{{asset("css/calendario.css")}}' rel='stylesheet' />
         <link href='{{asset("css/plugins/dataTables/datatables.min.css")}}' rel='stylesheet' />
         <link href='{{asset("css/plugins/sweetalert/sweetalert.css")}}' rel='stylesheet' />
+        <link href='{{ asset("css/plugins/iCheck/custom.css") }}' rel='stylesheet' >
     @show
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -64,7 +65,7 @@
         <script src='{{asset("/js/plugins/fullcalendar/timegrid/main.js")}}'></script>
         <script src='{{asset("/js/plugins/fullcalendar/list/main.js")}}'></script>
         <script src='{{asset("/js/plugins/fullcalendar/core/locales/pt-br.js")}}'></script>
-        <script src='{{asset("/js/plugins/fullcalendar/moment/main.min.js")}}'></script>
+        <script src='{{asset("/js/plugins/fullcalendar/moment/moment.js")}}'></script>
         <!-- Sweet alert -->
         <script src="{{ asset('js/plugins/sweetalert/sweetalert.min.js') }}"></script>
     @show

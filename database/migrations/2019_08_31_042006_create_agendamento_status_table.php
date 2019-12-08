@@ -15,7 +15,7 @@ class CreateAgendamentoStatusTable extends Migration
     {
         Schema::create('agendamento_status', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('nome', 20);
+            $table->string('tx_nome', 20);
             $table->softDeletes();
             $table->timestamps();
         });

@@ -2,15 +2,11 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
-
-class Paciente extends Model
+class Paciente extends AbstractModel
 {
-    use SoftDeletes;
     protected $fillable = [
-        'nome', 'nome_social', 'nome_responsavel', 'data_nascimento', 'cpf', 'rg', 'endereco',
-        'cidade_id', 'email', 'status_id'
+        'tx_nome', 'tx_nome_social', 'tx_nome_responsavel', 'dt_nascimento', 'nu_cpf', 'nu_rg', 'tx_endereco',
+        'cidade_id', 'tx_email', 'status_id'
     ];
 
     public function cidade()
@@ -22,11 +18,28 @@ class Paciente extends Model
     {
         return $this->hasMany('App\Models\Telefone');
     }
-    public function triagem(){
+
+    public function triagem()
+    {
         return $this->hasOne('App\Models\Triagem');
     }
 
-    public function status() {
-        return $this->belongsTo('App\Models\StatusDeCadastro','status_id');
+    public function status()
+    {
+        return $this->belongsTo('App\Models\StatusDeCadastro', 'status_id');
+    }
+
+    /**
+     * Mutator para formatação de número de cpf.
+     *
+     * @param $value
+     * @return string
+     */
+    public function getNuCpfAttribute($value)
+    {
+        if (strlen($value) == 11)
+            return preg_replace("/(\d{3})(\d{3})(\d{3})(\d{2})/", "\$1.\$2.\$3-\$4", $value);
+
+        return $value;
     }
 }

@@ -32,7 +32,7 @@ class PermissionsTableSeeder extends Seeder
         Permissao::create(['nome' => 'paciente.find']);
         Permissao::create(['nome' => 'paciente.store']);
         Permissao::create(['nome' => 'paciente.delete']);
-        Permissao::create(['nome' => 'triagem']);
+        Permissao::create(['nome' => 'triagem.index']);
         Permissao::create(['nome' => 'triagem.create']);
         Permissao::create(['nome' => 'triagem.show']);
         Permissao::create(['nome' => 'triagem.edit']);

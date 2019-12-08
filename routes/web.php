@@ -28,17 +28,18 @@ Route::middleware(['auth'])->group(function () {
         Route::get('search/cidadebyuf/{id}', 'CidadeController@findCidadeByUf');
 
         // Triagem
-        Route::get('/triagem', 'TriagemController@index')->name('triagem');
+        Route::get('/triagem/{id}/destroy', 'TriagemController@destroy')->name('triagem.delete');
+        Route::resource('/triagem', 'TriagemController');
+        /*Route::get('/triagem', 'TriagemController@index')->name('triagem');
         Route::get('/triagem/create', 'TriagemController@create')->name('triagem.create');
         Route::get('/triagem/show', 'TriagemController@show')->name('triagem.show');
         Route::get('triagem/edit/{id}', 'TriagemController@edit')->name('triagem.edit');
         Route::post('/triagem', 'TriagemController@store')->name('triagem.store');
-        Route::post('/triagem/delete', 'TriagemController@destroy')->name('triagem.delete');
+        Route::post('/triagem/delete', 'TriagemController@destroy')->name('triagem.delete');*/
 
         /**  Rotas de Status_de_cadastro **/
         Route::resource('/statusdecadastro', 'StatusDeCadastroController');
         Route::get('/statusdecadastro/{id}/destroy', 'StatusDeCadastroController@destroy')->name('statusdecadastro.delete');
-
 
         Route::get('search/telefonebypacienteid/{paciente_id}', 'TelefoneController@findTelefoneByPaciente')->name('telefone.by.paciente');
         Route::post('telefone/delete/{id}', 'TelefoneController@destroy')->name('telefone.destroy');
