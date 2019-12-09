@@ -5,8 +5,8 @@ namespace App\Models;
 class Paciente extends AbstractModel
 {
     protected $fillable = [
-        'tx_nome', 'tx_nome_social', 'tx_nome_responsavel', 'dt_nascimento', 'nu_cpf', 'nu_rg', 'tx_endereco',
-        'cidade_id', 'tx_email', 'status_id'
+        'tx_nome', 'tx_nome_social', 'tx_nome_responsavel', 'dt_nascimento', 'nu_cep', 'nu_cpf', 'nu_rg', 'tx_uf',
+        'tx_logradouro', 'tx_email', 'tx_complemento', 'tx_bairro', 'tx_localidade'
     ];
 
     public function cidade()

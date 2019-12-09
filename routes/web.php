@@ -19,23 +19,15 @@ Route::middleware(['auth'])->group(function () {
 
     Route::group(['middleware' => 'role'], function () {
 
-        Route::get('/paciente', 'PacienteController@index')->name('paciente');
-        Route::get('/paciente/create', 'PacienteController@create')->name('paciente.create');
-        Route::get('search/paciente/findById/{id}', 'PacienteController@findById')->name('paciente.find');
-        Route::post('/paciente', 'PacienteController@store')->name('paciente.store');
-        Route::post('/paciente/delete/{id}', 'PacienteController@delete')->name('paciente.delete');
+        /**  Rotas de Pacientes **/
+        Route::get('/paciente/{id}/destroy', 'PacienteController@destroy')->name('paciente.delete');
+        Route::resource('/paciente', 'PacienteController');
 
         Route::get('search/cidadebyuf/{id}', 'CidadeController@findCidadeByUf');
 
-        // Triagem
+        /**  Rotas de Triagem **/
         Route::get('/triagem/{id}/destroy', 'TriagemController@destroy')->name('triagem.delete');
         Route::resource('/triagem', 'TriagemController');
-        /*Route::get('/triagem', 'TriagemController@index')->name('triagem');
-        Route::get('/triagem/create', 'TriagemController@create')->name('triagem.create');
-        Route::get('/triagem/show', 'TriagemController@show')->name('triagem.show');
-        Route::get('triagem/edit/{id}', 'TriagemController@edit')->name('triagem.edit');
-        Route::post('/triagem', 'TriagemController@store')->name('triagem.store');
-        Route::post('/triagem/delete', 'TriagemController@destroy')->name('triagem.delete');*/
 
         /**  Rotas de Status_de_cadastro **/
         Route::resource('/statusdecadastro', 'StatusDeCadastroController');
@@ -66,7 +58,6 @@ Route::middleware(['auth'])->group(function () {
         Route::resource('supervisor', 'SupervisorController');
         Route::get('/supervisor/{id}/destroy', 'SupervisorController@destroy')->name('supervisor.delete');
         Route::get('/supervisor/{nu_crp}/crp', 'SupervisorController@searchCrp')->name('supervisor.search-crp');
-
 
         /**  Rotas de Alunos **/
         Route::get('/aluno', 'AlunoController@index')->name('aluno.index');

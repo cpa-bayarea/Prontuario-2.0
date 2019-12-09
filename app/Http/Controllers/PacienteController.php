@@ -2,69 +2,30 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Paciente;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
-use App\Models\UF;
-use Illuminate\Support\Facades\Redirect;
 
-
-class PacienteController extends Controller
+class PacienteController extends AbstractController
 {
-    public function index()
-    {
-        $pacientes = Paciente::with('telefones')->get();
-        $ufs = UF::all();
-
-        return view('paciente.index', compact('ufs', 'pacientes'));
-    }
-
     public function findById($id)
     {
-        $paciente = Paciente::find($id);
+        $paciente = $this->_model->find($id);
 
         return ['paciente' => $paciente, 'cidade' => $paciente->cidade()->with('uf')->get()];
     }
 
-    public function create()
-    {
-        $pacientes = Paciente::all();
-        $ufs = UF::all();
-
-        return view('paciente.create', compact('ufs', 'pacientes'));
-    }
-
     public function store(Request $request)
     {
-
-        if ($request->paciente_id) {
-            $paciente = Paciente::find($request->paciente_id);
-        } else {
-            $paciente = new Paciente();
+        if ($id = base64_decode($request->id)) {
+            $this->_model = $this->_model->find($id);
         }
-        $paciente->status_id = 1;
-        $paciente->fill($request->all());
-//        $paciente->save();
-
-        if ($request->telefone) {
-
-            $array = $request->all();
-            $array['paciente_id'] = $paciente->id;
-
-            if ((new TelefoneController)->store($array)) {
-                Session::flash('success', 'Operação realizada com sucesso');
-            } else {
-                Session::flash('danger', 'Erro ao cadstrar o telefone');
-            }
-        }
-        return Redirect::to('/paciente');
-
-    }
-
-    public function delete($id)
-    {
-        Paciente::find($id)->delete();
-        Session::flash('success', 'Excluído com sucesso');
-        return Redirect::to('paciente');
+        $data = $request->toArray();
+        $data['nu_cpf'] = str_replace(['.', '-'], '', $data['nu_cpf']);
+        $data['nu_rg'] = str_replace('.', '', $data['nu_rg']);
+        $data['nu_cep'] = str_replace('-', '', $data['nu_cep']);
+        $this->_model->fill($data);
+        $this->_model->save();
+        Session::flash('success', 'Operação realizada com sucesso');
+        return redirect()->route("{$this->_redirectSave}.index");
     }
 }
