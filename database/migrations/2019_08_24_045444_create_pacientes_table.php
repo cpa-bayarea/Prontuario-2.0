@@ -30,6 +30,9 @@ class CreatePacientesTable extends Migration
             $table->string('tx_bairro', 70)->nullable();
             $table->string('tx_localidade', 50)->nullable();
 
+            $table->unsignedBigInteger('status_id')->nullable();
+            $table->foreign('status_id')->references('id')->on('status_de_cadastros');
+
             $table->timestamps();
             $table->softDeletes();
         });
