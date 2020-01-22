@@ -2,11 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
-
-class Cidade extends Model
+class Cidade extends AbstractModel
 {
-    protected $table = 'cidades';
+//    protected $table = 'cidades';
 
     public function paciente()
     {

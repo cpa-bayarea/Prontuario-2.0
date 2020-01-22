@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Classes\Util;
+use Illuminate\Support\Facades\Log;
 
 class AbstractController extends Controller
 {
@@ -44,20 +45,25 @@ class AbstractController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
+     * Retorna a view com o array de itens ordenado pelo primeiro item do $fillable.
      *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
      */
     public function index()
     {
-        $orderBy = $this->_model->getFillable()[0];
-        $aItens = $this->_model->orderBy("{$orderBy}", "asc")->get();
+        try {
+            $orderBy = $this->_model->getFillable()[0];
+            $aItens = $this->_model->orderBy("{$orderBy}", "asc")->get();
 
-        return view("{$this->_dirView}.index", compact('aItens'));
+            return view("{$this->_dirView}.index", compact('aItens'));
+        } catch (\Exception $e) {
+            Log::info($e);
+            return back()->with('error', 'Não foi possível realizar a operação!');
+        }
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Exibe o fomulário para criação de um novo registro.
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
@@ -70,25 +76,30 @@ class AbstractController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Método para salvar/alterar um registro.
      *
-     * @param Request $request
+     * @param Request $request Dados vindo do formulário.
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function store(Request $request)
     {
-        if ($id = base64_decode($request->id)) {
-            $this->_model = $this->_model->find($id);
+        try {
+            if ($id = base64_decode($request->id)) {
+                $this->_model = $this->_model->find($id);
+            }
+            $this->_model->fill($request->toArray());
+            $this->_model->save();
+            return redirect()->route("{$this->_redirectSave}.index")->with('success', 'Operação realizada com sucesso!');
+        } catch (\Exception $e) {
+            Log::info($e);
+            return back()->with('error', 'Não foi possível realizar a operação!');
         }
-        $this->_model->fill($request->toArray());
-        $this->_model->save();
-        return redirect($this->_redirectSave);
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Exibe o formulário com dados específicos para edição.
      *
-     * @param int $id
+     * @param int $id Id do registro.
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -100,16 +111,21 @@ class AbstractController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove um dado específico através do id.
      *
-     * @param int $id
+     * @param int $id Id do registro que será excluído.
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        $this->_model = $this->_model->find(base64_decode($id));
-        $this->_model->delete();
-        return redirect($this->_redirectDelete);
+        try {
+            $this->_model = $this->_model->find(base64_decode($id));
+            $this->_model->delete();
+            return redirect()->route("{$this->_redirectDelete}.index")->with('success', 'Operação realizada com sucesso!');
+        } catch (\Exception $e) {
+            Log::info($e);
+            return back()->with('error', 'Não foi possível realizar a operação!');
+        }
     }
 
     protected function _recuperarDados()
