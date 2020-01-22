@@ -13,8 +13,8 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             UserTableSeeder::class,
-            CityTableSeeder::class,
-            StateTableSeeder::class,
+            CidadesTableSeeder::class,
+            EstadosTableSeeder::class,
             LinhaTeoricaTableSeeder::class,
             StatusTableSeeder::class,
             ProntuarioStatusTableSeeder::class,

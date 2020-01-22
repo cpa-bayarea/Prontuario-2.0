@@ -17,7 +17,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/home', 'HomeController@index')->name('home');
     Route::get('/', 'AgendamentoController@index');
 
-    Route::group(['middleware' => 'role'], function () {
+//    Route::group(['middleware' => 'role'], function () {
 
         /**  Rotas de Pacientes **/
         Route::get('/paciente/{id}/destroy', 'PacienteController@destroy')->name('paciente.delete');
@@ -90,5 +90,5 @@ Route::middleware(['auth'])->group(function () {
         /* Rotas da Permissions */
         Route::resource('/permissao', 'PermissionController');
         Route::post('/updatePermission', 'PermissionController@updatePermissions')->name('permissao.updatePermissions');
-    });
+//    });
 });

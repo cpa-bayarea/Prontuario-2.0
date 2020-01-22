@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Cidade extends Model
 {
-    protected $table = 'cities';
+    protected $table = 'cidades';
 
     public function paciente()
     {
@@ -15,6 +15,6 @@ class Cidade extends Model
 
     public function uf()
     {
-        return $this->hasOne('App\Models\Uf', 'id', 'state_id');
+        return $this->hasOne('App\Models\Uf', 'id', 'estado_id');
     }
 }

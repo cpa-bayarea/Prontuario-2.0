@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class UF extends Model
 {
-    protected $table = 'states';
+    protected $table = 'estados';
 
     public function cidade()
     {
